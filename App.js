@@ -10,7 +10,7 @@ import Factors from "./src/Factors";
 import Multiply from "./src/Multiply";
 import Divide from "./src/Divide";
 
-export default function App() {
+const App = () => {
     const Stack = createNativeStackNavigator();
     const options = {
         headerStyle: {
@@ -48,4 +48,5 @@ export default function App() {
             </Stack.Navigator>
         </NavigationContainer>
     );
-}
+};
+export default App;

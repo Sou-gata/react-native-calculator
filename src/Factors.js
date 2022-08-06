@@ -20,6 +20,9 @@ const Factors = () => {
                     onChangeText={onChangeText}
                     value={text}
                     autoFocus={true}
+                    placeholder="123"
+                    placeholderTextColor={"#ffffff50"}
+                    keyboardType="numeric"
                 />
                 <TouchableOpacity
                     style={styles.btn}

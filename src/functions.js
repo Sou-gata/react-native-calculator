@@ -112,6 +112,19 @@ export function multiple(numberA, numberB) {
         results[i] = numbers[0] * numbers[1][i];
         ans += results[i];
     }
+    for (let i = 0; i < results.length; i++) {
+        results[i] = results[i] + "";
+        let l = results[i].length;
+        let temp = results[i].split("");
+        for (let j = 0; j < i; j++) {
+            temp[l - j - 1] = "x";
+        }
+        let tempStr = "";
+        for (let j = 0; j < temp.length; j++) {
+            tempStr += temp[j];
+        }
+        results[i] = tempStr;
+    }
     return { results, ans, numberA, numberB };
 }
 export function factors(number) {

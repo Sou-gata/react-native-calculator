@@ -1,19 +1,13 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 
 import { checkNumbers, multiple } from "./functions";
+import styles from "./allStyles";
 
 import {
     useFonts,
     RobotoMono_400Regular,
-    RobotoMono_500Medium,
 } from "@expo-google-fonts/roboto-mono";
 
 const Multiply = () => {
@@ -22,7 +16,6 @@ const Multiply = () => {
     const [opacity, setOpacity] = useState(0);
     let [fontsLoaded] = useFonts({
         RobotoMono_400Regular,
-        RobotoMono_500Medium,
     });
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -35,6 +28,8 @@ const Multiply = () => {
                         onChangeText={onChangeText}
                         value={text}
                         autoFocus={true}
+                        placeholder="123 456"
+                        placeholderTextColor={"#ffffff50"}
                     />
                     <TouchableOpacity
                         style={styles.btn}
@@ -57,11 +52,13 @@ const Multiply = () => {
                             {"  "}
                             {ans.numberA}
                         </Text>
-                        <Text style={styles.mathText}>X {ans.numberB}</Text>
+                        <Text style={styles.mathText}>x {ans.numberB}</Text>
                         <View style={styles.hrLine}></View>
                         {(() => {
                             let element = [];
-                            if (ans.results)
+
+                            if (ans.results) {
+                                let key = 1;
                                 for (let i = 0; i < ans.results.length; i++) {
                                     let innerText = "";
                                     let space = "";
@@ -73,12 +70,14 @@ const Multiply = () => {
                                         space += " ";
                                     }
                                     innerText += `${space}${ans.results[i]}`;
+                                    key++;
                                     element.push(
-                                        <Text style={styles.mathText}>
+                                        <Text key={key} style={styles.mathText}>
                                             {innerText}
                                         </Text>
                                     );
                                 }
+                            }
                             return element;
                         })()}
                         <View style={styles.hrLine}></View>
@@ -91,58 +90,3 @@ const Multiply = () => {
 };
 
 export default Multiply;
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        backgroundColor: "#333",
-    },
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    input: {
-        height: 50,
-        width: 200,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        fontSize: 20,
-        borderRadius: 50,
-        color: "#fff",
-        borderColor: "#efefef81",
-        textAlign: "center",
-    },
-    btn: {
-        marginTop: 25,
-        width: 100,
-        height: 33,
-        borderColor: "#efefef81",
-        fontSize: 15,
-        borderWidth: 1,
-        borderRadius: 33,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    btnText: {
-        color: "#fff",
-    },
-    hrLine: {
-        height: 2,
-        backgroundColor: "#efefef81",
-        marginVertical: 2,
-    },
-    math: {
-        alignItems: "center",
-    },
-    mathText: {
-        fontSize: 25,
-        color: "#fff",
-        fontFamily: "RobotoMono_400Regular",
-    },
-    mathContainer: {
-        padding: 20,
-    },
-});

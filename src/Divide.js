@@ -4,15 +4,10 @@ import { checkNumbers, devide } from "./functions";
 import {
     useFonts,
     RobotoMono_400Regular,
-    RobotoMono_500Medium,
 } from "@expo-google-fonts/roboto-mono";
-import {
-    View,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    Text,
-} from "react-native";
+import { View, TextInput, TouchableOpacity, Text } from "react-native";
+
+import styles from "./allStyles";
 
 const Divide = () => {
     const [text, onChangeText] = useState("");
@@ -24,7 +19,6 @@ const Divide = () => {
     });
     let [fontsLoaded] = useFonts({
         RobotoMono_400Regular,
-        RobotoMono_500Medium,
     });
     if (!fontsLoaded) {
         return <AppLoading />;
@@ -37,6 +31,8 @@ const Divide = () => {
                         onChangeText={onChangeText}
                         value={text}
                         autoFocus={true}
+                        placeholder="123456 789"
+                        placeholderTextColor={"#ffffff50"}
                     />
                     <TouchableOpacity
                         style={styles.btn}
@@ -62,6 +58,7 @@ const Divide = () => {
                             let element = [];
                             if (divideAns.numberA) {
                                 let tempString = "";
+                                let key = 0;
                                 for (
                                     let i = 0;
                                     i < divideAns.spacingInfo.length;
@@ -73,13 +70,14 @@ const Divide = () => {
                                         tempString += " ";
                                     }
                                     tempString += `${divideAns.multipleRuselts[i]}`;
+                                    key++;
                                     element.push(
-                                        <>
+                                        <View key={key}>
                                             <Text style={styles.mathText}>
                                                 {tempString}
                                             </Text>
                                             <View style={styles.hrLine}></View>
-                                        </>
+                                        </View>
                                     );
                                     tempString = "";
                                     let b = divideAns.spacingInfo[i][1];
@@ -87,8 +85,9 @@ const Divide = () => {
                                         tempString += " ";
                                     }
                                     tempString += `${divideAns.subResults[i]}`;
+                                    key++;
                                     element.push(
-                                        <Text style={styles.mathText}>
+                                        <Text key={key} style={styles.mathText}>
                                             {tempString}
                                         </Text>
                                     );
@@ -106,73 +105,3 @@ const Divide = () => {
 };
 
 export default Divide;
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        backgroundColor: "#333",
-    },
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    text: {
-        color: "#fff",
-    },
-    input: {
-        height: 50,
-        width: 200,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        fontSize: 20,
-        borderRadius: 50,
-        color: "#fff",
-        borderColor: "#efefef81",
-        textAlign: "center",
-    },
-
-    text: {
-        color: "#fff",
-        fontSize: 20,
-    },
-    btn: {
-        marginTop: 25,
-        width: 100,
-        height: 33,
-        borderColor: "#efefef81",
-        fontSize: 15,
-        borderWidth: 1,
-        borderRadius: 33,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    btnText: {
-        color: "#fff",
-    },
-    varticleLine: {
-        width: 2,
-        height: 30,
-        backgroundColor: "#fff",
-        marginHorizontal: 4,
-    },
-    mathText: {
-        fontSize: 25,
-        color: "#fff",
-        fontFamily: "RobotoMono_400Regular",
-    },
-    divideMath: {
-        flexDirection: "row",
-        justifyContent: "center",
-        marginTop: 35,
-        fontFamily: "RobotoMono_400Regular",
-    },
-    hrLine: {
-        flexGrow: 1,
-        height: 2,
-        backgroundColor: "#efefef81",
-        marginVertical: 2,
-    },
-});

@@ -1,13 +1,8 @@
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    TextInput,
-} from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React, { useState } from "react";
 
 import { checkLcmHcfNum, gcd, inputNumbers } from "./functions";
+import styles from "./allStyles";
 
 const Hcf = () => {
     const [text, onChangeText] = useState("");
@@ -22,6 +17,8 @@ const Hcf = () => {
                     onChangeText={onChangeText}
                     value={text}
                     autoFocus={true}
+                    placeholder="10 20 30"
+                    placeholderTextColor={"#ffffff50"}
                 />
                 <TouchableOpacity
                     style={styles.btn}
@@ -48,50 +45,3 @@ const Hcf = () => {
 };
 
 export default Hcf;
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        backgroundColor: "#333",
-    },
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    input: {
-        height: 50,
-        width: 200,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        fontSize: 20,
-        borderRadius: 50,
-        color: "#fff",
-        borderColor: "#efefef81",
-        textAlign: "center",
-    },
-    btn: {
-        marginTop: 25,
-        width: 100,
-        height: 33,
-        borderColor: "#efefef81",
-        fontSize: 15,
-        borderWidth: 1,
-        borderRadius: 33,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    btnText: {
-        color: "#fff",
-    },
-    textStyle: {
-        fontSize: 25,
-        color: "#fff",
-    },
-    ansDiv: {
-        alignItems: "center",
-        padding: 20,
-    },
-});
