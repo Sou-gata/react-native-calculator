@@ -1,8 +1,8 @@
 {
     "expo": {
-        "name": "Sougata",
+        "name": "Calculator",
         "slug": "Sougata",
-        "version": "1.0.2",
+        "version": "1.0.8",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "dark",
@@ -21,7 +21,7 @@
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#333333"
+                "backgroundColor": "#ff7b00"
             },
             "package": "com.sougata.calculator",
             "versionCode": 1

@@ -94,6 +94,7 @@ export function devide(numberA, numberB) {
         spacingInfo,
     };
 }
+
 export function multiple(numberA, numberB) {
     let numbers = [];
     numbers[0] = numberA + "";
@@ -127,6 +128,7 @@ export function multiple(numberA, numberB) {
     }
     return { results, ans, numberA, numberB };
 }
+
 export function factors(number) {
     let num = number;
     num = parseInt(num);
@@ -177,6 +179,7 @@ export function lcm(numbersArr) {
     }
     return lcm;
 }
+
 export function gcd(numbersArr) {
     let numberSet = numbersArr;
     for (let i = 0; i < numberSet.length; i++) {
@@ -193,6 +196,7 @@ export function gcd(numbersArr) {
     }
     return gcd;
 }
+
 export function inputNumbers(str) {
     let numberSet = str;
     numberSet = numberSet.split(" ");
@@ -204,4 +208,163 @@ export function inputNumbers(str) {
         }
     }
     return inputShow;
+}
+
+function celToFar(num) {
+    let f = 1.8 * parseFloat(num) + 32;
+    f = f.toFixed(3) + "";
+    f = parseFloat(f);
+    let ans = `${num} °C = ${f} °F`;
+    return ans;
+}
+
+function celToKal(num) {
+    let k = parseFloat(num) + 273.15;
+    k = k.toFixed(3) + "";
+    k = parseFloat(k);
+    let ans = `${num} °C = ${k} K`;
+    return ans;
+}
+
+function celToRan(num) {
+    let r = parseFloat(num) * 1.8 + 491.67;
+    r = r.toFixed(3) + "";
+    r = parseFloat(r);
+    let ans = `${num} °C = ${r} °R`;
+    return ans;
+}
+
+function farToCel(num) {
+    let c = ((parseFloat(num) - 32) / 9) * 5;
+    c = c.toFixed(3) + "";
+    c = parseFloat(c);
+    let ans = `${num} °F = ${c} °C`;
+    return ans;
+}
+
+function farToRan(num) {
+    let r = parseFloat(num) - 459.67;
+    r = r.toFixed(3) + "";
+    r = parseFloat(r);
+    let ans = `${num} °F = ${r} °R`;
+    return ans;
+}
+
+function farToKal(num) {
+    let c = ((parseFloat(num) - 32) / 9) * 5;
+    let k = c + 273.15;
+    k = k.toFixed(3) + "";
+    k = parseFloat(k);
+    let ans = `${num} °F = ${k} K`;
+    return ans;
+}
+
+function ranToCel(num) {
+    let f = parseFloat(num) + 459.67;
+    let c = ((f - 32) / 9) * 5;
+    c = c.toFixed(3) + "";
+    c = parseFloat(c);
+    let ans = `${num} °R = ${c} °C`;
+    return ans;
+}
+
+function ranToFar(num) {
+    let f = parseFloat(num) + 459.67;
+    f = f.toFixed(3) + "";
+    f = parseFloat(f);
+    let ans = `${num} °R = ${f} °F`;
+    return ans;
+}
+
+function ranToKal(num) {
+    let f = parseFloat(num) + 459.67;
+    let c = ((f - 32) / 9) * 5;
+    let k = c + 273.15;
+    k = k.toFixed(3) + "";
+    k = parseFloat(k);
+    let ans = `${num} °R = ${k} K`;
+    return ans;
+}
+
+function kalToCal(num) {
+    let c = parseFloat(num) - 273.15;
+    c = c.toFixed(3) + "";
+    c = parseFloat(c);
+    let ans = `${num} K = ${c} °C`;
+    return ans;
+}
+
+function kalToFar(num) {
+    let c = parseFloat(num) - 273.15;
+    let f = 1.8 * c + 32;
+    f = f.toFixed(3) + "";
+    f = parseFloat(f);
+    let ans = `${num} K = ${f} °F`;
+    return ans;
+}
+
+function kalToRan(num) {
+    let c = parseFloat(num) - 273.15;
+    let f = 1.8 * c + 32;
+    let r = f - 459.67;
+    r = r.toFixed(3) + "";
+    r = parseFloat(r);
+    let ans = `${num} K = ${r} °R`;
+    return ans;
+}
+
+export function temConvert(fromToObj, num) {
+    let index = fromToObj;
+    let text = parseFloat(num);
+
+    let ans = "";
+
+    if (index.from == index.to) {
+        ans = "Invalid";
+    } else if (index.from == 0) {
+        if (index.to == 1) {
+            let f = celToFar(text);
+            ans = f;
+        } else if (index.to == 2) {
+            let k = celToKal(text);
+            ans = k;
+        } else if (index.to == 3) {
+            let r = celToRan(text);
+            ans = r;
+        }
+    } else if (index.from == 1) {
+        if (index.to == 0) {
+            let c = farToCel(text);
+            ans = c;
+        } else if (index.to == 2) {
+            let k = farToKal(text);
+            ans = k;
+        } else if (index.to == 3) {
+            let r = farToRan(text);
+            ans = r;
+        }
+    } else if (index.from == 2) {
+        if (index.to == 0) {
+            let c = kalToCal(text);
+            ans = c;
+        } else if (index.to == 1) {
+            let f = kalToFar(text);
+            ans = f;
+        } else if (index.to == 3) {
+            let r = kalToRan(text);
+            ans = r;
+        }
+    } else if (index.from == 3) {
+        if (index.to == 0) {
+            let c = ranToCel(text);
+            ans = c;
+        } else if (index.to == 1) {
+            let f = ranToFar(text);
+            ans = f;
+        } else if (index.to == 2) {
+            let k = ranToKal(text);
+            ans = k;
+        }
+    }
+    return ans;
 }

@@ -1,10 +1,5 @@
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    TextInput,
-} from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import styles from "./allStyles";
 import React, { useState } from "react";
 import { factors } from "./functions";
 
@@ -41,7 +36,7 @@ const Factors = () => {
             </View>
             <View style={styles.ansDiv} opacity={opacity}>
                 <Text style={styles.textStyle}>
-                    Factors of {ans.number} are :{" "}
+                    Factors of {ans.number} are :
                 </Text>
                 <Text style={styles.textStyle}>{ans.str}</Text>
             </View>
@@ -50,50 +45,3 @@ const Factors = () => {
 };
 
 export default Factors;
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        backgroundColor: "#333",
-    },
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    input: {
-        height: 50,
-        width: 200,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        fontSize: 20,
-        borderRadius: 50,
-        color: "#fff",
-        borderColor: "#efefef81",
-        textAlign: "center",
-    },
-    btn: {
-        marginTop: 25,
-        width: 100,
-        height: 33,
-        borderColor: "#efefef81",
-        fontSize: 15,
-        borderWidth: 1,
-        borderRadius: 33,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    btnText: {
-        color: "#fff",
-    },
-    textStyle: {
-        fontSize: 25,
-        color: "#fff",
-    },
-    ansDiv: {
-        alignItems: "center",
-        padding: 20,
-    },
-});

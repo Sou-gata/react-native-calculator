@@ -9,6 +9,9 @@ import Hcf from "./src/Hcf";
 import Factors from "./src/Factors";
 import Multiply from "./src/Multiply";
 import Divide from "./src/Divide";
+import NormalCalculator from "./src/NormalCalculator";
+import FractionSimplify from "./src/FractionSimplify";
+import TemperatureConverter from "./src/TemperatureConverter";
 
 const App = () => {
     const Stack = createNativeStackNavigator();
@@ -26,7 +29,15 @@ const App = () => {
                 <Stack.Screen
                     name="Home"
                     component={Home}
-                    options={{ ...options, title: "Calculator By Sougata" }}
+                    options={{
+                        ...options,
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="NormalCalculator"
+                    component={NormalCalculator}
+                    options={options}
                 />
                 <Stack.Screen name="LCM" component={Lcm} options={options} />
                 <Stack.Screen name="HCF" component={Hcf} options={options} />
@@ -44,6 +55,22 @@ const App = () => {
                     name="Divide"
                     component={Divide}
                     options={options}
+                />
+                <Stack.Screen
+                    name="FractionSimplify"
+                    component={FractionSimplify}
+                    options={{
+                        ...options,
+                        title: "Simplify Fraction",
+                    }}
+                />
+                <Stack.Screen
+                    name="TemperatureConverter"
+                    component={TemperatureConverter}
+                    options={{
+                        ...options,
+                        title: "Temperature Converter",
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

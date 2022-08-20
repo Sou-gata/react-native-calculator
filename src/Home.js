@@ -1,73 +1,72 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 
+import styles from "./allStyles";
+
 const Home = ({ navigation }) => {
+    const data = [
+        {
+            id: "1",
+            name: "NormalCalculator",
+            text: "Normal Calculator",
+        },
+        {
+            id: "2",
+            name: "LCM",
+            text: "LCM",
+        },
+        {
+            id: "3",
+            name: "HCF",
+            text: "HCF",
+        },
+        {
+            id: "4",
+            name: "Factors",
+            text: "Factors",
+        },
+        {
+            id: "5",
+            name: "Multiply",
+            text: "Multiply",
+        },
+        {
+            id: "6",
+            name: "Divide",
+            text: "Divide",
+        },
+        {
+            id: "7",
+            name: "FractionSimplify",
+            text: "Simplify Factors",
+        },
+        {
+            id: "8",
+            name: "TemperatureConverter",
+            text: "Temperature Converter",
+        },
+    ];
     return (
-        <View style={styles.main}>
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    navigation.navigate("LCM");
+        <View style={styles.homeMain}>
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                data={data}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity
+                            style={styles.homeBtn}
+                            onPress={() => {
+                                navigation.navigate(item.name);
+                            }}
+                        >
+                            <Text style={styles.btnText}>{item.text}</Text>
+                        </TouchableOpacity>
+                    );
                 }}
-            >
-                <Text style={styles.btnText}>LCM</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    navigation.navigate("HCF");
-                }}
-            >
-                <Text style={styles.btnText}>HCF</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    navigation.navigate("Factors");
-                }}
-            >
-                <Text style={styles.btnText}>Factors</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    navigation.navigate("Multiply");
-                }}
-            >
-                <Text style={styles.btnText}>Multiply</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.btn}
-                onPress={() => {
-                    navigation.navigate("Divide");
-                }}
-            >
-                <Text style={styles.btnText}>Divide</Text>
-            </TouchableOpacity>
+            />
         </View>
     );
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-    main: {
-        backgroundColor: "#333",
-        flex: 1,
-        justifyContent: "space-around",
-        alignItems: "center",
-    },
-    btn: {
-        width: 200,
-        height: 66,
-        borderRadius: 66,
-        borderColor: "#fff",
-        borderWidth: 1.5,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    btnText: {
-        color: "#fff",
-        fontSize: 20,
-    },
-});
