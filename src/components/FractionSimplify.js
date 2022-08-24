@@ -1,8 +1,8 @@
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import styles from "./allStyles";
-import { gcd } from "./functions";
+import styles from "../allStyles";
+import { gcd } from "../functions";
 
 const FractionSimplify = () => {
     const [textNu, onChangeTextNu] = useState("");

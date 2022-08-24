@@ -4,16 +4,18 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Home from "./src/Home";
-import Lcm from "./src/Lcm";
-import Hcf from "./src/Hcf";
-import Factors from "./src/Factors";
-import Multiply from "./src/Multiply";
-import Divide from "./src/Divide";
-import NormalCalculator from "./src/NormalCalculator";
-import FractionSimplify from "./src/FractionSimplify";
-import TemperatureConverter from "./src/TemperatureConverter";
+import Lcm from "./src/components/Lcm";
+import Hcf from "./src/components/Hcf";
+import Factors from "./src/components/Factors";
+import Multiply from "./src/components/Multiply";
+import Divide from "./src/components/Divide";
+import NormalCalculator from "./src/components/NormalCalculator";
+import FractionSimplify from "./src/components/FractionSimplify";
+import TemperatureConverter from "./src/components/TemperatureConverter";
+import NumberConverter from "./src/components/NumberConverter";
+import WaightConverter from "./src/components/WaightConverter";
 
-const App = () => {
+export default function App() {
     const Stack = createNativeStackNavigator();
     const options = {
         headerStyle: {
@@ -72,8 +74,23 @@ const App = () => {
                         title: "Temperature Converter",
                     }}
                 />
+                <Stack.Screen
+                    name="NumberConverter"
+                    component={NumberConverter}
+                    options={{
+                        ...options,
+                        title: "Number Converter",
+                    }}
+                />
+                <Stack.Screen
+                    name="WaightConverter"
+                    component={WaightConverter}
+                    options={{
+                        ...options,
+                        title: "Waight Converter",
+                    }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
-};
-export default App;
+}

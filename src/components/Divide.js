@@ -1,13 +1,13 @@
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
-import { checkNumbers, devide } from "./functions";
+import { checkNumbers, devide } from "../functions";
 import {
     useFonts,
     RobotoMono_400Regular,
 } from "@expo-google-fonts/roboto-mono";
 import { View, TextInput, TouchableOpacity, Text } from "react-native";
 
-import styles from "./allStyles";
+import styles from "../allStyles";
 
 const Divide = () => {
     const [text, onChangeText] = useState("");

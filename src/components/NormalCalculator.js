@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
 
-import styles from "./allStyles";
+import styles from "../allStyles";
 
 const NormalCalculator = () => {
     Math.toRadian = function (degrees) {

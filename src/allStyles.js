@@ -1,16 +1,23 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     homeMain: {
-        backgroundColor: "#333",
-        flex: 1,
+        flexDirection: "row",
+        flexWrap: "wrap",
         alignItems: "center",
-        maxHeight: "100%",
+        justifyContent: "space-around",
+        paddingVertical: 5,
+    },
+    homeContainer: {
+        backgroundColor: "#333",
+        height: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
     homeBtn: {
         marginTop: 15,
-        width: 200,
-        height: 66,
-        borderRadius: 66,
+        width: 100,
+        height: 100,
+        borderRadius: 6,
         borderColor: "#fff",
         borderWidth: 1.5,
         alignItems: "center",
@@ -51,6 +58,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         color: "#fff",
+        textAlign: "center",
     },
     hrLine: {
         height: 2,
@@ -159,10 +167,22 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: "#ccc",
     },
+    dropDownStyleTwo: {
+        width: 150,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: "#bbb",
+    },
     dropBtn: {
         width: 70,
         borderRadius: 50,
         backgroundColor: "#ccc",
+    },
+    dropBtnTwo: {
+        width: 150,
+        borderRadius: 50,
+        borderColor: "#0ff",
+        borderWidth: 1,
     },
 });
 

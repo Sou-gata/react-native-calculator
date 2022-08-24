@@ -210,161 +210,378 @@ export function inputNumbers(str) {
     return inputShow;
 }
 
-function celToFar(num) {
+export function celToFar(num) {
     let f = 1.8 * parseFloat(num) + 32;
     f = f.toFixed(3) + "";
     f = parseFloat(f);
-    let ans = `${num} °C = ${f} °F`;
+    let ans = f;
     return ans;
 }
 
-function celToKal(num) {
+export function celToKal(num) {
     let k = parseFloat(num) + 273.15;
     k = k.toFixed(3) + "";
     k = parseFloat(k);
-    let ans = `${num} °C = ${k} K`;
+    let ans = k;
     return ans;
 }
 
-function celToRan(num) {
+export function celToRan(num) {
     let r = parseFloat(num) * 1.8 + 491.67;
     r = r.toFixed(3) + "";
     r = parseFloat(r);
-    let ans = `${num} °C = ${r} °R`;
+    let ans = r;
     return ans;
 }
 
-function farToCel(num) {
+export function farToCel(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
     c = c.toFixed(3) + "";
     c = parseFloat(c);
-    let ans = `${num} °F = ${c} °C`;
+    let ans = c;
     return ans;
 }
 
-function farToRan(num) {
+export function farToRan(num) {
     let r = parseFloat(num) - 459.67;
     r = r.toFixed(3) + "";
     r = parseFloat(r);
-    let ans = `${num} °F = ${r} °R`;
+    let ans = r;
     return ans;
 }
 
-function farToKal(num) {
+export function farToKal(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
     let k = c + 273.15;
     k = k.toFixed(3) + "";
     k = parseFloat(k);
-    let ans = `${num} °F = ${k} K`;
+    let ans = k;
     return ans;
 }
 
-function ranToCel(num) {
+export function ranToCel(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
     c = c.toFixed(3) + "";
     c = parseFloat(c);
-    let ans = `${num} °R = ${c} °C`;
+    let ans = c;
     return ans;
 }
 
-function ranToFar(num) {
+export function ranToFar(num) {
     let f = parseFloat(num) + 459.67;
     f = f.toFixed(3) + "";
     f = parseFloat(f);
-    let ans = `${num} °R = ${f} °F`;
+    let ans = f;
     return ans;
 }
 
-function ranToKal(num) {
+export function ranToKal(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
     let k = c + 273.15;
     k = k.toFixed(3) + "";
     k = parseFloat(k);
-    let ans = `${num} °R = ${k} K`;
+    let ans = k;
     return ans;
 }
 
-function kalToCal(num) {
+export function kalToCal(num) {
     let c = parseFloat(num) - 273.15;
     c = c.toFixed(3) + "";
     c = parseFloat(c);
-    let ans = `${num} K = ${c} °C`;
+    let ans = c;
     return ans;
 }
 
-function kalToFar(num) {
+export function kalToFar(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
     f = f.toFixed(3) + "";
     f = parseFloat(f);
-    let ans = `${num} K = ${f} °F`;
+    let ans = f;
     return ans;
 }
 
-function kalToRan(num) {
+export function kalToRan(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
     let r = f - 459.67;
     r = r.toFixed(3) + "";
     r = parseFloat(r);
-    let ans = `${num} K = ${r} °R`;
+    let ans = r;
     return ans;
 }
 
-export function temConvert(fromToObj, num) {
-    let index = fromToObj;
-    let text = parseFloat(num);
+export function decimalToBinary(decimalNum) {
+    let i = parseFloat(decimalNum);
+    let binaryNum = "";
+    let binaryPoint = "";
+    let havePoint = Math.floor(i) != i;
+    i = Math.floor(i);
+    while (i != 0) {
+        let degit;
+        if (i % 2 == 0) {
+            degit = 0;
+        } else {
+            degit = 1;
+            i = i - 1;
+        }
+        binaryNum += degit;
+        i = Math.floor(i / 2);
+    }
+    binaryNum = binaryNum.split("");
+    binaryNum = binaryNum.reverse();
+    binaryNum = binaryNum.join("");
+    if (havePoint) {
+        let decPoint = decimalNum - Math.floor(decimalNum);
+        decPoint = parseFloat(decPoint.toFixed(5));
+        for (let j = 1; j <= 5; j++) {
+            let tempDegit = Math.floor(decPoint * 2);
+            binaryPoint += tempDegit;
+            decPoint *= 2;
+            if (decPoint >= 1) {
+                decPoint = parseFloat((decPoint - 1).toFixed(4));
+            }
+        }
+        binaryPoint = "." + binaryPoint;
+        binaryNum = binaryNum + binaryPoint;
+        binaryNum = parseFloat(binaryNum);
+    } else {
+        binaryNum = parseInt(binaryNum);
+    }
+    return binaryNum;
+}
 
-    let ans = "";
+export function binaryToDecimal(binaryNum) {
+    let digArr = [];
+    let count = 0;
+    let i = parseFloat(binaryNum);
+    let havePoint = Math.floor(i) != i;
+    i = Math.floor(i);
+    while (i != 0) {
+        let lastDegit = i % 10;
+        i = Math.floor(i / 10);
+        digArr[count] = lastDegit;
+        count++;
+    }
+    digArr = digArr.reverse();
+    let decimalNum = 0;
+    for (let j = 0; j < digArr.length; j++) {
+        decimalNum += digArr[j] * Math.pow(2, digArr.length - j - 1);
+    }
+    if (havePoint) {
+        let pointBinary = binaryNum - Math.floor(binaryNum);
+        let pointDec = 0;
+        pointBinary = pointBinary.toFixed(5);
+        pointBinary = pointBinary.split("");
+        pointBinary.splice(0, 2);
+        for (let j = 0; j < 5; j++) {
+            pointBinary[j] = parseInt(pointBinary[j]);
+            pointDec += pointBinary[j] * (1 / Math.pow(2, j + 1));
+        }
+        decimalNum += pointDec;
+    }
+    return decimalNum;
+}
 
-    if (index.from == index.to) {
-        ans = "Invalid";
-    } else if (index.from == 0) {
-        if (index.to == 1) {
-            let f = celToFar(text);
-            ans = f;
-        } else if (index.to == 2) {
-            let k = celToKal(text);
-            ans = k;
-        } else if (index.to == 3) {
-            let r = celToRan(text);
-            ans = r;
+import {
+    hexToBinTable,
+    binToHexTable,
+    binToOctTable,
+    octToBinTable,
+} from "./tables";
+
+export function hexToBin(hexVal) {
+    let parts = hexVal.toLowerCase();
+    parts = parts.split(".");
+    if (parts.length == 1) {
+        let digits = parts[0].split("");
+        let binVal = "";
+        for (let i = 0; i < digits.length; i++) {
+            if (digits[i] >= 65) digits[i] = digits[i];
+            let hexToBin = hexToBinTable[digits[i]];
+            binVal += hexToBin;
         }
-    } else if (index.from == 1) {
-        if (index.to == 0) {
-            let c = farToCel(text);
-            ans = c;
-        } else if (index.to == 2) {
-            let k = farToKal(text);
-            ans = k;
-        } else if (index.to == 3) {
-            let r = farToRan(text);
-            ans = r;
+        return binVal;
+    } else if (parts.length == 2) {
+        let fstPart = hexToBin(parts[0]);
+        let secondPart = hexToBin(parts[1]);
+        let fullNumber = fstPart + "." + secondPart;
+        return fullNumber;
+    }
+}
+
+export function binToHex(binaryNum) {
+    let parts = binaryNum + "";
+    parts = parts.split(".");
+    if (parts.length == 1) {
+        let digits = parts[0].split("");
+        let pointer = digits.length;
+        let count = 0;
+        let binArr = [];
+        let hexNum = "";
+        for (let j = 0; true; j++) {
+            let snippit = "";
+            for (let i = pointer - 1; i >= 0; i--) {
+                snippit += digits[i];
+                pointer--;
+                count++;
+                if (count == 4) break;
+                if (pointer == 0) break;
+            }
+            count = 0;
+            snippit = snippit.split("");
+            snippit.reverse();
+            snippit = snippit.join("");
+            binArr.push(snippit);
+            if (pointer == 0) break;
         }
-    } else if (index.from == 2) {
-        if (index.to == 0) {
-            let c = kalToCal(text);
-            ans = c;
-        } else if (index.to == 1) {
-            let f = kalToFar(text);
-            ans = f;
-        } else if (index.to == 3) {
-            let r = kalToRan(text);
-            ans = r;
+        binArr.reverse();
+        for (let i = 0; i < binArr.length; i++) {
+            binArr[i] = parseInt(binArr[i]);
+            if (binArr[i] <= 1) binArr[i] = "000" + binArr[i];
+            else if (binArr[i] <= 11) binArr[i] = "00" + binArr[i];
+            else if (binArr[i] <= 111) binArr[i] = "0" + binArr[i];
+            hexNum += binToHexTable[binArr[i]];
         }
-    } else if (index.from == 3) {
-        if (index.to == 0) {
-            let c = ranToCel(text);
-            ans = c;
-        } else if (index.to == 1) {
-            let f = ranToFar(text);
-            ans = f;
-        } else if (index.to == 2) {
-            let k = ranToKal(text);
-            ans = k;
+        return hexNum;
+    } else if (parts.length == 2) {
+        let fstPart = binToHex(parts[0]);
+        let secondPart = "";
+        let tempDegits = parts[1].split("");
+        let degitSet = [];
+        let counter = 0;
+        let pointer = tempDegits.length;
+        for (let i = 0; true; i++) {
+            let snippit = "";
+            for (let j = 0; j < 4; j++) {
+                snippit += tempDegits[j];
+                counter++;
+                pointer--;
+                if (counter == tempDegits.length) break;
+            }
+            degitSet.push(snippit);
+            if (pointer == 0) break;
         }
+        for (let i = 0; i < degitSet.length; i++) {
+            if (degitSet[i].length == 1) degitSet[i] = degitSet[i] + "000";
+            else if (degitSet[i].length == 2) degitSet[i] = degitSet[i] + "00";
+            else if (degitSet[i].length == 3) degitSet[i] = degitSet[i] + "0";
+        }
+        for (let i = 0; i < degitSet.length; i++) {
+            secondPart += binToHexTable[degitSet[i]];
+        }
+        if (secondPart == "0") {
+            return fstPart;
+        } else {
+            let fullNumber = fstPart + "." + secondPart;
+            return fullNumber;
+        }
+    }
+}
+
+export function binToOct(binaryNum) {
+    let parts = binaryNum + "";
+    parts = parts.split(".");
+    if (parts.length == 1) {
+        let digits = parts[0].split("");
+        let pointer = digits.length;
+        let count = 0;
+        let binArr = [];
+        let octNum = "";
+        for (let j = 0; true; j++) {
+            let snippit = "";
+            for (let i = pointer - 1; i >= 0; i--) {
+                snippit += digits[i];
+                pointer--;
+                count++;
+                if (count == 3) break;
+                if (pointer == 0) break;
+            }
+            count = 0;
+            snippit = snippit.split("");
+            snippit.reverse();
+            snippit = snippit.join("");
+            binArr.push(snippit);
+            if (pointer == 0) break;
+        }
+        binArr.reverse();
+
+        for (let i = 0; i < binArr.length; i++) {
+            binArr[i] = parseInt(binArr[i]);
+            if (binArr[i] <= 1) binArr[i] = "00" + binArr[i];
+            else if (binArr[i] <= 11) binArr[i] = "0" + binArr[i];
+            octNum += binToOctTable[binArr[i]];
+        }
+        return octNum;
+    } else if (parts.length == 2) {
+        let fstPart = binToOct(parts[0]);
+        let secondPart = "";
+        let tempDegits = parts[1].split("");
+        let degitSet = [];
+        let counter = 0;
+        let pointer = tempDegits.length;
+        for (let i = 0; true; i++) {
+            let snippit = "";
+            for (let j = 0; j < 3; j++) {
+                snippit += tempDegits[j];
+                counter++;
+                pointer--;
+                if (counter == tempDegits.length) break;
+            }
+            degitSet.push(snippit);
+            if (pointer == 0) break;
+        }
+        for (let i = 0; i < degitSet.length; i++) {
+            if (degitSet[i].length == 1) degitSet[i] = degitSet[i] + "00";
+            else if (degitSet[i].length == 2) degitSet[i] = degitSet[i] + "0";
+        }
+        for (let i = 0; i < degitSet.length; i++) {
+            secondPart += binToOctTable[degitSet[i]];
+        }
+        if (secondPart == "0") {
+            return fstPart;
+        } else {
+            let fullNumber = fstPart + "." + secondPart;
+            return fullNumber;
+        }
+    }
+}
+
+export function octToBin(octVal) {
+    let parts = octVal + "";
+    parts = parts.split(".");
+    if (parts.length == 1) {
+        let digits = parts[0].split("");
+        let binVal = "";
+        for (let i = 0; i < digits.length; i++) {
+            let octToBinVal = octToBinTable[digits[i]];
+            binVal += octToBinVal;
+        }
+        return binVal;
+    } else if (parts.length == 2) {
+        let fstPart = octToBin(parts[0]);
+        let secondPart = octToBin(parts[1]);
+        let fullNumber = fstPart + "." + secondPart;
+        return fullNumber;
+    }
+}
+
+export function pointRemove(val) {
+    let ans;
+    let number = val + "";
+    number = number.split("");
+    let lastDig = number[number.length - 1];
+    if (lastDig == ".") {
+        number.splice(number.length - 1, 1);
+        let temp = "";
+        for (let i = 0; i < number.length; i++) {
+            temp += number[i];
+        }
+        ans = temp;
+    } else {
+        ans = val;
     }
     return ans;
 }

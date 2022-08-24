@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import styles from "./allStyles";
+import styles from "../allStyles";
 import React, { useState } from "react";
-import { factors } from "./functions";
+import { factors } from "../functions";
 
 const Factors = () => {
     const [text, onChangeText] = useState("");

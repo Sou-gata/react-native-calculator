@@ -2,8 +2,8 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 
-import { checkNumbers, multiple } from "./functions";
-import styles from "./allStyles";
+import { checkNumbers, multiple } from "../functions";
+import styles from "../allStyles";
 
 import {
     useFonts,
