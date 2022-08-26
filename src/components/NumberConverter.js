@@ -174,7 +174,6 @@ const NumberConverter = () => {
                         value={hex.toString()}
                         placeholder="HexaDecimal"
                         placeholderTextColor={"#ffffff50"}
-                        keyboardType="numeric"
                     />
                 </View>
             </View>

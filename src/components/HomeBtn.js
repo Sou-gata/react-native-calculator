@@ -1,4 +1,4 @@
-import { View, Text, TouchableHighlight } from "react-native";
+import { View, Text, TouchableHighlight, Image } from "react-native";
 import React from "react";
 
 import styles from "../allStyles";
@@ -12,7 +12,13 @@ const HomeBtn = ({ item, navigation }) => {
                     navigation.navigate(item.name);
                 }}
             >
-                <Text style={styles.btnText}>{item.text}</Text>
+                <View style={{ alignItems: "center" }}>
+                    <Image
+                        style={{ marginBottom: 10, width: 40, height: 40 }}
+                        source={item.path}
+                    />
+                    <Text style={styles.btnText}>{item.text}</Text>
+                </View>
             </TouchableHighlight>
         </View>
     );

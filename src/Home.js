@@ -3,7 +3,7 @@ import React from "react";
 
 import styles from "./allStyles";
 import HomeBtn from "./components/HomeBtn";
-import { componentName } from "./helpers/componentName";
+import componentName from "./helpers/componentName";
 
 const data = componentName;
 const Home = ({ navigation }) => {

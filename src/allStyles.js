@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     homeContainer: {
-        backgroundColor: "#333",
+        backgroundColor: "#111",
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -18,14 +18,12 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 6,
-        borderColor: "#fff",
-        borderWidth: 1.5,
         alignItems: "center",
         justifyContent: "center",
     },
     main: {
         flex: 1,
-        backgroundColor: "#333",
+        backgroundColor: "#222",
     },
     container: {
         marginTop: 29,
@@ -183,6 +181,19 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderColor: "#0ff",
         borderWidth: 1,
+    },
+    ageRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    ageBtn: {
+        width: 150,
+        height: 50,
+        backgroundColor: "#ff7433",
+        borderRadius: 7,
+        justifyContent: "center",
+        alignItems: "center",
     },
 });
 

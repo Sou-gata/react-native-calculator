@@ -14,12 +14,14 @@ import FractionSimplify from "./src/components/FractionSimplify";
 import TemperatureConverter from "./src/components/TemperatureConverter";
 import NumberConverter from "./src/components/NumberConverter";
 import WaightConverter from "./src/components/WaightConverter";
+import LengthConverter from "./src/components/LengthConverter";
+import AgeCalculator from "./src/components/AgeCalculator";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     const options = {
         headerStyle: {
-            backgroundColor: "#222",
+            backgroundColor: "#111",
         },
         headerTintColor: "#fff",
     };
@@ -88,6 +90,22 @@ export default function App() {
                     options={{
                         ...options,
                         title: "Waight Converter",
+                    }}
+                />
+                <Stack.Screen
+                    name="LengthConverter"
+                    component={LengthConverter}
+                    options={{
+                        ...options,
+                        title: "Length Converter",
+                    }}
+                />
+                <Stack.Screen
+                    name="AgeCalculator"
+                    component={AgeCalculator}
+                    options={{
+                        ...options,
+                        title: "Age Calculator",
                     }}
                 />
             </Stack.Navigator>
