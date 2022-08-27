@@ -1,0 +1,148 @@
+import styles from "../allStyles";
+const btns = [
+    {
+        str: "(",
+        type: "brac",
+        text: "(",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: ")",
+        type: "brac",
+        text: ")",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "",
+        type: "ere",
+        text: "⌫",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "",
+        type: "clr",
+        text: "C",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "7",
+        type: "num",
+        text: "7",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "8",
+        type: "num",
+        text: "8",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "9",
+        type: "num",
+        text: "9",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "+",
+        type: "sym",
+        text: "+",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "4",
+        type: "num",
+        text: "4",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "5",
+        type: "num",
+        text: "5",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "6",
+        type: "num",
+        text: "6",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "-",
+        type: "sym",
+        text: "-",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "1",
+        type: "num",
+        text: "1",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "2",
+        type: "num",
+        text: "2",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "3",
+        type: "num",
+        text: "3",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "*",
+        type: "sym",
+        text: "*",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: ".",
+        type: "sym",
+        text: ".",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "0",
+        type: "num",
+        text: "0",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "%",
+        type: "sym",
+        text: "%",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "/",
+        type: "sym",
+        text: "/",
+        txtStyle: styles.calTextOrange,
+    },
+    {
+        str: "sin(",
+        type: "tri",
+        text: "sin",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "cos(",
+        type: "tri",
+        text: "cos",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "tan(",
+        type: "tri",
+        text: "tan",
+        txtStyle: styles.calText,
+    },
+    {
+        str: "=",
+        type: "eql",
+        text: "=",
+        txtStyle: [styles.calText, { fontSize: 30, fontWeight: "600" }],
+    },
+];
+export default btns;

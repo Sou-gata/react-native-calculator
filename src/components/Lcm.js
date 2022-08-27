@@ -38,7 +38,7 @@ const Lcm = () => {
             </View>
             <View style={styles.ansDiv} opacity={opacity}>
                 <Text style={styles.textStyle}>LCM of {input} is</Text>
-                <Text style={styles.textStyle}>{ans}</Text>
+                <Text style={styles.textStyleOrange}>{ans}</Text>
             </View>
         </View>
     );

@@ -128,10 +128,10 @@ const NumberConverter = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Binary</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Octal</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Decimal</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>
+                    <Text style={{ color: "#fff", fontSize: 20 }}>Binary</Text>
+                    <Text style={{ color: "#fff", fontSize: 20 }}>Octal</Text>
+                    <Text style={{ color: "#fff", fontSize: 20 }}>Decimal</Text>
+                    <Text style={{ color: "#fff", fontSize: 20 }}>
                         Hexadecimal
                     </Text>
                 </View>

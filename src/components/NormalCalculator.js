@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
 
 import styles from "../allStyles";
+import calBtns from "../helpers/calBtns";
 
 const NormalCalculator = () => {
     Math.toRadian = function (degrees) {
@@ -23,10 +24,15 @@ const NormalCalculator = () => {
     const calBtnPress = (str, type) => {
         if (type == "eql") {
             if (!sym && evalStr.length != 0) {
-                const ans = eval(evalStr);
-                const fixed = parseFloat(ans.toFixed(8)) + "";
-                setText(fixed);
-                setEvalStr(fixed);
+                try {
+                    const ans = eval(evalStr);
+                    const fixed = parseFloat(ans.toFixed(8)) + "";
+                    setText(fixed);
+                    setEvalStr(fixed);
+                } catch (error) {
+                    setText("Math Error");
+                    setEvalStr("Math Error");
+                }
             }
         }
 
@@ -35,6 +41,10 @@ const NormalCalculator = () => {
                 setText(text + str);
                 setEvalStr(evalStr + str);
                 setSym(false);
+            }
+            if (type == "brac") {
+                setText(text + str);
+                setEvalStr(evalStr + str);
             }
             if (type == "sym") setSym(true);
             if (!sym) {
@@ -69,185 +79,24 @@ const NormalCalculator = () => {
                 />
             </View>
             <View style={styles.allBtns}>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("7", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>7</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("8", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>8</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("9", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>9</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("+", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>+</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("4", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>4</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("5", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>5</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("6", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>6</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("-", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>-</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("1", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>1</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("2", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>2</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("3", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>3</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("*", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>*</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        onPress={() => calBtnPress(".", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>.</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e6573"
-                        onPress={() => calBtnPress("0", "num")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>0</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("/", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>/</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#7c5e8a"
-                        onPress={() => calBtnPress("=", "eql")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>=</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("(", "bracOpn")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>(</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress(")", "bracCls")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>)</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#734e4e"
-                        onPress={() => calBtnPress("", "ere")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>⌫</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#6f734e"
-                        onPress={() => calBtnPress("%", "sym")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>%</Text>
-                    </TouchableHighlight>
-                </View>
-                <View style={styles.row}>
-                    <TouchableHighlight
-                        underlayColor="#4e7355"
-                        onPress={() => calBtnPress("sin(", "tri")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>sin</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e7355"
-                        onPress={() => calBtnPress("cos(", "tri")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>cos</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#4e7355"
-                        onPress={() => calBtnPress("tan(", "tri")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>tan</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight
-                        underlayColor="#734e4e"
-                        onPress={() => calBtnPress("", "clr")}
-                        style={styles.calBtn}
-                    >
-                        <Text style={styles.calText}>C</Text>
-                    </TouchableHighlight>
-                </View>
+                {(() => {
+                    let btns = [];
+                    for (let i = 0; i < calBtns.length; i++) {
+                        let btn = calBtns[i];
+                        let com = (
+                            <TouchableHighlight
+                                key={i}
+                                onPress={() => calBtnPress(btn.str, btn.type)}
+                                style={styles.calBtn}
+                                underlayColor="#ff7733a0"
+                            >
+                                <Text style={btn.txtStyle}>{btn.text}</Text>
+                            </TouchableHighlight>
+                        );
+                        btns.push(com);
+                    }
+                    return btns;
+                })()}
             </View>
         </View>
     );

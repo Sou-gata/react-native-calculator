@@ -38,7 +38,7 @@ const Factors = () => {
                 <Text style={styles.textStyle}>
                     Factors of {ans.number} are :
                 </Text>
-                <Text style={styles.textStyle}>{ans.str}</Text>
+                <Text style={styles.textStyleOrange}>{ans.str}</Text>
             </View>
         </View>
     );
