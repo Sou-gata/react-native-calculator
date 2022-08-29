@@ -93,7 +93,7 @@ const btns = [
     {
         str: "*",
         type: "sym",
-        text: "*",
+        text: "×",
         txtStyle: styles.calTextOrange,
     },
     {
@@ -117,7 +117,7 @@ const btns = [
     {
         str: "/",
         type: "sym",
-        text: "/",
+        text: "÷",
         txtStyle: styles.calTextOrange,
     },
     {

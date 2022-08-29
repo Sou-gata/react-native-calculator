@@ -11,8 +11,7 @@
             "distribution": "internal",
             "android": {
                 "buildType": "apk"
-            },
-            "node": "16.16.0"
+            }
         },
         "preview2": {
             "android": {
