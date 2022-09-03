@@ -18,12 +18,38 @@ const NormalCalculator = () => {
     Math.newtan = function (str) {
         return Math.tan(Math.toRadian(str));
     };
+    Math.newasin = function (str) {
+        return (Math.asin(str) * 180) / Math.PI;
+    };
+    Math.newacos = function (str) {
+        return (Math.acos(str) * 180) / Math.PI;
+    };
+    Math.newatan = function (str) {
+        return (Math.atan(str) * 180) / Math.PI;
+    };
+    Math.newlog = function (str) {
+        return Math.log10(parseFloat(str));
+    };
+    Math.newln = function (str) {
+        return Math.log(parseFloat(str));
+    };
+    Math.newsqrt = function (str) {
+        return Math.sqrt(parseFloat(str));
+    };
+    Math.newcbrt = function (str) {
+        return Math.cbrt(parseFloat(str));
+    };
     const [text, setText] = useState("");
     const [evalStr, setEvalStr] = useState("");
     const [sym, setSym] = useState(false);
     const [point, setPoint] = useState(false);
+    const [numArr, setNumArr] = useState([]);
 
-    const calBtnPress = (str, type, txt) => {
+    const calBtnPress = (btn) => {
+        let str = btn.str;
+        let type = btn.type;
+        let txt = btn.text;
+
         if (type == "eql") {
             if (!sym && evalStr.length != 0) {
                 try {
@@ -31,6 +57,9 @@ const NormalCalculator = () => {
                     const fixed = parseFloat(ans.toFixed(8)) + "";
                     setText(fixed);
                     setEvalStr(fixed);
+                    setNumArr([
+                        { evalLen: fixed.length, textLen: fixed.length },
+                    ]);
                 } catch (error) {
                     setText("Math Error");
                     setEvalStr("Math Error");
@@ -39,6 +68,7 @@ const NormalCalculator = () => {
         }
 
         if (type != "clr" && type != "ere" && type != "eql") {
+            setNumArr([...numArr, btn]);
             if (type == "num") {
                 setText(text + txt);
                 setEvalStr(evalStr + str);
@@ -69,7 +99,7 @@ const NormalCalculator = () => {
                 }
             }
             if (type == "tri") {
-                setText(text + txt);
+                setText(text + txt + "(");
                 setSym(false);
                 setEvalStr(evalStr + `Math.new${str}`);
             }
@@ -79,12 +109,18 @@ const NormalCalculator = () => {
             setEvalStr("");
             setSym(false);
             setPoint(false);
+            setNumArr([]);
         }
         if (type == "ere" && text.length != 0) {
-            const temp = text.slice(0, -1);
+            let lastBtn = numArr[numArr.length - 1];
+            const temp = text.slice(0, -lastBtn.textLen);
             setText(temp);
-            const tempTwo = evalStr.slice(0, -1);
+            const tempTwo = evalStr.slice(0, -lastBtn.evalLen);
             setEvalStr(tempTwo);
+            let tempArr = [...numArr];
+            tempArr.splice(numArr.length - 1, 1);
+            setNumArr(tempArr);
+
             let last = lastChar(tempTwo);
             if (last == "sym") setSym(true);
             else setSym(false);
@@ -105,18 +141,29 @@ const NormalCalculator = () => {
                     let btns = [];
                     for (let i = 0; i < calBtns.length; i++) {
                         let btn = calBtns[i];
-                        let com = (
-                            <TouchableHighlight
-                                key={i}
-                                onPress={() =>
-                                    calBtnPress(btn.str, btn.type, btn.text)
-                                }
-                                style={styles.calBtn}
-                                underlayColor="#ff7733a0"
-                            >
-                                <Text style={btn.txtStyle}>{btn.text}</Text>
-                            </TouchableHighlight>
-                        );
+                        let com;
+                        if (btn.text != "=")
+                            com = (
+                                <TouchableHighlight
+                                    key={i}
+                                    onPress={() => calBtnPress(btn)}
+                                    style={styles.calBtn}
+                                    underlayColor="#ff7733a0"
+                                >
+                                    <Text style={btn.txtStyle}>{btn.text}</Text>
+                                </TouchableHighlight>
+                            );
+                        else
+                            com = (
+                                <TouchableHighlight
+                                    key={i}
+                                    onPress={() => calBtnPress(btn)}
+                                    style={styles.calBtnEql}
+                                    underlayColor="#ff7733a0"
+                                >
+                                    <Text style={btn.txtStyle}>{btn.text}</Text>
+                                </TouchableHighlight>
+                            );
                         btns.push(com);
                     }
                     return btns;

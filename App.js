@@ -24,6 +24,7 @@ export default function App() {
             backgroundColor: "#111",
         },
         headerTintColor: "#fff",
+        animation: "slide_from_left",
     };
     return (
         <NavigationContainer>
