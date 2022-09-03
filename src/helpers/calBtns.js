@@ -98,7 +98,7 @@ const btns = [
     },
     {
         str: ".",
-        type: "sym",
+        type: "point",
         text: ".",
         txtStyle: styles.calText,
     },

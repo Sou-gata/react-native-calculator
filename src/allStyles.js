@@ -1,4 +1,8 @@
 import { StyleSheet } from "react-native";
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 const styles = StyleSheet.create({
     homeMain: {
         flexDirection: "row",
@@ -9,7 +13,7 @@ const styles = StyleSheet.create({
     },
     homeContainer: {
         backgroundColor: "#111",
-        height: "100%",
+        height: hp("100%"),
         justifyContent: "center",
         alignItems: "center",
     },
@@ -106,11 +110,12 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         alignItems: "center",
         padding: 20,
+        height: hp("76%"),
     },
     calBtn: {
-        width: "25%",
+        width: wp("22%"),
         alignItems: "center",
-        height: "19.5%",
+        height: hp("12%"),
         justifyContent: "center",
         borderRadius: 7,
     },
@@ -125,11 +130,13 @@ const styles = StyleSheet.create({
     calText: {
         color: "#fff",
         fontSize: 25,
+        textAlign: "center",
     },
     calTextOrange: {
         color: "#ff7733",
         fontSize: 25,
         fontWeight: "600",
+        textAlign: "center",
     },
     inputContainer: {
         alignItems: "center",

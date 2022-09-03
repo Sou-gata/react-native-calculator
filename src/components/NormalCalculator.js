@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
+import { lastChar } from "../functions";
 
 const NormalCalculator = () => {
     Math.toRadian = function (degrees) {
@@ -20,8 +21,9 @@ const NormalCalculator = () => {
     const [text, setText] = useState("");
     const [evalStr, setEvalStr] = useState("");
     const [sym, setSym] = useState(false);
+    const [point, setPoint] = useState(false);
 
-    const calBtnPress = (str, type) => {
+    const calBtnPress = (str, type, txt) => {
         if (type == "eql") {
             if (!sym && evalStr.length != 0) {
                 try {
@@ -38,21 +40,36 @@ const NormalCalculator = () => {
 
         if (type != "clr" && type != "ere" && type != "eql") {
             if (type == "num") {
-                setText(text + str);
+                setText(text + txt);
                 setEvalStr(evalStr + str);
                 setSym(false);
             }
             if (type == "brac") {
-                setText(text + str);
+                setText(text + txt);
                 setEvalStr(evalStr + str);
             }
-            if (type == "sym") setSym(true);
-            if (!sym) {
-                setText(text + str);
-                setEvalStr(evalStr + str);
+            if (type == "sym") {
+                if (sym) {
+                    let temp = text.slice(0, -1);
+                    setText(temp + txt);
+                    temp = evalStr.slice(0, -1);
+                    setEvalStr(temp + str);
+                } else {
+                    setText(text + txt);
+                    setEvalStr(evalStr + str);
+                }
+                setSym(true);
+                setPoint(false);
+            }
+            if (type == "point") {
+                setPoint(true);
+                if (!point) {
+                    setText(text + txt);
+                    setEvalStr(evalStr + str);
+                }
             }
             if (type == "tri") {
-                setText(text + str);
+                setText(text + txt);
                 setSym(false);
                 setEvalStr(evalStr + `Math.new${str}`);
             }
@@ -60,12 +77,17 @@ const NormalCalculator = () => {
         if (type == "clr") {
             setText("");
             setEvalStr("");
+            setSym(false);
+            setPoint(false);
         }
         if (type == "ere" && text.length != 0) {
             const temp = text.slice(0, -1);
             setText(temp);
             const tempTwo = evalStr.slice(0, -1);
             setEvalStr(tempTwo);
+            let last = lastChar(tempTwo);
+            if (last == "sym") setSym(true);
+            else setSym(false);
         }
     };
 
@@ -86,7 +108,9 @@ const NormalCalculator = () => {
                         let com = (
                             <TouchableHighlight
                                 key={i}
-                                onPress={() => calBtnPress(btn.str, btn.type)}
+                                onPress={() =>
+                                    calBtnPress(btn.str, btn.type, btn.text)
+                                }
                                 style={styles.calBtn}
                                 underlayColor="#ff7733a0"
                             >

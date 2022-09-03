@@ -585,3 +585,17 @@ export function pointRemove(val) {
     }
     return ans;
 }
+
+import calBtns from "./helpers/calBtns";
+
+export function lastChar(str) {
+    let last = str.charAt(str.length - 1);
+    let type;
+    for (let i = 0; i < calBtns.length; i++) {
+        let btn = calBtns[i];
+        if (btn.text == last) {
+            type = btn.type;
+        }
+    }
+    return type;
+}
