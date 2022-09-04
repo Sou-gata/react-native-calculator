@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
-import { lastChar } from "../functions";
+import { lastChar } from "../helpers/functions";
 
 const NormalCalculator = () => {
     Math.toRadian = function (degrees) {

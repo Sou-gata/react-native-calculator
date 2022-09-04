@@ -100,10 +100,12 @@ const styles = StyleSheet.create({
     textStyle: {
         color: "#fff",
         fontSize: 25,
+        textAlign: "center",
     },
     textStyleOrange: {
         color: "#ff7733",
         fontSize: 35,
+        textAlign: "center",
     },
     allBtns: {
         flexDirection: "row",
@@ -158,10 +160,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
-    },
-    simplify: {
-        width: "100%",
-        textAlign: "center",
     },
     list: {
         width: 50,

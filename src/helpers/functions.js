@@ -586,7 +586,7 @@ export function pointRemove(val) {
     return ans;
 }
 
-import calBtns from "./helpers/calBtns";
+import calBtns from "../helpers/calBtns";
 
 export function lastChar(str) {
     let last = str.charAt(str.length - 1);

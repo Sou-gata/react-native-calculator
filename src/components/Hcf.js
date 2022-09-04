@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import { checkLcmHcfNum, gcd, inputNumbers } from "../functions";
+import { checkLcmHcfNum, gcd, inputNumbers } from "../helpers/functions";
 import styles from "../allStyles";
 
 const Hcf = () => {

@@ -1,6 +1,6 @@
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
-import { checkNumbers, devide } from "../functions";
+import { checkNumbers, devide } from "../helpers/functions";
 import {
     useFonts,
     RobotoMono_400Regular,

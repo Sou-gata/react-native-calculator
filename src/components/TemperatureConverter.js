@@ -15,7 +15,7 @@ import {
     ranToCel,
     ranToFar,
     ranToKal,
-} from "../functions";
+} from "../helpers/functions";
 
 const TemperatureConverter = () => {
     const [cel, setCel] = useState("");

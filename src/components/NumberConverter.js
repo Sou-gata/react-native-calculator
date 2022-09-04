@@ -2,7 +2,12 @@ import { View, Text, TextInput } from "react-native";
 import React, { useState } from "react";
 
 import styles from "../allStyles";
-import { binaryCheck, octalCheck, decCheck, hexCheck } from "../numbersCheck";
+import {
+    binaryCheck,
+    octalCheck,
+    decCheck,
+    hexCheck,
+} from "../helpers/numbersCheck";
 import {
     binaryToDecimal,
     binToOct,
@@ -11,7 +16,7 @@ import {
     decimalToBinary,
     hexToBin,
     pointRemove,
-} from "../functions";
+} from "../helpers/functions";
 
 const NumberConverter = () => {
     const [bin, setBin] = useState("");
