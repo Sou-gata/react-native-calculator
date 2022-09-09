@@ -16,12 +16,17 @@ import NumberConverter from "./src/components/NumberConverter";
 import WaightConverter from "./src/components/WaightConverter";
 import LengthConverter from "./src/components/LengthConverter";
 import AgeCalculator from "./src/components/AgeCalculator";
+import Area from "./src/components/Area";
+import Volume from "./src/components/Volume";
+import Gst from "./src/components/Gst";
+import Discount from "./src/components/Discount";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     const options = {
         headerStyle: {
             backgroundColor: "#111",
+            height: 50,
         },
         headerTintColor: "#fff",
         animation: "slide_from_left",
@@ -38,11 +43,6 @@ export default function App() {
                         ...options,
                         headerShown: false,
                     }}
-                />
-                <Stack.Screen
-                    name="NormalCalculator"
-                    component={NormalCalculator}
-                    options={options}
                 />
                 <Stack.Screen name="LCM" component={Lcm} options={options} />
                 <Stack.Screen name="HCF" component={Hcf} options={options} />
@@ -107,6 +107,38 @@ export default function App() {
                     options={{
                         ...options,
                         title: "Age Calculator",
+                    }}
+                />
+                <Stack.Screen
+                    name="Area"
+                    component={Area}
+                    options={{
+                        ...options,
+                        title: "Area Converter",
+                    }}
+                />
+                <Stack.Screen
+                    name="Volume"
+                    component={Volume}
+                    options={{
+                        ...options,
+                        title: "Volume Converter",
+                    }}
+                />
+                <Stack.Screen
+                    name="Gst"
+                    component={Gst}
+                    options={{
+                        ...options,
+                        title: "GST",
+                    }}
+                />
+                <Stack.Screen
+                    name="Discount"
+                    component={Discount}
+                    options={{
+                        ...options,
+                        title: "Discount Calculator",
                     }}
                 />
             </Stack.Navigator>
