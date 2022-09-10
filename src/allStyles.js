@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         borderRadius: 7,
         color: "#fff",
-        borderColor: "#ff7733",
+        borderColor: "#f73",
         textAlign: "center",
     },
     btn: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ff7733",
+        backgroundColor: "#f73",
     },
     btnText: {
         color: "#fff",
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     textStyleOrange: {
-        color: "#ff7733",
+        color: "#f73",
         fontSize: 35,
         textAlign: "center",
     },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         width: hp("7.5%"),
         height: hp("7.5%"),
         justifyContent: "center",
-        backgroundColor: "#ff7733",
+        backgroundColor: "#f73",
         borderRadius: 55,
     },
     calText: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     calTextOrange: {
-        color: "#ff7733",
+        color: "#f73",
         fontSize: 22,
         fontWeight: "600",
         textAlign: "center",
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     ageBtn: {
         width: 150,
         height: 50,
-        backgroundColor: "#ff7733",
+        backgroundColor: "#f73",
         borderRadius: 7,
         justifyContent: "center",
         alignItems: "center",
@@ -218,10 +218,16 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
         borderBottomRightRadius: 5,
     },
-    gstClmContainer: {
-        height: 300,
-        justifyContent: "space-evenly",
-        alignItems: "center",
+    areaClmContainer: {
+        height: 550,
+        justifyContent: "space-around",
+    },
+    inputLeftText: {
+        color: "#fff",
+        fontSize: 20,
+        height: 50,
+        marginTop: 20,
+        marginRight: 20,
     },
 });
 

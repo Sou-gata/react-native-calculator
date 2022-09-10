@@ -133,7 +133,7 @@ const NormalCalculator = () => {
                 <TextInput
                     style={styles.calInput}
                     value={text}
-                    disabled={true}
+                    editable={false}
                 />
             </View>
             <View style={styles.allBtns}>

@@ -71,13 +71,9 @@ const Gst = () => {
 
     return (
         <View style={styles.main}>
-            <View style={styles.ageRow}>
-                <View style={styles.gstClmContainer}>
+            <View style={{ height: 300, justifyContent: "space-around" }}>
+                <View style={styles.ageRow}>
                     <Text style={styles.text}>Original Price</Text>
-                    <Text style={styles.text}>GST</Text>
-                    <Text style={styles.text}>Final Price</Text>
-                </View>
-                <View style={styles.gstClmContainer}>
                     <TextInput
                         style={[styles.input, { marginVertical: 0 }]}
                         onChangeText={onChangeText}
@@ -87,46 +83,55 @@ const Gst = () => {
                         placeholderTextColor={"#ffffff50"}
                         keyboardType="numeric"
                     />
-                    <View style={styles.ageRow}>
-                        {(() => {
-                            let allBtns = [];
-                            for (let i = 0; i < btns.length; i++) {
-                                let btn = btns[i];
-                                let component = (
-                                    <TouchableOpacity
-                                        key={i}
-                                        onPress={() => {
-                                            onPressBtn(btn.value);
-                                        }}
+                </View>
+                <View style={styles.ageRow}>
+                    <Text style={[styles.text, { marginRight: 50 }]}>GST</Text>
+                    {(() => {
+                        let allBtns = [];
+                        for (let i = 0; i < btns.length; i++) {
+                            let btn = btns[i];
+                            let component = (
+                                <TouchableOpacity
+                                    key={i}
+                                    onPress={() => {
+                                        onPressBtn(btn.value);
+                                    }}
+                                    style={
+                                        selected == btn.value
+                                            ? btn.selectStyle
+                                            : btn.style
+                                    }
+                                >
+                                    <Text
                                         style={
                                             selected == btn.value
-                                                ? btn.selectStyle
-                                                : btn.style
+                                                ? styles.gstTextSelected
+                                                : styles.gstText
                                         }
                                     >
-                                        <Text
-                                            style={
-                                                selected == btn.value
-                                                    ? styles.gstTextSelected
-                                                    : styles.gstText
-                                            }
-                                        >
-                                            {btn.text}
-                                        </Text>
-                                    </TouchableOpacity>
-                                );
-                                allBtns.push(component);
-                            }
-                            return allBtns;
-                        })()}
-                    </View>
-                    <Text style={styles.textStyleOrange}>{ans.cost}</Text>
+                                        {btn.text}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                            allBtns.push(component);
+                        }
+                        return allBtns;
+                    })()}
                 </View>
+                <View style={styles.ageRow}>
+                    <Text style={[styles.text, styles.ageRow]}>
+                        Final Price
+                    </Text>
+                    <Text style={[styles.textStyleOrange, { height: 45 }]}>
+                        {"   "}
+                        {ans.cost}
+                    </Text>
+                </View>
+                <Text style={[styles.text, { textAlign: "center" }]}>
+                    SGST/CGST : {"  "}
+                    {ans.cs}
+                </Text>
             </View>
-            <Text style={[styles.text, { textAlign: "center" }]}>
-                SGST/CGST : {"  "}
-                {ans.cs}
-            </Text>
         </View>
     );
 };
