@@ -1,4 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    ScrollView,
+} from "react-native";
 import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 
@@ -46,44 +52,53 @@ const Multiply = () => {
                         <Text style={styles.btnText}>Calculate</Text>
                     </TouchableOpacity>
                 </View>
-                <View opacity={opacity} style={styles.math}>
-                    <View style={styles.mathContainer}>
-                        <Text style={styles.mathText}>
-                            {"  "}
-                            {ans.numberA}
-                        </Text>
-                        <Text style={styles.mathText}>x {ans.numberB}</Text>
-                        <View style={styles.hrLine}></View>
-                        {(() => {
-                            let element = [];
+                <ScrollView overScrollMode="never" style={{ marginBottom: 20 }}>
+                    <View opacity={opacity} style={styles.math}>
+                        <View style={styles.mathContainer}>
+                            <Text style={styles.mathText}>
+                                {"  "}
+                                {ans.numberA}
+                            </Text>
+                            <Text style={styles.mathText}>x {ans.numberB}</Text>
+                            <View style={styles.hrLine}></View>
+                            {(() => {
+                                let element = [];
 
-                            if (ans.results) {
-                                let key = 1;
-                                for (let i = 0; i < ans.results.length; i++) {
-                                    let innerText = "";
-                                    let space = "";
+                                if (ans.results) {
+                                    let key = 1;
                                     for (
-                                        let j = 0;
-                                        j < ans.results.length - i - 1;
-                                        j++
+                                        let i = 0;
+                                        i < ans.results.length;
+                                        i++
                                     ) {
-                                        space += " ";
+                                        let innerText = "";
+                                        let space = "";
+                                        for (
+                                            let j = 0;
+                                            j < ans.results.length - i - 1;
+                                            j++
+                                        ) {
+                                            space += " ";
+                                        }
+                                        innerText += `${space}${ans.results[i]}`;
+                                        key++;
+                                        element.push(
+                                            <Text
+                                                key={key}
+                                                style={styles.mathText}
+                                            >
+                                                {innerText}
+                                            </Text>
+                                        );
                                     }
-                                    innerText += `${space}${ans.results[i]}`;
-                                    key++;
-                                    element.push(
-                                        <Text key={key} style={styles.mathText}>
-                                            {innerText}
-                                        </Text>
-                                    );
                                 }
-                            }
-                            return element;
-                        })()}
-                        <View style={styles.hrLine}></View>
-                        <Text style={styles.mathText}>{ans.ans}</Text>
+                                return element;
+                            })()}
+                            <View style={styles.hrLine}></View>
+                            <Text style={styles.mathText}>{ans.ans}</Text>
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
         );
     }

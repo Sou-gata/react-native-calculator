@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
 
 import styles from "../allStyles";
@@ -127,7 +127,7 @@ const Area = () => {
     };
 
     return (
-        <View style={styles.main}>
+        <ScrollView style={styles.main}>
             <View style={styles.ageRow}>
                 <View style={styles.areaClmContainer}>
                     <Text style={styles.inputLeftText}>cm²</Text>
@@ -197,7 +197,7 @@ const Area = () => {
                     />
                 </View>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
