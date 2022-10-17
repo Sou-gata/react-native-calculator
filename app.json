@@ -2,13 +2,13 @@
     "expo": {
         "name": "Calculator",
         "slug": "Sougata",
-        "version": "1.1.6",
+        "version": "1.1.7",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "dark",
         "splash": {
             "image": "./assets/splash.png",
-            "resizeMode": "contain",
+            "resizeMode": "cover",
             "backgroundColor": "#111111"
         },
         "updates": {
@@ -20,8 +20,7 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#00000000"
+                "foregroundImage": "./assets/adaptive-icon.png"
             },
             "package": "com.sougata.calculator",
             "versionCode": 1

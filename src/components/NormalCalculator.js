@@ -1,5 +1,5 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
@@ -44,6 +44,24 @@ const NormalCalculator = () => {
     const [sym, setSym] = useState(false);
     const [point, setPoint] = useState(false);
     const [numArr, setNumArr] = useState([]);
+    const [ans, setAns] = useState("");
+
+    const calAns = () => {
+        if (evalStr != "") {
+            try {
+                const tempAns = eval(evalStr);
+                const fixed = parseFloat(tempAns.toFixed(8)) + "";
+                setAns(fixed);
+                if (tempAns == evalStr) {
+                    setAns("");
+                }
+            } catch (error) {}
+        }
+    };
+
+    useEffect(() => {
+        calAns();
+    }, [evalStr]);
 
     const calBtnPress = (btn) => {
         let str = btn.str;
@@ -53,8 +71,8 @@ const NormalCalculator = () => {
         if (type == "eql") {
             if (!sym && evalStr.length != 0) {
                 try {
-                    const ans = eval(evalStr);
-                    const fixed = parseFloat(ans.toFixed(8)) + "";
+                    const tempAns = eval(evalStr);
+                    const fixed = parseFloat(tempAns.toFixed(8)) + "";
                     setText(fixed);
                     setEvalStr(fixed);
                     setNumArr([
@@ -110,6 +128,7 @@ const NormalCalculator = () => {
             setSym(false);
             setPoint(false);
             setNumArr([]);
+            setAns("");
         }
         if (type == "ere" && text.length != 0) {
             let lastBtn = numArr[numArr.length - 1];
@@ -133,6 +152,13 @@ const NormalCalculator = () => {
                 <TextInput
                     style={styles.calInput}
                     value={text}
+                    editable={false}
+                    multiline={true}
+                    numberOfLines={2}
+                />
+                <TextInput
+                    style={styles.calInputAns}
+                    value={ans}
                     editable={false}
                 />
             </View>
