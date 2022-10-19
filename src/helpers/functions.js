@@ -155,7 +155,7 @@ export function checkLcmHcfNum(str) {
     let valid = true;
     if (numberSet.length < 2) valid = false;
     for (let i = 0; i < numberSet.length; i++) {
-        numberSet[i] = parseInt(numberSet[i]);
+        numberSet[i] = parseFloat(numberSet[i]);
         if (isNaN(numberSet[i])) {
             valid = false;
         }
@@ -164,37 +164,84 @@ export function checkLcmHcfNum(str) {
     else return valid;
 }
 
-export function lcm(numbersArr) {
+function maxDigitAfterPoint(numbersArr) {
     let numberSet = numbersArr;
-    let lcm = 1;
-    let lcmTemp = numberSet[0];
+    let maxDigit = 0;
     for (let i = 0; i < numberSet.length; i++) {
-        while (true) {
-            if (lcm % numberSet[i] == 0 && lcm % lcmTemp == 0) {
-                lcmTemp = lcm;
-                break;
-            }
-            lcm++;
+        let temp = numberSet[i] + "";
+        temp = temp.split(".");
+        if (temp.length > 1) {
+            let lengthAfter = temp[1].length;
+            if (lengthAfter > maxDigit) maxDigit = lengthAfter;
         }
     }
-    return lcm;
+    return maxDigit;
+}
+
+export function lcm(numbersArr) {
+    let hasPoint = false;
+    let numberSet = numbersArr;
+    let newNumberSet = [];
+    for (let i = 0; i < numberSet.length; i++) {
+        numberSet[i] = Math.abs(parseFloat(numberSet[i]));
+        if (numberSet[i] != Math.floor(numberSet[i])) {
+            hasPoint = true;
+        }
+    }
+    if (!hasPoint) {
+        let Lcm = 1;
+        let lcmTemp = numberSet[0];
+        for (let i = 0; i < numberSet.length; i++) {
+            while (true) {
+                if (Lcm % numberSet[i] == 0 && Lcm % lcmTemp == 0) {
+                    lcmTemp = Lcm;
+                    break;
+                }
+                Lcm++;
+            }
+        }
+        return Lcm;
+    } else {
+        let maxDigit = maxDigitAfterPoint(numberSet);
+        for (let i = 0; i < numberSet.length; i++) {
+            newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
+        }
+        let Lcm = lcm(newNumberSet);
+        Lcm = Lcm / Math.pow(10, maxDigit);
+        return Lcm;
+    }
 }
 
 export function gcd(numbersArr) {
+    let fractionHcf = false;
     let numberSet = numbersArr;
     for (let i = 0; i < numberSet.length; i++) {
-        numberSet[i] = parseInt(numberSet[i]);
-    }
-    let gcd = numberSet[0];
-    for (let i = 0; i < numberSet.length; i++) {
-        let gcdTemp = gcd;
-        for (let j = 1; j <= gcdTemp; j++) {
-            if (numberSet[i] % j == 0 && gcdTemp % j == 0) {
-                gcd = j;
-            }
+        numberSet[i] = Math.abs(parseFloat(numberSet[i]));
+        if (numberSet[i] != Math.floor(numberSet[i])) {
+            fractionHcf = true;
         }
     }
-    return gcd;
+    if (!fractionHcf) {
+        let gcd = numberSet[0];
+        for (let i = 0; i < numberSet.length; i++) {
+            let gcdTemp = gcd;
+            for (let j = 1; j <= gcdTemp; j++) {
+                if (numberSet[i] % j == 0 && gcdTemp % j == 0) {
+                    gcd = j;
+                }
+            }
+        }
+        return gcd;
+    } else {
+        let maxDigit = maxDigitAfterPoint(numberSet);
+        let newNumberSet = [];
+        for (let i = 0; i < numberSet.length; i++) {
+            newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
+        }
+        let hcf = gcd(newNumberSet);
+        hcf = hcf / Math.pow(10, maxDigit);
+        return hcf;
+    }
 }
 
 export function inputNumbers(str) {
@@ -598,4 +645,78 @@ export function lastChar(str) {
         }
     }
     return type;
+}
+
+export function equSolve(a1, a2, b1, b2, c1, c2, setFinalAns) {
+    a1 = parseFloat(a1);
+    a2 = parseFloat(a2);
+    b1 = parseFloat(b1);
+    b2 = parseFloat(b2);
+    c1 = parseFloat(c1);
+    c2 = parseFloat(c2);
+    if (isNaN(a1)) a1 = 0;
+    if (isNaN(a2)) a2 = 0;
+    if (isNaN(b1)) b1 = 0;
+    if (isNaN(b2)) b2 = 0;
+    if (isNaN(c1)) c1 = 0;
+    if (isNaN(c2)) c2 = 0;
+    let numeratorX = b1 * c2 - b2 * c1;
+    let numeratorY = c1 * a2 - c2 * a1;
+    let denominator = b2 * a1 - b1 * a2;
+    let firstAns = { numeratorX, numeratorY, denominator };
+
+    let hcf = gcd([a1, a2]);
+    let newA1 = a1 / hcf,
+        newA2 = a2 / hcf,
+        newB1 = b1 / hcf,
+        newB2 = b2 / hcf,
+        newC1 = c1 / hcf,
+        newC2 = c2 / hcf;
+    if (newA1 / newA2 == newB1 / newB2 && newA1 / newA2 != newC1 / newC2) {
+        setFinalAns({ noSolution: true });
+    } else if (
+        newA1 / newA2 == newB1 / newB2 &&
+        newA1 / newA2 == newC1 / newC2 &&
+        newB1 / newB2 == newC1 / newC2
+    ) {
+        setFinalAns({ manySolution: true });
+    } else {
+        if (firstAns.denominator != 0) {
+            let hcfX = gcd([firstAns.numeratorX, firstAns.denominator]);
+            let hcfY = gcd([firstAns.numeratorY, firstAns.denominator]);
+            if (hcfX == 0) hcfX = 1;
+            if (hcfY == 0) hcfY = 1;
+            let numeratorX = firstAns.numeratorX / hcfX;
+            let denominatorX = firstAns.denominator / hcfX;
+            let numeratorY = firstAns.numeratorY / hcfY;
+            let denominatorY = firstAns.denominator / hcfY;
+            let x = parseFloat((numeratorX / denominatorX).toFixed(4));
+            let y = parseFloat((numeratorY / denominatorY).toFixed(4));
+            if (denominatorX < 0) {
+                numeratorX *= -1;
+                denominatorX *= -1;
+            }
+            if (denominatorY < 0) {
+                numeratorY *= -1;
+                denominatorY *= -1;
+            }
+            if (denominatorX == 1 || numeratorX == 0) {
+                denominatorX = undefined;
+                x = undefined;
+            }
+            if (denominatorY == 1 || numeratorY == 0) {
+                denominatorY = undefined;
+                y = undefined;
+            }
+
+            setFinalAns({
+                numeratorX,
+                denominatorX,
+                numeratorY,
+                denominatorY,
+                x,
+                y,
+            });
+        }
+    }
 }

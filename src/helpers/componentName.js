@@ -89,5 +89,11 @@ const componentName = [
         text: "Discount Calculator",
         path: require("../../assets/icons/discount.png"),
     },
+    {
+        id: "16",
+        name: "SolveEqu",
+        text: "Solve Equation",
+        path: require("../../assets/icons/equ.png"),
+    },
 ];
 export default componentName;

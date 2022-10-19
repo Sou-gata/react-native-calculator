@@ -20,6 +20,7 @@ import Area from "./src/components/Area";
 import Volume from "./src/components/Volume";
 import Gst from "./src/components/Gst";
 import Discount from "./src/components/Discount";
+import EquSolve from "./src/components/EquSolve";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -139,6 +140,14 @@ export default function App() {
                     options={{
                         ...options,
                         title: "Discount Calculator",
+                    }}
+                />
+                <Stack.Screen
+                    name="SolveEqu"
+                    component={EquSolve}
+                    options={{
+                        ...options,
+                        title: "Solve Equation",
                     }}
                 />
             </Stack.Navigator>

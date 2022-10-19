@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     homeContainer: {
         backgroundColor: "#111",
-        height: hp("100%") - 45,
+        // height: hp("100%") - 45,
         justifyContent: "flex-start",
         alignItems: "center",
     },
@@ -237,6 +237,22 @@ const styles = StyleSheet.create({
         height: 50,
         marginTop: 20,
         marginRight: 20,
+    },
+    miniInput: {
+        height: 40,
+        width: 60,
+        margin: 12,
+        borderWidth: 1,
+        padding: 7,
+        fontSize: 16,
+        borderRadius: 7,
+        color: "#fff",
+        borderColor: "#f73",
+        textAlign: "center",
+    },
+    equText: {
+        fontSize: 18,
+        color: "#fff",
     },
 });
 
