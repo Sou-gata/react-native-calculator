@@ -7,21 +7,19 @@ const styles = StyleSheet.create({
     homeMain: {
         flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "space-around",
         padding: 5,
-    },
-    homeContainer: {
         backgroundColor: "#111",
-        // height: hp("100%") - 45,
-        justifyContent: "flex-start",
-        alignItems: "center",
     },
     homeBtn: {
         width: wp("25%"),
         height: hp("17.5%"),
         alignItems: "center",
         justifyContent: "center",
+    },
+    homeBtnContainer: {
+        width: (wp("100%") - 10) / 3,
+        justifyContent: "center",
+        alignItems: "center",
     },
     main: {
         flex: 1,
@@ -161,7 +159,6 @@ const styles = StyleSheet.create({
         color: "#ffffff90",
         textAlign: "right",
         backgroundColor: "#191919",
-        // backgroundColor: "#f0f",
     },
     flexRow: {
         flexDirection: "row",
@@ -252,6 +249,20 @@ const styles = StyleSheet.create({
     },
     equText: {
         fontSize: 18,
+        color: "#fff",
+    },
+    supContainer: {
+        flexDirection: "row",
+        alignItems: "flex-start",
+    },
+    sup1st: {
+        fontSize: 20,
+        lineHeight: 30,
+        color: "#fff",
+    },
+    supPow: {
+        fontSize: 12,
+        lineHeight: 18,
         color: "#fff",
     },
 });

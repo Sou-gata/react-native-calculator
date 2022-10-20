@@ -18,6 +18,12 @@ const componentName = [
         path: require("../../assets/icons/bmi.png"),
     },
     {
+        id: "6",
+        name: "FractionSimplify",
+        text: "Simplify Fraction",
+        path: require("../../assets/icons/relationship.webp"),
+    },
+    {
         id: "4",
         name: "Multiply",
         text: "Multiply",
@@ -30,10 +36,16 @@ const componentName = [
         path: require("../../assets/icons/devide.png"),
     },
     {
-        id: "6",
-        name: "FractionSimplify",
-        text: "Simplify Fraction",
-        path: require("../../assets/icons/relationship.webp"),
+        id: "16",
+        name: "SolveEqu",
+        text: "Solve Equation",
+        path: require("../../assets/icons/equ.png"),
+    },
+    {
+        id: "17",
+        name: "QuadraticEqu",
+        text: "Quadratic Equation",
+        path: require("../../assets/icons/equ.png"),
     },
     {
         id: "7",
@@ -60,12 +72,6 @@ const componentName = [
         path: require("../../assets/icons/length.png"),
     },
     {
-        id: "11",
-        name: "AgeCalculator",
-        text: "Age Calculator",
-        path: require("../../assets/icons/date.png"),
-    },
-    {
         id: "12",
         name: "Area",
         text: "Area Converter",
@@ -78,6 +84,12 @@ const componentName = [
         path: require("../../assets/icons/volume.png"),
     },
     {
+        id: "11",
+        name: "AgeCalculator",
+        text: "Age Calculator",
+        path: require("../../assets/icons/date.png"),
+    },
+    {
         id: "14",
         name: "Gst",
         text: "GST",
@@ -88,12 +100,6 @@ const componentName = [
         name: "Discount",
         text: "Discount Calculator",
         path: require("../../assets/icons/discount.png"),
-    },
-    {
-        id: "16",
-        name: "SolveEqu",
-        text: "Solve Equation",
-        path: require("../../assets/icons/equ.png"),
     },
 ];
 export default componentName;

@@ -9,24 +9,22 @@ const data = componentName;
 
 const TabTwo = ({ navigation }) => {
     return (
-        <ScrollView>
-            <View style={styles.homeContainer}>
-                <View style={styles.homeMain}>
-                    {(() => {
-                        let btns = [];
-                        for (let i = 0; i < data.length; i++) {
-                            let com = (
-                                <HomeBtn
-                                    key={i}
-                                    navigation={navigation}
-                                    item={data[i]}
-                                />
-                            );
-                            btns.push(com);
-                        }
-                        return btns;
-                    })()}
-                </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.homeMain}>
+                {(() => {
+                    let btns = [];
+                    for (let i = 0; i < data.length; i++) {
+                        let com = (
+                            <HomeBtn
+                                key={i}
+                                navigation={navigation}
+                                item={data[i]}
+                            />
+                        );
+                        btns.push(com);
+                    }
+                    return btns;
+                })()}
             </View>
         </ScrollView>
     );

@@ -5,7 +5,7 @@ import styles from "../allStyles";
 
 const HomeBtn = ({ item, navigation }) => {
     return (
-        <View>
+        <View style={styles.homeBtnContainer}>
             <TouchableHighlight
                 style={styles.homeBtn}
                 onPress={() => {

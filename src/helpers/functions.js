@@ -720,3 +720,172 @@ export function equSolve(a1, a2, b1, b2, c1, c2, setFinalAns) {
         }
     }
 }
+
+function simplifyFraction(numerator, denominator) {
+    let nume = numerator;
+    let deno = denominator;
+    let hcf = gcd([nume, deno]);
+    let root = "";
+    if (deno < 0) {
+        nume = nume * -1;
+        deno = deno * -1;
+    }
+    if (hcf != 0) {
+        nume = nume / hcf;
+        deno = deno / hcf;
+    }
+    if (nume == 0) {
+        root = 0 + "";
+    } else if (deno == 1) {
+        root = nume + "";
+    } else {
+        root = `${nume}/${deno}`;
+    }
+    return root;
+}
+
+function calculateRoot(number) {
+    let num = parseFloat(number);
+    let hasDecimal = false;
+    let temp = num + "";
+    temp = temp.split(".");
+    if (temp.length > 1) hasDecimal = true;
+    if (hasDecimal) {
+        return {
+            ans: parseFloat(Math.sqrt(num).toFixed(4)) + "",
+            hasRoot: false,
+        };
+    } else {
+        let rootOver = Math.sqrt(num);
+        if (rootOver == Math.floor(rootOver)) {
+            return { ans: Math.sqrt(num) + "", hasRoot: false };
+        } else {
+            let maxSqureFactor = 1;
+            for (let i = 1; i <= Math.sqrt(num); i++) {
+                if (number % (i * i) == 0) {
+                    maxSqureFactor = i * i;
+                }
+            }
+            if (maxSqureFactor == 1) {
+                return { ans: "√" + num, hasRoot: true };
+            } else {
+                let fontNum = Math.sqrt(maxSqureFactor);
+                let backNum = num / maxSqureFactor;
+                return { ans: fontNum + "√" + backNum, hasRoot: true };
+            }
+        }
+    }
+}
+
+export function solveQuadraticEqu(a, b, c) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    c = parseFloat(c);
+    if (isNaN(a)) a = 0;
+    if (isNaN(b)) b = 0;
+    if (isNaN(c)) c = 0;
+    if (a == 0 && b == 0) return false;
+    let hasImgRoot = false;
+    let rootOne = "";
+    let rootTwo = "";
+    let d = b * b - 4 * a * c;
+    if (a != 0) {
+        if (d < 0) {
+            hasImgRoot = true;
+            d = d * -1;
+        }
+        if (d == 0) {
+            let hcf = gcd([-b, 2 * a]);
+            let nume = -b / hcf;
+            let deno = (2 * a) / hcf;
+            let ans = simplifyFraction(nume, deno);
+            rootOne = ans;
+            rootTwo = rootOne;
+        } else {
+            let calRoot = calculateRoot(d);
+            let nuSecPart = calRoot.ans;
+            let nuFstPart = -b;
+            if (calRoot.hasRoot) {
+                if (!hasImgRoot) {
+                    rootOne = `(${nuFstPart}+${nuSecPart})/${2 * a}`;
+                    rootTwo = `(${nuFstPart}-${nuSecPart})/${2 * a}`;
+                } else {
+                    rootOne = `(${nuFstPart}+${nuSecPart}i)/${2 * a}`;
+                    rootTwo = `(${nuFstPart}-${nuSecPart}i)/${2 * a}`;
+                }
+            } else {
+                let nuOne = -b + parseFloat(nuSecPart);
+                let nuTwo = -b - parseFloat(nuSecPart);
+                if (hasImgRoot) {
+                    rootOne = simplifyFraction(nuOne, 2 * a);
+                    rootTwo = simplifyFraction(nuTwo, 2 * a);
+                    rootOne = rootOne.split("/");
+                    if (rootOne.length > 1) {
+                        rootOne = rootOne[0] + "i/" + rootOne[1];
+                    } else {
+                        rootOne = rootOne[0] + "i";
+                    }
+                    rootTwo = rootTwo.split("/");
+                    if (rootTwo.length > 1) {
+                        rootTwo = rootTwo[0] + "i/" + rootTwo[1];
+                    } else {
+                        rootTwo = rootTwo[0] + "i";
+                    }
+                } else {
+                    rootOne = simplifyFraction(nuOne, 2 * a);
+                    rootTwo = simplifyFraction(nuTwo, 2 * a);
+                }
+            }
+        }
+    } else {
+        let hcf = gcd([-c, b]);
+        let nume, deno;
+        if (hcf != 0) {
+            nume = -c / hcf;
+            deno = b / hcf;
+        } else {
+            nume = -c;
+            deno = b;
+        }
+        rootOne = simplifyFraction(nume, deno);
+        rootTwo = rootOne;
+    }
+    return { rootOne, rootTwo };
+}
+
+export function solveQuadraticDec(a, b, c) {
+    a = parseFloat(a);
+    b = parseFloat(b);
+    c = parseFloat(c);
+    let d = b * b - 4 * a * c;
+    let hasImgRoot = false;
+    let rootOne, rootTwo;
+    if (a != 0) {
+        if (d < 0) {
+            hasImgRoot = true;
+            d *= -1;
+        }
+        d = Math.sqrt(d);
+        let partOne = parseFloat((-b / (2 * a)).toFixed(4));
+        let secondPart = parseFloat((d / (2 * a)).toFixed(4));
+        if (!isFinite(partOne) || !isFinite(secondPart)) {
+            rootOne = undefined;
+            rootTwo = undefined;
+        }
+        if (hasImgRoot) {
+            rootOne = `${partOne}+${secondPart}i`;
+            rootTwo = `${partOne}-${secondPart}i`;
+        } else {
+            rootOne = partOne + secondPart + "";
+            rootTwo = partOne - secondPart + "";
+        }
+    } else {
+        rootOne = parseFloat((-c / b).toFixed(4));
+        rootTwo = rootOne;
+        if (!isFinite(rootOne)) {
+            rootOne = undefined;
+            rootTwo = undefined;
+        }
+    }
+    return { rootOne, rootTwo };
+}

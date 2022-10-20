@@ -21,6 +21,7 @@ import Volume from "./src/components/Volume";
 import Gst from "./src/components/Gst";
 import Discount from "./src/components/Discount";
 import EquSolve from "./src/components/EquSolve";
+import QuadraticEqu from "./src/components/QuadraticEqu";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
@@ -148,6 +149,14 @@ export default function App() {
                     options={{
                         ...options,
                         title: "Solve Equation",
+                    }}
+                />
+                <Stack.Screen
+                    name="QuadraticEqu"
+                    component={QuadraticEqu}
+                    options={{
+                        ...options,
+                        title: "Quadratic Equation",
                     }}
                 />
             </Stack.Navigator>
