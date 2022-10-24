@@ -79,25 +79,27 @@ const QuadraticEqu = () => {
                             </Text>
                         </View>
                     )}
-                    {ans.inDecimal.rootOne && (
-                        <View>
-                            <Text
-                                style={[
-                                    styles.textStyle,
-                                    { marginVertical: 20 },
-                                ]}
-                            >
-                                Or
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                X = {ans.inDecimal.rootOne}
-                            </Text>
-                            <Text style={styles.textStyle}>and</Text>
-                            <Text style={styles.textStyle}>
-                                X = {ans.inDecimal.rootTwo}
-                            </Text>
-                        </View>
-                    )}
+                    {ans.inDecimal.rootOne &&
+                        ans.inDecimal.rootOne != ans.inFraction.rootOne &&
+                        ans.inDecimal.rootTwo != ans.inFraction.rootTwo && (
+                            <View>
+                                <Text
+                                    style={[
+                                        styles.textStyle,
+                                        { marginVertical: 20 },
+                                    ]}
+                                >
+                                    Or
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    X = {ans.inDecimal.rootOne}
+                                </Text>
+                                <Text style={styles.textStyle}>and</Text>
+                                <Text style={styles.textStyle}>
+                                    X = {ans.inDecimal.rootTwo}
+                                </Text>
+                            </View>
+                        )}
                 </View>
             </ScrollView>
         </View>

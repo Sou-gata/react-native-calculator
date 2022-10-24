@@ -844,20 +844,40 @@ export function solveQuadraticEqu(a, b, c) {
                 let simplifiedAns = simplifyAns(nuFstPart, nuSecPart, 2 * a);
                 let { partOne, partTwo, denominator } = simplifiedAns;
                 if (!hasImgRoot) {
-                    if (denominator == 1) {
-                        rootOne = `(${partOne}+${partTwo})`;
-                        rootTwo = `(${partOne}-${partTwo})`;
+                    if (partOne != 0) {
+                        if (denominator == 1) {
+                            rootOne = `${partOne}+${partTwo}`;
+                            rootTwo = `${partOne}-${partTwo}`;
+                        } else {
+                            rootOne = `(${partOne}+${partTwo})/${denominator}`;
+                            rootTwo = `(${partOne}-${partTwo})/${denominator}`;
+                        }
                     } else {
-                        rootOne = `(${partOne}+${partTwo})/${denominator}`;
-                        rootTwo = `(${partOne}-${partTwo})/${denominator}`;
+                        if (denominator == 1) {
+                            rootOne = `${partTwo}`;
+                            rootTwo = `-${partTwo}`;
+                        } else {
+                            rootOne = `${partTwo}/${denominator}`;
+                            rootTwo = `-${partTwo}/${denominator}`;
+                        }
                     }
                 } else {
-                    if (denominator == 1) {
-                        rootOne = `(${partOne}+${partTwo}i)`;
-                        rootTwo = `(${partOne}-${partTwo}i)`;
+                    if (partOne != 0) {
+                        if (denominator == 1) {
+                            rootOne = `${partOne}+${partTwo}𝑖`;
+                            rootTwo = `${partOne}-${partTwo}𝑖`;
+                        } else {
+                            rootOne = `(${partOne}+${partTwo}𝑖)/${denominator}`;
+                            rootTwo = `(${partOne}-${partTwo}𝑖)/${denominator}`;
+                        }
                     } else {
-                        rootOne = `(${partOne}+${partTwo}i)/${denominator}`;
-                        rootTwo = `(${partOne}-${partTwo}i)/${denominator}`;
+                        if (denominator == 1) {
+                            rootOne = `${partTwo}𝑖`;
+                            rootTwo = `-${partTwo}𝑖`;
+                        } else {
+                            rootOne = `${partTwo}𝑖/${denominator}`;
+                            rootTwo = `-${partTwo}𝑖/${denominator}`;
+                        }
                     }
                 }
             } else {
@@ -870,11 +890,11 @@ export function solveQuadraticEqu(a, b, c) {
                     let sec = nuSecPart / hcf;
                     let de = (2 * a) / hcf;
                     if (de == 1) {
-                        rootOne = `${fst}+${sec}i`;
-                        rootTwo = `${fst}-${sec}i`;
+                        rootOne = `${fst}+${sec}𝑖`;
+                        rootTwo = `${fst}-${sec}𝑖`;
                     } else {
-                        rootOne = `(${fst}+${sec}i)/${de}`;
-                        rootTwo = `(${fst}-${sec}i)/${de}`;
+                        rootOne = `(${fst}+${sec}𝑖)/${de}`;
+                        rootTwo = `(${fst}-${sec}𝑖)/${de}`;
                     }
                 } else {
                     rootOne = simplifyFraction(nuOne, 2 * a);
@@ -918,8 +938,8 @@ export function solveQuadraticDec(a, b, c) {
             rootTwo = undefined;
         }
         if (hasImgRoot) {
-            rootOne = `${partOne}+${secondPart}i`;
-            rootTwo = `${partOne}-${secondPart}i`;
+            rootOne = `${partOne}+${secondPart}𝑖`;
+            rootTwo = `${partOne}-${secondPart}𝑖`;
         } else {
             rootOne = parseFloat((partOne + secondPart).toFixed(4));
             rootTwo = parseFloat((partOne - secondPart).toFixed(4));
