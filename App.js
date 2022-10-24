@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as SplashScreen from "expo-splash-screen";
 
 import Home from "./src/Home";
 import Lcm from "./src/components/Lcm";
@@ -9,7 +10,6 @@ import Hcf from "./src/components/Hcf";
 import Factors from "./src/components/Factors";
 import Multiply from "./src/components/Multiply";
 import Divide from "./src/components/Divide";
-import NormalCalculator from "./src/components/NormalCalculator";
 import FractionSimplify from "./src/components/FractionSimplify";
 import TemperatureConverter from "./src/components/TemperatureConverter";
 import NumberConverter from "./src/components/NumberConverter";
@@ -22,8 +22,17 @@ import Gst from "./src/components/Gst";
 import Discount from "./src/components/Discount";
 import EquSolve from "./src/components/EquSolve";
 import QuadraticEqu from "./src/components/QuadraticEqu";
+import TimeCalculator from "./src/components/TimeCalculator";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+    useEffect(() => {
+        setTimeout(async () => {
+            await SplashScreen.hideAsync();
+        }, 2500);
+    }, []);
+
     const Stack = createNativeStackNavigator();
     const options = {
         headerStyle: {
@@ -157,6 +166,14 @@ export default function App() {
                     options={{
                         ...options,
                         title: "Quadratic Equation",
+                    }}
+                />
+                <Stack.Screen
+                    name="TimeCalculator"
+                    component={TimeCalculator}
+                    options={{
+                        ...options,
+                        title: "Time Calculator",
                     }}
                 />
             </Stack.Navigator>

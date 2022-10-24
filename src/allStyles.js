@@ -265,6 +265,10 @@ const styles = StyleSheet.create({
         lineHeight: 18,
         color: "#fff",
     },
+    timeHeadText: {
+        width: (wp("100%") - 10) / 4,
+        alignItems: "center",
+    },
 });
 
 export default styles;

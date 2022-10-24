@@ -36,7 +36,7 @@ const QuadraticEqu = () => {
                         value={veriable.a}
                     />
                     <View style={styles.supContainer}>
-                        <Text style={styles.sup1st}>x</Text>
+                        <Text style={styles.sup1st}>X</Text>
                         <Text style={styles.supPow}>2</Text>
                         <Text style={styles.sup1st}> +</Text>
                     </View>
@@ -48,7 +48,7 @@ const QuadraticEqu = () => {
                         onChangeText={(e) => changeValues(e, "b")}
                         value={veriable.b}
                     />
-                    <Text style={styles.sup1st}>x +</Text>
+                    <Text style={styles.sup1st}>X +</Text>
                     <TextInput
                         style={[styles.miniInput, { marginHorizontal: 7 }]}
                         placeholder="c"

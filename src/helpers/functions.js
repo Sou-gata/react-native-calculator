@@ -777,6 +777,41 @@ function calculateRoot(number) {
     }
 }
 
+function simplifyAns(fstPart, secPart, deno) {
+    let secondPart = (secPart + "").split("√");
+    let hasTwoPart = false;
+    let secPartTwo = "";
+    if (secondPart.length > 1) {
+        secPartTwo = secondPart[1];
+        if (secondPart[0] == "") secondPart = 1;
+        else secondPart = parseFloat(secondPart[0]);
+        hasTwoPart = true;
+    } else {
+        secondPart = 1;
+    }
+    let hcf;
+    if (fstPart == 0) {
+        hcf = gcd([secondPart, deno]);
+    } else {
+        hcf = gcd([fstPart, secondPart, deno]);
+    }
+    let partOne = fstPart / hcf;
+    let partTwo = secondPart / hcf;
+    let denominator = deno / hcf;
+    if (hasTwoPart) {
+        if (partTwo == 1) {
+            partTwo = "√" + secPartTwo;
+        } else {
+            partTwo = partTwo + "√" + secPartTwo;
+        }
+    }
+    return {
+        partOne: partOne + "",
+        partTwo: partTwo + "",
+        denominator: denominator + "",
+    };
+}
+
 export function solveQuadraticEqu(a, b, c) {
     a = parseFloat(a);
     b = parseFloat(b);
@@ -806,30 +841,40 @@ export function solveQuadraticEqu(a, b, c) {
             let nuSecPart = calRoot.ans;
             let nuFstPart = -b;
             if (calRoot.hasRoot) {
+                let simplifiedAns = simplifyAns(nuFstPart, nuSecPart, 2 * a);
+                let { partOne, partTwo, denominator } = simplifiedAns;
                 if (!hasImgRoot) {
-                    rootOne = `(${nuFstPart}+${nuSecPart})/${2 * a}`;
-                    rootTwo = `(${nuFstPart}-${nuSecPart})/${2 * a}`;
+                    if (denominator == 1) {
+                        rootOne = `(${partOne}+${partTwo})`;
+                        rootTwo = `(${partOne}-${partTwo})`;
+                    } else {
+                        rootOne = `(${partOne}+${partTwo})/${denominator}`;
+                        rootTwo = `(${partOne}-${partTwo})/${denominator}`;
+                    }
                 } else {
-                    rootOne = `(${nuFstPart}+${nuSecPart}i)/${2 * a}`;
-                    rootTwo = `(${nuFstPart}-${nuSecPart}i)/${2 * a}`;
+                    if (denominator == 1) {
+                        rootOne = `(${partOne}+${partTwo}i)`;
+                        rootTwo = `(${partOne}-${partTwo}i)`;
+                    } else {
+                        rootOne = `(${partOne}+${partTwo}i)/${denominator}`;
+                        rootTwo = `(${partOne}-${partTwo}i)/${denominator}`;
+                    }
                 }
             } else {
                 let nuOne = -b + parseFloat(nuSecPart);
                 let nuTwo = -b - parseFloat(nuSecPart);
                 if (hasImgRoot) {
-                    rootOne = simplifyFraction(nuOne, 2 * a);
-                    rootTwo = simplifyFraction(nuTwo, 2 * a);
-                    rootOne = rootOne.split("/");
-                    if (rootOne.length > 1) {
-                        rootOne = rootOne[0] + "i/" + rootOne[1];
+                    let hcf = gcd([-b, nuSecPart, 2 * a]);
+                    hcf = hcf == 0 ? 1 : hcf;
+                    let fst = -b / hcf;
+                    let sec = nuSecPart / hcf;
+                    let de = (2 * a) / hcf;
+                    if (de == 1) {
+                        rootOne = `${fst}+${sec}i`;
+                        rootTwo = `${fst}-${sec}i`;
                     } else {
-                        rootOne = rootOne[0] + "i";
-                    }
-                    rootTwo = rootTwo.split("/");
-                    if (rootTwo.length > 1) {
-                        rootTwo = rootTwo[0] + "i/" + rootTwo[1];
-                    } else {
-                        rootTwo = rootTwo[0] + "i";
+                        rootOne = `(${fst}+${sec}i)/${de}`;
+                        rootTwo = `(${fst}-${sec}i)/${de}`;
                     }
                 } else {
                     rootOne = simplifyFraction(nuOne, 2 * a);
@@ -867,7 +912,7 @@ export function solveQuadraticDec(a, b, c) {
         }
         d = Math.sqrt(d);
         let partOne = parseFloat((-b / (2 * a)).toFixed(4));
-        let secondPart = parseFloat((d / (2 * a)).toFixed(4));
+        let secondPart = parseFloat((d / (2 * a)).toFixed(4) + "");
         if (!isFinite(partOne) || !isFinite(secondPart)) {
             rootOne = undefined;
             rootTwo = undefined;
@@ -876,8 +921,8 @@ export function solveQuadraticDec(a, b, c) {
             rootOne = `${partOne}+${secondPart}i`;
             rootTwo = `${partOne}-${secondPart}i`;
         } else {
-            rootOne = partOne + secondPart + "";
-            rootTwo = partOne - secondPart + "";
+            rootOne = parseFloat((partOne + secondPart).toFixed(4));
+            rootTwo = parseFloat((partOne - secondPart).toFixed(4));
         }
     } else {
         rootOne = parseFloat((-c / b).toFixed(4));
@@ -888,4 +933,87 @@ export function solveQuadraticDec(a, b, c) {
         }
     }
     return { rootOne, rootTwo };
+}
+
+function simplifyTime(d, h, m, s) {
+    let day = parseFloat(d);
+    let hou = parseFloat(h);
+    let min = parseFloat(m);
+    let sec = parseFloat(s);
+    let reCalculateTime = parseInt(sec / 60);
+    for (let i = 1; i <= reCalculateTime; i++) {
+        if (sec >= 60) {
+            min += 1;
+            sec -= 60;
+        }
+    }
+    reCalculateTime = parseInt(min / 60);
+    for (let i = 1; i <= reCalculateTime; i++) {
+        if (min >= 60) {
+            hou += 1;
+            min -= 60;
+        }
+    }
+    reCalculateTime = parseInt(hou / 24);
+    for (let i = 1; i <= reCalculateTime; i++) {
+        if (hou >= 24) {
+            day += 1;
+            hou -= 24;
+        }
+    }
+    return { day, hou, min, sec };
+}
+
+export function calculateTime(times, operation) {
+    let { d1, h1, m1, s1, d2, h2, m2, s2 } = times;
+    d1 = parseFloat(d1);
+    d2 = parseFloat(d2);
+    h1 = parseFloat(h1);
+    h2 = parseFloat(h2);
+    m1 = parseFloat(m1);
+    m2 = parseFloat(m2);
+    s1 = parseFloat(s1);
+    s2 = parseFloat(s2);
+    if (isNaN(d1)) d1 = 0;
+    if (isNaN(d2)) d2 = 0;
+    if (isNaN(h1)) h1 = 0;
+    if (isNaN(h2)) h2 = 0;
+    if (isNaN(m1)) m1 = 0;
+    if (isNaN(m2)) m2 = 0;
+    if (isNaN(s1)) s1 = 0;
+    if (isNaN(s2)) s2 = 0;
+    if (operation == 1) {
+        let day = d1 + d2;
+        let hou = h1 + h2;
+        let min = m1 + m2;
+        let sec = s1 + s2;
+        let ans = simplifyTime(day, hou, min, sec);
+        return { day: ans.day, hou: ans.hou, min: ans.min, sec: ans.sec };
+    } else if (operation == 2) {
+        let timeOne = simplifyTime(d1, h1, m1, s1);
+        let timeTwo = simplifyTime(d2, h2, m2, s2);
+        while (
+            timeOne.hou < timeTwo.hou ||
+            timeOne.min < timeTwo.min ||
+            timeOne.sec < timeTwo.sec
+        ) {
+            if (timeOne.hou < timeTwo.hou) {
+                timeOne.day -= 1;
+                timeOne.hou += 24;
+            }
+            if (timeOne.min < timeTwo.min) {
+                timeOne.hou -= 1;
+                timeOne.min += 60;
+            }
+            if (timeOne.sec < timeTwo.sec) {
+                timeOne.min -= 1;
+                timeOne.sec += 60;
+            }
+        }
+        let day = timeOne.day - timeTwo.day;
+        let hou = timeOne.hou - timeTwo.hou;
+        let min = timeOne.min - timeTwo.min;
+        let sec = timeOne.sec - timeTwo.sec;
+        return { day, hou, min, sec };
+    }
 }
