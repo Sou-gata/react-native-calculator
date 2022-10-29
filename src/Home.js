@@ -1,4 +1,4 @@
-import { Image } from "react-native";
+import { Image, Dimensions } from "react-native";
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
@@ -12,7 +12,7 @@ const Home = () => {
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarShowIcon: true,
-                tabBarIcon: ({ focused, color }) => {
+                tabBarIcon: ({ focused }) => {
                     let src, opacity;
                     opacity = focused ? 1 : 0.5;
                     if (route.name === "Normal") {
@@ -27,11 +27,15 @@ const Home = () => {
                         />
                     );
                 },
-                tabBarLabelStyle: { display: "none" },
+                tabBarShowLabel: false,
                 tabBarStyle: { backgroundColor: "#111" },
                 tabBarIndicatorStyle: { backgroundColor: "#ff7733" },
                 tabBarIndicatorContainerStyle: { height: 50 },
             })}
+            initialLayout={{
+                width: Dimensions.get("window").width,
+                height: Dimensions.get("window").height,
+            }}
         >
             <Tab.Screen name="Normal" component={NormalCalculator} />
             <Tab.Screen name="Navigation" component={TabTwo} />

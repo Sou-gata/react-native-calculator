@@ -6,26 +6,40 @@ import calBtns from "../helpers/calBtns";
 import { lastChar } from "../helpers/functions";
 
 const NormalCalculator = () => {
+    const [text, setText] = useState("");
+    const [evalStr, setEvalStr] = useState("");
+    const [sym, setSym] = useState(false);
+    const [point, setPoint] = useState(false);
+    const [numArr, setNumArr] = useState([]);
+    const [ans, setAns] = useState("");
+    const [mode, setMode] = useState("deg");
+
     Math.toRadian = function (degrees) {
         return (degrees * Math.PI) / 180;
     };
     Math.newsin = function (str) {
-        return Math.sin(Math.toRadian(str));
+        if (mode == "deg") return Math.sin(Math.toRadian(str));
+        else return Math.sin(str);
     };
     Math.newcos = function (str) {
-        return Math.cos(Math.toRadian(str));
+        if (mode == "deg") return Math.cos(Math.toRadian(str));
+        else return Math.cos(str);
     };
     Math.newtan = function (str) {
-        return Math.tan(Math.toRadian(str));
+        if (mode == "deg") return Math.tan(Math.toRadian(str));
+        else return Math.tan(str);
     };
     Math.newasin = function (str) {
-        return (Math.asin(str) * 180) / Math.PI;
+        if (mode == "deg") return (Math.asin(str) * 180) / Math.PI;
+        else return Math.asin(str);
     };
     Math.newacos = function (str) {
-        return (Math.acos(str) * 180) / Math.PI;
+        if (mode == "deg") return (Math.acos(str) * 180) / Math.PI;
+        else return Math.acos(str);
     };
     Math.newatan = function (str) {
-        return (Math.atan(str) * 180) / Math.PI;
+        if (mode == "deg") return (Math.atan(str) * 180) / Math.PI;
+        else return Math.atan(str);
     };
     Math.newlog = function (str) {
         return Math.log10(parseFloat(str));
@@ -39,19 +53,13 @@ const NormalCalculator = () => {
     Math.newcbrt = function (str) {
         return Math.cbrt(parseFloat(str));
     };
-    const [text, setText] = useState("");
-    const [evalStr, setEvalStr] = useState("");
-    const [sym, setSym] = useState(false);
-    const [point, setPoint] = useState(false);
-    const [numArr, setNumArr] = useState([]);
-    const [ans, setAns] = useState("");
 
     const calAns = () => {
         if (evalStr != "") {
             try {
-                const tempAns = eval(evalStr);
+                const tempAns = eval(bracManage(evalStr));
                 const fixed = parseFloat(tempAns.toFixed(8)) + "";
-                setAns(fixed);
+                if (tempAns) setAns(fixed);
                 if (tempAns == evalStr) {
                     setAns("");
                 }
@@ -59,9 +67,27 @@ const NormalCalculator = () => {
         }
     };
 
-    useEffect(() => {
-        calAns();
-    }, [evalStr]);
+    const bracManage = (str) => {
+        let openBrac = str.match(/\(/g);
+        let closeBrac = str.match(/\)/g);
+        if (!openBrac) openBrac = [];
+        if (!closeBrac) closeBrac = [];
+        openBrac = openBrac.length;
+        closeBrac = closeBrac.length;
+        let missing = openBrac - closeBrac;
+        let newStr = str;
+        for (let i = 0; i < missing; i++) {
+            newStr = newStr + ")";
+        }
+        return newStr;
+    };
+
+    const changeMode = () => {
+        if (mode == "deg") setMode("rad");
+        else if (mode == "rad") setMode("deg");
+    };
+
+    useEffect(calAns, [evalStr, mode]);
 
     const calBtnPress = (btn) => {
         let str = btn.str;
@@ -71,13 +97,15 @@ const NormalCalculator = () => {
         if (type == "eql") {
             if (!sym && evalStr.length != 0) {
                 try {
-                    const tempAns = eval(evalStr);
-                    const fixed = parseFloat(tempAns.toFixed(8)) + "";
-                    setText(fixed);
-                    setEvalStr(fixed);
-                    setNumArr([
-                        { evalLen: fixed.length, textLen: fixed.length },
-                    ]);
+                    const tempAns = eval(bracManage(evalStr));
+                    if (tempAns) {
+                        const fixed = parseFloat(tempAns.toFixed(8)) + "";
+                        setText(fixed);
+                        setEvalStr(fixed);
+                        setNumArr([
+                            { evalLen: fixed.length, textLen: fixed.length },
+                        ]);
+                    }
                 } catch (error) {
                     setText("Math Error");
                     setEvalStr("Math Error");
@@ -168,23 +196,38 @@ const NormalCalculator = () => {
                     for (let i = 0; i < calBtns.length; i++) {
                         let btn = calBtns[i];
                         let com;
-                        if (btn.text != "=")
-                            com = (
-                                <TouchableHighlight
-                                    key={i}
-                                    onPress={() => calBtnPress(btn)}
-                                    style={styles.calBtn}
-                                    underlayColor="#ff7733a0"
-                                >
-                                    <Text style={btn.txtStyle}>{btn.text}</Text>
-                                </TouchableHighlight>
-                            );
-                        else
+                        if (btn.text == "=")
                             com = (
                                 <TouchableHighlight
                                     key={i}
                                     onPress={() => calBtnPress(btn)}
                                     style={styles.calBtnEql}
+                                    underlayColor="#ff7733a0"
+                                >
+                                    <View style={styles.calEqual}>
+                                        <Text style={btn.txtStyle}>
+                                            {btn.text}
+                                        </Text>
+                                    </View>
+                                </TouchableHighlight>
+                            );
+                        else if (btn.text == "deg") {
+                            com = (
+                                <TouchableHighlight
+                                    key={i}
+                                    onPress={() => changeMode(btn)}
+                                    style={styles.calBtn}
+                                    underlayColor="#ff7733a0"
+                                >
+                                    <Text style={btn.txtStyle}>{mode}</Text>
+                                </TouchableHighlight>
+                            );
+                        } else
+                            com = (
+                                <TouchableHighlight
+                                    key={i}
+                                    onPress={() => calBtnPress(btn)}
+                                    style={styles.calBtn}
                                     underlayColor="#ff7733a0"
                                 >
                                     <Text style={btn.txtStyle}>{btn.text}</Text>

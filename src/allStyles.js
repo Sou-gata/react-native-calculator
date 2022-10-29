@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -17,9 +17,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     homeBtnContainer: {
-        width: (wp("100%") - 10) / 3,
+        width:
+            Platform.OS == "web"
+                ? (wp("100%") - 10) / 4
+                : (wp("100%") - 10) / 3,
         justifyContent: "center",
         alignItems: "center",
+        height: (hp("100%") - 80) / 4,
     },
     main: {
         flex: 1,
@@ -119,10 +123,17 @@ const styles = StyleSheet.create({
         borderRadius: 7,
     },
     calBtnEql: {
-        width: hp("7.5%"),
+        width: wp("17.5%"),
         height: hp("7.5%"),
         justifyContent: "center",
+        alignItems: "center",
+    },
+    calEqual: {
+        width: hp("7.5%"),
+        height: hp("7.5%"),
         backgroundColor: "#f73",
+        justifyContent: "center",
+        alignItems: "center",
         borderRadius: 55,
     },
     calText: {
@@ -144,7 +155,7 @@ const styles = StyleSheet.create({
         width: wp("100%"),
         padding: 10,
         paddingRight: 20,
-        fontSize: 35,
+        fontSize: 33,
         color: "#fff",
         textAlign: "right",
         backgroundColor: "#191919",

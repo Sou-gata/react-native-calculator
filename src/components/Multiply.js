@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     ScrollView,
 } from "react-native";
-import AppLoading from "expo-app-loading";
 import React, { useState } from "react";
 
 import { checkNumbers, multiple } from "../helpers/functions";
@@ -24,7 +23,7 @@ const Multiply = () => {
         RobotoMono_400Regular,
     });
     if (!fontsLoaded) {
-        return <AppLoading />;
+        return null;
     } else {
         return (
             <View style={styles.main}>
