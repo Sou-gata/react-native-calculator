@@ -1037,3 +1037,18 @@ export function calculateTime(times, operation) {
         return { day, hou, min, sec };
     }
 }
+
+export function bracManage(str) {
+    let openBrac = str.match(/\(/g);
+    let closeBrac = str.match(/\)/g);
+    if (!openBrac) openBrac = [];
+    if (!closeBrac) closeBrac = [];
+    openBrac = openBrac.length;
+    closeBrac = closeBrac.length;
+    let missing = openBrac - closeBrac;
+    let newStr = str;
+    for (let i = 0; i < missing; i++) {
+        newStr = newStr + ")";
+    }
+    return newStr;
+}

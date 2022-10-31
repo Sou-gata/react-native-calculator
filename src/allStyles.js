@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
         padding: 5,
-        backgroundColor: "#111",
+        backgroundColor: "#141414",
     },
     homeBtn: {
         width: wp("25%"),
@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
                 : (wp("100%") - 10) / 3,
         justifyContent: "center",
         alignItems: "center",
-        height: (hp("100%") - 80) / 4,
+        height:
+            Platform.OS == "web"
+                ? (hp("100%") - 80) / 4
+                : (hp("100%") - 80) / 5,
     },
     main: {
         flex: 1,

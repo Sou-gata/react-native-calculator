@@ -1,9 +1,9 @@
-import { View, Text, TextInput, TouchableHighlight } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 
 import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
-import { lastChar } from "../helpers/functions";
+import { lastChar, bracManage } from "../helpers/functions";
 
 const NormalCalculator = () => {
     const [text, setText] = useState("");
@@ -58,28 +58,15 @@ const NormalCalculator = () => {
         if (evalStr != "") {
             try {
                 const tempAns = eval(bracManage(evalStr));
-                const fixed = parseFloat(tempAns.toFixed(8)) + "";
-                if (tempAns) setAns(fixed);
+                if (tempAns || tempAns == 0) {
+                    const fixed = parseFloat(tempAns.toFixed(8)) + "";
+                    setAns(fixed);
+                }
                 if (tempAns == evalStr) {
                     setAns("");
                 }
             } catch (error) {}
         }
-    };
-
-    const bracManage = (str) => {
-        let openBrac = str.match(/\(/g);
-        let closeBrac = str.match(/\)/g);
-        if (!openBrac) openBrac = [];
-        if (!closeBrac) closeBrac = [];
-        openBrac = openBrac.length;
-        closeBrac = closeBrac.length;
-        let missing = openBrac - closeBrac;
-        let newStr = str;
-        for (let i = 0; i < missing; i++) {
-            newStr = newStr + ")";
-        }
-        return newStr;
     };
 
     const changeMode = () => {
@@ -98,7 +85,7 @@ const NormalCalculator = () => {
             if (!sym && evalStr.length != 0) {
                 try {
                     const tempAns = eval(bracManage(evalStr));
-                    if (tempAns) {
+                    if (tempAns || tempAns == 0) {
                         const fixed = parseFloat(tempAns.toFixed(8)) + "";
                         setText(fixed);
                         setEvalStr(fixed);
@@ -173,6 +160,11 @@ const NormalCalculator = () => {
             else setSym(false);
         }
     };
+    const androidRipple = {
+        color: "#f73",
+        radius: 32.5,
+        borderless: true,
+    };
 
     return (
         <View style={styles.main}>
@@ -198,40 +190,42 @@ const NormalCalculator = () => {
                         let com;
                         if (btn.text == "=")
                             com = (
-                                <TouchableHighlight
+                                <Pressable
                                     key={i}
                                     onPress={() => calBtnPress(btn)}
                                     style={styles.calBtnEql}
-                                    underlayColor="#ff7733a0"
+                                    android_ripple={androidRipple}
                                 >
                                     <View style={styles.calEqual}>
                                         <Text style={btn.txtStyle}>
                                             {btn.text}
                                         </Text>
                                     </View>
-                                </TouchableHighlight>
+                                </Pressable>
                             );
                         else if (btn.text == "deg") {
                             com = (
-                                <TouchableHighlight
+                                <Pressable
                                     key={i}
                                     onPress={() => changeMode(btn)}
                                     style={styles.calBtn}
-                                    underlayColor="#ff7733a0"
+                                    android_ripple={androidRipple}
+                                    android_disableSound={true}
                                 >
                                     <Text style={btn.txtStyle}>{mode}</Text>
-                                </TouchableHighlight>
+                                </Pressable>
                             );
                         } else
                             com = (
-                                <TouchableHighlight
+                                <Pressable
                                     key={i}
                                     onPress={() => calBtnPress(btn)}
                                     style={styles.calBtn}
-                                    underlayColor="#ff7733a0"
+                                    android_ripple={androidRipple}
+                                    android_disableSound={true}
                                 >
                                     <Text style={btn.txtStyle}>{btn.text}</Text>
-                                </TouchableHighlight>
+                                </Pressable>
                             );
                         btns.push(com);
                     }
