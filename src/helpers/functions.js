@@ -702,13 +702,14 @@ export function equSolve(a1, a2, b1, b2, c1, c2, setFinalAns) {
             }
             if (denominatorX == 1 || numeratorX == 0) {
                 denominatorX = undefined;
-                x = undefined;
             }
             if (denominatorY == 1 || numeratorY == 0) {
                 denominatorY = undefined;
+            }
+            if (numeratorX == x && numeratorY == y) {
+                x = undefined;
                 y = undefined;
             }
-
             setFinalAns({
                 numeratorX,
                 denominatorX,

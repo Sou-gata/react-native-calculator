@@ -30,7 +30,7 @@ export default function App() {
     useEffect(() => {
         setTimeout(async () => {
             await SplashScreen.hideAsync();
-        }, 2500);
+        }, 1500);
     }, []);
 
     const Stack = createNativeStackNavigator();

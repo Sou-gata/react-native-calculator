@@ -99,7 +99,6 @@ const NormalCalculator = () => {
                 }
             }
         }
-
         if (type != "clr" && type != "ere" && type != "eql") {
             setNumArr([...numArr, btn]);
             if (type == "num") {

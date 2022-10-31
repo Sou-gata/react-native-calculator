@@ -59,16 +59,37 @@ const QuadraticEqu = () => {
                     />
                     <Text style={styles.sup1st}>= 0</Text>
                 </View>
-                <View style={styles.flexRow}>
+                <View
+                    style={[styles.flexRow, { justifyContent: "space-evenly" }]}
+                >
                     <TouchableHighlight
                         style={styles.btn}
                         onPress={() => getAns()}
                     >
                         <Text style={styles.btnText}>Calculate</Text>
                     </TouchableHighlight>
+                    <TouchableHighlight
+                        style={styles.btn}
+                        onPress={() => {
+                            setVeriable({ a: "", b: "", c: "" });
+                            setAns({
+                                inFraction: {
+                                    rootOne: undefined,
+                                    rootTwo: undefined,
+                                },
+                                inDecimal: {
+                                    rootOne: undefined,
+                                    rootTwo: undefined,
+                                },
+                            });
+                        }}
+                    >
+                        <Text style={styles.btnText}>Clear</Text>
+                    </TouchableHighlight>
                 </View>
                 <View style={{ marginTop: 35 }}>
-                    {ans.inFraction.rootOne && (
+                    {(ans.inFraction.rootOne ||
+                        ans.inFraction.rootOne == 0) && (
                         <View>
                             <Text style={styles.textStyle}>
                                 X = {ans.inFraction.rootOne}
@@ -79,7 +100,7 @@ const QuadraticEqu = () => {
                             </Text>
                         </View>
                     )}
-                    {ans.inDecimal.rootOne &&
+                    {(ans.inDecimal.rootOne || ans.inDecimal.rootOne == 0) &&
                         ans.inDecimal.rootOne != ans.inFraction.rootOne &&
                         ans.inDecimal.rootTwo != ans.inFraction.rootTwo && (
                             <View>

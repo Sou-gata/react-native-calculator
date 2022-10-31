@@ -85,7 +85,7 @@ const EquSolve = () => {
                 />
                 <Text style={styles.equText}>= 0</Text>
             </View>
-            <View style={styles.flexRow}>
+            <View style={[styles.flexRow, { justifyContent: "space-evenly" }]}>
                 <TouchableHighlight
                     style={styles.btn}
                     onPress={() => {
@@ -102,6 +102,31 @@ const EquSolve = () => {
                 >
                     <Text style={styles.btnText}>Calculate</Text>
                 </TouchableHighlight>
+                <TouchableHighlight
+                    style={styles.btn}
+                    onPress={() => {
+                        setVal({
+                            a1: "",
+                            a2: "",
+                            b1: "",
+                            b2: "",
+                            c1: "",
+                            c2: "",
+                        });
+                        setFinalAns({
+                            numeratorX: undefined,
+                            denominatorX: undefined,
+                            numeratorY: undefined,
+                            denominatorY: undefined,
+                            x: undefined,
+                            y: undefined,
+                            noSolution: undefined,
+                            manySolution: undefined,
+                        });
+                    }}
+                >
+                    <Text style={styles.btnText}>Clear</Text>
+                </TouchableHighlight>
             </View>
             <View style={{ marginTop: 30 }}>
                 {finalAns.noSolution && (
@@ -111,7 +136,7 @@ const EquSolve = () => {
                     <Text style={styles.textStyle}>Many Solution</Text>
                 )}
                 <View style={styles.flexRow}>
-                    {finalAns.numeratorX && (
+                    {(finalAns.numeratorX || finalAns.numeratorX == 0) && (
                         <Text style={styles.textStyle}>
                             x = {finalAns.numeratorX}
                         </Text>
@@ -123,7 +148,7 @@ const EquSolve = () => {
                     )}
                 </View>
                 <View style={styles.flexRow}>
-                    {finalAns.numeratorY && (
+                    {(finalAns.numeratorY || finalAns.numeratorY == 0) && (
                         <Text style={styles.textStyle}>
                             y = {finalAns.numeratorY}
                         </Text>
@@ -134,7 +159,7 @@ const EquSolve = () => {
                         </Text>
                     )}
                 </View>
-                {finalAns.x && (
+                {(finalAns.x || finalAns.x == 0) && (
                     <View>
                         <Text
                             style={[styles.textStyle, { marginVertical: 20 }]}
