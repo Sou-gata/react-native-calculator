@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { checkNumbers, devide } from "../helpers/functions";
+import { devide } from "../helpers/functions";
+import { decCheck } from "../helpers/numbersCheck";
 import {
     useFonts,
     RobotoMono_400Regular,
@@ -15,7 +16,7 @@ import {
 import styles from "../allStyles";
 
 const Divide = () => {
-    const [text, onChangeText] = useState("");
+    const [text, onChangeText] = useState({ a: "", b: "" });
     const [vLine, setVline] = useState(0);
     const [divideAns, setDivideAns] = useState({
         spacingInfo: [0, 0],
@@ -25,31 +26,53 @@ const Divide = () => {
     let [fontsLoaded] = useFonts({
         RobotoMono_400Regular,
     });
+    const calculatePress = () => {
+        let validateA = decCheck(text.a);
+        let validateB = decCheck(text.b);
+        let numbers;
+        if (validateA && validateB) {
+            if (parseFloat(text.a) > parseFloat(text.b)) {
+                numbers = [text.a, text.b];
+                onChangeText({ a: "", b: "" });
+                setVline(1);
+                const abc = devide(numbers[0], numbers[1]);
+                setDivideAns(abc);
+            }
+        }
+    };
     if (!fontsLoaded) {
         return null;
     } else {
         return (
             <View style={styles.main}>
                 <View style={[styles.container, { marginBottom: 20 }]}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={onChangeText}
-                        value={text}
-                        autoFocus={true}
-                        placeholder="123456 789"
-                        placeholderTextColor={"#ffffff50"}
-                    />
+                    <View style={styles.flexRow}>
+                        <TextInput
+                            style={[styles.input, { width: 125 }]}
+                            onChangeText={(e) => {
+                                onChangeText({ ...text, a: e });
+                            }}
+                            value={text.a}
+                            autoFocus={true}
+                            placeholder="123456"
+                            placeholderTextColor={"#ffffff50"}
+                            keyboardType="numeric"
+                        />
+                        <Text style={styles.mathText}>÷</Text>
+                        <TextInput
+                            style={[styles.input, { width: 125 }]}
+                            onChangeText={(e) => {
+                                onChangeText({ ...text, b: e });
+                            }}
+                            value={text.b}
+                            placeholder="789"
+                            placeholderTextColor={"#ffffff50"}
+                            keyboardType="numeric"
+                        />
+                    </View>
                     <TouchableOpacity
                         style={styles.btn}
-                        onPress={() => {
-                            let numbers = checkNumbers(text);
-                            if (numbers) {
-                                onChangeText("");
-                                setVline(1);
-                                const abc = devide(numbers[0], numbers[1]);
-                                setDivideAns(abc);
-                            }
-                        }}
+                        onPress={calculatePress}
                     >
                         <Text style={styles.btnText}>Calculate</Text>
                     </TouchableOpacity>

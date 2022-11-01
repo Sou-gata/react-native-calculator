@@ -1,20 +1,3 @@
-export function checkNumbers(string) {
-    let valid = true;
-    let numArr = string;
-    numArr = numArr.split(" ");
-    if (numArr.length != 2) valid = false;
-    numArr[0] = parseInt(numArr[0]);
-    numArr[1] = parseInt(numArr[1]);
-    if (typeof numArr[0] !== "number" || typeof numArr[1] !== "number") {
-        valid = false;
-    }
-    if (isNaN(numArr[0]) || isNaN(numArr[1])) {
-        valid = false;
-    }
-    if (valid) return numArr;
-    else return false;
-}
-
 export function devide(numberA, numberB) {
     let numbers = [];
     numbers[0] = numberA + "";
@@ -231,6 +214,7 @@ export function gcd(numbersArr) {
                 }
             }
         }
+        gcd = gcd == 0 ? 1 : gcd;
         return gcd;
     } else {
         let maxDigit = maxDigitAfterPoint(numberSet);
@@ -923,6 +907,9 @@ export function solveQuadraticDec(a, b, c) {
     a = parseFloat(a);
     b = parseFloat(b);
     c = parseFloat(c);
+    if (isNaN(a)) a = 0;
+    if (isNaN(b)) b = 0;
+    if (isNaN(c)) c = 0;
     let d = b * b - 4 * a * c;
     let hasImgRoot = false;
     let rootOne, rootTwo;
