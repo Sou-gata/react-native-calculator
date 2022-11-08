@@ -1,4 +1,4 @@
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import React from "react";
 
 import styles from "../allStyles";
@@ -10,21 +10,23 @@ const data = componentName;
 const TabTwo = ({ navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.homeMain}>
-                {(() => {
-                    let btns = [];
-                    for (let i = 0; i < data.length; i++) {
-                        let com = (
-                            <HomeBtn
-                                key={i}
-                                navigation={navigation}
-                                item={data[i]}
-                            />
-                        );
-                        btns.push(com);
-                    }
-                    return btns;
-                })()}
+            <View>
+                <View style={styles.homeMain}>
+                    {(() => {
+                        let btns = [];
+                        for (let i = 0; i < data.length; i++) {
+                            let com = (
+                                <HomeBtn
+                                    key={i}
+                                    navigation={navigation}
+                                    item={data[i]}
+                                />
+                            );
+                            btns.push(com);
+                        }
+                        return btns;
+                    })()}
+                </View>
             </View>
         </ScrollView>
     );

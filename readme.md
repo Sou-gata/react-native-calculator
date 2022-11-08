@@ -17,7 +17,7 @@ yarn install
 Step 2:
 
 ```bash
-eas build -p android --profile preview
+eas build -p android --profile apk
 
 or
 

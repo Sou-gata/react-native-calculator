@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
                 ? (hp("100%") - 80) / 4
                 : (hp("100%") - 80) / 5,
     },
+    homeFooter: {
+        backgroundColor: "#141414",
+    },
     main: {
         flex: 1,
         backgroundColor: "#222",
@@ -281,6 +284,76 @@ const styles = StyleSheet.create({
     },
     timeHeadText: {
         width: (wp("100%") - 10) / 4,
+        alignItems: "center",
+    },
+    menuContainer: {
+        backgroundColor: "#222",
+        borderRadius: 7,
+        width: 125,
+        height: 100,
+        justifyContent: "center",
+    },
+    menuItem: {
+        marginVertical: 10,
+    },
+    menuItemText: {
+        color: "#fff",
+        fontSize: 16.5,
+        textAlign: "center",
+    },
+    dotContainer: {
+        height: 50,
+        width: 50,
+    },
+    dot: {
+        width: 3.5,
+        height: 3.5,
+        borderRadius: 3.5,
+        backgroundColor: "#ffffff80",
+        marginLeft: 15,
+        marginTop: 5,
+    },
+    menuDots: {
+        position: "absolute",
+        top: 5,
+        zIndex: 1,
+    },
+    aboutIcon: {
+        width: 100,
+        height: 100,
+    },
+    aboutTop: {
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        height: "30%",
+    },
+    aboutAppName: {
+        color: "#f73",
+        fontSize: 30,
+        fontFamily: "SourceSansPro_600SemiBold",
+    },
+    version: {
+        color: "#fff",
+        fontSize: 17,
+    },
+    cross: {
+        position: "absolute",
+        right: 10,
+        top: 20,
+        zIndex: 2,
+    },
+    aboutBottom: {
+        paddingHorizontal: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        height: "30%",
+    },
+    aboutText: {
+        fontSize: 18,
+        color: "#cfcfcf",
+        fontFamily: "SourceSansPro_400Regular",
+    },
+    aboutContact: {
         alignItems: "center",
     },
 });

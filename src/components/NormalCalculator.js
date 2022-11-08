@@ -1,9 +1,11 @@
 import { View, Text, TextInput, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
+import { MenuProvider } from "react-native-popup-menu";
 
 import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
 import { lastChar, bracManage } from "../helpers/functions";
+import PopupMenu from "./PopupMenu";
 
 const NormalCalculator = () => {
     const [text, setText] = useState("");
@@ -166,72 +168,79 @@ const NormalCalculator = () => {
     };
 
     return (
-        <View style={styles.main}>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.calInput}
-                    value={text}
-                    editable={false}
-                    multiline={true}
-                    numberOfLines={2}
-                />
-                <TextInput
-                    style={styles.calInputAns}
-                    value={ans}
-                    editable={false}
-                />
+        <MenuProvider>
+            <View style={styles.menuDots}>
+                <PopupMenu />
             </View>
-            <View style={styles.allBtns}>
-                {(() => {
-                    let btns = [];
-                    for (let i = 0; i < calBtns.length; i++) {
-                        let btn = calBtns[i];
-                        let com;
-                        if (btn.text == "=")
-                            com = (
-                                <Pressable
-                                    key={i}
-                                    onPress={() => calBtnPress(btn)}
-                                    style={styles.calBtnEql}
-                                    android_ripple={androidRipple}
-                                >
-                                    <View style={styles.calEqual}>
+            <View style={styles.main}>
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.calInput}
+                        value={text}
+                        editable={false}
+                        multiline={true}
+                        numberOfLines={2}
+                    />
+                    <TextInput
+                        style={styles.calInputAns}
+                        value={ans}
+                        editable={false}
+                    />
+                </View>
+                <View style={styles.allBtns}>
+                    {(() => {
+                        let btns = [];
+                        for (let i = 0; i < calBtns.length; i++) {
+                            let btn = calBtns[i];
+                            let com;
+                            if (btn.text == "=")
+                                com = (
+                                    <Pressable
+                                        key={i}
+                                        onPress={() => calBtnPress(btn)}
+                                        style={styles.calBtnEql}
+                                        android_ripple={androidRipple}
+                                    >
+                                        <View style={styles.calEqual}>
+                                            <Text style={btn.txtStyle}>
+                                                {btn.text}
+                                            </Text>
+                                        </View>
+                                    </Pressable>
+                                );
+                            else if (btn.text == "deg") {
+                                com = (
+                                    <Pressable
+                                        key={i}
+                                        onPress={() => changeMode(btn)}
+                                        style={styles.calBtn}
+                                        android_ripple={androidRipple}
+                                        android_disableSound={true}
+                                    >
+                                        <Text style={btn.txtStyle}>{mode}</Text>
+                                    </Pressable>
+                                );
+                            } else
+                                com = (
+                                    <Pressable
+                                        key={i}
+                                        onPress={() => calBtnPress(btn)}
+                                        style={styles.calBtn}
+                                        android_ripple={androidRipple}
+                                        android_disableSound={true}
+                                    >
                                         <Text style={btn.txtStyle}>
                                             {btn.text}
                                         </Text>
-                                    </View>
-                                </Pressable>
-                            );
-                        else if (btn.text == "deg") {
-                            com = (
-                                <Pressable
-                                    key={i}
-                                    onPress={() => changeMode(btn)}
-                                    style={styles.calBtn}
-                                    android_ripple={androidRipple}
-                                    android_disableSound={true}
-                                >
-                                    <Text style={btn.txtStyle}>{mode}</Text>
-                                </Pressable>
-                            );
-                        } else
-                            com = (
-                                <Pressable
-                                    key={i}
-                                    onPress={() => calBtnPress(btn)}
-                                    style={styles.calBtn}
-                                    android_ripple={androidRipple}
-                                    android_disableSound={true}
-                                >
-                                    <Text style={btn.txtStyle}>{btn.text}</Text>
-                                </Pressable>
-                            );
-                        btns.push(com);
-                    }
-                    return btns;
-                })()}
+                                    </Pressable>
+                                );
+                            btns.push(com);
+                        }
+                        return btns;
+                    })()}
+                </View>
             </View>
-        </View>
+        </MenuProvider>
     );
 };
 
