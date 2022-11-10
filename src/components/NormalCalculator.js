@@ -148,6 +148,7 @@ const NormalCalculator = () => {
         }
         if (type == "ere" && text.length != 0) {
             let lastBtn = numArr[numArr.length - 1];
+            if (lastBtn.type == "point") setPoint(false);
             const temp = text.slice(0, -lastBtn.textLen);
             setText(temp);
             const tempTwo = evalStr.slice(0, -lastBtn.evalLen);

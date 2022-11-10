@@ -101,7 +101,7 @@ export function multiple(numberA, numberB) {
         let l = results[i].length;
         let temp = results[i].split("");
         for (let j = 0; j < i; j++) {
-            temp[l - j - 1] = "x";
+            temp[l - j - 1] = "×";
         }
         let tempStr = "";
         for (let j = 0; j < temp.length; j++) {

@@ -1073,10 +1073,10 @@
   resolved "https://registry.npmjs.org/@expo-google-fonts/roboto-mono/-/roboto-mono-0.2.2.tgz"
   integrity sha512-x3a3wZ4Qq/OHzSL9fH492XCpTrCzhXvkVh+h9Q8+ESoHAqbR3EFx/SuZIFlLlX8Dg5AWesGOZxOQIRCOSo01nw==
 
-"@expo-google-fonts/source-sans-pro@^0.2.2":
+"@expo-google-fonts/varela-round@^0.2.2":
   version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@expo-google-fonts/source-sans-pro/-/source-sans-pro-0.2.2.tgz#3e20f45ce3a83db176f4bc9f287b069d5b104af5"
-  integrity sha512-EkHtxMkWMnuB7PzvC/OgAN27P7OqC2ephS97rWrXDeWmuzQ2sPPMT8mVlo/X6U5Z/oXpWYwh59GB5qPnJc0GgQ==
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/varela-round/-/varela-round-0.2.2.tgz#57fe3bc748112c4e56ccfc205de05981dbe1998d"
+  integrity sha512-L9crinZgKyn37/ELTTBueTDFObPBBILX9aLmKvK0KrDtYtV90qE+mhCifQRh6aihnpNyuTungf/9nuMdgfEukw==
 
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"

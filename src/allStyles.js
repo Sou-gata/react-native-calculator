@@ -330,7 +330,8 @@ const styles = StyleSheet.create({
     aboutAppName: {
         color: "#f73",
         fontSize: 30,
-        fontFamily: "SourceSansPro_600SemiBold",
+        fontWeight: "bold",
+        fontFamily: "VarelaRound_400Regular",
     },
     version: {
         color: "#fff",
@@ -338,7 +339,7 @@ const styles = StyleSheet.create({
     },
     cross: {
         position: "absolute",
-        right: 10,
+        right: 20,
         top: 20,
         zIndex: 2,
     },
@@ -346,15 +347,29 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         alignItems: "center",
         justifyContent: "center",
-        height: "30%",
+        height: "20%",
+    },
+    crossImg: {
+        width: 20,
+        height: 20,
+        opacity: 0.75,
     },
     aboutText: {
         fontSize: 18,
         color: "#cfcfcf",
-        fontFamily: "SourceSansPro_400Regular",
+        fontFamily: "VarelaRound_400Regular",
     },
     aboutContact: {
         alignItems: "center",
+        marginTop: 20,
+    },
+    keyFeatures: {
+        alignItems: "center",
+    },
+    hyperlinkText: {
+        color: "#f73",
+        fontSize: 18,
+        fontFamily: "VarelaRound_400Regular",
     },
 });
 
