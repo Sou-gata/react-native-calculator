@@ -126,13 +126,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         height: hp("9.5%"),
         justifyContent: "center",
-        borderRadius: 7,
-    },
-    calBtnEql: {
-        width: wp("17.5%"),
-        height: hp("7.5%"),
-        justifyContent: "center",
-        alignItems: "center",
     },
     calEqual: {
         width: hp("7.5%"),
@@ -370,6 +363,83 @@ const styles = StyleSheet.create({
         color: "#f73",
         fontSize: 18,
         fontFamily: "VarelaRound_400Regular",
+    },
+    romanAnsContainer: {
+        marginTop: 25,
+        flexWrap: "wrap",
+        width: "75%",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    romanText: {
+        color: "#f73",
+        fontSize: 27,
+    },
+    bigRoman: {
+        color: "#f73",
+        fontSize: 27,
+        borderColor: "#f73",
+        borderTopWidth: 2,
+    },
+    romanCalText: {
+        borderColor: "#f73",
+        borderTopWidth: 1,
+        color: "#f73",
+        fontSize: 20,
+        textAlign: "center",
+    },
+    ereseRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around",
+    },
+    ereBtns: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: hp("9.5%"),
+        width: wp("40%"),
+    },
+    displayContainer: {
+        height: 150,
+        alignItems: "center",
+        marginTop: 10,
+        backgroundColor: "#111",
+        borderColor: "#f73",
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+    },
+    display: {
+        width: "75%",
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+    },
+    pcTop: {
+        marginTop: 10,
+    },
+    pcRadio: {
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        margin: 10,
+        width: 175,
+    },
+    hr: {
+        width: "100%",
+        height: 2,
+        backgroundColor: "#fff",
+    },
+    pcAnsRow: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 15,
+    },
+    convertorIndicator: {
+        justifyContent: "space-around",
+        height: "100%",
+        alignItems: "center",
     },
 });
 

@@ -22,6 +22,9 @@ import QuadraticEqu from "./src/components/QuadraticEqu";
 import TimeCalculator from "./src/components/TimeCalculator";
 import About from "./src/components/About";
 import WhatsNew from "./src/components/WhatsNew";
+import RomanNumber from "./src/components/Roman/RomanNumber";
+import PermutationCombination from "./src/components/PermutationCombination";
+import PowerConverter from "./src/components/PowerConverter";
 
 const Screens = () => {
     const Stack = createNativeStackNavigator();
@@ -175,6 +178,30 @@ const Screens = () => {
                 options={{
                     ...options,
                     headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="RomanNumber"
+                component={RomanNumber}
+                options={{
+                    ...options,
+                    title: "Roman Number",
+                }}
+            />
+            <Stack.Screen
+                name="PermutationCombination"
+                component={PermutationCombination}
+                options={{
+                    ...options,
+                    title: "Permutation Combination",
+                }}
+            />
+            <Stack.Screen
+                name="PowerConverter"
+                component={PowerConverter}
+                options={{
+                    ...options,
+                    title: "Power Converter",
                 }}
             />
         </Stack.Navigator>

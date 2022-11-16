@@ -6,9 +6,9 @@
         "start": "expo start",
         "android": "expo start --android",
         "ios": "expo start --ios",
-        "web": "expo start --web",
-        "eject": "expo eject",
-        "dev": "NODE_OPTIONS=--openssl-legacy-provider expo start --web"
+        "webO": "expo start --web",
+        "web": "NODE_OPTIONS=--openssl-legacy-provider expo start --web",
+        "eject": "expo eject"
     },
     "dependencies": {
         "@expo-google-fonts/roboto-mono": "^0.2.2",

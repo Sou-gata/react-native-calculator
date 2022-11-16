@@ -5,12 +5,6 @@ import RadioButton from "./RadioButton";
 import { calculateTime } from "../helpers/functions";
 
 const TimeCalculator = () => {
-    const time = {
-        sec: 1,
-        min: 60,
-        hour: 3600,
-        day: 24 * 3600,
-    };
     const data = [
         {
             text: "Add (+)",

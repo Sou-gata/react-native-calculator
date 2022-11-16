@@ -1,5 +1,17 @@
 const info = [
     {
+        ver: "1.2.7",
+        changes: ["added decimal to roman", "added roman to decimal"],
+    },
+    {
+        ver: "1.2.6",
+        changes: ["Dcimal bug fix", "added permutation combination"],
+    },
+    {
+        ver: "1.2.5",
+        changes: ["bugs fix", "added power converter"],
+    },
+    {
         ver: "1.2.4",
         changes: ["bugs fix", "code cleaning", "about section added"],
     },

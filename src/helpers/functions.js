@@ -1,3 +1,14 @@
+import {
+    roman,
+    numeral,
+    romanToNumeral,
+    hexToBinTable,
+    binToHexTable,
+    binToOctTable,
+    octToBinTable,
+} from "./tables";
+import calBtns from "../helpers/calBtns";
+
 export function devide(numberA, numberB) {
     let numbers = [];
     numbers[0] = numberA + "";
@@ -416,13 +427,6 @@ export function binaryToDecimal(binaryNum) {
     return decimalNum;
 }
 
-import {
-    hexToBinTable,
-    binToHexTable,
-    binToOctTable,
-    octToBinTable,
-} from "./tables";
-
 export function hexToBin(hexVal) {
     let parts = hexVal.toLowerCase();
     parts = parts.split(".");
@@ -616,8 +620,6 @@ export function pointRemove(val) {
     }
     return ans;
 }
-
-import calBtns from "../helpers/calBtns";
 
 export function lastChar(str) {
     let last = str.charAt(str.length - 1);
@@ -1039,4 +1041,197 @@ export function bracManage(str) {
         newStr = newStr + ")";
     }
     return newStr;
+}
+function gamma(z) {
+    let ansOne = Math.sqrt((2 * Math.PI) / z);
+    let ansTwo = Math.pow((1 / Math.E) * (z + 1 / (12 * z - 1 / (10 * z))), z);
+    let ans = ansOne * ansTwo;
+    ans = ans.toFixed(4) + "";
+    ans = parseFloat(ans);
+    return ans;
+}
+
+export function fact(n) {
+    let isDecimal = false;
+    let temp = n + "";
+    temp = temp.split(".");
+    if (temp.length > 1) isDecimal = true;
+    let num = parseFloat(n);
+    if (num >= 0) {
+        if (isDecimal) {
+            return gamma(n + 1);
+        } else {
+            if (num == 0 || num == 1) {
+                return 1;
+            } else {
+                let ans = 1;
+                for (let i = 1; i <= num; i++) {
+                    ans = ans * i;
+                }
+                return ans;
+            }
+        }
+    } else return NaN;
+}
+
+export function numaricToRoman(number) {
+    let num = Math.abs(parseInt(number));
+    if (num == 0 || num > 3999999 || isNaN(num)) return [];
+    let romanNum = "";
+    for (let i = 0; i < numeral.length; i++) {
+        let rN = roman[i];
+        if (romanNum == "" && num < 5000 && num >= 4000) {
+            if (rN == "_I_V") rN = "MMMM";
+        } else if (romanNum != "" && num >= 1000 && num < 4000) {
+            if (rN == "M") rN = "_I";
+        }
+        romanNum = romanNum + rN.repeat(num / numeral[i]);
+        num = num % numeral[i];
+    }
+    let ans = valueGen(romanNum);
+    return ans;
+}
+
+function valueGen(string) {
+    let str = string;
+    str = str.split("");
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        if (char == "_") {
+            str[i] = { val: str[i + 1], special: true };
+            str.splice(i + 1, 1);
+        } else {
+            str[i] = { val: str[i], special: false };
+        }
+    }
+    return str;
+}
+
+export function permutationCombination({ n, r }, { order, repeat }) {
+    n = parseInt(n);
+    r = parseInt(r);
+    let invalid = false;
+    let nuFormula = "";
+    let deFormula = "";
+    let valueNu = "";
+    let valueDe = "";
+    let ans = 0;
+    if (n < r || n <= 0 || r <= 0 || n + r > 500) {
+        invalid = true;
+    }
+    if (!invalid) {
+        if (order == 1 && repeat == 1) {
+            nuFormula = "n^r";
+            deFormula = undefined;
+            valueNu = `${n}^${r}`;
+            valueDe = undefined;
+            ans = Math.pow(n, r);
+        } else if (order == 1 && repeat == 2) {
+            nuFormula = "n!";
+            deFormula = "(n-r)!";
+            valueNu = `${n}!`;
+            valueDe = `(${n}-${r})!`;
+            ans = fact(n) / fact(n - r);
+        } else if (order == 2 && repeat == 1) {
+            nuFormula = "(n+r-1)!";
+            deFormula = "r!(n-1)!";
+            valueNu = `(${n}+${r}-1)!`;
+            valueDe = `${r}!(${n}-1)!`;
+            ans = fact(n + r - 1) / (fact(r) * fact(n - 1));
+        } else if (order == 2 && repeat == 2) {
+            nuFormula = "n!";
+            deFormula = "r!(n-r)!";
+            valueNu = `${n}!`;
+            valueDe = `${r}!(${n}-${r})!`;
+            ans = fact(n) / (fact(r) * fact(n - r));
+        }
+        ans = isNaN(ans) ? "Can't calculate" : ans.toString();
+        return { nuFormula, deFormula, ans, valueNu, valueDe };
+    } else {
+        return {
+            nuFormula: undefined,
+            deFormula: undefined,
+            ans: undefined,
+            valueNu: undefined,
+            valueDe: undefined,
+        };
+    }
+}
+
+function maxRepeating(str) {
+    let len = str.length;
+    let count = 0;
+    let res = str[0];
+    for (let i = 0; i < len; i++) {
+        let cur_count = 1;
+        for (let j = i + 1; j < len; j++) {
+            if (str[i] != str[j]) break;
+            cur_count++;
+        }
+        if (cur_count > count) {
+            count = cur_count;
+            res = str[i];
+        }
+    }
+    let valid = true;
+    if (count > 3) valid = false;
+    if (count == 4 && res == "M") valid = true;
+    return valid;
+}
+function validateRoman(string) {
+    let valid = true;
+    let str = string;
+    valid = maxRepeating(str);
+    let strArr = str.split("");
+    if (strArr.length > 2) {
+        for (let i = 2; i < strArr.length; i++) {
+            let proPre = romanToNumeral[strArr[i - 2]];
+            let current = romanToNumeral[strArr[i]];
+            if (proPre < current) {
+                valid = false;
+                break;
+            }
+        }
+    } else if (strArr.length > 1) {
+        for (let i = 1; i < strArr.length; i++) {
+            let pre = romanToNumeral[strArr[i - 1]];
+            let current = romanToNumeral[strArr[i]];
+            if (pre <= current) {
+                let currDegit = (current + "").length;
+                let preDegit = (pre + "").length;
+                let preFstDgt = parseInt((pre + "").charAt(0));
+                if (preFstDgt != 1) {
+                    valid = false;
+                    break;
+                }
+                if (preDegit == currDegit || preDegit == currDegit - 1) {
+                } else {
+                    valid = false;
+                    break;
+                }
+            }
+        }
+    }
+    return valid;
+}
+export function romanToNumber(arr) {
+    let str = "";
+    for (let i = 0; i < arr.length; i++) {
+        str += arr[i].str;
+    }
+    if (str == "") return;
+    if (validateRoman(str)) {
+        let num = romanToNumeral[str.charAt(0)];
+        for (let i = 1; i < str.length; i++) {
+            let curr = romanToNumeral[str.charAt(i)];
+            let pre = romanToNumeral[str.charAt(i - 1)];
+            if (curr <= pre) {
+                num += curr;
+            } else {
+                num = num - pre * 2 + curr;
+            }
+        }
+        if (num > 3999999) num = undefined;
+        return num;
+    } else return undefined;
 }

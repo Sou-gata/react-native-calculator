@@ -47,13 +47,7 @@ const LengthConverter = () => {
                         },
                     ]}
                 >
-                    <View
-                        style={{
-                            justifyContent: "space-around",
-                            height: "100%",
-                            alignItems: "center",
-                        }}
-                    >
+                    <View style={styles.convertorIndicator}>
                         <Text style={{ color: "#fff", fontSize: 17 }}>
                             Meter
                         </Text>

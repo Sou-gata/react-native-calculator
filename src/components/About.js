@@ -1,5 +1,6 @@
 import { View, Text, Image, Pressable, Linking } from "react-native";
 import React from "react";
+import Appdata from "../../app.json";
 
 import {
     useFonts,
@@ -32,7 +33,9 @@ const About = ({ navigation }) => {
                 <View style={[styles.aboutTop, { marginTop: "5%" }]}>
                     <Text style={styles.aboutAppName}>Calculator</Text>
                     <Image style={styles.aboutIcon} source={icon} />
-                    <Text style={styles.version}>Version 1.2.4</Text>
+                    <Text style={styles.version}>
+                        Version {Appdata.expo.version}
+                    </Text>
                     <View style={styles.flexRow}>
                         <Text style={[styles.aboutAppName, { fontSize: 18 }]}>
                             by{" "}
