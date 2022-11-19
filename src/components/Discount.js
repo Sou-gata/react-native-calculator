@@ -1,9 +1,16 @@
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const Discount = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [inputs, setInputs] = useState({
         price: "",
         discount: "",
@@ -52,8 +59,10 @@ const Discount = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Price</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Price
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
                         Discount
                     </Text>
                 </View>
@@ -65,7 +74,7 @@ const Discount = () => {
                         }}
                         value={inputs.price}
                         placeholder="Price"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -75,7 +84,7 @@ const Discount = () => {
                         }}
                         value={inputs.discount}
                         placeholder="Discount in %"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                         maxLength={2}
                     />

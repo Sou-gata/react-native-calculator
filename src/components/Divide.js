@@ -13,9 +13,16 @@ import {
     ScrollView,
 } from "react-native";
 
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const Divide = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [vLine, setVline] = useState(0);
     const [divideAns, setDivideAns] = useState({
@@ -55,7 +62,7 @@ const Divide = () => {
                             value={text.a}
                             autoFocus={true}
                             placeholder="123456"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <Text style={styles.mathText}>÷</Text>
@@ -66,7 +73,7 @@ const Divide = () => {
                             }}
                             value={text.b}
                             placeholder="789"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                     </View>

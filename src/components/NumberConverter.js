@@ -1,7 +1,5 @@
 import { View, Text, TextInput } from "react-native";
 import React, { useState } from "react";
-
-import styles from "../allStyles";
 import {
     binaryCheck,
     octalCheck,
@@ -18,7 +16,16 @@ import {
     pointRemove,
 } from "../helpers/functions";
 
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
+
 const NumberConverter = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [bin, setBin] = useState("");
     const [oct, setOct] = useState("");
     const [dec, setDec] = useState("");
@@ -133,10 +140,16 @@ const NumberConverter = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 20 }}>Binary</Text>
-                    <Text style={{ color: "#fff", fontSize: 20 }}>Octal</Text>
-                    <Text style={{ color: "#fff", fontSize: 20 }}>Decimal</Text>
-                    <Text style={{ color: "#fff", fontSize: 20 }}>
+                    <Text style={{ color: color.white, fontSize: 20 }}>
+                        Binary
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 20 }}>
+                        Octal
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 20 }}>
+                        Decimal
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 20 }}>
                         Hexadecimal
                     </Text>
                 </View>
@@ -148,7 +161,7 @@ const NumberConverter = () => {
                         }}
                         value={bin.toString()}
                         placeholder="Binary"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -158,7 +171,7 @@ const NumberConverter = () => {
                         }}
                         value={oct.toString()}
                         placeholder="Octal"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -168,7 +181,7 @@ const NumberConverter = () => {
                         }}
                         value={dec.toString()}
                         placeholder="Decimal"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -178,7 +191,7 @@ const NumberConverter = () => {
                         }}
                         value={hex.toString()}
                         placeholder="HexaDecimal"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                     />
                 </View>
             </View>

@@ -3,25 +3,12 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
-export const colorDark = {
-    primary: "#ff7733",
-    homeBg: "#141414",
-    headerBg: "#111111",
-    mainBg: "#222222",
-    white: "#ffffff",
-    calText: "#191919",
-    paceHolder: "#ffffff50",
-    aboutText: "#cfcfcf",
-    headerIcon: "#ff7733",
-    btnBg: "#ff7733",
-    btnTxt: "#222222",
-    abotDot: "#ff773380",
-};
 export const colorWhite = {
+    statusBar: "#6200ee",
     primary: "#ff0266",
     homeBg: "#fff",
     headerBg: "#6200ee",
+    headerText: "#ffffff",
     mainBg: "#ffffff",
     white: "#000000cc",
     calText: "#e6e6e6",
@@ -381,6 +368,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         opacity: 0.75,
+        tintColor: color.primary,
     },
     aboutText: {
         fontSize: 18,

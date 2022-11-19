@@ -1,10 +1,17 @@
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
 import { gcd } from "../helpers/functions";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const FractionSimplify = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [textNu, onChangeTextNu] = useState("");
     const [textDe, onChangeTextDe] = useState("");
     const [ans, setAns] = useState({
@@ -27,7 +34,7 @@ const FractionSimplify = () => {
                     value={textNu}
                     autoFocus={true}
                     placeholder="Numerator"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                 />
                 <TextInput
@@ -35,7 +42,7 @@ const FractionSimplify = () => {
                     onChangeText={onChangeTextDe}
                     value={textDe}
                     placeholder="Denominator"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                 />
                 <TouchableHighlight

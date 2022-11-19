@@ -1,10 +1,17 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
 import { equSolve } from "../helpers/functions";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const EquSolve = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [val, setVal] = useState({
         a1: "",
         a2: "",
@@ -31,7 +38,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="a1"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "a1")}
                     value={val.a1}
@@ -40,7 +47,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="b1"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "b1")}
                     value={val.b1}
@@ -49,7 +56,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="c1"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "c1")}
                     value={val.c1}
@@ -60,7 +67,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="a2"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "a2")}
                     value={val.a2}
@@ -69,7 +76,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="b2"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "b2")}
                     value={val.b2}
@@ -78,7 +85,7 @@ const EquSolve = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="c2"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "c2")}
                     value={val.c2}

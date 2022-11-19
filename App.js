@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
-import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
-import Screens from "./Screens";
+
+import { Provider } from "react-redux";
+import configureStore from "./redux-store/store";
+import Main from "./Main";
+
+const store = configureStore();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,9 +18,10 @@ export default function App() {
     }, []);
 
     return (
-        <NavigationContainer>
-            <StatusBar style="auto" />
-            <Screens />
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <Main />
+            </NavigationContainer>
+        </Provider>
     );
 }

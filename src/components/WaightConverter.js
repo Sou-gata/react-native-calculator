@@ -1,8 +1,15 @@
 import { View, Text, TextInput } from "react-native";
-import styles from "../allStyles";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const WaightConverter = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [kg, setKg] = useState("");
     const [gm, setGm] = useState("");
     const [lb, setLb] = useState("");
@@ -26,12 +33,18 @@ const WaightConverter = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 17 }}>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
                         Killogram
                     </Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Gram</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Pound</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Ounce</Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Gram
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Pound
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Ounce
+                    </Text>
                 </View>
                 <View>
                     <TextInput
@@ -62,7 +75,7 @@ const WaightConverter = () => {
                         }}
                         value={kg.toString()}
                         placeholder="kg"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
 
@@ -94,7 +107,7 @@ const WaightConverter = () => {
                         }}
                         value={gm.toString()}
                         placeholder="gm"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
 
@@ -127,7 +140,7 @@ const WaightConverter = () => {
                         }}
                         value={lb.toString()}
                         placeholder="lb"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
 
@@ -160,7 +173,7 @@ const WaightConverter = () => {
                         }}
                         value={ounce.toString()}
                         placeholder="ounce"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                 </View>

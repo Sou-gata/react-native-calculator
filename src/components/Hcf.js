@@ -2,9 +2,16 @@ import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import React, { useState } from "react";
 
 import { checkLcmHcfNum, gcd, inputNumbers } from "../helpers/functions";
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const Hcf = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState(0);
@@ -18,7 +25,7 @@ const Hcf = () => {
                     value={text}
                     autoFocus={true}
                     placeholder="10 20 30"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                 />
                 <TouchableOpacity
                     style={styles.btn}

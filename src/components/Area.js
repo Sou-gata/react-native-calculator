@@ -1,9 +1,15 @@
 import { View, Text, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
-
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 const Area = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, setText] = useState({
         cm: "",
         m: "",
@@ -144,7 +150,7 @@ const Area = () => {
                         onChangeText={onChangeCm}
                         value={text.cm}
                         placeholder="Centimeter²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -152,7 +158,7 @@ const Area = () => {
                         onChangeText={onChangeM}
                         value={text.m}
                         placeholder="Meter²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -160,7 +166,7 @@ const Area = () => {
                         onChangeText={onChangeInch}
                         value={text.inc}
                         placeholder="Inch²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -168,7 +174,7 @@ const Area = () => {
                         onChangeText={onChangeFoot}
                         value={text.foot}
                         placeholder="Foot²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -176,7 +182,7 @@ const Area = () => {
                         onChangeText={onChangeYard}
                         value={text.yard}
                         placeholder="Yard²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -184,7 +190,7 @@ const Area = () => {
                         onChangeText={onChangeAcre}
                         value={text.acre}
                         placeholder="Acre"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -192,7 +198,7 @@ const Area = () => {
                         onChangeText={onChangeMile}
                         value={text.mile}
                         placeholder="Mile²"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                 </View>

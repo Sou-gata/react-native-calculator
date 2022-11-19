@@ -6,10 +6,17 @@ import {
     ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import styles from "../allStyles";
 import { solveQuadraticEqu, solveQuadraticDec } from "../helpers/functions";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const QuadraticEqu = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [veriable, setVeriable] = useState({ a: "", b: "", c: "" });
     const [ans, setAns] = useState({
         inFraction: { rootOne: undefined, rootTwo: undefined },
@@ -30,7 +37,7 @@ const QuadraticEqu = () => {
                     <TextInput
                         style={[styles.miniInput, { marginHorizontal: 7 }]}
                         placeholder="a"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                         onChangeText={(e) => changeValues(e, "a")}
                         value={veriable.a}
@@ -43,7 +50,7 @@ const QuadraticEqu = () => {
                     <TextInput
                         style={[styles.miniInput, { marginHorizontal: 7 }]}
                         placeholder="b"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                         onChangeText={(e) => changeValues(e, "b")}
                         value={veriable.b}
@@ -52,7 +59,7 @@ const QuadraticEqu = () => {
                     <TextInput
                         style={[styles.miniInput, { marginHorizontal: 7 }]}
                         placeholder="c"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                         onChangeText={(e) => changeValues(e, "c")}
                         value={veriable.c}

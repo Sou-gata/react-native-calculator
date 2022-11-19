@@ -1,10 +1,17 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
-import styles from "../allStyles";
 import RadioButton from "./RadioButton";
 import { calculateTime } from "../helpers/functions";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const TimeCalculator = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const data = [
         {
             text: "Add (+)",
@@ -57,7 +64,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="day"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "d1")}
                     value={inputs.d1}
@@ -65,7 +72,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="hour"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "h1")}
                     value={inputs.h1}
@@ -73,7 +80,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="min"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "m1")}
                     value={inputs.m1}
@@ -81,7 +88,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="sec"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "s1")}
                     value={inputs.s1}
@@ -103,7 +110,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="day"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "d2")}
                     value={inputs.d2}
@@ -111,7 +118,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="hour"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "h2")}
                     value={inputs.h2}
@@ -119,7 +126,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="min"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "m2")}
                     value={inputs.m2}
@@ -127,7 +134,7 @@ const TimeCalculator = () => {
                 <TextInput
                     style={styles.miniInput}
                     placeholder="sec"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     onChangeText={(e) => changeValues(e, "s2")}
                     value={inputs.s2}

@@ -1,8 +1,15 @@
 import { View, Text, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const PowerConverter = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [ans, setAns] = useState({
         wat: "",
         kwat: "",
@@ -45,19 +52,19 @@ const PowerConverter = () => {
                     ]}
                 >
                     <View style={styles.convertorIndicator}>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Watts
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Kilwatts
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Horsepower
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Ft-lb/sec
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             BTUs/minute
                         </Text>
                     </View>
@@ -78,7 +85,7 @@ const PowerConverter = () => {
                             }}
                             value={ans.wat}
                             placeholder="Watts"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -97,7 +104,7 @@ const PowerConverter = () => {
                             }}
                             value={ans.kwat}
                             placeholder="Kiloatts"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -116,7 +123,7 @@ const PowerConverter = () => {
                             }}
                             value={ans.hrsp}
                             placeholder="Horsepower"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -135,7 +142,7 @@ const PowerConverter = () => {
                             }}
                             value={ans.fpps}
                             placeholder="Ft-lb/sec"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -154,7 +161,7 @@ const PowerConverter = () => {
                             }}
                             value={ans.btu}
                             placeholder="BTUs/minute"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                     </View>

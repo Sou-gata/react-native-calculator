@@ -5,35 +5,23 @@ import {
 } from "react-native-responsive-screen";
 
 export const colorDark = {
+    statusBar: "#111111",
     primary: "#ff7733",
     homeBg: "#141414",
     headerBg: "#111111",
+    headerText: "#ffffff",
     mainBg: "#222222",
     white: "#ffffff",
     calText: "#191919",
     paceHolder: "#ffffff50",
+    calAns: "#ffffff80",
     aboutText: "#cfcfcf",
     headerIcon: "#ff7733",
     btnBg: "#ff7733",
     btnTxt: "#222222",
     abotDot: "#ff773380",
 };
-export const colorWhite = {
-    primary: "#ff0266",
-    homeBg: "#fff",
-    headerBg: "#6200ee",
-    mainBg: "#ffffff",
-    white: "#000000cc",
-    calText: "#e6e6e6",
-    calAns: "#00000090",
-    paceHolder: "#00000050",
-    aboutText: "#303030",
-    headerIcon: "#fff",
-    btnBg: "#ff0266",
-    btnTxt: "#ffffff",
-    abotDot: "#ff026680",
-};
-let color = colorWhite;
+let color = colorDark;
 
 export { color };
 
@@ -381,6 +369,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         opacity: 0.75,
+        tintColor: color.primary,
     },
     aboutText: {
         fontSize: 18,

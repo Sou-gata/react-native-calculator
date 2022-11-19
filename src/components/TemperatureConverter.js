@@ -1,7 +1,6 @@
 import { View, Text, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
 import {
     celToFar,
     celToKal,
@@ -16,8 +15,16 @@ import {
     ranToFar,
     ranToKal,
 } from "../helpers/functions";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const TemperatureConverter = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [cel, setCel] = useState("");
     const [kal, setKal] = useState("");
     const [far, setFar] = useState("");
@@ -46,12 +53,18 @@ const TemperatureConverter = () => {
                         alignItems: "center",
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Celsius</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Celsius
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
                         Fahrenheit
                     </Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Kelvin</Text>
-                    <Text style={{ color: "#fff", fontSize: 17 }}>Rankine</Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Kelvin
+                    </Text>
+                    <Text style={{ color: color.white, fontSize: 17 }}>
+                        Rankine
+                    </Text>
                 </View>
                 <View>
                     <TextInput
@@ -71,7 +84,7 @@ const TemperatureConverter = () => {
                         }}
                         value={cel.toString()}
                         placeholder="Celsius"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -91,7 +104,7 @@ const TemperatureConverter = () => {
                         }}
                         value={far.toString()}
                         placeholder="Fahrenheit"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -111,7 +124,7 @@ const TemperatureConverter = () => {
                         }}
                         value={kal.toString()}
                         placeholder="Kelvin"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -131,7 +144,7 @@ const TemperatureConverter = () => {
                         }}
                         value={ran.toString()}
                         placeholder="Rankine"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                 </View>

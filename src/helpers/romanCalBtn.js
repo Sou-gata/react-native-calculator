@@ -1,4 +1,4 @@
-import styles from "../allStyles";
+import styles, { color } from "../allStyles";
 const btns = [
     {
         str: "I",
@@ -120,7 +120,7 @@ const btns = [
         txtStyle: {
             fontSize: 24,
             fontWeight: "bold",
-            color: "#fff",
+            color: color.btnTxt,
             textAlign: "center",
         },
         btnStyle: styles.calEqual,

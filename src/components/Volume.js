@@ -1,9 +1,16 @@
 import { View, Text, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const Volume = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, setText] = useState({
         cm: "",
         m: "",
@@ -152,7 +159,7 @@ const Volume = () => {
                         onChangeText={onChangeCm}
                         value={text.cm}
                         placeholder="Centimeter³"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -160,7 +167,7 @@ const Volume = () => {
                         onChangeText={onChangeM}
                         value={text.m}
                         placeholder="Meter³"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -168,7 +175,7 @@ const Volume = () => {
                         onChangeText={onChangeInch}
                         value={text.inc}
                         placeholder="Inch³"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -176,7 +183,7 @@ const Volume = () => {
                         onChangeText={onChangeFoot}
                         value={text.foot}
                         placeholder="Foot³"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -184,7 +191,7 @@ const Volume = () => {
                         onChangeText={onChangeLit}
                         value={text.lit}
                         placeholder="Liter"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -192,7 +199,7 @@ const Volume = () => {
                         onChangeText={onChangeGln}
                         value={text.gln}
                         placeholder="Imperial Gallon"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                     <TextInput
@@ -200,7 +207,7 @@ const Volume = () => {
                         onChangeText={onChangeQnt}
                         value={text.qnt}
                         placeholder="Imperial Quant"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                 </View>

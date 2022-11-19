@@ -1,19 +1,28 @@
 import { View, Text, Image, Pressable, Linking } from "react-native";
-import React from "react";
+import { Platform } from "react-native";
+import React, { useEffect } from "react";
 import Appdata from "../../app.json";
+
+import { useSelector } from "react-redux";
 
 import {
     useFonts,
     VarelaRound_400Regular,
 } from "@expo-google-fonts/varela-round";
-
-import styles from "../allStyles";
+import allStylesLight from "../allStylesLight";
+import allStyleDark from "../allStylesDark";
+let styles = allStyleDark;
 const icon = require("../../assets/icon.png");
-
 const About = ({ navigation }) => {
+    const theme = useSelector((state) => state.theme);
+
+    useEffect(() => {
+        styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    }, [theme]);
     let [fontsLoaded] = useFonts({
         VarelaRound_400Regular,
     });
+    let marginTop = Platform.OS == "web" ? "2%" : "5%";
     if (!fontsLoaded) {
         return <View style={styles.main}></View>;
     } else {
@@ -30,7 +39,7 @@ const About = ({ navigation }) => {
                         source={require("../../assets/icons/cross.png")}
                     />
                 </Pressable>
-                <View style={[styles.aboutTop, { marginTop: "5%" }]}>
+                <View style={[styles.aboutTop, { marginTop }]}>
                     <Text style={styles.aboutAppName}>Calculator</Text>
                     <Image style={styles.aboutIcon} source={icon} />
                     <Text style={styles.version}>

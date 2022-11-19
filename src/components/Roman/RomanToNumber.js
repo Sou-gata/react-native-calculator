@@ -1,11 +1,11 @@
 import { View, Text, Pressable } from "react-native";
 import React, { useState } from "react";
-import styles from "../../allStyles";
+import styles, { color } from "../../allStyles";
 import btns from "../../helpers/romanCalBtn";
 import { romanToNumber } from "../../helpers/functions";
 
 const androidRipple = {
-    color: "#f73",
+    color: color.primary,
     radius: 32.5,
     borderless: true,
 };

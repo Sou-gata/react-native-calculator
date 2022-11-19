@@ -1,7 +1,11 @@
 import { View, TouchableOpacity, Text, TextInput } from "react-native";
 import React, { useState } from "react";
 
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const btns = [
     {
@@ -37,6 +41,9 @@ const btns = [
 ];
 
 const Gst = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [selected, setSelected] = useState(3);
     const [text, setText] = useState("");
     const [ans, setAns] = useState({
@@ -80,7 +87,7 @@ const Gst = () => {
                         value={text}
                         autoFocus={true}
                         placeholder="100"
-                        placeholderTextColor={"#ffffff50"}
+                        placeholderTextColor={color.paceHolder}
                         keyboardType="numeric"
                     />
                 </View>

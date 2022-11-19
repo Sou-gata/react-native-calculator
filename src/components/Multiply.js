@@ -9,7 +9,11 @@ import React, { useState } from "react";
 
 import { multiple } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 import {
     useFonts,
@@ -17,6 +21,9 @@ import {
 } from "@expo-google-fonts/roboto-mono";
 
 const Multiply = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [ans, setAns] = useState({});
     const [opacity, setOpacity] = useState(0);
@@ -50,7 +57,7 @@ const Multiply = () => {
                             value={text.a}
                             autoFocus={true}
                             placeholder="123"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <Text style={styles.mathText}>×</Text>
@@ -61,7 +68,7 @@ const Multiply = () => {
                             }}
                             value={text.b}
                             placeholder="456"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                     </View>

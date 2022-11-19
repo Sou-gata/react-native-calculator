@@ -4,10 +4,18 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import NormalCalculator from "./components/NormalCalculator";
 import TabTwo from "./components/TabTwo";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "./allStylesLight";
+import allStyleDark, { colorDark } from "./allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const Tab = createMaterialTopTabNavigator();
 
 const Home = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -23,13 +31,18 @@ const Home = () => {
                     return (
                         <Image
                             source={src}
-                            style={{ width: 30, height: 30, opacity }}
+                            style={{
+                                width: 30,
+                                height: 30,
+                                opacity,
+                                tintColor: color.headerIcon,
+                            }}
                         />
                     );
                 },
                 tabBarShowLabel: false,
-                tabBarStyle: { backgroundColor: "#111" },
-                tabBarIndicatorStyle: { backgroundColor: "#ff7733" },
+                tabBarStyle: { backgroundColor: color.headerBg },
+                tabBarIndicatorStyle: { backgroundColor: color.primary },
                 tabBarIndicatorContainerStyle: { height: 50 },
             })}
             initialLayout={{

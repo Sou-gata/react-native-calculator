@@ -1,9 +1,16 @@
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import styles from "../allStyles";
 import React, { useState } from "react";
 import { factors } from "../helpers/functions";
 
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 const Factors = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState({});
     const [opacity, setOpacity] = useState(0);
@@ -16,7 +23,7 @@ const Factors = () => {
                     value={text}
                     autoFocus={true}
                     placeholder="123"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                 />
                 <TouchableOpacity

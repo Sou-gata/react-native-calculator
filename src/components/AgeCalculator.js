@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const AgeCalculator = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [visible, setVisible] = useState({
         from: false,
         to: false,
@@ -109,11 +115,16 @@ const AgeCalculator = () => {
                     }}
                 >
                     <View style={styles.ageRow}>
-                        <Text style={[styles.text, { color: "#ff7433" }]}>
+                        <Text style={[styles.text, { color: color.primary }]}>
                             {date.from}
                         </Text>
                         <Image
-                            style={{ width: 30, height: 30, marginLeft: 10 }}
+                            style={{
+                                width: 30,
+                                height: 30,
+                                marginLeft: 10,
+                                tintColor: color.primary,
+                            }}
                             source={require("../../assets/icons/date.png")}
                         />
                     </View>
@@ -139,11 +150,16 @@ const AgeCalculator = () => {
                     }}
                 >
                     <View style={styles.ageRow}>
-                        <Text style={[styles.text, { color: "#ff7433" }]}>
+                        <Text style={[styles.text, { color: color.primary }]}>
                             {date.to}
                         </Text>
                         <Image
-                            style={{ width: 30, height: 30, marginLeft: 10 }}
+                            style={{
+                                width: 30,
+                                height: 30,
+                                marginLeft: 10,
+                                tintColor: color.primary,
+                            }}
                             source={require("../../assets/icons/date.png")}
                         />
                     </View>
@@ -164,7 +180,7 @@ const AgeCalculator = () => {
                         calculateAge();
                     }}
                 >
-                    <Text style={{ color: "#fff", fontSize: 20 }}>
+                    <Text style={{ color: color.btnTxt, fontSize: 20 }}>
                         Calculate
                     </Text>
                 </TouchableOpacity>
@@ -177,26 +193,26 @@ const AgeCalculator = () => {
                         height: 130,
                     }}
                 >
-                    <Text style={{ fontSize: 100, color: "#ff7433" }}>
+                    <Text style={{ fontSize: 100, color: color.primary }}>
                         {age.years}
                     </Text>
-                    <Text style={{ fontSize: 20, color: "#fff" }}>
+                    <Text style={{ fontSize: 20, color: color.white }}>
                         {"   "}Years
                     </Text>
                 </View>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={{ fontSize: 40, color: "#fff" }}>
+                    <Text style={{ fontSize: 40, color: color.white }}>
                         {age.months}
                     </Text>
-                    <Text style={{ fontSize: 20, color: "#fff" }}>
+                    <Text style={{ fontSize: 20, color: color.white }}>
                         {"   "}
                         Months
                         {"      "}
                     </Text>
-                    <Text style={{ fontSize: 40, color: "#fff" }}>
+                    <Text style={{ fontSize: 40, color: color.white }}>
                         {age.days}
                     </Text>
-                    <Text style={{ fontSize: 20, color: "#fff" }}>
+                    <Text style={{ fontSize: 20, color: color.white }}>
                         {"   "}Days
                     </Text>
                 </View>

@@ -1,6 +1,6 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import styles from "../../allStyles";
+import styles, { color } from "../../allStyles";
 import { numaricToRoman } from "../../helpers/functions";
 
 const NumberToRoman = () => {
@@ -18,7 +18,7 @@ const NumberToRoman = () => {
                     onChangeText={onChangeText}
                     value={text}
                     placeholder="123"
-                    placeholderTextColor={"#ffffff50"}
+                    placeholderTextColor={color.paceHolder}
                     keyboardType="numeric"
                     maxLength={7}
                 />

@@ -2,12 +2,20 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import { MenuProvider } from "react-native-popup-menu";
 
-import styles from "../allStyles";
 import calBtns from "../helpers/calBtns";
 import { lastChar, bracManage } from "../helpers/functions";
 import PopupMenu from "./PopupMenu";
+import LightDark from "./LightDark";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const NormalCalculator = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [text, setText] = useState("");
     const [evalStr, setEvalStr] = useState("");
     const [sym, setSym] = useState(false);
@@ -163,13 +171,14 @@ const NormalCalculator = () => {
         }
     };
     const androidRipple = {
-        color: "#f73",
+        color: color.primary,
         radius: 32.5,
         borderless: true,
     };
 
     return (
         <MenuProvider>
+            <LightDark />
             <View style={styles.menuDots}>
                 <PopupMenu />
             </View>
@@ -199,11 +208,16 @@ const NormalCalculator = () => {
                                     <Pressable
                                         key={i}
                                         onPress={() => calBtnPress(btn)}
-                                        style={styles.calBtnEql}
+                                        style={styles.calBtn}
                                         android_ripple={androidRipple}
                                     >
                                         <View style={styles.calEqual}>
-                                            <Text style={btn.txtStyle}>
+                                            <Text
+                                                style={[
+                                                    btn.txtStyle,
+                                                    { color: color.btnTxt },
+                                                ]}
+                                            >
                                                 {btn.text}
                                             </Text>
                                         </View>
@@ -218,7 +232,14 @@ const NormalCalculator = () => {
                                         android_ripple={androidRipple}
                                         android_disableSound={true}
                                     >
-                                        <Text style={btn.txtStyle}>{mode}</Text>
+                                        <Text
+                                            style={[
+                                                styles.calText,
+                                                { color: color.primary + "80" },
+                                            ]}
+                                        >
+                                            {mode}
+                                        </Text>
                                     </Pressable>
                                 );
                             } else
@@ -230,7 +251,13 @@ const NormalCalculator = () => {
                                         android_ripple={androidRipple}
                                         android_disableSound={true}
                                     >
-                                        <Text style={btn.txtStyle}>
+                                        <Text
+                                            style={
+                                                btn.primaryColor
+                                                    ? styles.calTextOrange
+                                                    : styles.calText
+                                            }
+                                        >
                                             {btn.text}
                                         </Text>
                                     </Pressable>

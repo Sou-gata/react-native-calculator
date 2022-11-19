@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { colorWhite } from "../allStylesLight";
+import { colorDark } from "../allStylesDark";
+
+let color = colorDark;
 
 export default function RadioButton({ data, onSelect, selected, style }) {
+    const theme = useSelector((state) => state.theme);
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [userOption, setUserOption] = useState(selected);
     const selectHandler = (value) => {
         onSelect(value);
@@ -36,7 +43,7 @@ export default function RadioButton({ data, onSelect, selected, style }) {
 const styles = StyleSheet.create({
     option: {
         fontSize: 20,
-        color: "white",
+        color: color.primary,
         textAlign: "center",
     },
     container: {
@@ -47,7 +54,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         borderWidth: 2,
-        borderColor: "#f73",
+        borderColor: color.primary,
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center",
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
         width: 10,
         height: 10,
         borderRadius: 10,
-        backgroundColor: "#f73",
+        backgroundColor: color.primary,
     },
     innerUnselected: {
         width: 12,

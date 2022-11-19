@@ -1,10 +1,8 @@
-import styles from "../allStyles";
 const btns = [
     {
         str: "",
         type: "unknown",
         text: "deg",
-        txtStyle: [styles.calText, { color: "#ff773380" }],
     },
     {
         str: "sin(",
@@ -12,7 +10,6 @@ const btns = [
         text: "sin",
         evalLen: 12,
         textLen: 4,
-        txtStyle: styles.calText,
     },
     {
         str: "cos(",
@@ -20,7 +17,6 @@ const btns = [
         text: "cos",
         evalLen: 12,
         textLen: 4,
-        txtStyle: styles.calText,
     },
     {
         str: "tan(",
@@ -28,7 +24,6 @@ const btns = [
         text: "tan",
         evalLen: 12,
         textLen: 4,
-        txtStyle: styles.calText,
     },
     {
         str: "",
@@ -36,7 +31,7 @@ const btns = [
         text: "C",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "log(",
@@ -44,7 +39,6 @@ const btns = [
         text: "log",
         evalLen: 12,
         textLen: 4,
-        txtStyle: styles.calText,
     },
     {
         str: "ln(",
@@ -52,7 +46,6 @@ const btns = [
         text: "ln",
         evalLen: 11,
         textLen: 3,
-        txtStyle: styles.calText,
     },
     {
         str: "asin(",
@@ -60,7 +53,6 @@ const btns = [
         text: "asin",
         evalLen: 13,
         textLen: 5,
-        txtStyle: styles.calText,
     },
     {
         str: "acos(",
@@ -68,7 +60,6 @@ const btns = [
         text: "acos",
         evalLen: 13,
         textLen: 5,
-        txtStyle: styles.calText,
     },
     {
         str: "atan(",
@@ -76,7 +67,6 @@ const btns = [
         text: "atan",
         evalLen: 13,
         textLen: 5,
-        txtStyle: styles.calText,
     },
     {
         str: "sqrt(",
@@ -84,7 +74,7 @@ const btns = [
         text: "√",
         evalLen: 13,
         textLen: 2,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "(",
@@ -92,7 +82,7 @@ const btns = [
         text: "(",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: ")",
@@ -100,7 +90,7 @@ const btns = [
         text: ")",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "",
@@ -108,7 +98,7 @@ const btns = [
         text: "⌫",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "/",
@@ -116,7 +106,7 @@ const btns = [
         text: "÷",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "cbrt(",
@@ -124,7 +114,7 @@ const btns = [
         text: "∛",
         evalLen: 13,
         textLen: 2,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "7",
@@ -132,7 +122,6 @@ const btns = [
         text: "7",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "8",
@@ -140,7 +129,6 @@ const btns = [
         text: "8",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "9",
@@ -148,7 +136,6 @@ const btns = [
         text: "9",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "*",
@@ -156,7 +143,7 @@ const btns = [
         text: "×",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "**",
@@ -164,7 +151,7 @@ const btns = [
         text: "^",
         evalLen: 2,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "4",
@@ -172,7 +159,6 @@ const btns = [
         text: "4",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "5",
@@ -180,7 +166,6 @@ const btns = [
         text: "5",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "6",
@@ -188,7 +173,6 @@ const btns = [
         text: "6",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "-",
@@ -196,7 +180,7 @@ const btns = [
         text: "-",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "Math.PI",
@@ -204,7 +188,7 @@ const btns = [
         text: "π",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "1",
@@ -212,7 +196,6 @@ const btns = [
         text: "1",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "2",
@@ -220,7 +203,6 @@ const btns = [
         text: "2",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "3",
@@ -228,7 +210,6 @@ const btns = [
         text: "3",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "+",
@@ -236,7 +217,7 @@ const btns = [
         text: "+",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "Math.E",
@@ -244,7 +225,7 @@ const btns = [
         text: "e",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: ".",
@@ -252,7 +233,6 @@ const btns = [
         text: ".",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "0",
@@ -260,7 +240,6 @@ const btns = [
         text: "0",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calText,
     },
     {
         str: "%",
@@ -268,7 +247,7 @@ const btns = [
         text: "%",
         evalLen: 1,
         textLen: 1,
-        txtStyle: styles.calTextOrange,
+        primaryColor: true,
     },
     {
         str: "=",
@@ -276,7 +255,6 @@ const btns = [
         text: "=",
         evalLen: 1,
         textLen: 1,
-        txtStyle: [styles.calText, { fontSize: 30, fontWeight: "600" }],
     },
 ];
 export default btns;

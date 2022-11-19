@@ -1,13 +1,18 @@
 import { View, ScrollView, Text } from "react-native";
 import React from "react";
 
-import styles from "../allStyles";
 import HomeBtn from "./HomeBtn";
 import componentName from "../helpers/componentName";
+import { useSelector } from "react-redux";
+import allStylesLight from "../allStylesLight";
+import allStyleDark from "../allStylesDark";
+let styles = allStyleDark;
 
 const data = componentName;
 
 const TabTwo = ({ navigation }) => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View>

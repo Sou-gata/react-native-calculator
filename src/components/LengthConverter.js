@@ -1,8 +1,15 @@
 import { View, Text, TextInput, ScrollView } from "react-native";
 import React, { useState } from "react";
-import styles from "../allStyles";
+import { useSelector } from "react-redux";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
+let styles = allStyleDark;
+let color = colorDark;
 
 const LengthConverter = () => {
+    const theme = useSelector((state) => state.theme);
+    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
+    color = theme.mode == "dark" ? colorDark : colorWhite;
     const [ans, setAns] = useState({
         met: "",
         klm: "",
@@ -48,22 +55,22 @@ const LengthConverter = () => {
                     ]}
                 >
                     <View style={styles.convertorIndicator}>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Meter
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Kilometer
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Inch
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Feet
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Mile
                         </Text>
-                        <Text style={{ color: "#fff", fontSize: 17 }}>
+                        <Text style={{ color: color.white, fontSize: 17 }}>
                             Nautical Mile
                         </Text>
                     </View>
@@ -85,7 +92,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.met}
                             placeholder="Meter"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -105,7 +112,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.klm}
                             placeholder="Kilomeater"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -125,7 +132,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.inc}
                             placeholder="Inch"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -145,7 +152,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.fet}
                             placeholder="Feet"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -165,7 +172,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.mil}
                             placeholder="Mile"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                         <TextInput
@@ -185,7 +192,7 @@ const LengthConverter = () => {
                             }}
                             value={ans.nom}
                             placeholder="Nautical Mile"
-                            placeholderTextColor={"#ffffff50"}
+                            placeholderTextColor={color.paceHolder}
                             keyboardType="numeric"
                         />
                     </View>
