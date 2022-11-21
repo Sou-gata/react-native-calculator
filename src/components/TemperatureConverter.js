@@ -1,5 +1,5 @@
 import { View, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     celToFar,
@@ -15,16 +15,14 @@ import {
     ranToFar,
     ranToKal,
 } from "../helpers/functions";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const TemperatureConverter = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [cel, setCel] = useState("");
     const [kal, setKal] = useState("");
     const [far, setFar] = useState("");

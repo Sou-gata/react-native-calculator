@@ -1,9 +1,14 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import styles, { color } from "../../allStyles";
+import React, { useEffect, useState } from "react";
 import { numaricToRoman } from "../../helpers/functions";
+import ThemeSelector from "../../helpers/ThemeSelector";
 
 const NumberToRoman = () => {
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState([]);
     const [number, setNumber] = useState("");

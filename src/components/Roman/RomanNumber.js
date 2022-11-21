@@ -1,6 +1,6 @@
 import { View } from "react-native";
-import React, { useState } from "react";
-import styles from "../../allStyles";
+import React, { useEffect, useState } from "react";
+import ThemeSelector from "../../helpers/ThemeSelector";
 
 import NumberToRoman from "./NumberToRoman";
 import RomanToNumber from "./RomanToNumber";
@@ -18,6 +18,10 @@ const data = [
 ];
 
 const RomanNumber = () => {
+    const [styles, setStyles] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles);
+    }, []);
     const [operation, setOperation] = useState(1);
     return (
         <View style={styles.main}>

@@ -5,15 +5,11 @@ import {
     TouchableOpacity,
     ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { multiple } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 import {
     useFonts,
@@ -21,9 +17,11 @@ import {
 } from "@expo-google-fonts/roboto-mono";
 
 const Multiply = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [ans, setAns] = useState({});
     const [opacity, setOpacity] = useState(0);

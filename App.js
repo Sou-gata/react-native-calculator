@@ -3,10 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 
 import { Provider } from "react-redux";
-import configureStore from "./redux-store/store";
+import store from "./redux-store/store";
 import Main from "./Main";
-
-const store = configureStore();
 
 SplashScreen.preventAutoHideAsync();
 

@@ -1,15 +1,13 @@
 import { View, Text, TextInput, ScrollView } from "react-native";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import React, { useState, useEffect } from "react";
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const LengthConverter = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [ans, setAns] = useState({
         met: "",
         klm: "",

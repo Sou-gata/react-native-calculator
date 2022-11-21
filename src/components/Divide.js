@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { devide } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
 import {
@@ -13,16 +13,13 @@ import {
     ScrollView,
 } from "react-native";
 
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
-
+import ThemeSelector from "../helpers/ThemeSelector";
 const Divide = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [vLine, setVline] = useState(0);
     const [divideAns, setDivideAns] = useState({

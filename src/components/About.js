@@ -1,24 +1,19 @@
 import { View, Text, Image, Pressable, Linking } from "react-native";
 import { Platform } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Appdata from "../../app.json";
-
-import { useSelector } from "react-redux";
 
 import {
     useFonts,
     VarelaRound_400Regular,
 } from "@expo-google-fonts/varela-round";
-import allStylesLight from "../allStylesLight";
-import allStyleDark from "../allStylesDark";
-let styles = allStyleDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 const icon = require("../../assets/icon.png");
 const About = ({ navigation }) => {
-    const theme = useSelector((state) => state.theme);
-
+    const [styles, setStyles] = useState({});
     useEffect(() => {
-        styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    }, [theme]);
+        ThemeSelector(setStyles);
+    }, []);
     let [fontsLoaded] = useFonts({
         VarelaRound_400Regular,
     });

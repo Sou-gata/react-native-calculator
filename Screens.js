@@ -1,9 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "./src/allStylesLight";
-import allStyleDark, { colorDark } from "./src/allStylesDark";
-let styles = allStyleDark;
+import { colorWhite } from "./src/allStylesLight";
+import { colorDark } from "./src/allStylesDark";
 let color = colorDark;
 
 import Home from "./src/Home";
@@ -33,7 +32,6 @@ import PowerConverter from "./src/components/PowerConverter";
 
 const Screens = () => {
     const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
     color = theme.mode == "dark" ? colorDark : colorWhite;
     const Stack = createNativeStackNavigator();
     const options = {

@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Switch } from "react-native";
 import React, { useState } from "react";
 import {
     Menu,
@@ -8,10 +8,10 @@ import {
 } from "react-native-popup-menu";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
-import allStylesLight from "../allStylesLight";
-import allStyleDark from "../allStylesDark";
+import allStylesLight, { colorWhite } from "../allStylesLight";
+import allStyleDark, { colorDark } from "../allStylesDark";
 let styles = allStyleDark;
-
+let color = colorDark;
 const PopupMenu = () => {
     const theme = useSelector((state) => state.theme);
     styles = theme.mode == "dark" ? allStyleDark : allStylesLight;

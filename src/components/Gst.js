@@ -1,49 +1,47 @@
 import { View, TouchableOpacity, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
-
-const btns = [
-    {
-        text: "3%",
-        selectStyle: [styles.gstBtnSelected, styles.leftGstBtn],
-        style: [styles.gstBtn, styles.leftGstBtn],
-        value: 3,
-    },
-    {
-        text: "5%",
-        selectStyle: styles.gstBtnSelected,
-        style: styles.gstBtn,
-        value: 5,
-    },
-    {
-        text: "12%",
-        selectStyle: styles.gstBtnSelected,
-        style: styles.gstBtn,
-        value: 12,
-    },
-    {
-        text: "18%",
-        selectStyle: styles.gstBtnSelected,
-        style: styles.gstBtn,
-        value: 18,
-    },
-    {
-        text: "28%",
-        selectStyle: [styles.gstBtnSelected, styles.rightGstBtn],
-        style: [styles.gstBtn, styles.rightGstBtn],
-        value: 28,
-    },
-];
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const Gst = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
+    const btns = [
+        {
+            text: "3%",
+            selectStyle: [styles.gstBtnSelected, styles.leftGstBtn],
+            style: [styles.gstBtn, styles.leftGstBtn],
+            value: 3,
+        },
+        {
+            text: "5%",
+            selectStyle: styles.gstBtnSelected,
+            style: styles.gstBtn,
+            value: 5,
+        },
+        {
+            text: "12%",
+            selectStyle: styles.gstBtnSelected,
+            style: styles.gstBtn,
+            value: 12,
+        },
+        {
+            text: "18%",
+            selectStyle: styles.gstBtnSelected,
+            style: styles.gstBtn,
+            value: 18,
+        },
+        {
+            text: "28%",
+            selectStyle: [styles.gstBtnSelected, styles.rightGstBtn],
+            style: [styles.gstBtn, styles.rightGstBtn],
+            value: 28,
+        },
+    ];
+
     const [selected, setSelected] = useState(3);
     const [text, setText] = useState("");
     const [ans, setAns] = useState({

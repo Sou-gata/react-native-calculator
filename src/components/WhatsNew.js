@@ -6,21 +6,18 @@ import {
     FlatList,
     ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     useFonts,
     VarelaRound_400Regular,
 } from "@expo-google-fonts/varela-round";
-
-import allStylesLight from "../allStylesLight";
-import allStyleDark from "../allStylesDark";
 import data from "../helpers/versionInfo";
-
-import { useSelector } from "react-redux";
+import ThemeSelector from "../helpers/ThemeSelector";
 const WhatsNew = ({ navigation }) => {
-    const theme = useSelector((state) => state.theme);
-    let styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-
+    const [styles, setStyles] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles);
+    }, []);
     let [fontsLoaded] = useFonts({
         VarelaRound_400Regular,
     });
@@ -28,7 +25,7 @@ const WhatsNew = ({ navigation }) => {
         return <View style={styles.main}></View>;
     }
 
-    const renderItem = ({ item }) => {
+    const RenderItem = ({ item }) => {
         return (
             <View>
                 <View>
@@ -84,13 +81,15 @@ const WhatsNew = ({ navigation }) => {
                 style={{ padding: 30 }}
                 showsVerticalScrollIndicator={false}
             >
-                <View>
-                    <FlatList
-                        data={data}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.ver}
-                        showsVerticalScrollIndicator={false}
-                    />
+                <View style={{ marginBottom: 45 }}>
+                    {(() => {
+                        let allCom = [];
+                        for (let i = 0; i < data.length; i++) {
+                            let com = <RenderItem key={i} item={data[i]} />;
+                            allCom.push(com);
+                        }
+                        return allCom;
+                    })()}
                 </View>
             </ScrollView>
         </View>

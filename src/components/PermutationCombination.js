@@ -1,12 +1,8 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RadioButton from "./RadioButton";
 import { permutationCombination } from "../helpers/functions";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const data = [
     {
@@ -20,9 +16,11 @@ const data = [
 ];
 
 const Permutation = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [inputs, setInputs] = useState({ n: "", r: "" });
     const [operation, setOperation] = useState({ order: 1, repeat: 1 });
     const [ans, setAns] = useState({

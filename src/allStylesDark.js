@@ -14,7 +14,6 @@ export const colorDark = {
     white: "#ffffff",
     calText: "#191919",
     paceHolder: "#ffffff50",
-    calAns: "#ffffff80",
     aboutText: "#cfcfcf",
     headerIcon: "#ff7733",
     btnBg: "#ff7733",
@@ -22,8 +21,6 @@ export const colorDark = {
     abotDot: "#ff773380",
 };
 let color = colorDark;
-
-export { color };
 
 const styles = StyleSheet.create({
     homeMain: {

@@ -5,18 +5,16 @@ import {
     TouchableHighlight,
     ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { solveQuadraticEqu, solveQuadraticDec } from "../helpers/functions";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const QuadraticEqu = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [veriable, setVeriable] = useState({ a: "", b: "", c: "" });
     const [ans, setAns] = useState({
         inFraction: { rootOne: undefined, rootTwo: undefined },

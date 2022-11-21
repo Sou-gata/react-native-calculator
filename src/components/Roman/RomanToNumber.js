@@ -1,16 +1,20 @@
 import { View, Text, Pressable } from "react-native";
-import React, { useState } from "react";
-import styles, { color } from "../../allStyles";
 import btns from "../../helpers/romanCalBtn";
 import { romanToNumber } from "../../helpers/functions";
-
-const androidRipple = {
-    color: color.primary,
-    radius: 32.5,
-    borderless: true,
-};
+import React, { useEffect, useState } from "react";
+import ThemeSelector from "../../helpers/ThemeSelector";
 
 const RomanToNumber = () => {
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
+    const androidRipple = {
+        color: color.primary,
+        radius: 32.5,
+        borderless: true,
+    };
     const [btn, setBtn] = useState([]);
     const [ans, setAns] = useState("");
     const handleBtnPress = (button) => {
@@ -96,16 +100,47 @@ const RomanToNumber = () => {
                     let components = [];
                     for (let i = 0; i < btns.length; i++) {
                         let btn = btns[i];
-                        let com = (
-                            <Pressable
-                                onPress={() => handleBtnPress(btn)}
-                                style={btn.btnStyle}
-                                android_ripple={androidRipple}
-                                key={i}
-                            >
-                                <Text style={btn.txtStyle}>{btn.text}</Text>
-                            </Pressable>
-                        );
+                        let com;
+                        if (btn.text != "=") {
+                            com = (
+                                <Pressable
+                                    onPress={() => handleBtnPress(btn)}
+                                    style={btn.btnStyle}
+                                    android_ripple={androidRipple}
+                                    key={i}
+                                >
+                                    <Text
+                                        style={
+                                            btn.special
+                                                ? styles.romanCalText
+                                                : styles.calText
+                                        }
+                                    >
+                                        {btn.text}
+                                    </Text>
+                                </Pressable>
+                            );
+                        } else {
+                            com = (
+                                <Pressable
+                                    onPress={() => handleBtnPress(btn)}
+                                    style={styles.calEqual}
+                                    android_ripple={androidRipple}
+                                    key={i}
+                                >
+                                    <Text
+                                        style={{
+                                            fontSize: 24,
+                                            fontWeight: "bold",
+                                            color: color.btnTxt,
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        {btn.text}
+                                    </Text>
+                                </Pressable>
+                            );
+                        }
                         components.push(com);
                     }
                     return components;

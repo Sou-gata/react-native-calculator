@@ -1,16 +1,13 @@
-import { View, Text, TouchableHighlight, TextInput } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import React, { useState } from "react";
-
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const Discount = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [inputs, setInputs] = useState({
         price: "",
         discount: "",

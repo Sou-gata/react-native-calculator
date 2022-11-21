@@ -1,17 +1,15 @@
 import { View, Text, TextInput, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { equSolve } from "../helpers/functions";
-import { useSelector } from "react-redux";
-import allStylesLight, { colorWhite } from "../allStylesLight";
-import allStyleDark, { colorDark } from "../allStylesDark";
-let styles = allStyleDark;
-let color = colorDark;
+import ThemeSelector from "../helpers/ThemeSelector";
 
 const EquSolve = () => {
-    const theme = useSelector((state) => state.theme);
-    styles = theme.mode == "dark" ? allStyleDark : allStylesLight;
-    color = theme.mode == "dark" ? colorDark : colorWhite;
+    const [styles, setStyles] = useState({});
+    const [color, setColor] = useState({});
+    useEffect(() => {
+        ThemeSelector(setStyles, setColor);
+    }, []);
     const [val, setVal] = useState({
         a1: "",
         a2: "",
