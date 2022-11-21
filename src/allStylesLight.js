@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         fontSize: 33,
         color: color.white,
-        textAlign: "right",
+        textAlign: "center",
         backgroundColor: color.calText,
         flexShrink: 1,
     },
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         fontSize: 25,
         color: color.calAns,
-        textAlign: "right",
+        textAlign: "center",
         backgroundColor: color.calText,
     },
     flexRow: {

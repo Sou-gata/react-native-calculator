@@ -105,7 +105,7 @@ const RomanToNumber = () => {
                             com = (
                                 <Pressable
                                     onPress={() => handleBtnPress(btn)}
-                                    style={btn.btnStyle}
+                                    style={styles.calBtn}
                                     android_ripple={androidRipple}
                                     key={i}
                                 >

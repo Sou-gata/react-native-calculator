@@ -1,5 +1,5 @@
 import { View, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ThemeSelector from "../helpers/ThemeSelector";
 
 const Discount = () => {
