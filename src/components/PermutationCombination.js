@@ -86,6 +86,8 @@ const Permutation = () => {
                         style={styles.btn}
                         onPress={() => {
                             let ans = permutationCombination(inputs, operation);
+                            if (ans.ans == "NaN" || ans.ans == "Infinity")
+                                ans.ans = "Can't Calculate";
                             setAns(ans);
                         }}
                     >

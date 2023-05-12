@@ -11,8 +11,8 @@ import calBtns from "../helpers/calBtns";
 
 export function devide(numberA, numberB) {
     let numbers = [];
-    numbers[0] = numberA + "";
-    numbers[1] = numberB + "";
+    numbers[0] = numberA.toString();
+    numbers[1] = numberB.toString();
     let result = "0";
     let remainder = numberA;
     let multipleRuselts = [];
@@ -22,7 +22,7 @@ export function devide(numberA, numberB) {
     let spacingInfo = [];
     let a = parseInt(numbers[0]);
     let b = parseInt(numbers[1]);
-    if (b > a) {
+    if (b > a || isNaN(a) || isNaN(b)) {
         return;
     }
     numbers[0] = numbers[0].split("");
@@ -62,11 +62,13 @@ export function devide(numberA, numberB) {
     result = parseInt(result);
     for (let i = 0; i < remainderArr.length; i++) {
         let space =
-            (subResults[i] + "").length - (multipleRuselts[i] + "").length;
+            subResults[i].toString().length -
+            multipleRuselts[i].toString().length;
 
         spacingArr.push(space);
         space =
-            (multipleRuselts[i] + "").length - (remainderArr[i] + "").length;
+            multipleRuselts[i].toString().length -
+            remainderArr[i].toString().length;
         spacingArr.push(space);
     }
     for (let i = 1; i < spacingArr.length; i++) {
@@ -91,8 +93,8 @@ export function devide(numberA, numberB) {
 
 export function multiple(numberA, numberB) {
     let numbers = [];
-    numbers[0] = numberA + "";
-    numbers[1] = numberB + "";
+    numbers[0] = numberA.toString();
+    numbers[1] = numberB.toString();
     let results = [];
     let ans = 0;
     numbers[1] = numbers[1].split("");
@@ -106,9 +108,18 @@ export function multiple(numberA, numberB) {
     for (let i = 0; i < numbers[1].length; i++) {
         results[i] = numbers[0] * numbers[1][i];
         ans += results[i];
+        let blakMultiplyFix;
+        if (results[i] == 0) {
+            if (i == 0) blakMultiplyFix = "";
+            else blakMultiplyFix = "0";
+            for (let x = 0; x < numbers[0].length; x++) {
+                blakMultiplyFix += "0";
+            }
+            results[i] = blakMultiplyFix;
+        }
     }
     for (let i = 0; i < results.length; i++) {
-        results[i] = results[i] + "";
+        results[i] = results[i].toString();
         let l = results[i].length;
         let temp = results[i].split("");
         for (let j = 0; j < i; j++) {
@@ -120,6 +131,7 @@ export function multiple(numberA, numberB) {
         }
         results[i] = tempStr;
     }
+
     return { results, ans, numberA, numberB };
 }
 
@@ -162,7 +174,7 @@ function maxDigitAfterPoint(numbersArr) {
     let numberSet = numbersArr;
     let maxDigit = 0;
     for (let i = 0; i < numberSet.length; i++) {
-        let temp = numberSet[i] + "";
+        let temp = numberSet[i].toString();
         temp = temp.split(".");
         if (temp.length > 1) {
             let lengthAfter = temp[1].length;
@@ -254,7 +266,7 @@ export function inputNumbers(str) {
 
 export function celToFar(num) {
     let f = 1.8 * parseFloat(num) + 32;
-    f = f.toFixed(3) + "";
+    f = f.toFixed(3).toString();
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -262,7 +274,7 @@ export function celToFar(num) {
 
 export function celToKal(num) {
     let k = parseFloat(num) + 273.15;
-    k = k.toFixed(3) + "";
+    k = k.toFixed(3).toString();
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -270,7 +282,7 @@ export function celToKal(num) {
 
 export function celToRan(num) {
     let r = parseFloat(num) * 1.8 + 491.67;
-    r = r.toFixed(3) + "";
+    r = r.toFixed(3).toString();
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -278,7 +290,7 @@ export function celToRan(num) {
 
 export function farToCel(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
-    c = c.toFixed(3) + "";
+    c = c.toFixed(3).toString();
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -286,7 +298,7 @@ export function farToCel(num) {
 
 export function farToRan(num) {
     let r = parseFloat(num) - 459.67;
-    r = r.toFixed(3) + "";
+    r = r.toFixed(3).toString();
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -295,7 +307,7 @@ export function farToRan(num) {
 export function farToKal(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
     let k = c + 273.15;
-    k = k.toFixed(3) + "";
+    k = k.toFixed(3).toString();
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -304,7 +316,7 @@ export function farToKal(num) {
 export function ranToCel(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
-    c = c.toFixed(3) + "";
+    c = c.toFixed(3).toString();
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -312,7 +324,7 @@ export function ranToCel(num) {
 
 export function ranToFar(num) {
     let f = parseFloat(num) + 459.67;
-    f = f.toFixed(3) + "";
+    f = f.toFixed(3).toString();
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -322,7 +334,7 @@ export function ranToKal(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
     let k = c + 273.15;
-    k = k.toFixed(3) + "";
+    k = k.toFixed(3).toString();
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -330,7 +342,7 @@ export function ranToKal(num) {
 
 export function kalToCal(num) {
     let c = parseFloat(num) - 273.15;
-    c = c.toFixed(3) + "";
+    c = c.toFixed(3).toString();
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -339,7 +351,7 @@ export function kalToCal(num) {
 export function kalToFar(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
-    f = f.toFixed(3) + "";
+    f = f.toFixed(3).toString();
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -349,7 +361,7 @@ export function kalToRan(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
     let r = f - 459.67;
-    r = r.toFixed(3) + "";
+    r = r.toFixed(3).toString();
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -448,7 +460,7 @@ export function hexToBin(hexVal) {
 }
 
 export function binToHex(binaryNum) {
-    let parts = binaryNum + "";
+    let parts = binaryNum.toString();
     parts = parts.split(".");
     if (parts.length == 1) {
         let digits = parts[0].split("");
@@ -517,7 +529,7 @@ export function binToHex(binaryNum) {
 }
 
 export function binToOct(binaryNum) {
-    let parts = binaryNum + "";
+    let parts = binaryNum.toString();
     parts = parts.split(".");
     if (parts.length == 1) {
         let digits = parts[0].split("");
@@ -585,7 +597,7 @@ export function binToOct(binaryNum) {
 }
 
 export function octToBin(octVal) {
-    let parts = octVal + "";
+    let parts = octVal.toString();
     parts = parts.split(".");
     if (parts.length == 1) {
         let digits = parts[0].split("");
@@ -605,7 +617,7 @@ export function octToBin(octVal) {
 
 export function pointRemove(val) {
     let ans;
-    let number = val + "";
+    let number = val.toString();
     number = number.split("");
     let lastDig = number[number.length - 1];
     if (lastDig == ".") {
@@ -722,9 +734,9 @@ function simplifyFraction(numerator, denominator) {
         deno = deno / hcf;
     }
     if (nume == 0) {
-        root = 0 + "";
+        root = "0";
     } else if (deno == 1) {
-        root = nume + "";
+        root = nume.toString();
     } else {
         root = `${nume}/${deno}`;
     }
@@ -734,18 +746,18 @@ function simplifyFraction(numerator, denominator) {
 function calculateRoot(number) {
     let num = parseFloat(number);
     let hasDecimal = false;
-    let temp = num + "";
+    let temp = num.toString();
     temp = temp.split(".");
     if (temp.length > 1) hasDecimal = true;
     if (hasDecimal) {
         return {
-            ans: parseFloat(Math.sqrt(num).toFixed(4)) + "",
+            ans: parseFloat(Math.sqrt(num).toFixed(4)).toString(),
             hasRoot: false,
         };
     } else {
         let rootOver = Math.sqrt(num);
         if (rootOver == Math.floor(rootOver)) {
-            return { ans: Math.sqrt(num) + "", hasRoot: false };
+            return { ans: Math.sqrt(num).toString(), hasRoot: false };
         } else {
             let maxSqureFactor = 1;
             for (let i = 1; i <= Math.sqrt(num); i++) {
@@ -765,7 +777,7 @@ function calculateRoot(number) {
 }
 
 function simplifyAns(fstPart, secPart, deno) {
-    let secondPart = (secPart + "").split("√");
+    let secondPart = secPart.toString().split("√");
     let hasTwoPart = false;
     let secPartTwo = "";
     if (secondPart.length > 1) {
@@ -793,9 +805,9 @@ function simplifyAns(fstPart, secPart, deno) {
         }
     }
     return {
-        partOne: partOne + "",
-        partTwo: partTwo + "",
-        denominator: denominator + "",
+        partOne: partOne.toString(),
+        partTwo: partTwo.toString(),
+        denominator: denominator.toString(),
     };
 }
 
@@ -922,7 +934,7 @@ export function solveQuadraticDec(a, b, c) {
         }
         d = Math.sqrt(d);
         let partOne = parseFloat((-b / (2 * a)).toFixed(4));
-        let secondPart = parseFloat((d / (2 * a)).toFixed(4) + "");
+        let secondPart = parseFloat((d / (2 * a)).toFixed(4).toString());
         if (!isFinite(partOne) || !isFinite(secondPart)) {
             rootOne = undefined;
             rootTwo = undefined;
@@ -1042,18 +1054,19 @@ export function bracManage(str) {
     }
     return newStr;
 }
+
 function gamma(z) {
     let ansOne = Math.sqrt((2 * Math.PI) / z);
     let ansTwo = Math.pow((1 / Math.E) * (z + 1 / (12 * z - 1 / (10 * z))), z);
     let ans = ansOne * ansTwo;
-    ans = ans.toFixed(4) + "";
+    ans = ans.toFixed(4).toString();
     ans = parseFloat(ans);
     return ans;
 }
 
 export function fact(n) {
     let isDecimal = false;
-    let temp = n + "";
+    let temp = n.toString();
     temp = temp.split(".");
     if (temp.length > 1) isDecimal = true;
     let num = parseFloat(n);
@@ -1116,7 +1129,7 @@ export function permutationCombination({ n, r }, { order, repeat }) {
     let valueNu = "";
     let valueDe = "";
     let ans = 0;
-    if (n < r || n <= 0 || r <= 0 || n + r > 500) {
+    if (n < r || n <= 0 || r <= 0) {
         invalid = true;
     }
     if (!invalid) {
@@ -1125,27 +1138,26 @@ export function permutationCombination({ n, r }, { order, repeat }) {
             deFormula = undefined;
             valueNu = `${n}^${r}`;
             valueDe = undefined;
-            ans = Math.pow(n, r);
+            ans = expToPow(Math.pow(n, r));
         } else if (order == 1 && repeat == 2) {
             nuFormula = "n!";
             deFormula = "(n-r)!";
             valueNu = `${n}!`;
             valueDe = `(${n}-${r})!`;
-            ans = fact(n) / fact(n - r);
+            ans = expToPow(fact(n) / fact(n - r));
         } else if (order == 2 && repeat == 1) {
             nuFormula = "(n+r-1)!";
             deFormula = "r!(n-1)!";
             valueNu = `(${n}+${r}-1)!`;
             valueDe = `${r}!(${n}-1)!`;
-            ans = fact(n + r - 1) / (fact(r) * fact(n - 1));
+            ans = expToPow((fact(n + r - 1) / fact(r)) * (1 / fact(n - 1)));
         } else if (order == 2 && repeat == 2) {
             nuFormula = "n!";
             deFormula = "r!(n-r)!";
             valueNu = `${n}!`;
             valueDe = `${r}!(${n}-${r})!`;
-            ans = fact(n) / (fact(r) * fact(n - r));
+            ans = expToPow((fact(n) / fact(r)) * (1 / fact(n - r)));
         }
-        ans = isNaN(ans) ? "Can't calculate" : ans.toString();
         return { nuFormula, deFormula, ans, valueNu, valueDe };
     } else {
         return {
@@ -1178,6 +1190,7 @@ function maxRepeating(str) {
     if (count == 4 && res == "M") valid = true;
     return valid;
 }
+
 function validateRoman(string) {
     let valid = true;
     let str = string;
@@ -1197,9 +1210,9 @@ function validateRoman(string) {
             let pre = romanToNumeral[strArr[i - 1]];
             let current = romanToNumeral[strArr[i]];
             if (pre <= current) {
-                let currDegit = (current + "").length;
-                let preDegit = (pre + "").length;
-                let preFstDgt = parseInt((pre + "").charAt(0));
+                let currDegit = current.toString().length;
+                let preDegit = pre.toString().length;
+                let preFstDgt = parseInt(pre.toString().charAt(0));
                 if (preFstDgt != 1) {
                     valid = false;
                     break;
@@ -1214,6 +1227,7 @@ function validateRoman(string) {
     }
     return valid;
 }
+
 export function romanToNumber(arr) {
     let str = "";
     for (let i = 0; i < arr.length; i++) {
@@ -1234,4 +1248,17 @@ export function romanToNumber(arr) {
         if (num > 3999999) num = undefined;
         return num;
     } else return undefined;
+}
+
+function expToPow(number) {
+    let num = number.toString();
+    num = num.split("e");
+    if (num.length == 1) {
+        return number.toString();
+    } else {
+        let partOne = parseFloat(num[0]).toFixed(3);
+        let pow = parseFloat(num[1]);
+        let ans = `${partOne}×10^${pow}`;
+        return ans;
+    }
 }

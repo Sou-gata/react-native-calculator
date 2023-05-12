@@ -81,8 +81,11 @@ const FractionSimplify = () => {
                 </TouchableHighlight>
             </View>
             <View
-                style={[styles.ansDiv, styles.flexRow]}
-                opacity={opacity.full}
+                style={
+                    opacity.full
+                        ? [styles.ansDiv, styles.flexRow]
+                        : { display: "none" }
+                }
             >
                 <View>
                     <Text style={styles.textStyle}>{ans.oriNu}</Text>

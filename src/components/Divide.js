@@ -85,8 +85,11 @@ const Divide = () => {
                     <View style={styles.divideMath}>
                         <Text style={styles.mathText}>{divideAns.numberB}</Text>
                         <View
-                            opacity={vLine}
-                            style={styles.varticleLine}
+                            style={
+                                vLine
+                                    ? styles.varticleLine
+                                    : { display: "none" }
+                            }
                         ></View>
                         <View>
                             <Text style={styles.mathText}>
@@ -140,8 +143,11 @@ const Divide = () => {
                             })()}
                         </View>
                         <View
-                            opacity={vLine}
-                            style={styles.varticleLine}
+                            style={
+                                vLine
+                                    ? styles.varticleLine
+                                    : { display: "none" }
+                            }
                         ></View>
                         <Text style={styles.mathText}>{divideAns.result}</Text>
                     </View>

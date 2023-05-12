@@ -28,6 +28,7 @@ const Multiply = () => {
     let [fontsLoaded] = useFonts({
         RobotoMono_400Regular,
     });
+
     const calculatePress = () => {
         let validateA = decCheck(text.a);
         let validateB = decCheck(text.b);
@@ -78,49 +79,63 @@ const Multiply = () => {
                     </TouchableOpacity>
                 </View>
                 <ScrollView overScrollMode="never" style={{ marginBottom: 20 }}>
-                    <View opacity={opacity} style={styles.math}>
+                    <View style={opacity ? styles.math : { display: "none" }}>
                         <View style={styles.mathContainer}>
-                            <Text style={styles.mathText}>
-                                {"  "}
-                                {ans.numberA}
-                            </Text>
-                            <Text style={styles.mathText}>x {ans.numberB}</Text>
+                            <View style={{ alignItems: "flex-end" }}>
+                                <Text style={styles.mathText}>
+                                    {ans.numberA}
+                                </Text>
+                            </View>
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Text style={styles.mathText}>x</Text>
+                                <Text style={styles.mathText}>
+                                    {ans.numberB}
+                                </Text>
+                            </View>
                             <View style={styles.hrLine}></View>
-                            {(() => {
-                                let element = [];
-
-                                if (ans.results) {
-                                    let key = 1;
-                                    for (
-                                        let i = 0;
-                                        i < ans.results.length;
-                                        i++
-                                    ) {
-                                        let innerText = "";
-                                        let space = "";
+                            <View style={{ alignItems: "flex-end" }}>
+                                {(() => {
+                                    let element = [];
+                                    if (ans.results) {
+                                        let key = 1;
                                         for (
-                                            let j = 0;
-                                            j < ans.results.length - i - 1;
-                                            j++
+                                            let i = 0;
+                                            i < ans.results.length;
+                                            i++
                                         ) {
-                                            space += " ";
+                                            let innerText = "";
+                                            let space = "";
+                                            for (
+                                                let j = 0;
+                                                j < ans.results.length - i - 1;
+                                                j++
+                                            ) {
+                                                space += " ";
+                                            }
+                                            innerText += `${space}${ans.results[i]}`;
+                                            key++;
+                                            element.push(
+                                                <Text
+                                                    key={key}
+                                                    style={styles.mathText}
+                                                >
+                                                    {innerText}
+                                                </Text>
+                                            );
                                         }
-                                        innerText += `${space}${ans.results[i]}`;
-                                        key++;
-                                        element.push(
-                                            <Text
-                                                key={key}
-                                                style={styles.mathText}
-                                            >
-                                                {innerText}
-                                            </Text>
-                                        );
                                     }
-                                }
-                                return element;
-                            })()}
+                                    return element;
+                                })()}
+                            </View>
                             <View style={styles.hrLine}></View>
-                            <Text style={styles.mathText}>{ans.ans}</Text>
+                            <View style={{ alignItems: "flex-end" }}>
+                                <Text style={styles.mathText}>{ans.ans}</Text>
+                            </View>
                         </View>
                     </View>
                 </ScrollView>

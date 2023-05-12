@@ -2,7 +2,7 @@
     "expo": {
         "name": "Calculator",
         "slug": "Sougata",
-        "version": "1.2.8",
+        "version": "1.2.9",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "dark",
@@ -12,7 +12,8 @@
             "backgroundColor": "#111111"
         },
         "updates": {
-            "fallbackToCacheTimeout": 0
+            "fallbackToCacheTimeout": 0,
+            "url": "https://u.expo.dev/3665b1a7-58af-40ee-bcca-d9c1cc4ea9dc"
         },
         "assetBundlePatterns": ["**/*"],
         "ios": {
@@ -32,6 +33,9 @@
             "eas": {
                 "projectId": "3665b1a7-58af-40ee-bcca-d9c1cc4ea9dc"
             }
+        },
+        "runtimeVersion": {
+            "policy": "sdkVersion"
         }
     }
 }

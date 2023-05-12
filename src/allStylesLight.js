@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.white,
         marginVertical: 2,
         marginTop: 7,
+        width: wp("100%"),
     },
     varticleLine: {
         width: 2,

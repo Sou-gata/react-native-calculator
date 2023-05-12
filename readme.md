@@ -17,6 +17,7 @@ yarn install
 Step 2:
 
 ```bash
+npm install -g eas-cli
 eas build -p android --profile apk
 
 or

@@ -1,11 +1,4 @@
-import {
-    View,
-    Text,
-    Pressable,
-    Image,
-    FlatList,
-    ScrollView,
-} from "react-native";
+import { View, Text, Pressable, Image, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
     useFonts,
