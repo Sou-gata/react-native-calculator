@@ -1,7 +1,11 @@
 const info = [
     {
         ver: "1.2.9",
-        changes: ["fix blank multiply issue", "minor improvement"],
+        changes: [
+            "fix blank multiply issue",
+            "fix square radio button",
+            "minor improvement",
+        ],
     },
     {
         ver: "1.2.8",

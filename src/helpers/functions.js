@@ -11,10 +11,10 @@ import calBtns from "../helpers/calBtns";
 
 export function devide(numberA, numberB) {
     let numbers = [];
-    numbers[0] = numberA.toString();
-    numbers[1] = numberB.toString();
+    numbers[0] = convertToNumber(numberA).toString();
+    numbers[1] = convertToNumber(numberB).toString();
     let result = "0";
-    let remainder = numberA;
+    let remainder = numbers[0];
     let multipleRuselts = [];
     let subResults = [];
     let remainderArr = [];
@@ -93,8 +93,8 @@ export function devide(numberA, numberB) {
 
 export function multiple(numberA, numberB) {
     let numbers = [];
-    numbers[0] = numberA.toString();
-    numbers[1] = numberB.toString();
+    numbers[0] = convertToNumber(numberA).toString();
+    numbers[1] = convertToNumber(numberB).toString();
     let results = [];
     let ans = 0;
     numbers[1] = numbers[1].split("");
@@ -136,8 +136,7 @@ export function multiple(numberA, numberB) {
 }
 
 export function factors(number) {
-    let num = number;
-    num = parseInt(num);
+    let num = convertToNumber(number);
     let facts = [];
     for (let i = 0; i <= num; i++) {
         if (num % i == 0) {
@@ -152,7 +151,7 @@ export function factors(number) {
             str += ", ";
         }
     }
-    return { str, number };
+    return { str, number: num };
 }
 
 export function checkLcmHcfNum(str) {
@@ -1261,4 +1260,14 @@ function expToPow(number) {
         let ans = `${partOne}×10^${pow}`;
         return ans;
     }
+}
+
+function convertToNumber(number) {
+    let num = number.toString();
+    num = num.split(" ")[0];
+    num = num.split("-")[0];
+    num = num.split(".")[0];
+    num = num.split(",")[0];
+    num = parseInt(num);
+    return num;
 }

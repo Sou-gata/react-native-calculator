@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import ThemeSelector from "../helpers/ThemeSelector";
 
 export default function RadioButton({ data, onSelect, selected, style }) {
@@ -26,17 +26,6 @@ export default function RadioButton({ data, onSelect, selected, style }) {
             justifyContent: "center",
             alignItems: "center",
         },
-        innerSelecter: {
-            width: 10,
-            height: 10,
-            borderRadius: 10,
-            backgroundColor: color.primary,
-        },
-        innerUnselected: {
-            width: 12,
-            height: 12,
-            borderRadius: 6,
-        },
     });
     const [userOption, setUserOption] = useState(selected);
     const selectHandler = (value) => {
@@ -53,15 +42,17 @@ export default function RadioButton({ data, onSelect, selected, style }) {
                         key={index}
                     >
                         <View style={styles.outer}>
-                            <View
-                                style={
-                                    item.value == userOption
-                                        ? styles.innerSelecter
-                                        : styles.innerUnselected
-                                }
-                            ></View>
+                            {item.value == userOption && (
+                                <Image
+                                    style={{
+                                        width: 10,
+                                        height: 10,
+                                        tintColor: color.primary,
+                                    }}
+                                    source={require("../../assets/icons/circle.png")}
+                                />
+                            )}
                         </View>
-
                         <Text style={styles.option}> {item.text}</Text>
                     </Pressable>
                 );

@@ -24,6 +24,7 @@ const Hcf = () => {
                     autoFocus={true}
                     placeholder="10 20 30"
                     placeholderTextColor={color.paceHolder}
+                    keyboardType="decimal-pad"
                 />
                 <TouchableOpacity
                     style={styles.btn}

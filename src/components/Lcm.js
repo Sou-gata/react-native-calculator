@@ -24,6 +24,7 @@ const Lcm = () => {
                     value={text}
                     autoFocus={true}
                     placeholder="10 20 30"
+                    keyboardType="decimal-pad"
                     placeholderTextColor={color.paceHolder}
                 />
                 <TouchableOpacity
@@ -41,6 +42,14 @@ const Lcm = () => {
                 >
                     <Text style={styles.btnText}>Calculate</Text>
                 </TouchableOpacity>
+                {/* <TouchableOpacity
+                    style={styles.btn}
+                    onPress={() => {
+                        onChangeText(text + " ");
+                    }}
+                >
+                    <Text style={styles.btnText}>Space</Text>
+                </TouchableOpacity> */}
             </View>
             <View style={styles.ansDiv} opacity={opacity}>
                 <Text style={styles.textStyle}>LCM of {input} is</Text>
