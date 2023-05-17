@@ -22,10 +22,6 @@ Now finally type this commend to start build
 
 ```
   eas build -p android --profile apk
-
-                    or
-
-  expo build:android -t apk
 ```
 
 Now wait for sometime while build is running. It can take upto 20 min to complete the build.

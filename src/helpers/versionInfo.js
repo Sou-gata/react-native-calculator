@@ -1,5 +1,16 @@
 const info = [
     {
+        ver: "1.3.0",
+        changes: [
+            "new ui",
+            "less use of extra packages",
+            "update dependancies",
+            "smooth theme transition",
+            "apk sizereduced",
+            "bugs fix",
+        ],
+    },
+    {
         ver: "1.2.9",
         changes: [
             "fix blank multiply issue",
