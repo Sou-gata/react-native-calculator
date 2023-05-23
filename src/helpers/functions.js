@@ -158,13 +158,16 @@ export function checkLcmHcfNum(str) {
     let numberSet = str;
     numberSet = numberSet.split(" ");
     let valid = true;
+    let hasZero = false;
     if (numberSet.length < 2) valid = false;
     for (let i = 0; i < numberSet.length; i++) {
         numberSet[i] = parseFloat(numberSet[i]);
+        if (numberSet[i] == 0) hasZero = true;
         if (isNaN(numberSet[i])) {
             valid = false;
         }
     }
+    if (hasZero) return false;
     if (valid) return numberSet;
     else return valid;
 }
@@ -183,71 +186,87 @@ function maxDigitAfterPoint(numbersArr) {
     return maxDigit;
 }
 
-export function lcm(numbersArr) {
+export function hasDecimalInArr(arr) {
     let hasPoint = false;
-    let numberSet = numbersArr;
-    let newNumberSet = [];
-    for (let i = 0; i < numberSet.length; i++) {
-        numberSet[i] = Math.abs(parseFloat(numberSet[i]));
-        if (numberSet[i] != Math.floor(numberSet[i])) {
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = Math.abs(parseFloat(arr[i]));
+        if (arr[i] != Math.floor(arr[i])) {
             hasPoint = true;
         }
     }
-    if (!hasPoint) {
-        let Lcm = 1;
-        let lcmTemp = numberSet[0];
-        for (let i = 0; i < numberSet.length; i++) {
-            while (true) {
-                if (Lcm % numberSet[i] == 0 && Lcm % lcmTemp == 0) {
-                    lcmTemp = Lcm;
-                    break;
-                }
-                Lcm++;
+    return hasPoint;
+}
+
+export function lcm(numbersArr) {
+    let numberSet = [...numbersArr];
+    let Lcm = 1;
+    let lcmTemp = numberSet[0];
+    for (let i = 0; i < numberSet.length; i++) {
+        while (true) {
+            if (Lcm % numberSet[i] == 0 && Lcm % lcmTemp == 0) {
+                lcmTemp = Lcm;
+                break;
             }
+            Lcm++;
         }
-        return Lcm;
-    } else {
-        let maxDigit = maxDigitAfterPoint(numberSet);
-        for (let i = 0; i < numberSet.length; i++) {
-            newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
-        }
-        let Lcm = lcm(newNumberSet);
-        Lcm = Lcm / Math.pow(10, maxDigit);
-        return Lcm;
     }
+    return Lcm;
+}
+
+export function decimalLcm(numbersArr) {
+    let numberSet = [...numbersArr];
+    let newNumberSet = [];
+    let maxDigit = maxDigitAfterPoint(numberSet);
+    for (let i = 0; i < numberSet.length; i++) {
+        newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
+    }
+    let Lcm = lcm(newNumberSet);
+    let nuLcm = Lcm;
+    Lcm = Lcm / Math.pow(10, maxDigit);
+
+    return {
+        numinator: newNumberSet.toString(),
+        denominator: Math.pow(10, maxDigit).toString(),
+        nuLcm,
+        lcm: Lcm,
+    };
 }
 
 export function gcd(numbersArr) {
-    let fractionHcf = false;
-    let numberSet = numbersArr;
+    let numberSet = [...numbersArr];
+    let gcd = numberSet[0];
     for (let i = 0; i < numberSet.length; i++) {
-        numberSet[i] = Math.abs(parseFloat(numberSet[i]));
-        if (numberSet[i] != Math.floor(numberSet[i])) {
-            fractionHcf = true;
-        }
-    }
-    if (!fractionHcf) {
-        let gcd = numberSet[0];
-        for (let i = 0; i < numberSet.length; i++) {
-            let gcdTemp = gcd;
-            for (let j = 1; j <= gcdTemp; j++) {
-                if (numberSet[i] % j == 0 && gcdTemp % j == 0) {
-                    gcd = j;
-                }
+        let gcdTemp = gcd;
+        for (let j = 1; j <= gcdTemp; j++) {
+            if (numberSet[i] % j == 0 && gcdTemp % j == 0) {
+                gcd = j;
             }
         }
-        gcd = gcd == 0 ? 1 : gcd;
-        return gcd;
-    } else {
-        let maxDigit = maxDigitAfterPoint(numberSet);
-        let newNumberSet = [];
-        for (let i = 0; i < numberSet.length; i++) {
-            newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
-        }
-        let hcf = gcd(newNumberSet);
-        hcf = hcf / Math.pow(10, maxDigit);
-        return hcf;
     }
+    gcd = gcd == 0 ? 1 : gcd;
+    return gcd;
+}
+
+export function decimalHcf(numbersArr) {
+    let numberSet = [...numbersArr];
+    let maxDigit = maxDigitAfterPoint(numberSet);
+    let newNumberSet = [];
+    for (let i = 0; i < numberSet.length; i++) {
+        newNumberSet[i] = numberSet[i] * Math.pow(10, maxDigit);
+    }
+    let hcf = gcd(newNumberSet);
+    let nuHcf = hcf;
+    hcf = hcf / Math.pow(10, maxDigit);
+    let numinator = "";
+    let denominator = Math.pow(10, maxDigit);
+    for (let i = 0; i < newNumberSet.length; i++) {
+        if (i < newNumberSet.length - 1) {
+            numinator += newNumberSet[i] + ", ";
+        } else {
+            numinator += newNumberSet[i];
+        }
+    }
+    return { hcf, numinator, denominator, nuHcf };
 }
 
 export function inputNumbers(str) {
@@ -1270,4 +1289,115 @@ function convertToNumber(number) {
     num = num.split(",")[0];
     num = parseInt(num);
     return num;
+}
+
+function factorize(number) {
+    let num = parseInt(number);
+    if (num == 0) return [0, 1];
+    let factors = [];
+    let original = num;
+    for (let i = 2; i <= original; i++) {
+        for (let j = 2; j <= i; j++) {
+            if (num % j == 0) {
+                factors.push(j);
+                num = num / j;
+                break;
+            }
+        }
+        if (num == 1) break;
+    }
+    factors.unshift(1);
+    return factors;
+}
+
+export function factorizeHcf(arr) {
+    let factorsAll = [];
+    for (let i = 0; i < arr.length; i++) {
+        let num = parseInt(arr[i]);
+        num = factorize(num);
+        factorsAll.push(num);
+    }
+    let hcf = gcd(arr);
+    hcf = factorize(hcf);
+    return { factors: factorsAll, hcf, numbers: arr };
+}
+
+export function factorLcm(numbersArr) {
+    let numArr = [...numbersArr];
+    let min = smallInArr(numArr);
+    let divisiors = [];
+    let dividends = [];
+    let i = 2;
+    while (true) {
+        let devided = 0;
+        for (let j = 0; j < numArr.length; j++) {
+            if (numArr[j] % i == 0) devided++;
+        }
+        if (devided >= 2) {
+            for (let j = 0; j < numArr.length; j++) {
+                if (numArr[j] % i == 0) {
+                    numArr[j] /= i;
+                }
+            }
+            divisiors.push(i);
+        } else i++;
+        if (i > min) break;
+    }
+
+    numArr = [...numbersArr];
+    for (let i = 0; i < divisiors.length; i++) {
+        for (let j = 0; j < numArr.length; j++) {
+            if (numArr[j] % divisiors[i] == 0) {
+                numArr[j] /= divisiors[i];
+            }
+        }
+        dividends.push([...numArr]);
+    }
+    dividends.unshift(numbersArr);
+    if (divisiors.length == 0) {
+        divisiors = [1];
+        dividends.unshift(numbersArr);
+    }
+    divisiors = adjustSpacing(divisiors);
+    let factors = [...divisiors, ...dividends[dividends.length - 1]];
+    for (let i = factors.length - 1; i >= 0; i--) {
+        factors[i] = parseInt(factors[i]);
+        if (factors[i] == 1) {
+            factors.splice(i, 1);
+        }
+    }
+    // factors.reverse();
+    return { divisiors, dividends, factors };
+}
+function adjustSpacing(array) {
+    let max = largeInArr(array);
+    max = max.toString().length;
+    let newArr = [...array];
+    for (let i = 0; i < newArr.length; i++) {
+        newArr[i] = newArr[i].toString();
+        let length = newArr[i].length;
+        let required = Math.abs(max - length);
+        for (let j = 0; j < required; j++) {
+            newArr[i] = " " + newArr[i];
+        }
+    }
+    return newArr;
+}
+function smallInArr(array) {
+    if (array.length == 0) return undefined;
+    let min = parseInt(array[0]);
+    for (let i = 0; i < array.length; i++) {
+        array[i] = parseInt(array[i]);
+        min = Math.min(min, array[i]);
+    }
+    return min;
+}
+export function largeInArr(array) {
+    if (array.length == 0) return undefined;
+    let max = parseInt(array[0]);
+    for (let i = 0; i < array.length; i++) {
+        array[i] = parseInt(array[i]);
+        max = Math.max(max, array[i]);
+    }
+    return max;
 }

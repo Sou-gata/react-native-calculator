@@ -32,6 +32,7 @@ Now wait for sometime while build is running. It can take upto 20 min to complet
 -   Scientific calculator
 -   Full process of multiply
 -   Full process of division
+-   Full process of LCM & HCF
 -   Area, volume, length, waight, power & temparature converter
 -   Permutation, combination, equation solve
 -   GST, discount & age calculator
@@ -53,3 +54,5 @@ For support, email sougatatalukdar77@gmail.com.
 [![twitter](https://img.shields.io/badge/facebook-0165E1?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/sougata76)
 
 ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/sou-gata/react-native-calculator?logo=v.1.2.9)
+
+<!-- ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/badge/version-v1.3.1-blue) -->

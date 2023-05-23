@@ -1,5 +1,9 @@
 const info = [
     {
+        ver: "1.3.1",
+        changes: ["add details LCM and HCF", "minor improvement", "bugs fix"],
+    },
+    {
         ver: "1.3.0",
         changes: [
             "new ui",
