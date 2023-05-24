@@ -1291,7 +1291,7 @@ function convertToNumber(number) {
     return num;
 }
 
-function factorize(number) {
+export function factorize(number) {
     let num = parseInt(number);
     if (num == 0) return [0, 1];
     let factors = [];
@@ -1319,7 +1319,8 @@ export function factorizeHcf(arr) {
     }
     let hcf = gcd(arr);
     hcf = factorize(hcf);
-    return { factors: factorsAll, hcf, numbers: arr };
+    let numbers = adjustSpacing([...arr]);
+    return { factors: factorsAll, hcf, numbers };
 }
 
 export function factorLcm(numbersArr) {
@@ -1366,7 +1367,6 @@ export function factorLcm(numbersArr) {
             factors.splice(i, 1);
         }
     }
-    // factors.reverse();
     return { divisiors, dividends, factors };
 }
 function adjustSpacing(array) {

@@ -132,60 +132,82 @@ const LCM = () => {
                 }}
             >
                 <ScrollView>
-                    <View>
-                        {(() => {
-                            let com = [];
-                            for (let i = 0; i < details.dividends.length; i++) {
-                                const item = details.dividends[i];
-                                let ele;
-                                if (i < details.dividends.length - 1) {
-                                    ele = (
-                                        <View
-                                            key={i}
-                                            style={{ flexDirection: "row" }}
-                                        >
-                                            <Text style={textStyleThree}>
-                                                {details.divisiors[i]}
-                                            </Text>
-                                            <Text style={textStyleTwo}>
-                                                {item.toString()}
-                                            </Text>
-                                        </View>
-                                    );
-                                } else {
-                                    ele = (
-                                        <View
-                                            key={i}
-                                            style={{ flexDirection: "row" }}
-                                        >
-                                            <Text style={textStyleThree}>
-                                                {gap}
-                                            </Text>
-                                            <Text style={textStyleThree}>
-                                                {item.toString()}
-                                            </Text>
-                                        </View>
-                                    );
+                    <View
+                        style={{
+                            alignItems: "center",
+                        }}
+                    >
+                        <View>
+                            {(() => {
+                                let com = [];
+                                for (
+                                    let i = 0;
+                                    i < details.dividends.length;
+                                    i++
+                                ) {
+                                    const item = details.dividends[i];
+                                    let ele;
+                                    if (i < details.dividends.length - 1) {
+                                        ele = (
+                                            <View
+                                                key={i}
+                                                style={{ flexDirection: "row" }}
+                                            >
+                                                <Text style={textStyleThree}>
+                                                    {details.divisiors[i]}
+                                                </Text>
+                                                <Text style={textStyleTwo}>
+                                                    {item.toString()}
+                                                </Text>
+                                            </View>
+                                        );
+                                    } else {
+                                        ele = (
+                                            <View
+                                                key={i}
+                                                style={{ flexDirection: "row" }}
+                                            >
+                                                <Text style={textStyleThree}>
+                                                    {gap}
+                                                </Text>
+                                                <Text style={textStyleThree}>
+                                                    {item.toString()}
+                                                </Text>
+                                            </View>
+                                        );
+                                    }
+                                    com.push(ele);
                                 }
-                                com.push(ele);
-                            }
-                            return com;
-                        })()}
+                                return com;
+                            })()}
+                        </View>
                     </View>
                     <View style={{ flexDirection: "row" }}>
-                        <Text style={textStyle}>LCM = </Text>
-                        {(() => {
-                            let element = "";
-                            for (let i = 0; i < details.factors.length; i++) {
-                                let single = details.factors[i];
-                                if (i < details.factors.length - 1) {
-                                    element += single + " × ";
-                                } else {
-                                    element += single;
+                        <View>
+                            <Text style={textStyle}>LCM = </Text>
+                        </View>
+                        <View style={{ width: wp("100%") - 130 }}>
+                            {(() => {
+                                let element = "";
+                                for (
+                                    let i = 0;
+                                    i < details.factors.length;
+                                    i++
+                                ) {
+                                    let single = details.factors[i];
+                                    if (i < details.factors.length - 1) {
+                                        element += single + " × ";
+                                    } else {
+                                        element += single;
+                                    }
                                 }
-                            }
-                            return <Text style={textStyle}>{element}</Text>;
-                        })()}
+                                return (
+                                    <Text style={[...textStyle]}>
+                                        {element}
+                                    </Text>
+                                );
+                            })()}
+                        </View>
                     </View>
                 </ScrollView>
             </View>

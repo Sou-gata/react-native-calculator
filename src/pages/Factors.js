@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
-import { factors } from "../helpers/functions";
+import { factors, factorize } from "../helpers/functions";
 import CustomInput from "../components/CustomInput";
 
 const Factors = () => {
@@ -10,6 +10,7 @@ const Factors = () => {
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState({});
     const [opacity, setOpacity] = useState(0);
+    const [factor, setFactor] = useState([]);
     return (
         <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
             <View style={styles.container}>
@@ -28,6 +29,8 @@ const Factors = () => {
                                 onChangeText("");
                                 let output = factors(text);
                                 setAns(output);
+                                output = factorize(text);
+                                setFactor(output);
                                 setOpacity(1);
                             }
                         }}
@@ -38,7 +41,9 @@ const Factors = () => {
                     </Button>
                 </View>
             </View>
-            <View style={styles.ansDiv} opacity={opacity}>
+            <View
+                style={[styles.ansDiv, { display: opacity ? "flex" : "none" }]}
+            >
                 <Text style={[styles.textStyle, { color: colors.text }]}>
                     Factors of {ans.number} are :
                 </Text>
@@ -47,6 +52,37 @@ const Factors = () => {
                 >
                     {ans.str}
                 </Text>
+            </View>
+            <View
+                style={{
+                    display: opacity ? "flex" : "none",
+                    flexDirection: "row",
+                    padding: 20,
+                }}
+            >
+                <Text style={[styles.textStyle, { color: colors.text }]}>
+                    {ans.number} ={" "}
+                </Text>
+                {(() => {
+                    let com = "";
+                    for (let i = 0; i < factor.length; i++) {
+                        if (i < factor.length - 1) {
+                            com += factor[i] + " × ";
+                        } else {
+                            com += factor[i];
+                        }
+                    }
+                    return (
+                        <Text
+                            style={[
+                                styles.textStyle,
+                                { color: colors.text, flexShrink: 1 },
+                            ]}
+                        >
+                            {com}
+                        </Text>
+                    );
+                })()}
             </View>
         </View>
     );

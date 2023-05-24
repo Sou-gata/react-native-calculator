@@ -9,11 +9,15 @@ import {
     hasDecimalInArr,
     decimalHcf,
 } from "../helpers/functions";
-import { useTheme, Button, Text } from "react-native-paper";
+import { useTheme, Button, Text, DataTable } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
+import { useFonts } from "expo-font";
 
 const HCF = () => {
     const { colors } = useTheme();
+    let [fontsLoaded] = useFonts({
+        RobotoMono_400Regular: require("../../assets/fonts/RobotoMono_400Regular.ttf"),
+    });
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState({
@@ -33,6 +37,24 @@ const HCF = () => {
         denominator: undefined,
         nuHcf: undefined,
     });
+
+    const arrayToString = (array) => {
+        let element = "";
+        for (let j = 0; j < array.length; j++) {
+            if (j < array.length - 1) {
+                element += array[j] + " × ";
+            } else {
+                element += array[j];
+            }
+        }
+        return element;
+    };
+    if (!fontsLoaded) return null;
+    const textStyle = {
+        color: colors.text,
+        fontSize: 22,
+        marginTop: 20,
+    };
     return (
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
@@ -134,88 +156,82 @@ const HCF = () => {
             >
                 <View
                     style={{
-                        paddingHorizontal: 20,
+                        paddingHorizontal: 10,
                     }}
                 >
-                    <View style={{ flexDirection: "row" }}>
-                        <View style={{ justifyContent: "space-between" }}>
-                            {(() => {
-                                let com = [];
-                                for (
-                                    let i = 0;
-                                    i < details.numbers.length;
-                                    i++
-                                ) {
-                                    const element = details.numbers[i];
-                                    com.push(
-                                        <Text
-                                            key={i}
+                    <DataTable>
+                        {(() => {
+                            let com = [];
+                            for (let i = 0; i < details.numbers.length; i++) {
+                                const num = details.numbers[i];
+                                const fact = arrayToString(details.factors[i]);
+                                com.push(
+                                    <DataTable.Row
+                                        key={i}
+                                        style={{
+                                            borderBottomWidth: 0,
+                                            marginVertical: 2.5,
+                                        }}
+                                    >
+                                        <View style={{ flexShrink: 1 }}>
+                                            <Text
+                                                style={{
+                                                    color: colors.text,
+                                                    fontSize: 22,
+                                                    fontFamily:
+                                                        "RobotoMono_400Regular",
+                                                }}
+                                            >
+                                                {num} ={"   "}
+                                            </Text>
+                                        </View>
+                                        <View
                                             style={{
-                                                color: colors.text,
-                                                fontSize: 25,
+                                                flexShrink: 1,
                                             }}
                                         >
-                                            {element} ={" "}
-                                        </Text>
-                                    );
-                                }
-                                return com;
-                            })()}
-                        </View>
-                        <View style={{ justifyContent: "space-between" }}>
-                            {(() => {
-                                let com = [];
-                                for (
-                                    let i = 0;
-                                    i < details.factors?.length;
-                                    i++
-                                ) {
-                                    let single = details.factors[i];
-                                    let element = "";
-                                    for (let j = 0; j < single.length; j++) {
-                                        if (j < single.length - 1) {
-                                            element += single[j] + " × ";
-                                        } else {
-                                            element += single[j];
-                                        }
-                                    }
-                                    com.push(
-                                        <Text
-                                            style={{
-                                                color: colors.text,
-                                                fontSize: 25,
-                                            }}
-                                            key={i}
-                                        >
-                                            {element}
-                                        </Text>
-                                    );
-                                }
-                                return com;
-                            })()}
-                        </View>
-                    </View>
-                    {(() => {
-                        let com = "";
-                        for (let i = 0; i < details.hcf.length; i++) {
-                            if (i < details.hcf.length - 1) {
-                                com += details.hcf[i] + " × ";
-                            } else {
-                                com += details.hcf[i];
+                                            <Text
+                                                style={{
+                                                    color: colors.text,
+                                                    fontSize: 22,
+                                                }}
+                                            >
+                                                {fact}
+                                            </Text>
+                                        </View>
+                                    </DataTable.Row>
+                                );
                             }
-                        }
-                        return (
-                            <Text
-                                style={{
-                                    color: colors.text,
-                                    fontSize: 25,
-                                    marginTop: 20,
-                                }}
-                            >
-                                HCF = {com} = {ans}
-                            </Text>
-                        );
-                    })()}
+                            return com;
+                        })()}
+                    </DataTable>
+                    <View>
+                        {(() => {
+                            let com = "";
+                            for (let i = 0; i < details.hcf.length; i++) {
+                                if (i < details.hcf.length - 1) {
+                                    com += details.hcf[i] + " × ";
+                                } else {
+                                    com += details.hcf[i];
+                                }
+                            }
+                            return (
+                                <View
+                                    style={{
+                                        flexDirection: "row",
+                                        paddingHorizontal: 20,
+                                    }}
+                                >
+                                    <View>
+                                        <Text style={textStyle}>HCF = </Text>
+                                    </View>
+                                    <View style={{ flexShrink: 1 }}>
+                                        <Text style={textStyle}>{com}</Text>
+                                    </View>
+                                </View>
+                            );
+                        })()}
+                    </View>
                 </View>
             </ScrollView>
             <View
@@ -226,56 +242,24 @@ const HCF = () => {
                 }}
             >
                 <View>
-                    <Text
-                        style={{
-                            color: colors.text,
-                            fontSize: 25,
-                            textAlign: "center",
-                        }}
-                    >
-                        HCF of ({fraction.numinator})
-                    </Text>
+                    <Text style={textStyle}>HCF of ({fraction.numinator})</Text>
                     <View
                         style={[
                             styles.hrLine,
                             { backgroundColor: colors.text },
                         ]}
                     />
-                    <Text
-                        style={{
-                            color: colors.text,
-                            fontSize: 25,
-                            textAlign: "center",
-                        }}
-                    >
-                        {fraction.denominator}
-                    </Text>
+                    <Text style={textStyle}>{fraction.denominator}</Text>
                 </View>
                 <View style={{ marginTop: 20 }}>
-                    <Text
-                        style={{
-                            color: colors.text,
-                            fontSize: 25,
-                            textAlign: "center",
-                        }}
-                    >
-                        {fraction.nuHcf}
-                    </Text>
+                    <Text style={textStyle}>{fraction.nuHcf}</Text>
                     <View
                         style={[
                             styles.hrLine,
                             { backgroundColor: colors.text },
                         ]}
                     />
-                    <Text
-                        style={{
-                            color: colors.text,
-                            fontSize: 25,
-                            textAlign: "center",
-                        }}
-                    >
-                        {fraction.denominator}
-                    </Text>
+                    <Text style={textStyle}>{fraction.denominator}</Text>
                 </View>
             </View>
         </View>
