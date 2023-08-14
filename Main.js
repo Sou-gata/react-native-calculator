@@ -1,6 +1,5 @@
 import { Provider, MD3LightTheme, MD3DarkTheme } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-// import { StatusBar } from "expo-status-bar";
 import { StatusBar } from "react-native";
 import { useSelector } from "react-redux";
 import Screens from "./Screens";
@@ -21,13 +20,14 @@ const Main = () => {
             text: "#000000de",
             calAns: "#00000090",
             paceHolder: "#00000050",
+            divider: "#00000080",
         },
     };
     const themeDark = {
         ...MD3DarkTheme,
         colors: {
             elevation: {
-                level2: "#222222",
+                level2: "#1a1a1a",
             },
             primary: "#4527a0",
             secondary: "#ff7733",
@@ -37,6 +37,7 @@ const Main = () => {
             text: "#ffffffde",
             calAns: "#ffffff90",
             paceHolder: "#ffffff50",
+            divider: "#ffffff80",
         },
     };
     let theme = themeMode == "light" ? themeLight : themeDark;
@@ -46,7 +47,7 @@ const Main = () => {
             <Provider theme={theme}>
                 <StatusBar
                     style="light"
-                    backgroundColor={theme.colors?.primary}
+                    backgroundColor={theme.colors.primary}
                 />
                 <Screens />
             </Provider>

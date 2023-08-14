@@ -2,7 +2,7 @@ import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import One from "./src/pages/Tabs/One";
 import Two from "./src/pages/Tabs/Two";
-import { Image, Dimensions, StatusBar } from "react-native";
+import { Image, Dimensions } from "react-native";
 import { useTheme } from "react-native-paper";
 
 const Tab = createMaterialTopTabNavigator();

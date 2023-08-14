@@ -49,6 +49,46 @@ const HCF = () => {
         }
         return element;
     };
+    const calculate = () => {
+        let numbers = checkLcmHcfNum(text);
+        if (numbers) {
+            setInput(inputNumbers(text));
+            if (!hasDecimalInArr(numbers)) {
+                let hcfAns = gcd(numbers);
+                setAns(hcfAns);
+                let fact = factorizeHcf(numbers);
+                setDetails(fact);
+                setOpacity({
+                    one: 1,
+                    two: 0,
+                    three: 1,
+                    four: 0,
+                });
+            } else {
+                let hcf = decimalHcf(numbers);
+                setAns(hcf.hcf);
+                setFraction({
+                    numinator: hcf.numinator,
+                    denominator: hcf.denominator,
+                    nuHcf: hcf.nuHcf,
+                });
+                setOpacity({
+                    one: 1,
+                    two: 0,
+                    three: 0,
+                    four: 1,
+                });
+            }
+            onChangeText("");
+        } else {
+            setOpacity({
+                one: 0,
+                two: 1,
+                three: 0,
+                four: 0,
+            });
+        }
+    };
     if (!fontsLoaded) return null;
     const textStyle = {
         color: colors.text,
@@ -64,51 +104,15 @@ const HCF = () => {
                         value={text}
                         placeholder="10 20 30"
                         width={200}
+                        onEndEditing={() => {
+                            if (inputNumbers(text)) calculate();
+                        }}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button
                         mode="contained"
-                        onPress={() => {
-                            let numbers = checkLcmHcfNum(text);
-                            if (numbers) {
-                                setInput(inputNumbers(text));
-                                if (!hasDecimalInArr(numbers)) {
-                                    let hcfAns = gcd(numbers);
-                                    setAns(hcfAns);
-                                    let fact = factorizeHcf(numbers);
-                                    setDetails(fact);
-                                    setOpacity({
-                                        one: 1,
-                                        two: 0,
-                                        three: 1,
-                                        four: 0,
-                                    });
-                                } else {
-                                    let hcf = decimalHcf(numbers);
-                                    setAns(hcf.hcf);
-                                    setFraction({
-                                        numinator: hcf.numinator,
-                                        denominator: hcf.denominator,
-                                        nuHcf: hcf.nuHcf,
-                                    });
-                                    setOpacity({
-                                        one: 1,
-                                        two: 0,
-                                        three: 0,
-                                        four: 1,
-                                    });
-                                }
-                                onChangeText("");
-                            } else {
-                                setOpacity({
-                                    one: 0,
-                                    two: 1,
-                                    three: 0,
-                                    four: 0,
-                                });
-                            }
-                        }}
+                        onPress={() => calculate()}
                         buttonColor={colors.secondary}
                         textColor={"white"}
                     >
@@ -182,7 +186,7 @@ const HCF = () => {
                                                         "RobotoMono_400Regular",
                                                 }}
                                             >
-                                                {num} ={"   "}
+                                                {num} ={" "}
                                             </Text>
                                         </View>
                                         <View

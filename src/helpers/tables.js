@@ -102,3 +102,119 @@ export const romanToNumeral = {
     T: 500000,
     U: 1000000,
 };
+
+export const trigonometricFormula = [
+    {
+        text: "sin θ",
+        numerator: "height",
+        denominator: "hypotenuse",
+    },
+    {
+        text: "cos θ",
+        numerator: "base",
+        denominator: "hypotenuse",
+    },
+    {
+        text: "tan θ",
+        numerator: "height",
+        denominator: "base",
+    },
+    {
+        text: "tan θ",
+        numerator: "sin θ",
+        denominator: "cos θ",
+    },
+    {
+        text: "cot θ",
+        numerator: "cos θ",
+        denominator: "sin θ",
+    },
+    {
+        text: "cosec θ",
+        numerator: "1",
+        denominator: "sin θ",
+    },
+    {
+        text: "sec θ",
+        numerator: "1",
+        denominator: "cos θ",
+    },
+    {
+        text: "cot θ",
+        numerator: "1",
+        denominator: "tan θ",
+    },
+    {
+        text: "sin²θ + cos²θ",
+        numerator: "1",
+    },
+    {
+        text: "cosec²θ - cot²θ",
+        numerator: "1",
+    },
+    {
+        text: "sec²θ - tan²θ",
+        numerator: "1",
+    },
+    {
+        text: "sin θ",
+        numerator: "cos(90-θ)",
+    },
+    {
+        text: "cos θ",
+        numerator: "sin(90-θ)",
+    },
+    {
+        text: "tan θ",
+        numerator: "cot(90-θ)",
+    },
+    {
+        text: "cosec θ",
+        numerator: "sec(90-θ)",
+    },
+    {
+        text: "sec θ",
+        numerator: "cosec(90-θ)",
+    },
+    {
+        text: "sin 2θ",
+        numerator: "2 sin θ cos θ",
+    },
+    {
+        text: "cos 2θ",
+        numerator: "cos²θ - sin²θ",
+    },
+    {
+        text: "tan 2θ",
+        numerator: "2 tan θ",
+        denominator: "1-tan²θ",
+    },
+    {
+        text: "sin x . cos y",
+        numerator: "sin(x+y) + sin(x-y)",
+        denominator: "2",
+    },
+    {
+        text: "cos x . cos y",
+        numerator: "cos(x+y) + cos(x-y)",
+        denominator: "2",
+    },
+    {
+        text: "sin x . sin y",
+        numerator: "cos(x+y) - cos(x-y)",
+        denominator: "2",
+    },
+];
+
+export const algebricFormula = [
+    "a² – b² = (a - b)(a + b)",
+    "a² – b² = (a - b)(a + b)",
+    "(a - b)² = a² – 2ab + b²",
+    "a² + b² = (a - b)² + 2ab",
+    "(a+b+c)² = a²+ b²+c²+2ab+2ac+2bc",
+    "(a-b-c)² = a²+b²+c²-2ab-2ac+2bc",
+    "a³ + b³ = (a + b) (a² – ab + b²)",
+    "a³ - b³ = (a - b) (a² + ab + b²)",
+    "(a + b)³ = a³ + 3a²b + 3ab² + b³",
+    "(a - b)³ = a³ - 3a²b + 3ab² – b³",
+];

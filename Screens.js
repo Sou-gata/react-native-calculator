@@ -1,4 +1,3 @@
-import React from "react";
 import {
     createStackNavigator,
     TransitionPresets,
@@ -28,6 +27,9 @@ import Volume from "./src/pages/Volume";
 import PowerConverter from "./src/pages/PowerConverter";
 import QuadraticEqu from "./src/pages/QuadraticEqu";
 import TimeCalculator from "./src/pages/TimeCalculator";
+import VolumeCalculator from "./src/pages/VolumeCalculator";
+import SurfaceArea from "./src/pages/SurfaceArea";
+import UsefulFormulas from "./src/pages/UsefulFormulas";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -198,11 +200,35 @@ const Screens = () => {
                 }}
             />
             <Stack.Screen
-                name="WaightConverter"
+                name="MassConverter"
                 component={WaightConverter}
                 options={{
                     ...options,
-                    title: "Waight Converter",
+                    title: "Mass Converter",
+                }}
+            />
+            <Stack.Screen
+                name="VolumeCalculator"
+                component={VolumeCalculator}
+                options={{
+                    ...options,
+                    title: "Volume Calculator",
+                }}
+            />
+            <Stack.Screen
+                name="SurfaceArea"
+                component={SurfaceArea}
+                options={{
+                    ...options,
+                    title: "Surface Area",
+                }}
+            />
+            <Stack.Screen
+                name="UsefulFormula"
+                component={UsefulFormulas}
+                options={{
+                    ...options,
+                    title: "Useful Formulas",
                 }}
             />
         </Stack.Navigator>

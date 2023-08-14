@@ -1,5 +1,15 @@
 const info = [
     {
+        ver: "1.3.2",
+        changes: [
+            "add surface area",
+            "add volume calculator",
+            "add some useful formulas",
+            "minor improvement",
+            "bugs fix",
+        ],
+    },
+    {
         ver: "1.3.1",
         changes: ["add details LCM and HCF", "minor improvement", "bugs fix"],
     },

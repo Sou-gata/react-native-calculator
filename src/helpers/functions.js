@@ -155,7 +155,7 @@ export function factors(number) {
 }
 
 export function checkLcmHcfNum(str) {
-    let numberSet = str;
+    let numberSet = str.trim();
     numberSet = numberSet.split(" ");
     let valid = true;
     let hasZero = false;

@@ -358,9 +358,10 @@ const styles = StyleSheet.create({
     calInput: {
         height: (2 * (hp("25%") - 25)) / 3,
         width: wp("100%"),
-        padding: 10,
-        paddingRight: 20,
-        fontSize: 33,
+        paddingVertical: 10,
+        paddingRight: 45,
+        paddingLeft: 25,
+        fontSize: 30,
         textAlign: "center",
     },
     calInputAns: {

@@ -53,6 +53,31 @@ const LCM = () => {
             setGap(space);
         }
     };
+    const calculate = () => {
+        let numbers = checkLcmHcfNum(text);
+        if (numbers) {
+            setInput(inputNumbers(text));
+            if (!hasDecimalInArr(numbers)) {
+                let factorLCM = factorLcm(numbers);
+                let lcmAns = lcm(numbers);
+                setDetails(factorLCM);
+                setAns(lcmAns);
+                setOpacity({ one: true, two: true });
+            } else {
+                let LCM = decimalLcm(numbers);
+                setAns(LCM.lcm);
+                setDecimal({
+                    numinator: LCM.numinator,
+                    denominator: LCM.denominator,
+                    nuLcm: LCM.nuLcm,
+                });
+                setOpacity({ one: true, three: true });
+            }
+            onChangeText("");
+        } else {
+            setOpacity({ four: true });
+        }
+    };
     useEffect(() => {
         generateGap(details.divisiors);
     }, [details]);
@@ -69,37 +94,16 @@ const LCM = () => {
                         autoFocus={true}
                         placeholder="10 20 30"
                         width={200}
+                        onEndEditing={() => {
+                            if (inputNumbers(text)) calculate();
+                        }}
                     />
                 </View>
 
                 <View style={styles.buttonContainer}>
                     <Button
                         mode="contained"
-                        onPress={() => {
-                            let numbers = checkLcmHcfNum(text);
-                            if (numbers) {
-                                setInput(inputNumbers(text));
-                                if (!hasDecimalInArr(numbers)) {
-                                    let factorLCM = factorLcm(numbers);
-                                    let lcmAns = lcm(numbers);
-                                    setDetails(factorLCM);
-                                    setAns(lcmAns);
-                                    setOpacity({ one: true, two: true });
-                                } else {
-                                    let LCM = decimalLcm(numbers);
-                                    setAns(LCM.lcm);
-                                    setDecimal({
-                                        numinator: LCM.numinator,
-                                        denominator: LCM.denominator,
-                                        nuLcm: LCM.nuLcm,
-                                    });
-                                    setOpacity({ one: true, three: true });
-                                }
-                                onChangeText("");
-                            } else {
-                                setOpacity({ four: true });
-                            }
-                        }}
+                        onPress={() => calculate()}
                         buttonColor={colors.secondary}
                         textColor={"white"}
                     >
@@ -151,7 +155,9 @@ const LCM = () => {
                                         ele = (
                                             <View
                                                 key={i}
-                                                style={{ flexDirection: "row" }}
+                                                style={{
+                                                    flexDirection: "row",
+                                                }}
                                             >
                                                 <Text style={textStyleThree}>
                                                     {details.divisiors[i]}
@@ -165,7 +171,9 @@ const LCM = () => {
                                         ele = (
                                             <View
                                                 key={i}
-                                                style={{ flexDirection: "row" }}
+                                                style={{
+                                                    flexDirection: "row",
+                                                }}
                                             >
                                                 <Text style={textStyleThree}>
                                                     {gap}
@@ -182,7 +190,7 @@ const LCM = () => {
                             })()}
                         </View>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{ flexDirection: "row", marginTop: 20 }}>
                         <View>
                             <Text style={textStyle}>LCM = </Text>
                         </View>
@@ -202,7 +210,12 @@ const LCM = () => {
                                     }
                                 }
                                 return (
-                                    <Text style={[...textStyle]}>
+                                    <Text
+                                        style={[
+                                            textStyle,
+                                            { textAlign: "left" },
+                                        ]}
+                                    >
                                         {element}
                                     </Text>
                                 );

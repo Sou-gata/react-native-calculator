@@ -21,12 +21,11 @@ const AgeCalculator = () => {
     const [age, setAge] = useState({ days: 0, months: 0, years: 0 });
     const dateToStr = (day) => {
         let today = day;
-        var dd = String(today.getDate()).padStart(2, "0");
-        var mm = String(today.getMonth() + 1).padStart(2, "0");
-        var yyyy = today.getFullYear();
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const yyyy = today.getFullYear();
         today = dd + "/" + mm + "/" + yyyy;
         let dt = `${yyyy}-${mm}-${dd}`;
-
         return { today, dt };
     };
     useEffect(() => {

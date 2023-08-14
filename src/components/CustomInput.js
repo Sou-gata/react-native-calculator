@@ -8,8 +8,10 @@ const CustomInput = ({
     width,
     keyboardType,
     maxLength,
+    onEndEditing,
 }) => {
     const { colors } = useTheme();
+    const empty = () => {};
     return (
         <TextInput
             mode="outlined"
@@ -24,6 +26,7 @@ const CustomInput = ({
             textColor={colors.text}
             style={{ textAlign: "center", width: width || 150 }}
             maxLength={maxLength}
+            onEndEditing={onEndEditing || empty}
         />
     );
 };

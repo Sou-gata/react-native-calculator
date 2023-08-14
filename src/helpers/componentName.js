@@ -67,9 +67,9 @@ const componentName = [
     },
     {
         id: "12",
-        name: "WaightConverter",
-        text: "Waight Converter",
-        path: require("../../assets/icons/weight.png"),
+        name: "MassConverter",
+        text: "Mass Converter",
+        path: require("../../assets/icons/mass.png"),
     },
     {
         id: "13",
@@ -124,6 +124,24 @@ const componentName = [
         name: "Discount",
         text: "Discount Calculator",
         path: require("../../assets/icons/discount.png"),
+    },
+    {
+        id: "22",
+        name: "SurfaceArea",
+        text: "Surface Area",
+        path: require("../../assets/icons/sarea.png"),
+    },
+    {
+        id: "23",
+        name: "VolumeCalculator",
+        text: "Volume Calculator",
+        path: require("../../assets/icons/volume_two.png"),
+    },
+    {
+        id: "24",
+        name: "UsefulFormula",
+        text: "Useful Formulas",
+        path: require("../../assets/icons/formula.png"),
     },
 ];
 export default componentName;
