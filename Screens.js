@@ -27,9 +27,9 @@ import Volume from "./src/pages/Volume";
 import PowerConverter from "./src/pages/PowerConverter";
 import QuadraticEqu from "./src/pages/QuadraticEqu";
 import TimeCalculator from "./src/pages/TimeCalculator";
-import VolumeCalculator from "./src/pages/VolumeCalculator";
-import SurfaceArea from "./src/pages/SurfaceArea";
+import SurfaceAreaAndVolume from "./src/pages/SurfaceAreaAndVolume";
 import UsefulFormulas from "./src/pages/UsefulFormulas";
+import EMICalculator from "./src/pages/EMICalculator";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -208,19 +208,11 @@ const Screens = () => {
                 }}
             />
             <Stack.Screen
-                name="VolumeCalculator"
-                component={VolumeCalculator}
+                name="SurfaceAreaAndVolume"
+                component={SurfaceAreaAndVolume}
                 options={{
                     ...options,
-                    title: "Volume Calculator",
-                }}
-            />
-            <Stack.Screen
-                name="SurfaceArea"
-                component={SurfaceArea}
-                options={{
-                    ...options,
-                    title: "Surface Area",
+                    title: "Surface Area & Volume",
                 }}
             />
             <Stack.Screen
@@ -229,6 +221,14 @@ const Screens = () => {
                 options={{
                     ...options,
                     title: "Useful Formulas",
+                }}
+            />
+            <Stack.Screen
+                name="EMICalculator"
+                component={EMICalculator}
+                options={{
+                    ...options,
+                    title: "EMI Calculator",
                 }}
             />
         </Stack.Navigator>

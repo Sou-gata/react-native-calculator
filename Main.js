@@ -1,11 +1,12 @@
 import { Provider, MD3LightTheme, MD3DarkTheme } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
 import Screens from "./Screens";
+import { Context } from "./Context";
 
 const Main = () => {
-    const themeMode = useSelector((state) => state.theme.mode);
+    const themeContext = useContext(Context);
     let themeLight = {
         ...MD3LightTheme,
         colors: {
@@ -40,8 +41,7 @@ const Main = () => {
             divider: "#ffffff80",
         },
     };
-    let theme = themeMode == "light" ? themeLight : themeDark;
-
+    let theme = themeContext.mode == "light" ? themeLight : themeDark;
     return (
         <NavigationContainer>
             <Provider theme={theme}>

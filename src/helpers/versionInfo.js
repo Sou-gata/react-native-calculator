@@ -1,5 +1,21 @@
 const info = [
     {
+        ver: "1.3.4",
+        changes: [
+            "update depandencies",
+            "remove some dependencies",
+            "code cleaning",
+        ],
+    },
+    {
+        ver: "1.3.3",
+        changes: [
+            "add emi calculator",
+            "reorganized layout",
+            "combined surface area and volume",
+        ],
+    },
+    {
         ver: "1.3.2",
         changes: [
             "add surface area",

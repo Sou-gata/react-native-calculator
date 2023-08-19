@@ -1,14 +1,13 @@
 import { View, Pressable, Animated, StyleSheet } from "react-native";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { switchMode } from "../../redux-store/actions";
+import { Context } from "../../Context";
 
 const ThemeSwitch = ({ colors }) => {
     const animOne = useRef(new Animated.Value(0)).current;
     const animTwo = useRef(new Animated.Value(1)).current;
-    const mode = useSelector((state) => state.theme.mode);
-    const dispatch = useDispatch();
+    const state = useContext(Context);
+
     const lightIn = () => {
         Animated.timing(animOne, {
             toValue: 1,
@@ -56,9 +55,11 @@ const ThemeSwitch = ({ colors }) => {
         >
             <Pressable
                 onPress={() => {
-                    if (mode == "dark") lightIn();
+                    if (state.mode == "dark") lightIn();
                     else darkIn();
-                    dispatch(switchMode(mode === "light" ? "dark" : "light"));
+                    state.updateTheme(
+                        state.mode === "light" ? "dark" : "light"
+                    );
                 }}
             >
                 <Animated.View

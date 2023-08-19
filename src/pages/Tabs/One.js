@@ -1,14 +1,11 @@
-import { View, Text, StyleSheet, TextInput, Pressable } from "react-native";
+import { View, StyleSheet, TextInput, Pressable } from "react-native";
 import React, { useState, useEffect } from "react";
 import calBtns from "../../helpers/calBtns";
 import { lastChar, bracManage } from "../../helpers/functions";
-import { useTheme, Menu } from "react-native-paper";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { useTheme, Menu, Text } from "react-native-paper";
 import ThemeSwitch from "../../components/ThemeSwitch";
 import { Entypo } from "@expo/vector-icons";
+import { wp, hp } from "../../helpers/functions";
 
 const One = ({ navigation }) => {
     const { colors } = useTheme();

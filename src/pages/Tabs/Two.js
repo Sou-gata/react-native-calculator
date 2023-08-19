@@ -5,12 +5,9 @@ import {
     Text,
     StyleSheet,
     Pressable,
+    Dimensions,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import componentName from "../../helpers/componentName";
 const data = componentName;
@@ -90,17 +87,17 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     homeBtn: {
-        width: wp("25%"),
-        height: hp("17.5%"),
+        width: Dimensions.get("window").width * 0.25,
+        height: Dimensions.get("window").height * 0.175,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 7,
     },
     homeBtnContainer: {
-        width: (wp("100%") - 10) / 3,
+        width: (Dimensions.get("window").width - 10) / 3,
         justifyContent: "center",
         alignItems: "center",
-        height: (hp("100%") - 80) / 5,
+        height: (Dimensions.get("window").height - 80) / 5,
     },
     pressable: {
         borderRadius: 10,

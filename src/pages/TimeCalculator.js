@@ -1,9 +1,8 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { useTheme, Button, Text, RadioButton } from "react-native-paper";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import CustomInput from "../components/CustomInput";
-import { calculateTime } from "../helpers/functions";
+import { calculateTime, wp } from "../helpers/functions";
 
 const TimeCalculator = () => {
     const { colors } = useTheme();

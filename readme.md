@@ -33,6 +33,8 @@ Now wait for sometime while build is running. It can take upto 20 min to complet
 -   Full process of multiply
 -   Full process of division
 -   Full process of LCM & HCF
+-   EMI calculator
+-   Surface area & Volume calculator
 -   Area, volume, length, waight, power & temparature converter
 -   Permutation, combination, equation solve
 -   GST, discount & age calculator
@@ -53,6 +55,6 @@ For support, email sougatatalukdar77@gmail.com.
 [![linkedin](https://img.shields.io/badge/instagram-E1306C?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/sougata_76/)
 [![twitter](https://img.shields.io/badge/facebook-0165E1?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/sougata76)
 
-![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/sou-gata/react-native-calculator?logo=v.1.2.9)
+![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/sou-gata/react-native-calculator?logo=v.1.3.3)
 
 <!-- ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/badge/version-v1.3.1-blue) -->

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import { useTheme, RadioButton } from "react-native-paper";
 import NumberToRoman from "../components/NumberToRoman";
@@ -41,10 +41,3 @@ const RomanNumber = () => {
 };
 
 export default RomanNumber;
-
-const styles = StyleSheet.create({
-    radioButton: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-});

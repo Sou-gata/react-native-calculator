@@ -1,6 +1,5 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { useState } from "react";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import {
     checkLcmHcfNum,
     gcd,
@@ -8,6 +7,7 @@ import {
     factorizeHcf,
     hasDecimalInArr,
     decimalHcf,
+    wp,
 } from "../helpers/functions";
 import { useTheme, Button, Text, DataTable } from "react-native-paper";
 import CustomInput from "../components/CustomInput";

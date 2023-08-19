@@ -9,7 +9,7 @@
         },
         "apk": {
             "distribution": "internal",
-            "node": "18.12.0",
+            "node": "18.17.0",
             "android": {
                 "buildType": "apk"
             },

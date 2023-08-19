@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme, Text, RadioButton, Menu, Button } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 import CustomInput from "../components/CustomInput";
+import { areaAndVolume } from "../helpers/functions";
 
 const SurfaceArea = () => {
     const { colors } = useTheme();
@@ -32,136 +33,89 @@ const SurfaceArea = () => {
     });
     const [isHollow, setIsHollow] = useState(0);
     const [input, setInput] = useState(emptyInputs);
-    const [answer, setAnswer] = useState("");
-    const [greater, setGreater] = useState(false);
+    const [answer, setAnswer] = useState({ area: "", volume: "" });
+    const [greater, setGreater] = useState({ area: false, volume: false });
 
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
 
     const btns = [
-        { label: "Cube", speacial: 0, field: ["side"] },
-        { label: "Cuboid", speacial: 0, field: ["length", "breath", "height"] },
-        { label: "Sphere", speacial: 0, field: ["radious"] },
-        { label: "Hemisphere", speacial: 1, field: ["radious"] },
-        { label: "Cylinder", speacial: 1, field: ["radious", "height"] },
-        { label: "Cone", speacial: 1, field: ["radious", "height"] },
-        { label: "Circle", speacial: 0, field: ["radious"] },
-        { label: "Square", speacial: 0, field: ["side"] },
-        { label: "Rectangle", speacial: 0, field: ["length", "breath"] },
-        { label: "Triangle", speacial: 0, field: ["s1", "s2", "s3"] },
-        { label: "Ellipse", speacial: 0, field: ["major", "minor"] },
+        {
+            label: "Cube",
+            speacial: false,
+            field: ["side"],
+            value: 1,
+        },
+        {
+            label: "Cuboid",
+            speacial: false,
+            field: ["length", "breath", "height"],
+            value: 2,
+        },
+        {
+            label: "Sphere",
+            speacial: false,
+            field: ["radious"],
+            value: 3,
+        },
+        {
+            label: "Hemisphere",
+            speacial: true,
+            field: ["radious"],
+            value: 4,
+        },
+        {
+            label: "Cylinder",
+            speacial: true,
+            field: ["radious", "height"],
+            value: 5,
+        },
+        {
+            label: "Cone",
+            speacial: true,
+            field: ["radious", "height"],
+            value: 6,
+        },
+        {
+            label: "Circle",
+            speacial: false,
+            field: ["radious"],
+            value: 7,
+        },
+        {
+            label: "Square",
+            speacial: false,
+            field: ["side"],
+            value: 8,
+        },
+        {
+            label: "Rectangle",
+            speacial: false,
+            field: ["length", "breath"],
+            value: 9,
+        },
+        {
+            label: "Triangle",
+            speacial: false,
+            field: ["s1", "s2", "s3"],
+            value: 10,
+        },
+        {
+            label: "Ellipse",
+            speacial: false,
+            field: ["major", "minor"],
+            value: 11,
+        },
     ];
 
-    const fixed = (number) => {
-        let num = number.toFixed(4);
-        num = parseFloat(num);
-        let decimalPart = number.toString().split(".");
-        if (decimalPart.length > 1) {
-            if (decimalPart[1] > 4) setGreater(true);
-        }
-        return num;
-    };
-
-    const checkTriangle = (s1, s2, s3) => {
-        if (s1 + s2 > s3 && s2 + s3 > s1 && s3 + s1 > s2) return true;
-        else return false;
-    };
-
     const calculate = () => {
-        if (selected.value === 1) {
-            let side = parseFloat(input.side);
-            if (!isNaN(side)) {
-                let area = 6 * side * side;
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 2) {
-            let l = parseFloat(input.length);
-            let b = parseFloat(input.breath);
-            let h = parseFloat(input.height);
-            if (!isNaN(l) && !isNaN(b) && !isNaN(h)) {
-                let area = 2 * (l * b + b * h + h * l);
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 3) {
-            let r = parseFloat(input.radious);
-            if (!isNaN(r)) {
-                let area = 4 * Math.PI * r * r;
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 4) {
-            let r = parseFloat(input.radious);
-            if (!isNaN(r)) {
-                let area;
-                if (isHollow) {
-                    area = 2 * Math.PI * r * r;
-                } else {
-                    area = 3 * Math.PI * r * r;
-                }
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 5) {
-            let r = parseFloat(input.radious);
-            let h = parseFloat(input.height);
-            if (!isNaN(r) && !isNaN(h)) {
-                let area;
-                if (isHollow) {
-                    area = 2 * Math.PI * r * h;
-                } else {
-                    area = 2 * Math.PI * r * (h + r);
-                }
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 6) {
-            let r = parseFloat(input.radious);
-            let h = parseFloat(input.height);
-            if (!isNaN(r) && !isNaN(h)) {
-                let area;
-                if (isHollow) {
-                    area = Math.PI * r * Math.sqrt(h * h + r * r);
-                } else {
-                    area = Math.PI * r * (r + Math.sqrt(h * h + r * r));
-                }
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 7) {
-            let r = parseFloat(input.radious);
-            if (!isNaN(r)) {
-                let area = Math.PI * r * r;
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 8) {
-            let side = parseFloat(input.side);
-            if (!isNaN(side)) {
-                let area = side * side;
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 9) {
-            let l = parseFloat(input.length);
-            let b = parseFloat(input.breath);
-            if (!isNaN(l) && !isNaN(b)) {
-                let area = l * b;
-                setAnswer(fixed(area));
-            }
-        } else if (selected.value === 10) {
-            let s1 = parseFloat(input.s1);
-            let s2 = parseFloat(input.s2);
-            let s3 = parseFloat(input.s3);
-            if (!isNaN(s1) && !isNaN(s2) && !isNaN(s3)) {
-                if (checkTriangle(s1, s2, s3)) {
-                    let s = (s1 + s2 + s3) / 2;
-                    let asq = s * (s - s1) * (s - s2) * (s - s3);
-                    let area = Math.sqrt(asq);
-                    setAnswer(fixed(area));
-                }
-            }
-        } else if (selected.value === 11) {
-            let minor = parseFloat(input.minor);
-            let major = parseFloat(input.major);
-            if (!isNaN(minor) && !isNaN(major)) {
-                let area = Math.PI * major * minor;
-                setAnswer(fixed(area));
-            }
-        }
+        const ans = areaAndVolume({
+            ...input,
+            value: selected.value,
+            isHollow: selected.isHollow,
+        });
+        setAnswer({ area: ans.area.ans, volume: ans.volume.ans });
+        setGreater({ area: ans.area.isGreater, volume: ans.volume.isGreater });
     };
 
     return (
@@ -209,7 +163,7 @@ const SurfaceArea = () => {
                                 closeMenu();
                                 setSelected(btn);
                                 setInput(emptyInputs);
-                                setAnswer("");
+                                setAnswer({ area: "", volume: "" });
                             }}
                             title={btn.label}
                             titleStyle={{ color: colors.text }}
@@ -309,13 +263,23 @@ const SurfaceArea = () => {
                     Calculate
                 </Button>
             </View>
-            {answer.toString().length > 0 && (
+            {answer.area && answer.area.toString().length > 0 && (
                 <View style={styles.ans}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>
-                        Area {greater ? "≈" : "="}{" "}
+                        Area {greater.area ? "≈" : "="}{" "}
                     </Text>
                     <Text style={{ color: colors.secondary, fontSize: 30 }}>
-                        {answer}
+                        {answer.area}
+                    </Text>
+                </View>
+            )}
+            {answer.volume && answer.volume.toString().length > 0 && (
+                <View style={styles.ans}>
+                    <Text style={{ color: colors.text, fontSize: 20 }}>
+                        Volume {greater.volume ? "≈" : "="}{" "}
+                    </Text>
+                    <Text style={{ color: colors.secondary, fontSize: 30 }}>
+                        {answer.volume}
                     </Text>
                 </View>
             )}

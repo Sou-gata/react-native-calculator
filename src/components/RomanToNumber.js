@@ -1,12 +1,8 @@
 import { StyleSheet, View, Pressable } from "react-native";
 import { useState } from "react";
 import btns from "../helpers/romanCalBtn";
-import { romanToNumber } from "../helpers/functions";
+import { romanToNumber, wp, hp } from "../helpers/functions";
 import { useTheme, Text } from "react-native-paper";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 const RomanToNumber = () => {
     const { colors } = useTheme();

@@ -8,6 +8,14 @@ import {
     octToBinTable,
 } from "./tables";
 import calBtns from "../helpers/calBtns";
+import { Dimensions } from "react-native";
+
+export const wp = (str) => {
+    return (Dimensions.get("window").width * parseFloat(str)) / 100;
+};
+export const hp = (str) => {
+    return (Dimensions.get("window").height * parseFloat(str)) / 100;
+};
 
 export function devide(numberA, numberB) {
     let numbers = [];
@@ -1400,4 +1408,118 @@ export function largeInArr(array) {
         max = Math.max(max, array[i]);
     }
     return max;
+}
+
+function checkTriangle(s1, s2, s3) {
+    if (s1 + s2 > s3 && s2 + s3 > s1 && s3 + s1 > s2) return true;
+    else return false;
+}
+
+function fixed(number) {
+    if (!isNaN(parseFloat(number))) {
+        let num = number.toFixed(4);
+        num = parseFloat(num);
+        let isGreater = false;
+        let decimalPart = number.toString().split(".");
+        if (decimalPart.length > 1) {
+            if (decimalPart[1] > 4) isGreater = true;
+        }
+        return { ans: num, isGreater };
+    } else return { ans: undefined, isGreater: false };
+}
+
+export function areaAndVolume(data) {
+    let area, volume;
+    if (data.value === 1) {
+        let side = parseFloat(data.side);
+        if (!isNaN(side)) {
+            area = 6 * side * side;
+            volume = side * side * side;
+        }
+    } else if (data.value === 2) {
+        let l = parseFloat(data.length);
+        let b = parseFloat(data.breath);
+        let h = parseFloat(data.height);
+        if (!isNaN(l) && !isNaN(b) && !isNaN(h)) {
+            area = 2 * (l * b + b * h + h * l);
+            volume = l * b * h;
+        }
+    } else if (data.value === 3) {
+        let r = parseFloat(data.radious);
+        if (!isNaN(r)) {
+            area = 4 * Math.PI * r * r;
+            volume = (4 / 3) * Math.PI * r * r * r;
+        }
+    } else if (data.value === 4) {
+        let r = parseFloat(data.radious);
+        if (!isNaN(r)) {
+            if (data.isHollow) {
+                area = 2 * Math.PI * r * r;
+            } else {
+                area = 3 * Math.PI * r * r;
+            }
+            volume = (2 / 3) * Math.PI * r * r * r;
+        }
+    } else if (data.value === 5) {
+        let r = parseFloat(data.radious);
+        let h = parseFloat(data.height);
+        if (!isNaN(r) && !isNaN(h)) {
+            if (data.isHollow) {
+                area = 2 * Math.PI * r * h;
+            } else {
+                area = 2 * Math.PI * r * (h + r);
+            }
+            volume = Math.PI * r * r * h;
+        }
+    } else if (data.value === 6) {
+        let r = parseFloat(data.radious);
+        let h = parseFloat(data.height);
+        if (!isNaN(r) && !isNaN(h)) {
+            if (data.isHollow) {
+                area = Math.PI * r * Math.sqrt(h * h + r * r);
+            } else {
+                area = Math.PI * r * (r + Math.sqrt(h * h + r * r));
+            }
+            volume = (1 / 3) * Math.PI * r * r * h;
+        }
+    } else if (data.value === 7) {
+        let r = parseFloat(data.radious);
+        if (!isNaN(r)) {
+            area = Math.PI * r * r;
+            area = area;
+        }
+    } else if (data.value === 8) {
+        let side = parseFloat(data.side);
+        if (!isNaN(side)) {
+            area = side * side;
+        }
+    } else if (data.value === 9) {
+        let l = parseFloat(data.length);
+        let b = parseFloat(data.breath);
+        if (!isNaN(l) && !isNaN(b)) {
+            area = l * b;
+        }
+    } else if (data.value === 10) {
+        let s1 = parseFloat(data.s1);
+        let s2 = parseFloat(data.s2);
+        let s3 = parseFloat(data.s3);
+        if (!isNaN(s1) && !isNaN(s2) && !isNaN(s3)) {
+            if (checkTriangle(s1, s2, s3)) {
+                let s = (s1 + s2 + s3) / 2;
+                let asq = s * (s - s1) * (s - s2) * (s - s3);
+                area = Math.sqrt(asq);
+            }
+        }
+    } else if (data.value === 11) {
+        let minor = parseFloat(data.minor);
+        let major = parseFloat(data.major);
+        if (!isNaN(minor) && !isNaN(major)) {
+            area = Math.PI * major * minor;
+        }
+    }
+    if (area) area = fixed(area);
+    else area = { ans: undefined, isGreater: false };
+    if (volume) volume = fixed(volume);
+    else volume = { ans: undefined, isGreater: false };
+    return { area, volume };
 }

@@ -6,11 +6,17 @@ const Fraction = ({ data, color, size }) => {
     const text = data.text;
     const numerator = data.numerator;
     const denominator = data.denominator;
+    let hasDenominator = false;
+    let isDenoLarger = false;
+    if (denominator) {
+        isDenoLarger = numerator.length < denominator.length;
+        hasDenominator = true;
+    }
 
     return (
         <View
             style={{
-                marginTop: 5,
+                marginTop: 7,
                 flexDirection: "row",
                 alignItems: "center",
             }}
@@ -25,34 +31,39 @@ const Fraction = ({ data, color, size }) => {
                 {"   "}
                 {text} ={" "}
             </Text>
-
-            {denominator && numerator.length >= denominator.length && (
+            {hasDenominator && (
                 <View
                     style={{ justifyContent: "center", alignItems: "center" }}
                 >
                     <Text
-                        style={[
-                            styles.numerator,
-                            { fontSize: size, color, borderColor: color },
-                        ]}
+                        style={
+                            isDenoLarger
+                                ? { fontSize: size, color, paddingBottom: 2 }
+                                : [
+                                      styles.numerator,
+                                      {
+                                          fontSize: size,
+                                          color,
+                                          borderColor: color,
+                                      },
+                                  ]
+                        }
                     >
                         {numerator}
                     </Text>
-                    <Text style={{ fontSize: size, color }}>{denominator}</Text>
-                </View>
-            )}
-            {denominator && numerator.length < denominator.length && (
-                <View
-                    style={{ justifyContent: "center", alignItems: "center" }}
-                >
-                    <Text style={{ fontSize: size, color, paddingBottom: 2 }}>
-                        {numerator}
-                    </Text>
                     <Text
-                        style={[
-                            styles.denominator,
-                            { fontSize: size, color, borderColor: color },
-                        ]}
+                        style={
+                            isDenoLarger
+                                ? [
+                                      styles.denominator,
+                                      {
+                                          fontSize: size,
+                                          color,
+                                          borderColor: color,
+                                      },
+                                  ]
+                                : { fontSize: size, color }
+                        }
                     >
                         {denominator}
                     </Text>
@@ -91,7 +102,7 @@ const UsefulFormulas = () => {
                                 style={{
                                     fontSize: 18,
                                     color: colors.text,
-                                    marginTop: 5,
+                                    marginTop: 7,
                                 }}
                             >
                                 {"\u2022"}

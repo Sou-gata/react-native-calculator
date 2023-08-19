@@ -1,13 +1,10 @@
 import Main from "./Main";
-import { Provider as ReduxProvider } from "react-redux";
-import store from "./redux-store/store";
+import State from "./Context";
 
-const App = () => {
-    return (
-        <ReduxProvider store={store}>
-            <Main />
-        </ReduxProvider>
-    );
-};
+const App = () => (
+    <State>
+        <Main />
+    </State>
+);
 
 export default App;

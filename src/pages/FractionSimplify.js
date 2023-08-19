@@ -1,9 +1,8 @@
 import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import CustomInput from "../components/CustomInput";
-import { gcd } from "../helpers/functions";
+import { gcd, wp } from "../helpers/functions";
 
 const FractionSimplify = () => {
     const { colors } = useTheme();

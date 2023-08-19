@@ -1,9 +1,8 @@
 import { StyleSheet, ScrollView, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
-import { multiple } from "../helpers/functions";
+import { multiple, wp } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { useFonts } from "expo-font";
 import CustomInput from "../components/CustomInput";
 

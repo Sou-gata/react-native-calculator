@@ -8,9 +8,9 @@ import {
     largeInArr,
     hasDecimalInArr,
     decimalLcm,
+    wp,
 } from "../helpers/functions";
 import { useTheme, Button, Text } from "react-native-paper";
-import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import CustomInput from "../components/CustomInput";
 import { useFonts } from "expo-font";
 
