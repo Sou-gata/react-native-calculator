@@ -1,5 +1,17 @@
 const info = [
     {
+        ver: "1.4.0",
+        changes: ["migration from expo to react native", "reduced apk size"],
+    },
+    {
+        ver: "1.3.5",
+        changes: [
+            "add matrix multiplication",
+            "add infix to prefix",
+            "update dependencies",
+        ],
+    },
+    {
         ver: "1.3.4",
         changes: [
             "update depandencies",

@@ -45,8 +45,7 @@ const Home = () => {
             initialLayout={{
                 width: Dimensions.get("window").width,
                 height: Dimensions.get("window").height,
-            }}
-        >
+            }}>
             <Tab.Screen name="Normal" component={One} />
             <Tab.Screen name="Navigation" component={Two} />
         </Tab.Navigator>

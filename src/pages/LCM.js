@@ -12,13 +12,9 @@ import {
 } from "../helpers/functions";
 import { useTheme, Button, Text } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
-import { useFonts } from "expo-font";
 
 const LCM = () => {
     const { colors } = useTheme();
-    let [fontsLoaded] = useFonts({
-        RobotoMono_400Regular: require("../../assets/fonts/RobotoMono_400Regular.ttf"),
-    });
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState({ one: false, two: false });
@@ -42,7 +38,7 @@ const LCM = () => {
     ];
     const textStyleThree = [styles.textStyleThree, { color: colors.text }];
 
-    const generateGap = (array) => {
+    const generateGap = array => {
         let space = "";
         if (largeInArr([...array])) {
             let large = largeInArr([...array]);
@@ -82,8 +78,6 @@ const LCM = () => {
         generateGap(details.divisiors);
     }, [details]);
 
-    if (!fontsLoaded) return null;
-
     return (
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
@@ -105,8 +99,7 @@ const LCM = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -115,15 +108,13 @@ const LCM = () => {
                 style={[
                     styles.ansDiv,
                     { display: opacity.one ? "flex" : "none" },
-                ]}
-            >
+                ]}>
                 <Text style={textStyle}>LCM of {input} is</Text>
                 <Text
                     style={[
                         styles.textStyleOrange,
                         { color: colors.secondary },
-                    ]}
-                >
+                    ]}>
                     {ans}
                 </Text>
             </View>
@@ -133,14 +124,12 @@ const LCM = () => {
                     alignItems: "center",
                     display: opacity.two ? "flex" : "none",
                     flex: 1,
-                }}
-            >
+                }}>
                 <ScrollView>
                     <View
                         style={{
                             alignItems: "center",
-                        }}
-                    >
+                        }}>
                         <View>
                             {(() => {
                                 let com = [];
@@ -157,8 +146,7 @@ const LCM = () => {
                                                 key={i}
                                                 style={{
                                                     flexDirection: "row",
-                                                }}
-                                            >
+                                                }}>
                                                 <Text style={textStyleThree}>
                                                     {details.divisiors[i]}
                                                 </Text>
@@ -173,8 +161,7 @@ const LCM = () => {
                                                 key={i}
                                                 style={{
                                                     flexDirection: "row",
-                                                }}
-                                            >
+                                                }}>
                                                 <Text style={textStyleThree}>
                                                     {gap}
                                                 </Text>
@@ -214,8 +201,7 @@ const LCM = () => {
                                         style={[
                                             textStyle,
                                             { textAlign: "left" },
-                                        ]}
-                                    >
+                                        ]}>
                                         {element}
                                     </Text>
                                 );
@@ -229,16 +215,14 @@ const LCM = () => {
                     alignItems: "center",
                     padding: 20,
                     display: opacity.three ? "flex" : "none",
-                }}
-            >
+                }}>
                 <View>
                     <Text
                         style={{
                             color: colors.text,
                             fontSize: 25,
                             textAlign: "center",
-                        }}
-                    >
+                        }}>
                         HCF of ({decimal.numinator})
                     </Text>
                     <View
@@ -252,8 +236,7 @@ const LCM = () => {
                             color: colors.text,
                             fontSize: 25,
                             textAlign: "center",
-                        }}
-                    >
+                        }}>
                         {decimal.denominator}
                     </Text>
                 </View>
@@ -263,8 +246,7 @@ const LCM = () => {
                             color: colors.text,
                             fontSize: 25,
                             textAlign: "center",
-                        }}
-                    >
+                        }}>
                         {decimal.nuLcm}
                     </Text>
                     <View
@@ -278,22 +260,22 @@ const LCM = () => {
                             color: colors.text,
                             fontSize: 25,
                             textAlign: "center",
-                        }}
-                    >
+                        }}>
                         {decimal.denominator}
                     </Text>
                 </View>
             </View>
             <View
-                style={{ padding: 25, display: opacity.four ? "flex" : "none" }}
-            >
+                style={{
+                    padding: 25,
+                    display: opacity.four ? "flex" : "none",
+                }}>
                 <Text
                     style={{
                         fontSize: 35,
                         textAlign: "center",
                         color: colors.secondary,
-                    }}
-                >
+                    }}>
                     Can't calculate
                 </Text>
             </View>

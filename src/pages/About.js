@@ -3,36 +3,30 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import Appdata from "../../app.json";
 import { useTheme } from "react-native-paper";
-import { useFonts } from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 const icon = require("../../assets/icon.png");
 const About = ({ navigation }) => {
     const { colors } = useTheme();
-    let [fontsLoaded] = useFonts({
-        Flamante: require("../../assets/fonts/Flamante.ttf"),
-    });
 
     const aboutText = [styles.aboutText, { color: colors.text }];
     const hyperlinkText = [styles.hyperlinkText, { color: colors.secondary }];
     const aboutAppName = [styles.aboutAppName, { color: colors.secondary }];
 
-    if (!fontsLoaded) return null;
     return (
         <View
             style={{
                 flex: 1,
                 backgroundColor: colors.backgroundColor,
-            }}
-        >
+            }}>
             <Pressable
                 style={styles.cross}
                 onPress={() => {
                     navigation.navigate("Home");
-                }}
-            >
+                }}>
                 <Ionicons
                     style={styles.crossImg}
-                    name="ios-close"
+                    name="close"
                     size={35}
                     color={colors.secondary}
                 />
@@ -41,7 +35,7 @@ const About = ({ navigation }) => {
                 <Text style={aboutAppName}>Calculator</Text>
                 <Image style={styles.aboutIcon} source={icon} />
                 <Text style={[styles.version, { color: colors.text }]}>
-                    Version {Appdata.expo.version}
+                    Version {Appdata.version}
                 </Text>
                 <View style={styles.flexRow}>
                     <Text style={[aboutAppName, { fontSize: 18 }]}>by </Text>
@@ -79,8 +73,7 @@ const About = ({ navigation }) => {
                         Linking.openURL(
                             "https://github.com/Sou-gata/react-native-calculator"
                         )
-                    }
-                >
+                    }>
                     Github
                 </Text>
             </View>
@@ -93,8 +86,7 @@ const About = ({ navigation }) => {
                             Linking.openURL(
                                 "https://www.facebook.com/sougata76/"
                             )
-                        }
-                    >
+                        }>
                         Facebook
                     </Text>
                     <Text
@@ -103,9 +95,28 @@ const About = ({ navigation }) => {
                             Linking.openURL(
                                 "https://www.instagram.com/sougata_76/"
                             )
-                        }
-                    >
+                        }>
                         Instagram
+                    </Text>
+                </View>
+                <View style={styles.flexRow}>
+                    <Text
+                        style={[hyperlinkText, { margin: 10 }]}
+                        onPress={() =>
+                            Linking.openURL(
+                                "https://www.linkedin.com/in/sougata76/"
+                            )
+                        }>
+                        Linkedin
+                    </Text>
+                    <Text
+                        style={[hyperlinkText, { margin: 10 }]}
+                        onPress={() =>
+                            Linking.openURL(
+                                "mailto:sougatatalukdar77@gmail.com"
+                            )
+                        }>
+                        Email
                     </Text>
                 </View>
             </View>

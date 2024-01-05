@@ -9,6 +9,7 @@ const CustomInput = ({
     keyboardType,
     maxLength,
     onEndEditing,
+    style = {},
 }) => {
     const { colors } = useTheme();
     const empty = () => {};
@@ -24,9 +25,14 @@ const CustomInput = ({
             selectionColor={colors.secondary}
             activeOutlineColor={colors.secondary}
             textColor={colors.text}
-            style={{ textAlign: "center", width: width || 150 }}
+            style={{
+                textAlign: "center",
+                width: width || 150,
+                ...style,
+            }}
             maxLength={maxLength}
             onEndEditing={onEndEditing || empty}
+            outlineStyle={{ borderWidth: 0.5 }}
         />
     );
 };

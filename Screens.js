@@ -30,6 +30,8 @@ import TimeCalculator from "./src/pages/TimeCalculator";
 import SurfaceAreaAndVolume from "./src/pages/SurfaceAreaAndVolume";
 import UsefulFormulas from "./src/pages/UsefulFormulas";
 import EMICalculator from "./src/pages/EMICalculator";
+import MatrixMultiply from "./src/pages/MatrixMultiply";
+import PostFix from "./src/pages/PostFix";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -229,6 +231,22 @@ const Screens = () => {
                 options={{
                     ...options,
                     title: "EMI Calculator",
+                }}
+            />
+            <Stack.Screen
+                name="MatrixMultiplication"
+                component={MatrixMultiply}
+                options={{
+                    ...options,
+                    title: "Matrix Multiplication",
+                }}
+            />
+            <Stack.Screen
+                name="Postfix"
+                component={PostFix}
+                options={{
+                    ...options,
+                    title: "Infix To Postfix",
                 }}
             />
         </Stack.Navigator>

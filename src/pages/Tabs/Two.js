@@ -29,8 +29,7 @@ const Two = ({ navigation }) => {
                                 let com = (
                                     <View
                                         key={i}
-                                        style={styles.homeBtnContainer}
-                                    >
+                                        style={styles.homeBtnContainer}>
                                         <View style={styles.pressable}>
                                             <Pressable
                                                 style={styles.homeBtn}
@@ -39,13 +38,11 @@ const Two = ({ navigation }) => {
                                                     navigation.navigate(
                                                         data[i].name
                                                     );
-                                                }}
-                                            >
+                                                }}>
                                                 <View
                                                     style={{
                                                         alignItems: "center",
-                                                    }}
-                                                >
+                                                    }}>
                                                     <Image
                                                         style={{
                                                             marginBottom: 10,
@@ -62,8 +59,7 @@ const Two = ({ navigation }) => {
                                                             {
                                                                 color: colors.text,
                                                             },
-                                                        ]}
-                                                    >
+                                                        ]}>
                                                         {data[i].text}
                                                     </Text>
                                                 </View>

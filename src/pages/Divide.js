@@ -1,15 +1,11 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { devide, wp } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
-import { useFonts } from "expo-font";
 import CustomInput from "../components/CustomInput";
 
 const Divide = () => {
-    let [fontsLoaded] = useFonts({
-        RobotoMono_400Regular: require("../../assets/fonts/RobotoMono_400Regular.ttf"),
-    });
     const { colors } = useTheme();
 
     const mathText = [styles.mathText, { color: colors.text }];
@@ -40,18 +36,16 @@ const Divide = () => {
             }
         }
     };
-    if (!fontsLoaded) return null;
     return (
         <View
             style={{
                 backgroundColor: colors.backgroundColor,
                 flex: 1,
-            }}
-        >
+            }}>
             <View style={styles.container}>
                 <View style={styles.flexRow}>
                     <CustomInput
-                        onChangeText={(e) => {
+                        onChangeText={e => {
                             onChangeText({ ...text, a: e });
                         }}
                         value={text.a}
@@ -60,7 +54,7 @@ const Divide = () => {
                     />
                     <Text style={mathText}>÷</Text>
                     <CustomInput
-                        onChangeText={(e) => {
+                        onChangeText={e => {
                             onChangeText({ ...text, b: e });
                         }}
                         value={text.b}
@@ -73,8 +67,7 @@ const Divide = () => {
                         mode="contained"
                         onPress={calculatePress}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -83,8 +76,9 @@ const Divide = () => {
                 <View style={styles.divideMath}>
                     <Text style={mathText}>{divideAns.numberB}</Text>
                     <View
-                        style={vLine ? varticleLine : { display: "none" }}
-                    ></View>
+                        style={
+                            vLine ? varticleLine : { display: "none" }
+                        }></View>
                     <View>
                         <Text style={mathText}>{divideAns.numberA}</Text>
                         {(() => {
@@ -130,8 +124,9 @@ const Divide = () => {
                         })()}
                     </View>
                     <View
-                        style={vLine ? varticleLine : { display: "none" }}
-                    ></View>
+                        style={
+                            vLine ? varticleLine : { display: "none" }
+                        }></View>
                     <Text style={mathText}>{divideAns.result}</Text>
                 </View>
             </ScrollView>

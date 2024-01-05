@@ -4,7 +4,7 @@ import calBtns from "../../helpers/calBtns";
 import { lastChar, bracManage } from "../../helpers/functions";
 import { useTheme, Menu, Text } from "react-native-paper";
 import ThemeSwitch from "../../components/ThemeSwitch";
-import { Entypo } from "@expo/vector-icons";
+import Entypo from "react-native-vector-icons/Entypo";
 import { wp, hp } from "../../helpers/functions";
 
 const One = ({ navigation }) => {
@@ -79,7 +79,7 @@ const One = ({ navigation }) => {
 
     useEffect(calAns, [evalStr, mode]);
 
-    const calBtnPress = (btn) => {
+    const calBtnPress = btn => {
         let str = btn.str;
         let type = btn.type;
         let txt = btn.text;
@@ -176,8 +176,7 @@ const One = ({ navigation }) => {
         <View
             style={{
                 backgroundColor: colors.backgroundColor,
-            }}
-        >
+            }}>
             <View style={styles.main}>
                 <ThemeSwitch colors={colors} />
                 <View style={styles.menu}>
@@ -191,8 +190,7 @@ const One = ({ navigation }) => {
                                 size={24}
                                 color={colors.secondary}
                             />
-                        }
-                    >
+                        }>
                         <Menu.Item
                             style={{
                                 backgroundColor: colors.elevation.leve2,
@@ -247,8 +245,7 @@ const One = ({ navigation }) => {
                     style={[
                         styles.allBtns,
                         { backgroundColor: colors.numPadBg },
-                    ]}
-                >
+                    ]}>
                     {(() => {
                         let btns = [];
                         for (let i = 0; i < calBtns.length; i++) {
@@ -260,8 +257,7 @@ const One = ({ navigation }) => {
                                         key={i}
                                         onPress={() => calBtnPress(btn)}
                                         style={styles.calBtn}
-                                        android_ripple={androidRipple}
-                                    >
+                                        android_ripple={androidRipple}>
                                         <View
                                             style={[
                                                 styles.calEqual,
@@ -269,14 +265,12 @@ const One = ({ navigation }) => {
                                                     backgroundColor:
                                                         colors.secondary,
                                                 },
-                                            ]}
-                                        >
+                                            ]}>
                                             <Text
                                                 style={{
                                                     color: colors.backgroundColor,
                                                     fontSize: 22,
-                                                }}
-                                            >
+                                                }}>
                                                 {btn.text}
                                             </Text>
                                         </View>
@@ -289,8 +283,7 @@ const One = ({ navigation }) => {
                                         onPress={() => changeMode(btn)}
                                         style={styles.calBtn}
                                         android_ripple={androidRipple}
-                                        android_disableSound={true}
-                                    >
+                                        android_disableSound={true}>
                                         <Text
                                             style={[
                                                 styles.calText,
@@ -298,8 +291,7 @@ const One = ({ navigation }) => {
                                                     color:
                                                         colors.secondary + "80",
                                                 },
-                                            ]}
-                                        >
+                                            ]}>
                                             {mode}
                                         </Text>
                                     </Pressable>
@@ -311,8 +303,7 @@ const One = ({ navigation }) => {
                                         onPress={() => calBtnPress(btn)}
                                         style={styles.calBtn}
                                         android_ripple={androidRipple}
-                                        android_disableSound={true}
-                                    >
+                                        android_disableSound={true}>
                                         <Text
                                             style={
                                                 btn.primaryColor
@@ -328,8 +319,7 @@ const One = ({ navigation }) => {
                                                               color: colors.text,
                                                           },
                                                       ]
-                                            }
-                                        >
+                                            }>
                                             {btn.text}
                                         </Text>
                                     </Pressable>

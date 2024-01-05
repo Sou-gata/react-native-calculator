@@ -10,10 +10,10 @@ import {
 import calBtns from "../helpers/calBtns";
 import { Dimensions } from "react-native";
 
-export const wp = (str) => {
+export const wp = str => {
     return (Dimensions.get("window").width * parseFloat(str)) / 100;
 };
-export const hp = (str) => {
+export const hp = str => {
     return (Dimensions.get("window").height * parseFloat(str)) / 100;
 };
 
@@ -278,7 +278,7 @@ export function decimalHcf(numbersArr) {
 }
 
 export function inputNumbers(str) {
-    let numberSet = str;
+    let numberSet = str.trim();
     numberSet = numberSet.split(" ");
     let inputShow = "";
     for (let i = 0; i < numberSet.length; i++) {
@@ -671,19 +671,21 @@ export function lastChar(str) {
     return type;
 }
 
-export function equSolve(a1, a2, b1, b2, c1, c2, setFinalAns) {
+export function equSolve(
+    a1 = 0,
+    a2 = 0,
+    b1 = 0,
+    b2 = 0,
+    c1 = 0,
+    c2 = 0,
+    setFinalAns
+) {
     a1 = parseFloat(a1);
     a2 = parseFloat(a2);
     b1 = parseFloat(b1);
     b2 = parseFloat(b2);
     c1 = parseFloat(c1);
     c2 = parseFloat(c2);
-    if (isNaN(a1)) a1 = 0;
-    if (isNaN(a2)) a2 = 0;
-    if (isNaN(b1)) b1 = 0;
-    if (isNaN(b2)) b2 = 0;
-    if (isNaN(c1)) c1 = 0;
-    if (isNaN(c2)) c2 = 0;
     let numeratorX = b1 * c2 - b2 * c1;
     let numeratorY = c1 * a2 - c2 * a1;
     let denominator = b2 * a1 - b1 * a2;
@@ -837,13 +839,10 @@ function simplifyAns(fstPart, secPart, deno) {
     };
 }
 
-export function solveQuadraticEqu(a, b, c) {
+export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
     a = parseFloat(a);
     b = parseFloat(b);
     c = parseFloat(c);
-    if (isNaN(a)) a = 0;
-    if (isNaN(b)) b = 0;
-    if (isNaN(c)) c = 0;
     if (a == 0 && b == 0) return false;
     let hasImgRoot = false;
     let rootOne = "";
@@ -943,13 +942,10 @@ export function solveQuadraticEqu(a, b, c) {
     return { rootOne, rootTwo };
 }
 
-export function solveQuadraticDec(a, b, c) {
+export function solveQuadraticDec(a = 0, b = 0, c = 0) {
     a = parseFloat(a);
     b = parseFloat(b);
     c = parseFloat(c);
-    if (isNaN(a)) a = 0;
-    if (isNaN(b)) b = 0;
-    if (isNaN(c)) c = 0;
     let d = b * b - 4 * a * c;
     let hasImgRoot = false;
     let rootOne, rootTwo;
@@ -983,7 +979,7 @@ export function solveQuadraticDec(a, b, c) {
     return { rootOne, rootTwo };
 }
 
-function simplifyTime(d, h, m, s) {
+function simplifyTime(d = 0, h = 0, m = 0, s = 0) {
     let day = parseFloat(d);
     let hou = parseFloat(h);
     let min = parseFloat(m);
@@ -1522,4 +1518,127 @@ export function areaAndVolume(data) {
     if (volume) volume = fixed(volume);
     else volume = { ans: undefined, isGreater: false };
     return { area, volume };
+}
+
+export function matrixMultiply(matrix, info) {
+    const { oneRow, oneCol, twoCol } = info;
+    const { one, two } = matrix;
+    let matrixOne = [];
+    let matrixTwo = [];
+    for (let i = 0; i < oneCol; i++) {
+        const col = one[i + 1 + ""].trim().split(" ");
+        matrixOne.push(col);
+    }
+    for (let i = 0; i < twoCol; i++) {
+        const col = two[i + 1 + ""].trim().split(" ");
+        matrixTwo.push(col);
+    }
+    for (let i = 0; i < matrixOne.length; i++) {
+        for (let j = 0; j < oneCol; j++) {
+            if (matrixOne[i][j]) {
+                matrixOne[i][j] = parseFloat(matrixOne[i][j]);
+            } else matrixOne[i][j] = 0;
+        }
+    }
+    for (let i = 0; i < matrixTwo.length; i++) {
+        for (let j = 0; j < twoCol; j++) {
+            if (matrixTwo[i][j] && !isNaN(parseFloat(matrixTwo[i][j]))) {
+                matrixTwo[i][j] = parseFloat(matrixTwo[i][j]);
+            } else matrixTwo[i][j] = 0;
+        }
+    }
+    let ans = [];
+    for (let i = 0; i < oneRow; i++) {
+        ans.push([]);
+    }
+    for (let i = 0; i < oneRow; i++) {
+        for (let j = 0; j < twoCol; j++) {
+            ans[i][j] = 0;
+            for (let k = 0; k < oneCol; k++) {
+                ans[i][j] += matrixOne[i][k] * matrixTwo[k][j];
+            }
+        }
+    }
+    let newMatrix = [];
+    for (let j = 0; j < twoCol; j++) {
+        let x = [];
+        for (let i = 0; i < oneRow; i++) {
+            x.push(ans[i][j]);
+        }
+        newMatrix.push(x);
+    }
+    return { newMatrix, matrixOne, matrixTwo };
+}
+
+export function infixToPostfix(infix) {
+    const pOne = ["^"];
+    const pTwo = ["*", "/"];
+    const pThree = ["+", "-"];
+    let str = removeSpace(infix).toUpperCase();
+    let ans = "";
+    let stack = [];
+    str = str.split("");
+    str.unshift("(");
+    str.push(")");
+    let returnData = [];
+    if (str.length == 2)
+        return {
+            data: [],
+            infix: "",
+            postfix: "",
+        };
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] == "(") {
+            stack.push(str[i]);
+        } else if (str[i] == ")") {
+            while (stack[stack.length - 1] != "(") {
+                ans += stack.pop();
+            }
+            stack.pop();
+        } else if (pOne.includes(str[i])) {
+            stack.push(str[i]);
+        } else if (pTwo.includes(str[i])) {
+            let j = stack.length - 1;
+            while (stack[j] != "(") {
+                if (
+                    pOne.includes(stack[stack.length - 1]) ||
+                    pTwo.includes(stack[stack.length - 1])
+                ) {
+                    ans += stack.pop();
+                }
+                j--;
+            }
+            stack.push(str[i]);
+        } else if (pThree.includes(str[i])) {
+            let j = stack.length - 1;
+            while (stack[j] != "(") {
+                if (
+                    pOne.includes(stack[stack.length - 1]) ||
+                    pTwo.includes(stack[stack.length - 1]) ||
+                    pThree.includes(stack[stack.length - 1])
+                ) {
+                    ans += stack.pop();
+                }
+                j--;
+            }
+            stack.push(str[i]);
+        } else {
+            ans += str[i];
+        }
+        returnData.push([str[i], stack.join(""), ans]);
+    }
+    return {
+        data: returnData,
+        infix: removeSpace(infix).toUpperCase(),
+        postfix: removeSpace(ans),
+    };
+}
+function removeSpace(str) {
+    let ans = "";
+    for (let i = 0; i < str.length; i++) {
+        if (str.charAt(i) != " ") {
+            ans += str[i];
+        }
+    }
+    return ans;
 }

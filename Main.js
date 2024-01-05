@@ -1,6 +1,6 @@
 import { Provider, MD3LightTheme, MD3DarkTheme } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "react-native";
+import { StatusBar, Text } from "react-native";
 import { useContext } from "react";
 import Screens from "./Screens";
 import { Context } from "./Context";
@@ -49,6 +49,7 @@ const Main = () => {
                     style="light"
                     backgroundColor={theme.colors.primary}
                 />
+                {/* <Text>Sougata</Text> */}
                 <Screens />
             </Provider>
         </NavigationContainer>

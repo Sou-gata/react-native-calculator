@@ -2,7 +2,7 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { Feather } from "@expo/vector-icons";
+import Feather from "react-native-vector-icons/Feather";
 
 const AgeCalculator = () => {
     const { colors } = useTheme();
@@ -19,7 +19,7 @@ const AgeCalculator = () => {
         to: undefined,
     });
     const [age, setAge] = useState({ days: 0, months: 0, years: 0 });
-    const dateToStr = (day) => {
+    const dateToStr = day => {
         let today = day;
         const dd = String(today.getDate()).padStart(2, "0");
         const mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -35,14 +35,14 @@ const AgeCalculator = () => {
         setForCal({ from: dt, to: dt });
     }, []);
 
-    const confirmOne = (dat) => {
+    const confirmOne = dat => {
         let ans = dateToStr(dat);
         let d = ans.today;
         setDate({ ...date, from: d });
         setVisible({ ...visible, from: false });
         setForCal({ ...forCal, from: ans.dt });
     };
-    const confirmTo = (dat) => {
+    const confirmTo = dat => {
         let ans = dateToStr(dat);
         let d = ans.today;
         setDate({ ...date, to: d });
@@ -102,15 +102,13 @@ const AgeCalculator = () => {
                     <TouchableOpacity
                         onPress={() => {
                             setVisible({ ...visible, from: true });
-                        }}
-                    >
+                        }}>
                         <View style={styles.flexRow}>
                             <Text
                                 style={{
                                     color: colors.secondary,
                                     fontSize: 20,
-                                }}
-                            >
+                                }}>
                                 {date.from}
                             </Text>
                             <Feather
@@ -133,15 +131,13 @@ const AgeCalculator = () => {
                     <TouchableOpacity
                         onPress={() => {
                             setVisible({ ...visible, to: true });
-                        }}
-                    >
+                        }}>
                         <View style={styles.flexRow}>
                             <Text
                                 style={{
                                     color: colors.secondary,
                                     fontSize: 20,
-                                }}
-                            >
+                                }}>
                                 {date.to}
                             </Text>
                             <Feather
@@ -164,8 +160,7 @@ const AgeCalculator = () => {
                         mode="contained"
                         onPress={calculateAge}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -175,11 +170,9 @@ const AgeCalculator = () => {
                             flexDirection: "row",
                             alignItems: "center",
                             height: 130,
-                        }}
-                    >
+                        }}>
                         <Text
-                            style={{ fontSize: 100, color: colors.secondary }}
-                        >
+                            style={{ fontSize: 100, color: colors.secondary }}>
                             {age.years}
                         </Text>
                         <Text style={{ fontSize: 20, color: colors.text }}>
@@ -187,8 +180,7 @@ const AgeCalculator = () => {
                         </Text>
                     </View>
                     <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                    >
+                        style={{ flexDirection: "row", alignItems: "center" }}>
                         <Text style={{ fontSize: 40, color: colors.text }}>
                             {age.months}
                         </Text>

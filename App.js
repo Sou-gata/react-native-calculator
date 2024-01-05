@@ -1,10 +1,19 @@
-import Main from "./Main";
+import { useEffect } from "react";
+import RNBootSplash from "react-native-bootsplash";
 import State from "./Context";
+import Main from "./Main";
 
-const App = () => (
-    <State>
-        <Main />
-    </State>
-);
+const App = () => {
+    useEffect(() => {
+        setTimeout(() => {
+            RNBootSplash.hide({ fade: true });
+        }, 1500);
+    }, []);
+    return (
+        <State>
+            <Main />
+        </State>
+    );
+};
 
 export default App;

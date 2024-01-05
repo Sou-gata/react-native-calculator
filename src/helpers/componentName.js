@@ -139,6 +139,18 @@ const componentName = [
     },
     {
         id: "24",
+        name: "MatrixMultiplication",
+        text: "Matrix Multiplication",
+        path: require("../../assets/icons/matrix.png"),
+    },
+    {
+        id: "25",
+        name: "Postfix",
+        text: "Infix To Postfix",
+        path: require("../../assets/icons/postfix.png"),
+    },
+    {
+        id: "26",
         name: "UsefulFormula",
         text: "Useful Formulas",
         path: require("../../assets/icons/formula.png"),

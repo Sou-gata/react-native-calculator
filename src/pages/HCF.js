@@ -11,13 +11,9 @@ import {
 } from "../helpers/functions";
 import { useTheme, Button, Text, DataTable } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
-import { useFonts } from "expo-font";
 
 const HCF = () => {
     const { colors } = useTheme();
-    let [fontsLoaded] = useFonts({
-        RobotoMono_400Regular: require("../../assets/fonts/RobotoMono_400Regular.ttf"),
-    });
     const [text, onChangeText] = useState("");
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState({
@@ -38,7 +34,7 @@ const HCF = () => {
         nuHcf: undefined,
     });
 
-    const arrayToString = (array) => {
+    const arrayToString = array => {
         let element = "";
         for (let j = 0; j < array.length; j++) {
             if (j < array.length - 1) {
@@ -89,7 +85,6 @@ const HCF = () => {
             });
         }
     };
-    if (!fontsLoaded) return null;
     const textStyle = {
         color: colors.text,
         fontSize: 22,
@@ -114,8 +109,7 @@ const HCF = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -124,14 +118,12 @@ const HCF = () => {
                 style={[
                     styles.ansDiv,
                     { display: opacity.two == 1 ? "flex" : "none" },
-                ]}
-            >
+                ]}>
                 <Text
                     style={[
                         styles.textStyleOrange,
                         { color: colors.secondary },
-                    ]}
-                >
+                    ]}>
                     Can't calculate
                 </Text>
             </View>
@@ -139,8 +131,7 @@ const HCF = () => {
                 style={[
                     styles.ansDiv,
                     { display: opacity.one ? "flex" : "none" },
-                ]}
-            >
+                ]}>
                 <Text style={[styles.textStyle, { color: colors.text }]}>
                     HCF of {input} is
                 </Text>
@@ -148,21 +139,18 @@ const HCF = () => {
                     style={[
                         styles.textStyleOrange,
                         { color: colors.secondary },
-                    ]}
-                >
+                    ]}>
                     {ans}
                 </Text>
             </View>
             <ScrollView
                 style={{
                     display: opacity.three == 1 ? "flex" : "none",
-                }}
-            >
+                }}>
                 <View
                     style={{
                         paddingHorizontal: 10,
-                    }}
-                >
+                    }}>
                     <DataTable>
                         {(() => {
                             let com = [];
@@ -175,8 +163,7 @@ const HCF = () => {
                                         style={{
                                             borderBottomWidth: 0,
                                             marginVertical: 2.5,
-                                        }}
-                                    >
+                                        }}>
                                         <View style={{ flexShrink: 1 }}>
                                             <Text
                                                 style={{
@@ -184,22 +171,19 @@ const HCF = () => {
                                                     fontSize: 22,
                                                     fontFamily:
                                                         "RobotoMono_400Regular",
-                                                }}
-                                            >
+                                                }}>
                                                 {num} ={" "}
                                             </Text>
                                         </View>
                                         <View
                                             style={{
                                                 flexShrink: 1,
-                                            }}
-                                        >
+                                            }}>
                                             <Text
                                                 style={{
                                                     color: colors.text,
                                                     fontSize: 22,
-                                                }}
-                                            >
+                                                }}>
                                                 {fact}
                                             </Text>
                                         </View>
@@ -224,8 +208,7 @@ const HCF = () => {
                                     style={{
                                         flexDirection: "row",
                                         paddingHorizontal: 20,
-                                    }}
-                                >
+                                    }}>
                                     <View>
                                         <Text style={textStyle}>HCF = </Text>
                                     </View>
@@ -243,8 +226,7 @@ const HCF = () => {
                     padding: 20,
                     display: opacity.four === 0 ? "none" : "flex",
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <View>
                     <Text style={textStyle}>HCF of ({fraction.numinator})</Text>
                     <View

@@ -1,12 +1,17 @@
 import { View, Pressable, Animated, StyleSheet } from "react-native";
 import { useRef, useContext } from "react";
-import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { Context } from "../../Context";
 
 const ThemeSwitch = ({ colors }) => {
-    const animOne = useRef(new Animated.Value(0)).current;
-    const animTwo = useRef(new Animated.Value(1)).current;
     const state = useContext(Context);
+    const animOne = useRef(
+        new Animated.Value(state.mode === "dark" ? 0 : 1)
+    ).current;
+    const animTwo = useRef(
+        new Animated.Value(state.mode === "dark" ? 1 : 0)
+    ).current;
 
     const lightIn = () => {
         Animated.timing(animOne, {
@@ -51,17 +56,15 @@ const ThemeSwitch = ({ colors }) => {
                 top: 10,
                 width: 24,
                 height: 24,
-            }}
-        >
+            }}>
             <Pressable
                 onPress={() => {
-                    if (state.mode == "dark") lightIn();
+                    if (state.mode === "dark") lightIn();
                     else darkIn();
                     state.updateTheme(
                         state.mode === "light" ? "dark" : "light"
                     );
-                }}
-            >
+                }}>
                 <Animated.View
                     style={[
                         styles.iconContainer,
@@ -72,8 +75,7 @@ const ThemeSwitch = ({ colors }) => {
                                 { rotate: rotateOne },
                             ],
                         },
-                    ]}
-                >
+                    ]}>
                     <MaterialIcons
                         name="brightness-7"
                         size={24}
@@ -90,8 +92,7 @@ const ThemeSwitch = ({ colors }) => {
                                 { rotate: rotateTwo },
                             ],
                         },
-                    ]}
-                >
+                    ]}>
                     <Ionicons name="moon" size={24} color={colors.secondary} />
                 </Animated.View>
             </Pressable>

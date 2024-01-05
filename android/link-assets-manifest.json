@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Flamante.ttf",
+      "sha1": "9e48c9b8cd093ff104bf3b8ea243c0d1a9a2100d"
+    },
+    {
+      "path": "assets/fonts/RobotoMono_400Regular.ttf",
+      "sha1": "10459dd11ec5adb59f3775b062dc06c4abe70a3a"
+    }
+  ]
+}

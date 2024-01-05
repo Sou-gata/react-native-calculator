@@ -1,7 +1,7 @@
 import { View, Pressable, ScrollView, StyleSheet } from "react-native";
 import data from "../helpers/versionInfo";
 import { useTheme, Text } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const RenderItem = ({ item, colors }) => {
     return (
@@ -15,8 +15,7 @@ const RenderItem = ({ item, colors }) => {
                             marginBottom: 10,
                             color: colors.secondary,
                         },
-                    ]}
-                >
+                    ]}>
                     {item.ver}
                 </Text>
             </View>
@@ -30,8 +29,7 @@ const RenderItem = ({ item, colors }) => {
                                     styles.aboutText,
                                     { marginLeft: 15, color: colors.text },
                                 ]}
-                                key={i}
-                            >
+                                key={i}>
                                 {"\u2022"}
                                 {"  "}
                                 {item.changes[i]}
@@ -54,19 +52,17 @@ const WhatsNew = ({ navigation }) => {
                 style={styles.cross}
                 onPress={() => {
                     navigation.navigate("Home");
-                }}
-            >
+                }}>
                 <Ionicons
                     style={styles.crossImg}
-                    name="ios-close"
+                    name="close"
                     size={35}
                     color={colors.secondary}
                 />
             </Pressable>
             <ScrollView
                 style={{ padding: 30 }}
-                showsVerticalScrollIndicator={false}
-            >
+                showsVerticalScrollIndicator={false}>
                 <View style={{ marginBottom: 45 }}>
                     {(() => {
                         let allCom = [];

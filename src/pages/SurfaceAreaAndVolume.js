@@ -1,7 +1,7 @@
 import { StyleSheet, View, Pressable } from "react-native";
 import { useState } from "react";
 import { useTheme, Text, RadioButton, Menu, Button } from "react-native-paper";
-import { AntDesign } from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import CustomInput from "../components/CustomInput";
 import { areaAndVolume } from "../helpers/functions";
 
@@ -134,8 +134,7 @@ const SurfaceArea = () => {
                                 { borderColor: colors.secondary },
                             ]}
                             onPress={openMenu}
-                            android_ripple={androidRipple}
-                        >
+                            android_ripple={androidRipple}>
                             <View style={styles.openBtn}>
                                 <Text
                                     style={{
@@ -143,8 +142,7 @@ const SurfaceArea = () => {
                                         color: colors.text,
                                         padding: 10,
                                         textAlign: "center",
-                                    }}
-                                >
+                                    }}>
                                     {selected.label}
                                 </Text>
                                 <AntDesign
@@ -154,8 +152,7 @@ const SurfaceArea = () => {
                                 />
                             </View>
                         </Pressable>
-                    }
-                >
+                    }>
                     {btns.map((btn, i) => (
                         <Menu.Item
                             key={i}
@@ -177,23 +174,20 @@ const SurfaceArea = () => {
                         flexDirection: "row",
                         alignItems: "center",
                         justifyContent: "center",
-                    }}
-                >
+                    }}>
                     <Text style={{ fontSize: 16, color: colors.text }}>
                         Is hollow ?
                     </Text>
                     <RadioButton.Group
                         value={isHollow}
-                        onValueChange={(val) => {
+                        onValueChange={val => {
                             setIsHollow(val);
-                        }}
-                    >
+                        }}>
                         <View
                             style={{
                                 flexDirection: "row",
                                 alignItems: "center",
-                            }}
-                        >
+                            }}>
                             <RadioButton.Item
                                 label="Yes"
                                 value={1}
@@ -231,21 +225,19 @@ const SurfaceArea = () => {
                             alignItems: "center",
                             justifyContent: "center",
                             marginTop: 20,
-                        }}
-                    >
+                        }}>
                         <Text
                             style={{
                                 fontSize: 16,
                                 color: colors.text,
                                 textTransform: "capitalize",
-                            }}
-                        >
+                            }}>
                             {field} ={" "}
                         </Text>
                         <CustomInput
                             width={90}
                             value={input[field]}
-                            onChangeText={(e) => {
+                            onChangeText={e => {
                                 setInput({ ...input, [field]: e });
                             }}
                             placeholder={field}
@@ -258,8 +250,7 @@ const SurfaceArea = () => {
                     mode="contained"
                     onPress={() => calculate()}
                     buttonColor={colors.secondary}
-                    textColor={"white"}
-                >
+                    textColor={"white"}>
                     Calculate
                 </Button>
             </View>

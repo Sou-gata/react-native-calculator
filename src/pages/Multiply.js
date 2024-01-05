@@ -3,14 +3,10 @@ import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { multiple, wp } from "../helpers/functions";
 import { decCheck } from "../helpers/numbersCheck";
-import { useFonts } from "expo-font";
 import CustomInput from "../components/CustomInput";
 
 const Multiply = () => {
     const { colors } = useTheme();
-    let [fontsLoaded] = useFonts({
-        RobotoMono_400Regular: require("../../assets/fonts/RobotoMono_400Regular.ttf"),
-    });
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [ans, setAns] = useState({});
     const [opacity, setOpacity] = useState(0);
@@ -26,18 +22,16 @@ const Multiply = () => {
             setOpacity(1);
         }
     };
-    if (!fontsLoaded) return null;
     return (
         <View
             style={{
                 backgroundColor: colors.backgroundColor,
                 flex: 1,
-            }}
-        >
+            }}>
             <View style={styles.container}>
                 <View style={styles.flexRow}>
                     <CustomInput
-                        onChangeText={(e) => {
+                        onChangeText={e => {
                             onChangeText({ ...text, a: e });
                         }}
                         value={text.a}
@@ -48,7 +42,7 @@ const Multiply = () => {
                         ×
                     </Text>
                     <CustomInput
-                        onChangeText={(e) => {
+                        onChangeText={e => {
                             onChangeText({ ...text, b: e });
                         }}
                         value={text.b}
@@ -61,8 +55,7 @@ const Multiply = () => {
                         mode="contained"
                         onPress={calculatePress}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -71,16 +64,14 @@ const Multiply = () => {
                 <View
                     style={
                         opacity ? { alignItems: "center" } : { display: "none" }
-                    }
-                >
+                    }>
                     <View style={{ padding: 20 }}>
                         <View style={{ alignItems: "flex-end" }}>
                             <Text
                                 style={[
                                     styles.mathText,
                                     { color: colors.text },
-                                ]}
-                            >
+                                ]}>
                                 {ans.numberA}
                             </Text>
                         </View>
@@ -88,22 +79,19 @@ const Multiply = () => {
                             style={{
                                 flexDirection: "row",
                                 justifyContent: "space-between",
-                            }}
-                        >
+                            }}>
                             <Text
                                 style={[
                                     styles.mathText,
                                     { color: colors.text },
-                                ]}
-                            >
+                                ]}>
                                 x
                             </Text>
                             <Text
                                 style={[
                                     styles.mathText,
                                     { color: colors.text },
-                                ]}
-                            >
+                                ]}>
                                 {ans.numberB}
                             </Text>
                         </View>
@@ -111,8 +99,7 @@ const Multiply = () => {
                             style={[
                                 styles.hrLine,
                                 { backgroundColor: colors.text },
-                            ]}
-                        ></View>
+                            ]}></View>
                         <View style={{ alignItems: "flex-end" }}>
                             {(() => {
                                 let element = [];
@@ -142,8 +129,7 @@ const Multiply = () => {
                                                     {
                                                         color: colors.text,
                                                     },
-                                                ]}
-                                            >
+                                                ]}>
                                                 {innerText}
                                             </Text>
                                         );
@@ -156,15 +142,13 @@ const Multiply = () => {
                             style={[
                                 styles.hrLine,
                                 { backgroundColor: colors.text },
-                            ]}
-                        ></View>
+                            ]}></View>
                         <View style={{ alignItems: "flex-end" }}>
                             <Text
                                 style={[
                                     styles.mathText,
                                     { color: colors.text },
-                                ]}
-                            >
+                                ]}>
                                 {ans.ans}
                             </Text>
                         </View>

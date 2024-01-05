@@ -1,41 +1,5 @@
 {
-    "expo": {
-        "name": "Calculator",
-        "slug": "Sougata",
-        "version": "1.3.4",
-        "orientation": "portrait",
-        "icon": "./assets/icon.png",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./assets/splash.png",
-            "resizeMode": "cover",
-            "backgroundColor": "#111111"
-        },
-        "updates": {
-            "fallbackToCacheTimeout": 0,
-            "url": "https://u.expo.dev/3665b1a7-58af-40ee-bcca-d9c1cc4ea9dc"
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png"
-            },
-            "package": "com.sougata.calculator",
-            "versionCode": 3
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "extra": {
-            "eas": {
-                "projectId": "3665b1a7-58af-40ee-bcca-d9c1cc4ea9dc"
-            }
-        },
-        "runtimeVersion": {
-            "policy": "sdkVersion"
-        }
-    }
+    "name": "Calculator",
+    "displayName": "Calculator",
+    "version": "1.4.0"
 }
