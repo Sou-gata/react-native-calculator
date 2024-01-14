@@ -29,13 +29,15 @@ keytool -genkey -v -keystore my-upload-key.keystore -alias my-key-alias -keyalg 
 ```
 
 Put the generated keystore file inside android/app folder.<br/>
-Now rename <code>keystore.sample.properties</code> to <code>keystore.properties</code> inside android folder and modify the credentials with your own
+Now rename <code>build.sample.properties</code> to <code>build.properties</code> inside android folder and modify the credentials with your own
 
 ```gradle
 storeFile = my-upload-key.keystore
 storePassword = 12345678
 keyAlias = my-key-alias
 keyPassword = 12345678
+versionCode = 1
+versionName = 1.4.1
 ```
 
 save the file and run following commend

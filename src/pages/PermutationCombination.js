@@ -49,8 +49,7 @@ const PermutationCombination = () => {
                     <View style={styles.radioGroup}>
                         <Pressable
                             style={styles.radioItem}
-                            onPress={() => setOrder(1)}
-                        >
+                            onPress={() => setOrder(1)}>
                             <RadioButton
                                 value={1}
                                 status={
@@ -68,8 +67,7 @@ const PermutationCombination = () => {
                         </Pressable>
                         <Pressable
                             style={styles.radioItem}
-                            onPress={() => setOrder(2)}
-                        >
+                            onPress={() => setOrder(2)}>
                             <RadioButton
                                 value={2}
                                 status={
@@ -92,8 +90,7 @@ const PermutationCombination = () => {
                     <View style={styles.radioGroup}>
                         <Pressable
                             style={styles.radioItem}
-                            onPress={() => setRepeat(1)}
-                        >
+                            onPress={() => setRepeat(1)}>
                             <RadioButton
                                 value={1}
                                 status={
@@ -111,8 +108,7 @@ const PermutationCombination = () => {
                         </Pressable>
                         <Pressable
                             style={styles.radioItem}
-                            onPress={() => setRepeat(2)}
-                        >
+                            onPress={() => setRepeat(2)}>
                             <RadioButton
                                 value={2}
                                 status={
@@ -140,8 +136,7 @@ const PermutationCombination = () => {
                             setAns(ans);
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -157,8 +152,7 @@ const PermutationCombination = () => {
                                     style={[
                                         styles.hr,
                                         { backgroundColor: colors.text },
-                                    ]}
-                                ></View>
+                                    ]}></View>
                             )}
                             {ans.deFormula && (
                                 <Text style={textStyle}>{ans.deFormula}</Text>
@@ -177,8 +171,7 @@ const PermutationCombination = () => {
                                     style={[
                                         styles.hr,
                                         { backgroundColor: colors.text },
-                                    ]}
-                                ></View>
+                                    ]}></View>
                             )}
                             {ans.deFormula && (
                                 <Text style={textStyle}>{ans.valueDe}</Text>

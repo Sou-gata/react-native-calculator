@@ -10,10 +10,10 @@ import {
 import calBtns from "../helpers/calBtns";
 import { Dimensions } from "react-native";
 
-export const wp = str => {
+export const wp = (str) => {
     return (Dimensions.get("window").width * parseFloat(str)) / 100;
 };
-export const hp = str => {
+export const hp = (str) => {
     return (Dimensions.get("window").height * parseFloat(str)) / 100;
 };
 
@@ -162,14 +162,14 @@ export function factors(number) {
     return { str, number: num };
 }
 
-export function checkLcmHcfNum(str) {
-    let numberSet = str.trim();
-    numberSet = numberSet.split(" ");
+export function checkLcmHcfNumber(inputs) {
+    let numberSet = [];
     let valid = true;
     let hasZero = false;
-    if (numberSet.length < 2) valid = false;
-    for (let i = 0; i < numberSet.length; i++) {
-        numberSet[i] = parseFloat(numberSet[i]);
+    if (inputs.length < 2) valid = false;
+    if (inputs[0].value == "" || inputs[1].value == "") valid = false;
+    for (let i = 0; i < inputs.length; i++) {
+        numberSet[i] = parseFloat(parseFloat(inputs[i].value).toFixed(4));
         if (numberSet[i] == 0) hasZero = true;
         if (isNaN(numberSet[i])) {
             valid = false;
@@ -284,6 +284,17 @@ export function inputNumbers(str) {
     for (let i = 0; i < numberSet.length; i++) {
         inputShow += numberSet[i];
         if (i < numberSet.length - 1) {
+            inputShow += ", ";
+        }
+    }
+    return inputShow;
+}
+
+export function inputToText(inputs) {
+    let inputShow = "";
+    for (let i = 0; i < inputs.length; i++) {
+        inputShow += parseFloat(parseFloat(inputs[i].value).toFixed(4));
+        if (i < inputs.length - 1) {
             inputShow += ", ";
         }
     }
@@ -825,6 +836,7 @@ function simplifyAns(fstPart, secPart, deno) {
     let partOne = fstPart / hcf;
     let partTwo = secondPart / hcf;
     let denominator = deno / hcf;
+    denominator = parseFloat(denominator.toFixed(4));
     if (hasTwoPart) {
         if (partTwo == 1) {
             partTwo = "√" + secPartTwo;
@@ -843,6 +855,7 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
     a = parseFloat(a);
     b = parseFloat(b);
     c = parseFloat(c);
+    const removeSigne = (num) => num.toString().slice(1);
     if (a == 0 && b == 0) return false;
     let hasImgRoot = false;
     let rootOne = "";
@@ -891,8 +904,13 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
                             rootOne = `${partOne}+${partTwo}𝑖`;
                             rootTwo = `${partOne}-${partTwo}𝑖`;
                         } else {
-                            rootOne = `(${partOne}+${partTwo}𝑖)/${denominator}`;
-                            rootTwo = `(${partOne}-${partTwo}𝑖)/${denominator}`;
+                            let isNegative = parseFloat(partTwo) < 0;
+                            rootOne = `(${partOne}${
+                                isNegative ? "-" : "+"
+                            }${removeSigne(partTwo)}𝑖)/${denominator}`;
+                            rootTwo = `(${partOne}${
+                                isNegative ? "+" : "-"
+                            }${removeSigne(partTwo)}𝑖)/${denominator}`;
                         }
                     } else {
                         if (denominator == 1) {
@@ -1425,7 +1443,7 @@ function fixed(number) {
 }
 
 export function areaAndVolume(data) {
-    let area, volume;
+    let area, volume, perimeter;
     if (data.value === 1) {
         let side = parseFloat(data.side);
         if (!isNaN(side)) {
@@ -1483,17 +1501,20 @@ export function areaAndVolume(data) {
         if (!isNaN(r)) {
             area = Math.PI * r * r;
             area = area;
+            perimeter = 2 * Math.PI * r;
         }
     } else if (data.value === 8) {
         let side = parseFloat(data.side);
         if (!isNaN(side)) {
             area = side * side;
+            perimeter = 4 * side;
         }
     } else if (data.value === 9) {
         let l = parseFloat(data.length);
         let b = parseFloat(data.breath);
         if (!isNaN(l) && !isNaN(b)) {
             area = l * b;
+            perimeter = 2 * (l + b);
         }
     } else if (data.value === 10) {
         let s1 = parseFloat(data.s1);
@@ -1504,6 +1525,7 @@ export function areaAndVolume(data) {
                 let s = (s1 + s2 + s3) / 2;
                 let asq = s * (s - s1) * (s - s2) * (s - s3);
                 area = Math.sqrt(asq);
+                perimeter = s1 + s2 + s3;
             }
         }
     } else if (data.value === 11) {
@@ -1511,13 +1533,17 @@ export function areaAndVolume(data) {
         let major = parseFloat(data.major);
         if (!isNaN(minor) && !isNaN(major)) {
             area = Math.PI * major * minor;
+            perimeter =
+                2 * Math.PI * Math.sqrt((major * major + minor * minor) / 2);
         }
     }
     if (area) area = fixed(area);
     else area = { ans: undefined, isGreater: false };
     if (volume) volume = fixed(volume);
     else volume = { ans: undefined, isGreater: false };
-    return { area, volume };
+    if (perimeter) perimeter = fixed(perimeter);
+    else perimeter = { ans: undefined, isGreater: false };
+    return { area, volume, perimeter };
 }
 
 export function matrixMultiply(matrix, info) {

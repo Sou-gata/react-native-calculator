@@ -10,7 +10,7 @@ import Multiply from "./src/pages/Multiply";
 import Divide from "./src/pages/Divide";
 import About from "./src/pages/About";
 import Factors from "./src/pages/Factors";
-import FractionSimplify from "./src/pages/FractionSimplify";
+import Proportion from "./src/pages/Proportion";
 import Gst from "./src/pages/Gst";
 import LengthConverter from "./src/pages/LengthConverter";
 import NumberConverter from "./src/pages/NumberConverter";
@@ -32,6 +32,7 @@ import UsefulFormulas from "./src/pages/UsefulFormulas";
 import EMICalculator from "./src/pages/EMICalculator";
 import MatrixMultiply from "./src/pages/MatrixMultiply";
 import PostFix from "./src/pages/PostFix";
+import Average from "./src/pages/Average";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -76,9 +77,9 @@ const Screens = () => {
                 options={options}
             />
             <Stack.Screen
-                name="FractionSimplify"
-                component={FractionSimplify}
-                options={{ ...options, title: "Simplify Fraction" }}
+                name="Proportion"
+                component={Proportion}
+                options={{ ...options, title: "Proportion" }}
             />
             <Stack.Screen name="Gst" component={Gst} options={options} />
             <Stack.Screen
@@ -247,6 +248,14 @@ const Screens = () => {
                 options={{
                     ...options,
                     title: "Infix To Postfix",
+                }}
+            />
+            <Stack.Screen
+                name="Average"
+                component={Average}
+                options={{
+                    ...options,
+                    title: "Average",
                 }}
             />
         </Stack.Navigator>

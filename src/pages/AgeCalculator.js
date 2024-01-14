@@ -19,7 +19,7 @@ const AgeCalculator = () => {
         to: undefined,
     });
     const [age, setAge] = useState({ days: 0, months: 0, years: 0 });
-    const dateToStr = day => {
+    const dateToStr = (day) => {
         let today = day;
         const dd = String(today.getDate()).padStart(2, "0");
         const mm = String(today.getMonth() + 1).padStart(2, "0");
@@ -35,14 +35,14 @@ const AgeCalculator = () => {
         setForCal({ from: dt, to: dt });
     }, []);
 
-    const confirmOne = dat => {
+    const confirmOne = (dat) => {
         let ans = dateToStr(dat);
         let d = ans.today;
         setDate({ ...date, from: d });
         setVisible({ ...visible, from: false });
         setForCal({ ...forCal, from: ans.dt });
     };
-    const confirmTo = dat => {
+    const confirmTo = (dat) => {
         let ans = dateToStr(dat);
         let d = ans.today;
         setDate({ ...date, to: d });

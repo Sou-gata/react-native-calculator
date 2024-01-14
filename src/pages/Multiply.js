@@ -31,7 +31,7 @@ const Multiply = () => {
             <View style={styles.container}>
                 <View style={styles.flexRow}>
                     <CustomInput
-                        onChangeText={e => {
+                        onChangeText={(e) => {
                             onChangeText({ ...text, a: e });
                         }}
                         value={text.a}
@@ -42,7 +42,7 @@ const Multiply = () => {
                         ×
                     </Text>
                     <CustomInput
-                        onChangeText={e => {
+                        onChangeText={(e) => {
                             onChangeText({ ...text, b: e });
                         }}
                         value={text.b}
@@ -60,7 +60,9 @@ const Multiply = () => {
                     </Button>
                 </View>
             </View>
-            <ScrollView overScrollMode="never" style={{ marginBottom: 20 }}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ marginBottom: 20 }}>
                 <View
                     style={
                         opacity ? { alignItems: "center" } : { display: "none" }

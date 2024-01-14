@@ -4,7 +4,7 @@ import { useTheme, Button, Text } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
 import { gcd, wp } from "../helpers/functions";
 
-const FractionSimplify = () => {
+const Proportion = () => {
     const { colors } = useTheme();
     const [textNu, onChangeTextNu] = useState("");
     const [textDe, onChangeTextDe] = useState("");
@@ -75,8 +75,7 @@ const FractionSimplify = () => {
                         mode="contained"
                         onPress={calculate}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -90,30 +89,32 @@ const FractionSimplify = () => {
                             {
                                 backgroundColor: colors.text,
                             },
-                        ]}
-                    ></View>
+                        ]}></View>
                     <Text style={textStyle}>{ans.oldDe}</Text>
                 </View>
-                <Text style={textStyle}> = </Text>
-                <View>
-                    <Text style={textStyle}>{ans.nu}</Text>
-                    <View
-                        style={[
-                            styles.hrLine,
-                            {
-                                backgroundColor: colors.text,
-                            },
-                        ]}
-                    ></View>
-                    <Text style={textStyle}>{ans.de}</Text>
-                </View>
+                {ans.oldDe != ans.de && ans.oriNu != ans.nu && (
+                    <>
+                        <Text style={textStyle}> = </Text>
+                        <View>
+                            <Text style={textStyle}>{ans.nu}</Text>
+                            <View
+                                style={[
+                                    styles.hrLine,
+                                    {
+                                        backgroundColor: colors.text,
+                                    },
+                                ]}
+                            />
+                            <Text style={textStyle}>{ans.de}</Text>
+                        </View>
+                    </>
+                )}
                 <Text
                     style={
-                        opacity.mix == 0
+                        opacity.mix === 0
                             ? [{ display: "none" }, textStyle]
                             : [{ display: "flex" }, textStyle]
-                    }
-                >
+                    }>
                     {" "}
                     ={" "}
                 </Text>
@@ -126,30 +127,30 @@ const FractionSimplify = () => {
                                   flexDirection: "row",
                                   alignItems: "center",
                               }
-                    }
-                >
+                    }>
                     <Text style={[textStyle, { marginRight: 5 }]}>
                         {ans.mix}
                     </Text>
-                    <View>
-                        <Text style={textStyle}>{ans.mixNu}</Text>
-                        <View
-                            style={[
-                                styles.hrLine,
-                                {
-                                    backgroundColor: colors.text,
-                                },
-                            ]}
-                        ></View>
-                        <Text style={textStyle}>{ans.mixDe}</Text>
-                    </View>
+                    {ans.mixNu !== 0 && (
+                        <View>
+                            <Text style={textStyle}>{ans.mixNu}</Text>
+                            <View
+                                style={[
+                                    styles.hrLine,
+                                    {
+                                        backgroundColor: colors.text,
+                                    },
+                                ]}></View>
+                            <Text style={textStyle}>{ans.mixDe}</Text>
+                        </View>
+                    )}
                 </View>
             </View>
         </View>
     );
 };
 
-export default FractionSimplify;
+export default Proportion;
 
 const styles = StyleSheet.create({
     container: {

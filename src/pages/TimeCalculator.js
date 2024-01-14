@@ -56,8 +56,7 @@ const TimeCalculator = () => {
                         flexDirection: "row",
                         justifyContent: "space-evenly",
                         marginTop: 10,
-                    }}
-                >
+                    }}>
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d1")}
@@ -91,8 +90,7 @@ const TimeCalculator = () => {
                             android_ripple={{
                                 color: colors.secondary + "80",
                                 radius: 100,
-                            }}
-                        >
+                            }}>
                             <RadioButton
                                 value={1}
                                 status={
@@ -114,8 +112,7 @@ const TimeCalculator = () => {
                             android_ripple={{
                                 color: colors.secondary + "80",
                                 radius: 100,
-                            }}
-                        >
+                            }}>
                             <RadioButton
                                 value={2}
                                 status={
@@ -135,8 +132,7 @@ const TimeCalculator = () => {
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-evenly",
-                    }}
-                >
+                    }}>
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d2")}
@@ -170,8 +166,7 @@ const TimeCalculator = () => {
                             setAns(answer);
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -182,15 +177,16 @@ const TimeCalculator = () => {
                                 style={[
                                     styles.textHighlight,
                                     { color: colors.secondary },
-                                ]}
-                            >
+                                ]}>
                                 {ans.day}
                             </Text>
                         )}
                         {ans.day > 0 && (
                             <Text
-                                style={[styles.ansText, { color: colors.text }]}
-                            >
+                                style={[
+                                    styles.ansText,
+                                    { color: colors.text },
+                                ]}>
                                 {" "}
                                 D
                             </Text>
@@ -200,16 +196,17 @@ const TimeCalculator = () => {
                                 style={[
                                     styles.textHighlight,
                                     { color: colors.secondary },
-                                ]}
-                            >
+                                ]}>
                                 {" "}
                                 {ans.hou}
                             </Text>
                         )}
                         {ans.hou > 0 && (
                             <Text
-                                style={[styles.ansText, { color: colors.text }]}
-                            >
+                                style={[
+                                    styles.ansText,
+                                    { color: colors.text },
+                                ]}>
                                 {" "}
                                 H
                             </Text>
@@ -219,16 +216,17 @@ const TimeCalculator = () => {
                                 style={[
                                     styles.textHighlight,
                                     { color: colors.secondary },
-                                ]}
-                            >
+                                ]}>
                                 {" "}
                                 {ans.min}
                             </Text>
                         )}
                         {ans.min > 0 && (
                             <Text
-                                style={[styles.ansText, { color: colors.text }]}
-                            >
+                                style={[
+                                    styles.ansText,
+                                    { color: colors.text },
+                                ]}>
                                 {" "}
                                 M
                             </Text>
@@ -238,16 +236,17 @@ const TimeCalculator = () => {
                                 style={[
                                     styles.textHighlight,
                                     { color: colors.secondary },
-                                ]}
-                            >
+                                ]}>
                                 {" "}
                                 {ans.sec}
                             </Text>
                         )}
                         {ans.sec > 0 && (
                             <Text
-                                style={[styles.ansText, { color: colors.text }]}
-                            >
+                                style={[
+                                    styles.ansText,
+                                    { color: colors.text },
+                                ]}>
                                 {" "}
                                 S
                             </Text>

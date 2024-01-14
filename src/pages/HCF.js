@@ -1,20 +1,23 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { useState } from "react";
 import {
-    checkLcmHcfNum,
+    checkLcmHcfNumber,
     gcd,
-    inputNumbers,
+    inputToText,
     factorizeHcf,
     hasDecimalInArr,
     decimalHcf,
     wp,
 } from "../helpers/functions";
 import { useTheme, Button, Text, DataTable } from "react-native-paper";
-import CustomInput from "../components/CustomInput";
+import CustomInputFilds from "../components/CustomInputFilds";
 
 const HCF = () => {
     const { colors } = useTheme();
-    const [text, onChangeText] = useState("");
+    const [inputs, setInputs] = useState([
+        { id: 1, value: "" },
+        { id: 2, value: "" },
+    ]);
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState({
         one: 0,
@@ -34,7 +37,7 @@ const HCF = () => {
         nuHcf: undefined,
     });
 
-    const arrayToString = array => {
+    const arrayToString = (array) => {
         let element = "";
         for (let j = 0; j < array.length; j++) {
             if (j < array.length - 1) {
@@ -46,9 +49,9 @@ const HCF = () => {
         return element;
     };
     const calculate = () => {
-        let numbers = checkLcmHcfNum(text);
+        let numbers = checkLcmHcfNumber(inputs);
         if (numbers) {
-            setInput(inputNumbers(text));
+            setInput(inputToText(inputs));
             if (!hasDecimalInArr(numbers)) {
                 let hcfAns = gcd(numbers);
                 setAns(hcfAns);
@@ -75,7 +78,6 @@ const HCF = () => {
                     four: 1,
                 });
             }
-            onChangeText("");
         } else {
             setOpacity({
                 one: 0,
@@ -94,14 +96,10 @@ const HCF = () => {
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
                 <View style={{ alignItems: "center" }}>
-                    <CustomInput
-                        onChangeText={onChangeText}
-                        value={text}
-                        placeholder="10 20 30"
-                        width={200}
-                        onEndEditing={() => {
-                            if (inputNumbers(text)) calculate();
-                        }}
+                    <CustomInputFilds
+                        inputs={inputs}
+                        setInputs={setInputs}
+                        maxInput={12}
                     />
                 </View>
                 <View style={styles.buttonContainer}>

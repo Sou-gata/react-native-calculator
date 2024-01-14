@@ -218,3 +218,127 @@ export const algebricFormula = [
     "(a + b)³ = a³ + 3a²b + 3ab² + b³",
     "(a - b)³ = a³ - 3a²b + 3ab² – b³",
 ];
+
+export const calculusFormula = [
+    {
+        text: "xⁿ",
+        numerator: "n . xⁿ⁻¹",
+    },
+    {
+        text: "√x",
+        numerator: "1",
+        denominator: "2√x",
+    },
+    {
+        text: "sin x",
+        numerator: "cos x",
+    },
+    {
+        text: "cos x",
+        numerator: "-sin x",
+    },
+    {
+        text: "tan x",
+        numerator: "sec²x",
+    },
+    {
+        text: "cot x",
+        numerator: "-cosec²x",
+    },
+    {
+        text: "sec x",
+        numerator: "sec x . tan x",
+    },
+    {
+        text: "cosec x",
+        numerator: "-cosec x . cot x",
+    },
+    {
+        text: "aˣ",
+        numerator: "aˣ . logₑa",
+    },
+    {
+        text: "logₑx",
+        numerator: "1",
+        denominator: "x",
+    },
+    {
+        text: "eˣ",
+        numerator: "eˣ",
+    },
+    {
+        text: "logₐx",
+        numerator: "logₑa",
+        denominator: "x",
+    },
+    {
+        text: "sin⁻¹x",
+        numerator: "1",
+        denominator: "√(1-x²)",
+    },
+    {
+        text: "cos⁻¹x",
+        numerator: "-1",
+        denominator: "√(1-x²)",
+    },
+    {
+        text: "tan⁻¹x",
+        numerator: "1",
+        denominator: "1+x²",
+    },
+    {
+        text: "cot⁻¹x",
+        numerator: "-1",
+        denominator: "1+x²",
+    },
+    {
+        text: "sec⁻¹x",
+        numerator: "1",
+        denominator: "|x| . √(x²-1)",
+    },
+    {
+        text: "cosec⁻¹x",
+        numerator: "-1",
+        denominator: "|x| . √(x²-1)",
+    },
+    {
+        text: "sinh x",
+        numerator: "cosh x",
+    },
+    {
+        text: "cosh x",
+        numerator: "sinh x",
+    },
+    {
+        text: "tanh x",
+        numerator: "sech²x",
+    },
+    {
+        text: "coth x",
+        numerator: "-cosh x",
+        denominator: "sinh²x",
+    },
+    {
+        text: "sech x",
+        numerator: "-sech x . tanh x",
+    },
+    {
+        text: "cosech x",
+        numerator: "-cosech x . coth x",
+    },
+    {
+        text: "sinh⁻¹x",
+        numerator: "1",
+        denominator: "√(x²+1)",
+    },
+    {
+        text: "cosh⁻¹x",
+        numerator: "1",
+        denominator: "√(x²-1)",
+    },
+    {
+        text: "tanh⁻¹x",
+        numerator: "1",
+        denominator: "1-x²",
+    },
+];

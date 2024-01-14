@@ -154,8 +154,7 @@ const Area = () => {
                         </Text>
                     </View>
                     <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}
-                    >
+                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
                         <CustomInput
                             onChangeText={onChangeCm}
                             value={text.cm}

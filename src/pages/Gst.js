@@ -79,14 +79,12 @@ const Gst = () => {
                         flexDirection: "row",
                         justifyContent: "center",
                         marginTop: 20,
-                    }}
-                >
+                    }}>
                     <Text
                         style={[
                             styles.text,
                             { marginRight: 10, color: colors.text },
-                        ]}
-                    >
+                        ]}>
                         GST
                     </Text>
                     <SegmentedButtons
@@ -103,8 +101,7 @@ const Gst = () => {
                         style={[
                             styles.text,
                             { color: colors.secondary, fontSize: 35 },
-                        ]}
-                    >
+                        ]}>
                         {"   "}
                         {ans.cost}
                     </Text>
@@ -113,8 +110,7 @@ const Gst = () => {
                     style={[
                         styles.text,
                         { textAlign: "center", color: colors.text },
-                    ]}
-                >
+                    ]}>
                     SGST/CGST : {"  "}
                     {ans.cs}
                 </Text>

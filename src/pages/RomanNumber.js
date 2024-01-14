@@ -11,12 +11,10 @@ const RomanNumber = () => {
             <View
                 style={{
                     alignItems: "center",
-                }}
-            >
+                }}>
                 <RadioButton.Group
                     onValueChange={(val) => setValue(val)}
-                    value={value}
-                >
+                    value={value}>
                     <RadioButton.Item
                         label="Number to Roman"
                         value={1}

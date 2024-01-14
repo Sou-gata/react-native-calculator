@@ -33,8 +33,16 @@ const SurfaceArea = () => {
     });
     const [isHollow, setIsHollow] = useState(0);
     const [input, setInput] = useState(emptyInputs);
-    const [answer, setAnswer] = useState({ area: "", volume: "" });
-    const [greater, setGreater] = useState({ area: false, volume: false });
+    const [answer, setAnswer] = useState({
+        area: "",
+        volume: "",
+        perimeter: "",
+    });
+    const [greater, setGreater] = useState({
+        area: false,
+        volume: false,
+        perimeter: false,
+    });
 
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
@@ -108,14 +116,28 @@ const SurfaceArea = () => {
         },
     ];
 
+    const ansSections = [
+        { key: "area", label: "Area" },
+        { key: "volume", label: "Volume" },
+        { key: "perimeter", label: "Perimeter" },
+    ];
+
     const calculate = () => {
         const ans = areaAndVolume({
             ...input,
             value: selected.value,
             isHollow: selected.isHollow,
         });
-        setAnswer({ area: ans.area.ans, volume: ans.volume.ans });
-        setGreater({ area: ans.area.isGreater, volume: ans.volume.isGreater });
+        setAnswer({
+            area: ans.area.ans,
+            volume: ans.volume.ans,
+            perimeter: ans.perimeter.ans,
+        });
+        setGreater({
+            area: ans.area.isGreater,
+            volume: ans.volume.isGreater,
+            perimeter: ans.perimeter.isGreater,
+        });
     };
 
     return (
@@ -180,7 +202,7 @@ const SurfaceArea = () => {
                     </Text>
                     <RadioButton.Group
                         value={isHollow}
-                        onValueChange={val => {
+                        onValueChange={(val) => {
                             setIsHollow(val);
                         }}>
                         <View
@@ -237,7 +259,7 @@ const SurfaceArea = () => {
                         <CustomInput
                             width={90}
                             value={input[field]}
-                            onChangeText={e => {
+                            onChangeText={(e) => {
                                 setInput({ ...input, [field]: e });
                             }}
                             placeholder={field}
@@ -254,26 +276,27 @@ const SurfaceArea = () => {
                     Calculate
                 </Button>
             </View>
-            {answer.area && answer.area.toString().length > 0 && (
-                <View style={styles.ans}>
-                    <Text style={{ color: colors.text, fontSize: 20 }}>
-                        Area {greater.area ? "≈" : "="}{" "}
-                    </Text>
-                    <Text style={{ color: colors.secondary, fontSize: 30 }}>
-                        {answer.area}
-                    </Text>
-                </View>
-            )}
-            {answer.volume && answer.volume.toString().length > 0 && (
-                <View style={styles.ans}>
-                    <Text style={{ color: colors.text, fontSize: 20 }}>
-                        Volume {greater.volume ? "≈" : "="}{" "}
-                    </Text>
-                    <Text style={{ color: colors.secondary, fontSize: 30 }}>
-                        {answer.volume}
-                    </Text>
-                </View>
-            )}
+            {ansSections.map((item, i) => {
+                if (
+                    answer[item.key] &&
+                    answer[item.key].toString().length > 0
+                ) {
+                    return (
+                        <View style={styles.ans} key={i}>
+                            <Text style={{ color: colors.text, fontSize: 20 }}>
+                                {item.label} {greater[item.key] ? "≈" : "="}{" "}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: colors.secondary,
+                                    fontSize: 30,
+                                }}>
+                                {answer[item.key]}
+                            </Text>
+                        </View>
+                    );
+                }
+            })}
         </View>
     );
 };

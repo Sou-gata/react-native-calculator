@@ -27,8 +27,7 @@ const PostFix = () => {
                     onPress={() => calculate()}
                     buttonColor={colors.secondary}
                     textColor={"white"}
-                    style={{ marginTop: 15 }}
-                >
+                    style={{ marginTop: 15 }}>
                     Calculate
                 </Button>
             </View>
@@ -40,17 +39,14 @@ const PostFix = () => {
                             flexDirection: "row",
                             justifyContent: "center",
                             height: 50,
-                        }}
-                    >
+                        }}>
                         <View style={{ alignItems: "flex-end" }}>
                             <Text
-                                style={{ fontSize: 20, color: colors.divider }}
-                            >
+                                style={{ fontSize: 20, color: colors.divider }}>
                                 Infix:{" "}
                             </Text>
                             <Text
-                                style={{ fontSize: 20, color: colors.divider }}
-                            >
+                                style={{ fontSize: 20, color: colors.divider }}>
                                 Postfix:{" "}
                             </Text>
                         </View>
@@ -67,35 +63,31 @@ const PostFix = () => {
                         <DataTable.Header
                             style={{
                                 backgroundColor: colors.secondary + "e0",
-                            }}
-                        >
+                            }}>
                             <DataTable.Title style={styles.colOne}>
                                 <Text
                                     style={[
-                                        { color: colors.text },
+                                        { color: "white" },
                                         styles.headerText,
-                                    ]}
-                                >
+                                    ]}>
                                     Infix
                                 </Text>
                             </DataTable.Title>
                             <DataTable.Title style={styles.colTwo}>
                                 <Text
                                     style={[
-                                        { color: colors.text },
+                                        { color: "white" },
                                         styles.headerText,
-                                    ]}
-                                >
+                                    ]}>
                                     Stack
                                 </Text>
                             </DataTable.Title>
                             <DataTable.Title style={styles.colThree}>
                                 <Text
                                     style={[
-                                        { color: colors.text },
+                                        { color: "white" },
                                         styles.headerText,
-                                    ]}
-                                >
+                                    ]}>
                                     Postfix
                                 </Text>
                             </DataTable.Title>
@@ -103,8 +95,7 @@ const PostFix = () => {
                     </DataTable>
                     <ScrollView
                         showsVerticalScrollIndicator={false}
-                        showsHorizontalScrollIndicator={false}
-                    >
+                        showsHorizontalScrollIndicator={false}>
                         <>
                             <DataTable>
                                 {data.data.map((row, i) => {
@@ -114,38 +105,31 @@ const PostFix = () => {
                                             style={{
                                                 borderBlockColor:
                                                     colors.secondary,
-                                            }}
-                                        >
+                                            }}>
                                             <DataTable.Cell
-                                                style={styles.colOne}
-                                            >
+                                                style={styles.colOne}>
                                                 <Text
                                                     style={{
                                                         color: colors.text,
-                                                    }}
-                                                >
+                                                    }}>
                                                     {row[0]}
                                                 </Text>
                                             </DataTable.Cell>
                                             <DataTable.Cell
-                                                style={styles.colTwo}
-                                            >
+                                                style={styles.colTwo}>
                                                 <Text
                                                     style={{
                                                         color: colors.text,
-                                                    }}
-                                                >
+                                                    }}>
                                                     {row[1]}
                                                 </Text>
                                             </DataTable.Cell>
                                             <DataTable.Cell
-                                                style={styles.colThree}
-                                            >
+                                                style={styles.colThree}>
                                                 <Text
                                                     style={{
                                                         color: colors.text,
-                                                    }}
-                                                >
+                                                    }}>
                                                     {row[2]}
                                                 </Text>
                                             </DataTable.Cell>

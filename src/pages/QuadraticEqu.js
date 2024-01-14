@@ -53,8 +53,7 @@ const QuadraticEqu = () => {
                     style={[
                         styles.sup1st,
                         { marginHorizontal: 10, color: colors.text },
-                    ]}
-                >
+                    ]}>
                     X +
                 </Text>
                 <CustomInput
@@ -69,8 +68,7 @@ const QuadraticEqu = () => {
                     mode="contained"
                     onPress={getAns}
                     buttonColor={colors.secondary}
-                    textColor={"white"}
-                >
+                    textColor={"white"}>
                     Calculate
                 </Button>
                 <Button
@@ -89,8 +87,7 @@ const QuadraticEqu = () => {
                         });
                     }}
                     buttonColor={colors.secondary}
-                    textColor={"white"}
-                >
+                    textColor={"white"}>
                     Clear
                 </Button>
             </View>
@@ -111,8 +108,7 @@ const QuadraticEqu = () => {
                     ans.inDecimal.rootTwo != ans.inFraction.rootTwo && (
                         <View>
                             <Text
-                                style={[...textStyle, { marginVertical: 20 }]}
-                            >
+                                style={[...textStyle, { marginVertical: 20 }]}>
                                 Or
                             </Text>
                             <Text style={textStyle}>

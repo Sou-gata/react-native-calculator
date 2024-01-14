@@ -43,8 +43,7 @@ const NumberToRoman = () => {
                             }
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
@@ -73,8 +72,7 @@ const NumberToRoman = () => {
                                                   styles.romanText,
                                                   { color: colors.secondary },
                                               ]
-                                    }
-                                >
+                                    }>
                                     {ans[i].val}
                                 </Text>
                             );

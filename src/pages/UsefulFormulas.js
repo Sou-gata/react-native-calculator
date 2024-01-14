@@ -1,6 +1,10 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { useTheme, Text } from "react-native-paper";
-import { algebricFormula, trigonometricFormula } from "../helpers/tables";
+import {
+    algebricFormula,
+    trigonometricFormula,
+    calculusFormula,
+} from "../helpers/tables";
 
 const Fraction = ({ data, color, size }) => {
     const text = data.text;
@@ -19,22 +23,19 @@ const Fraction = ({ data, color, size }) => {
                 marginTop: 7,
                 flexDirection: "row",
                 alignItems: "center",
-            }}
-        >
+            }}>
             <Text
                 style={{
                     fontSize: size,
                     color,
-                }}
-            >
+                }}>
                 {"\u2022"}
                 {"   "}
                 {text} ={" "}
             </Text>
             {hasDenominator && (
                 <View
-                    style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                    style={{ justifyContent: "center", alignItems: "center" }}>
                     <Text
                         style={
                             isDenoLarger
@@ -47,8 +48,7 @@ const Fraction = ({ data, color, size }) => {
                                           borderColor: color,
                                       },
                                   ]
-                        }
-                    >
+                        }>
                         {numerator}
                     </Text>
                     <Text
@@ -63,16 +63,94 @@ const Fraction = ({ data, color, size }) => {
                                       },
                                   ]
                                 : { fontSize: size, color }
-                        }
-                    >
+                        }>
                         {denominator}
                     </Text>
                 </View>
             )}
             {!denominator && (
                 <View
-                    style={{ justifyContent: "center", alignItems: "center" }}
-                >
+                    style={{ justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ fontSize: size, color }}>{numerator}</Text>
+                </View>
+            )}
+        </View>
+    );
+};
+
+const Calculus = ({ data, color, size }) => {
+    const text = data.text;
+    const numerator = data.numerator;
+    const denominator = data.denominator;
+    let hasDenominator = false;
+    let isDenoLarger = false;
+    if (denominator) {
+        isDenoLarger = numerator.length < denominator.length;
+        hasDenominator = true;
+    }
+
+    return (
+        <View
+            style={{
+                marginTop: 7,
+                flexDirection: "row",
+                alignItems: "center",
+            }}>
+            <Text style={{ fontSize: size, color }}>
+                {"\u2022"}
+                {"   "}
+            </Text>
+            <View>
+                <Text style={{ fontSize: size, color, textAlign: "center" }}>
+                    d
+                </Text>
+                <Text
+                    style={[
+                        styles.denominator,
+                        { fontSize: size, color, borderColor: color },
+                    ]}>
+                    dx
+                </Text>
+            </View>
+            <Text style={{ fontSize: size, color }}> {text} = </Text>
+            {hasDenominator && (
+                <View
+                    style={{ justifyContent: "center", alignItems: "center" }}>
+                    <Text
+                        style={
+                            isDenoLarger
+                                ? { fontSize: size, color, paddingBottom: 2 }
+                                : [
+                                      styles.numerator,
+                                      {
+                                          fontSize: size,
+                                          color,
+                                          borderColor: color,
+                                      },
+                                  ]
+                        }>
+                        {numerator}
+                    </Text>
+                    <Text
+                        style={
+                            isDenoLarger
+                                ? [
+                                      styles.denominator,
+                                      {
+                                          fontSize: size,
+                                          color,
+                                          borderColor: color,
+                                      },
+                                  ]
+                                : { fontSize: size, color }
+                        }>
+                        {denominator}
+                    </Text>
+                </View>
+            )}
+            {!denominator && (
+                <View
+                    style={{ justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ fontSize: size, color }}>{numerator}</Text>
                 </View>
             )}
@@ -92,8 +170,7 @@ const UsefulFormulas = () => {
                                 fontSize: 28,
                                 color: colors.secondary,
                                 marginTop: 5,
-                            }}
-                        >
+                            }}>
                             Algebra :-
                         </Text>
                         {algebricFormula.map((formula, i) => (
@@ -103,8 +180,7 @@ const UsefulFormulas = () => {
                                     fontSize: 18,
                                     color: colors.text,
                                     marginTop: 7,
-                                }}
-                            >
+                                }}>
                                 {"\u2022"}
                                 {"  "} {formula}
                             </Text>
@@ -117,12 +193,30 @@ const UsefulFormulas = () => {
                                 fontSize: 28,
                                 color: colors.secondary,
                                 marginTop: 10,
-                            }}
-                        >
+                            }}>
                             Trigonometry :-
                         </Text>
                         {trigonometricFormula.map((formula, i) => (
                             <Fraction
+                                key={i}
+                                data={formula}
+                                color={colors.text}
+                                size={18}
+                            />
+                        ))}
+                    </View>
+
+                    <View>
+                        <Text
+                            style={{
+                                fontSize: 28,
+                                color: colors.secondary,
+                                marginTop: 10,
+                            }}>
+                            Calculus :-
+                        </Text>
+                        {calculusFormula.map((formula, i) => (
+                            <Calculus
                                 key={i}
                                 data={formula}
                                 color={colors.text}

@@ -77,8 +77,7 @@ const WaightConverter = () => {
                         </Text>
                     </View>
                     <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}
-                    >
+                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
                         <CustomInput
                             value={kg.toString()}
                             placeholder="kg"

@@ -5,42 +5,38 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const RenderItem = ({ item, colors }) => {
     return (
-        <View>
-            <View>
-                <Text
-                    style={[
-                        styles.aboutAppName,
-                        {
-                            marginTop: 20,
-                            marginBottom: 10,
-                            color: colors.secondary,
-                        },
-                    ]}>
-                    {item.ver}
-                </Text>
-            </View>
-            <View>
-                {(() => {
-                    let comp = [];
-                    for (let i = 0; i < item.changes.length; i++) {
-                        let txt = (
-                            <Text
-                                style={[
-                                    styles.aboutText,
-                                    { marginLeft: 15, color: colors.text },
-                                ]}
-                                key={i}>
-                                {"\u2022"}
-                                {"  "}
-                                {item.changes[i]}
-                            </Text>
-                        );
-                        comp.push(txt);
-                    }
-                    return comp;
-                })()}
-            </View>
-        </View>
+        <>
+            <Text
+                style={[
+                    styles.aboutAppName,
+                    {
+                        marginTop: 20,
+                        marginBottom: 10,
+                        color: colors.secondary,
+                    },
+                ]}>
+                {item.ver}
+            </Text>
+            {(() => {
+                let comp = [];
+                for (let i = 0; i < item.changes.length; i++) {
+                    let txt = (
+                        <Text
+                            style={[
+                                styles.aboutText,
+                                { marginLeft: 15, color: colors.text },
+                            ]}
+                            key={i}>
+                            {"\u2022"}
+                            {"  "}
+                            {item.changes[i]}
+                        </Text>
+                    );
+                    comp.push(txt);
+                }
+                return comp;
+            })()}
+        </>
     );
 };
 

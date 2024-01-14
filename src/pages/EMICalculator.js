@@ -33,8 +33,7 @@ const EMICalculator = () => {
                         style={{
                             justifyContent: "space-around",
                             height: 200,
-                        }}
-                    >
+                        }}>
                         <Text style={{ fontSize: 16, color: colors.text }}>
                             Principal ={" "}
                         </Text>
@@ -49,8 +48,7 @@ const EMICalculator = () => {
                         style={{
                             justifyContent: "space-around",
                             height: 200,
-                        }}
-                    >
+                        }}>
                         <CustomInput
                             width={150}
                             placeholder="p"
@@ -83,15 +81,17 @@ const EMICalculator = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
                 {ans.emi && (
                     <View
-                        style={{ marginTop: 30, alignItems: "center", gap: 15 }}
-                    >
+                        style={{
+                            marginTop: 30,
+                            alignItems: "center",
+                            gap: 15,
+                        }}>
                         <View style={{ flexDirection: "row" }}>
                             <Text style={{ fontSize: 20, color: colors.text }}>
                                 Monthly EMI ={" "}
@@ -100,8 +100,7 @@ const EMICalculator = () => {
                                 style={{
                                     fontSize: 20,
                                     color: colors.secondary,
-                                }}
-                            >
+                                }}>
                                 ₹ {ans.emi}
                             </Text>
                         </View>
@@ -113,8 +112,7 @@ const EMICalculator = () => {
                                 style={{
                                     fontSize: 20,
                                     color: colors.secondary,
-                                }}
-                            >
+                                }}>
                                 ₹ {ans.i}
                             </Text>
                         </View>
@@ -126,8 +124,7 @@ const EMICalculator = () => {
                                 style={{
                                     fontSize: 20,
                                     color: colors.secondary,
-                                }}
-                            >
+                                }}>
                                 ₹ {ans.a}
                             </Text>
                         </View>

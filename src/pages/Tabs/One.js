@@ -79,7 +79,7 @@ const One = ({ navigation }) => {
 
     useEffect(calAns, [evalStr, mode]);
 
-    const calBtnPress = btn => {
+    const calBtnPress = (btn) => {
         let str = btn.str;
         let type = btn.type;
         let txt = btn.text;

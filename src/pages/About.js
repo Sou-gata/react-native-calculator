@@ -109,15 +109,6 @@ const About = ({ navigation }) => {
                         }>
                         Linkedin
                     </Text>
-                    <Text
-                        style={[hyperlinkText, { margin: 10 }]}
-                        onPress={() =>
-                            Linking.openURL(
-                                "mailto:sougatatalukdar77@gmail.com"
-                            )
-                        }>
-                        Email
-                    </Text>
                 </View>
             </View>
         </View>

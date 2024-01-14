@@ -22,14 +22,12 @@ const SegmentedButtons = ({ data, value, onChange }) => {
                                               colors.secondary + "80",
                                       }
                                     : {},
-                            ]}
-                        >
+                            ]}>
                             <Text
                                 style={{
                                     textAlign: "center",
                                     color: colors.text,
-                                }}
-                            >
+                                }}>
                                 {item.label}
                             </Text>
                         </Pressable>
@@ -49,14 +47,12 @@ const SegmentedButtons = ({ data, value, onChange }) => {
                                               colors.secondary + "80",
                                       }
                                     : {},
-                            ]}
-                        >
+                            ]}>
                             <Text
                                 style={{
                                     textAlign: "center",
                                     color: colors.text,
-                                }}
-                            >
+                                }}>
                                 {item.label}
                             </Text>
                         </Pressable>
@@ -75,16 +71,14 @@ const SegmentedButtons = ({ data, value, onChange }) => {
                                               colors.secondary + "80",
                                       }
                                     : {},
-                            ]}
-                        >
+                            ]}>
                             <Text
                                 style={[
                                     {
                                         textAlign: "center",
                                         color: colors.text,
                                     },
-                                ]}
-                            >
+                                ]}>
                                 {item.label}
                             </Text>
                         </Pressable>

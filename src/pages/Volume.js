@@ -38,12 +38,12 @@ const Volume = () => {
         });
     };
 
-    const fixed = val => {
+    const fixed = (val) => {
         let fxt = parseFloat(val.toFixed(5)) + "";
         return fxt;
     };
 
-    const onChangeCm = e => {
+    const onChangeCm = (e) => {
         setText({ ...text, cm: e });
         if (e != "") {
             const cm = parseFloat(e);
@@ -56,7 +56,7 @@ const Volume = () => {
             setAns(e, m, inc, foot, lit, gln, qnt);
         } else setEmpty();
     };
-    const onChangeM = e => {
+    const onChangeM = (e) => {
         setText({ ...text, m: e });
         if (e != "") {
             const m = parseFloat(e);
@@ -69,7 +69,7 @@ const Volume = () => {
             setAns(cm, e, inc, foot, lit, gln, qnt);
         } else setEmpty();
     };
-    const onChangeInch = e => {
+    const onChangeInch = (e) => {
         setText({ ...text, inc: e });
         if (e != "") {
             const inc = parseFloat(e);
@@ -82,7 +82,7 @@ const Volume = () => {
             setAns(cm, m, e, foot, lit, gln, qnt);
         } else setEmpty();
     };
-    const onChangeFoot = e => {
+    const onChangeFoot = (e) => {
         setText({ ...text, foot: e });
         if (e != "") {
             const foot = parseFloat(e);
@@ -95,7 +95,7 @@ const Volume = () => {
             setAns(cm, m, inc, e, lit, gln, qnt);
         } else setEmpty();
     };
-    const onChangeLit = e => {
+    const onChangeLit = (e) => {
         setText({ ...text, lit: e });
         if (e != "") {
             const lit = parseFloat(e);
@@ -108,7 +108,7 @@ const Volume = () => {
             setAns(cm, m, inc, foot, e, gln, qnt);
         } else setEmpty();
     };
-    const onChangeGln = e => {
+    const onChangeGln = (e) => {
         setText({ ...text, gln: e });
         if (e != "") {
             const gln = parseFloat(e);
@@ -121,7 +121,7 @@ const Volume = () => {
             setAns(cm, m, inc, foot, lit, e, qnt);
         } else setEmpty();
     };
-    const onChangeQnt = e => {
+    const onChangeQnt = (e) => {
         setText({ ...text, qnt: e });
         if (e != "") {
             const qnt = parseFloat(e);

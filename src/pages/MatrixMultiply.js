@@ -72,8 +72,7 @@ const MatrixMultiply = () => {
                                 flexDirection: "row",
                                 columnGap: 30,
                                 marginTop: 15,
-                            }}
-                        >
+                            }}>
                             <CustomInput
                                 onChangeText={(e) => change(e, "oneRow")}
                                 value={input.oneRow}
@@ -97,8 +96,7 @@ const MatrixMultiply = () => {
                                 flexDirection: "row",
                                 columnGap: 30,
                                 marginTop: 15,
-                            }}
-                        >
+                            }}>
                             <CustomInput
                                 onChangeText={(e) => change(e, "twoRow")}
                                 value={input.twoRow}
@@ -118,8 +116,7 @@ const MatrixMultiply = () => {
                             mode="contained"
                             onPress={createMatrix}
                             buttonColor={colors.secondary}
-                            textColor={"white"}
-                        >
+                            textColor={"white"}>
                             Create
                         </Button>
                     </View>
@@ -130,8 +127,7 @@ const MatrixMultiply = () => {
                                 marginTop: 30,
                                 textAlign: "center",
                                 fontSize: 25,
-                            }}
-                        >
+                            }}>
                             Can't multiply.
                         </Text>
                     )}
@@ -144,16 +140,14 @@ const MatrixMultiply = () => {
                             flexDirection: "row",
                             alignItems: "center",
                             justifyContent: "space-between",
-                        }}
-                    >
+                        }}>
                         <View>
                             <Text
                                 style={{
                                     color: colors.text,
                                     textAlign: "center",
                                     fontSize: 20,
-                                }}
-                            >
+                                }}>
                                 Matrix One
                             </Text>
                             {(() => {
@@ -190,8 +184,7 @@ const MatrixMultiply = () => {
                                     color: colors.text,
                                     textAlign: "center",
                                     fontSize: 20,
-                                }}
-                            >
+                                }}>
                                 Matrix Two
                             </Text>
                             {(() => {
@@ -225,16 +218,14 @@ const MatrixMultiply = () => {
                             mode="contained"
                             onPress={calculate}
                             buttonColor={colors.secondary}
-                            textColor={"white"}
-                        >
+                            textColor={"white"}>
                             Calculate
                         </Button>
                         <Button
                             mode="contained"
                             onPress={goBack}
                             buttonColor={colors.secondary}
-                            textColor={"white"}
-                        >
+                            textColor={"white"}>
                             Go Back
                         </Button>
                     </View>
@@ -251,8 +242,7 @@ const MatrixMultiply = () => {
                                         padding: 5,
                                         flexDirection: "row",
                                         gap: 15,
-                                    }}
-                                >
+                                    }}>
                                     {ans.map((col, i) => {
                                         return (
                                             <View key={i + 999}>
@@ -271,8 +261,7 @@ const MatrixMultiply = () => {
                                                                     color: colors.text,
                                                                     textAlign:
                                                                         "center",
-                                                                }}
-                                                            >
+                                                                }}>
                                                                 {col[j]}
                                                             </Text>
                                                         );
@@ -299,8 +288,7 @@ const MatrixBorder = ({ colors }) => {
             style={{
                 justifyContent: "space-between",
                 flexDirection: "row",
-            }}
-        >
+            }}>
             <View
                 style={{
                     height: 1,

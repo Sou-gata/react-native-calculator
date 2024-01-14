@@ -45,7 +45,7 @@ const Divide = () => {
             <View style={styles.container}>
                 <View style={styles.flexRow}>
                     <CustomInput
-                        onChangeText={e => {
+                        onChangeText={(e) => {
                             onChangeText({ ...text, a: e });
                         }}
                         value={text.a}
@@ -54,7 +54,7 @@ const Divide = () => {
                     />
                     <Text style={mathText}>÷</Text>
                     <CustomInput
-                        onChangeText={e => {
+                        onChangeText={(e) => {
                             onChangeText({ ...text, b: e });
                         }}
                         value={text.b}
@@ -72,7 +72,9 @@ const Divide = () => {
                     </Button>
                 </View>
             </View>
-            <ScrollView overScrollMode="never" style={{ marginBottom: 20 }}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ marginBottom: 20 }}>
                 <View style={styles.divideMath}>
                     <Text style={mathText}>{divideAns.numberB}</Text>
                     <View

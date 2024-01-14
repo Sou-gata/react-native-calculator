@@ -1,6 +1,6 @@
 import { Provider, MD3LightTheme, MD3DarkTheme } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar, Text } from "react-native";
+import { StatusBar } from "react-native";
 import { useContext } from "react";
 import Screens from "./Screens";
 import { Context } from "./Context";
@@ -32,9 +32,9 @@ const Main = () => {
             },
             primary: "#4527a0",
             secondary: "#ff7733",
-            backgroundColor: "#222222",
-            numPadBg: "#222222",
-            calBg: "#111111",
+            backgroundColor: "#24292b",
+            numPadBg: "#24292b",
+            calBg: "#161b1c",
             text: "#ffffffde",
             calAns: "#ffffff90",
             paceHolder: "#ffffff50",
@@ -45,11 +45,7 @@ const Main = () => {
     return (
         <NavigationContainer>
             <Provider theme={theme}>
-                <StatusBar
-                    style="light"
-                    backgroundColor={theme.colors.primary}
-                />
-                {/* <Text>Sougata</Text> */}
+                <StatusBar backgroundColor={theme.colors.primary} />
                 <Screens />
             </Provider>
         </NavigationContainer>

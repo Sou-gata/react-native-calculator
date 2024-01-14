@@ -10,6 +10,7 @@ const CustomInput = ({
     maxLength,
     onEndEditing,
     style = {},
+    autoFocus = false,
 }) => {
     const { colors } = useTheme();
     const empty = () => {};
@@ -33,6 +34,7 @@ const CustomInput = ({
             maxLength={maxLength}
             onEndEditing={onEndEditing || empty}
             outlineStyle={{ borderWidth: 0.5 }}
+            autoFocus={autoFocus}
         />
     );
 };

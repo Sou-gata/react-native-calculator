@@ -57,9 +57,9 @@ react {
  */
 def enableProguardInReleaseBuilds = false
 // Load keystore
-def keystorePropertiesFile = rootProject.file("keystore.properties");
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def buildPropertiesFile = rootProject.file("build.properties");
+def buildProperties = new Properties()
+buildProperties.load(new FileInputStream(buildPropertiesFile))
 
 /**
  * The preferred build flavor of JavaScriptCore (JSC)
@@ -85,15 +85,15 @@ android {
         applicationId "com.sougata.calculator"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.4.0"
+        versionCode buildProperties['versionCode'].toInteger()
+        versionName buildProperties['versionName']
     }
     signingConfigs {
         release{
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
+            storeFile file(buildProperties['storeFile'])
+            storePassword buildProperties['storePassword']
+            keyAlias buildProperties['keyAlias']
+            keyPassword buildProperties['keyPassword']
         }
         debug {
             storeFile file('debug.keystore')

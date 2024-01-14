@@ -71,8 +71,7 @@ const Discount = () => {
                     opacity == 0
                         ? { display: "none" }
                         : { display: "flex", marginTop: 50 }
-                }
-            >
+                }>
                 <View style={styles.flexRow}>
                     <Text style={textStyle}>The final price is </Text>
                     <Text style={textHeighlight}>{ans.cost}</Text>

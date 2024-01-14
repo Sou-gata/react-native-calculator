@@ -65,4 +65,4 @@ yarn-error.log
 # testing
 /coverage
 
-android/keystore.properties
+android/build.properties

@@ -34,21 +34,18 @@ const Factors = () => {
                             }
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}
-                    >
+                        textColor={"white"}>
                         Calculate
                     </Button>
                 </View>
             </View>
             <View
-                style={[styles.ansDiv, { display: opacity ? "flex" : "none" }]}
-            >
+                style={[styles.ansDiv, { display: opacity ? "flex" : "none" }]}>
                 <Text style={[styles.textStyle, { color: colors.text }]}>
                     Factors of {ans.number} are :
                 </Text>
                 <Text
-                    style={[styles.textStyleAns, { color: colors.secondary }]}
-                >
+                    style={[styles.textStyleAns, { color: colors.secondary }]}>
                     {ans.str}
                 </Text>
             </View>
@@ -57,8 +54,7 @@ const Factors = () => {
                     display: opacity ? "flex" : "none",
                     flexDirection: "row",
                     padding: 20,
-                }}
-            >
+                }}>
                 <Text style={[styles.textStyle, { color: colors.text }]}>
                     {ans.number} ={" "}
                 </Text>
@@ -76,8 +72,7 @@ const Factors = () => {
                             style={[
                                 styles.textStyle,
                                 { color: colors.text, flexShrink: 1 },
-                            ]}
-                        >
+                            ]}>
                             {com}
                         </Text>
                     );

@@ -1,5 +1,14 @@
 const info = [
     {
+        ver: "1.4.1",
+        changes: [
+            "bugs fix",
+            "more useful formulas",
+            "add average",
+            "new ui for lcm and hcf",
+        ],
+    },
+    {
         ver: "1.4.0",
         changes: ["migration from expo to react native", "reduced apk size"],
     },

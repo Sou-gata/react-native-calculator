@@ -57,8 +57,7 @@ const PowerConverter = () => {
                         </Text>
                     </View>
                     <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}
-                    >
+                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
                         <CustomInput
                             onChangeText={(e) => {
                                 if (e != "") {

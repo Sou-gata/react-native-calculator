@@ -1,9 +1,9 @@
 import { View, StyleSheet, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
-    checkLcmHcfNum,
+    checkLcmHcfNumber,
     lcm,
-    inputNumbers,
+    inputToText,
     factorLcm,
     largeInArr,
     hasDecimalInArr,
@@ -11,14 +11,17 @@ import {
     wp,
 } from "../helpers/functions";
 import { useTheme, Button, Text } from "react-native-paper";
-import CustomInput from "../components/CustomInput";
+import CustomInputFilds from "../components/CustomInputFilds";
 
 const LCM = () => {
     const { colors } = useTheme();
-    const [text, onChangeText] = useState("");
     const [ans, setAns] = useState(0);
     const [opacity, setOpacity] = useState({ one: false, two: false });
     const [input, setInput] = useState("");
+    const [inputs, setInputs] = useState([
+        { id: 1, value: "" },
+        { id: 2, value: "" },
+    ]);
     const [details, setDetails] = useState({
         dividends: [],
         divisiors: [],
@@ -38,7 +41,7 @@ const LCM = () => {
     ];
     const textStyleThree = [styles.textStyleThree, { color: colors.text }];
 
-    const generateGap = array => {
+    const generateGap = (array) => {
         let space = "";
         if (largeInArr([...array])) {
             let large = largeInArr([...array]);
@@ -50,9 +53,9 @@ const LCM = () => {
         }
     };
     const calculate = () => {
-        let numbers = checkLcmHcfNum(text);
+        let numbers = checkLcmHcfNumber(inputs);
         if (numbers) {
-            setInput(inputNumbers(text));
+            setInput(inputToText(inputs));
             if (!hasDecimalInArr(numbers)) {
                 let factorLCM = factorLcm(numbers);
                 let lcmAns = lcm(numbers);
@@ -69,7 +72,6 @@ const LCM = () => {
                 });
                 setOpacity({ one: true, three: true });
             }
-            onChangeText("");
         } else {
             setOpacity({ four: true });
         }
@@ -82,15 +84,10 @@ const LCM = () => {
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
                 <View style={{ alignItems: "center" }}>
-                    <CustomInput
-                        onChangeText={onChangeText}
-                        value={text}
-                        autoFocus={true}
-                        placeholder="10 20 30"
-                        width={200}
-                        onEndEditing={() => {
-                            if (inputNumbers(text)) calculate();
-                        }}
+                    <CustomInputFilds
+                        inputs={inputs}
+                        setInputs={setInputs}
+                        maxInput={12}
                     />
                 </View>
 

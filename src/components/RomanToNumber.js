@@ -55,8 +55,7 @@ const RomanToNumber = () => {
                             style={[
                                 styles.romanText,
                                 { color: colors.secondary },
-                            ]}
-                        >
+                            ]}>
                             {ans + ""}
                         </Text>
                         {(() => {
@@ -74,8 +73,7 @@ const RomanToNumber = () => {
                                                     borderColor:
                                                         colors.secondary,
                                                 },
-                                            ]}
-                                        >
+                                            ]}>
                                             {btn[i].text}
                                         </Text>
                                     );
@@ -86,8 +84,7 @@ const RomanToNumber = () => {
                                             style={[
                                                 styles.romanText,
                                                 { color: colors.secondary },
-                                            ]}
-                                        >
+                                            ]}>
                                             {btn[i].text}
                                         </Text>
                                     );
@@ -105,8 +102,7 @@ const RomanToNumber = () => {
                     onPress={() => {
                         erase();
                     }}
-                    android_ripple={androidRipple}
-                >
+                    android_ripple={androidRipple}>
                     <Text style={calText}>⌫</Text>
                 </Pressable>
                 <Pressable
@@ -115,8 +111,7 @@ const RomanToNumber = () => {
                         setBtn([]);
                         setAns("");
                     }}
-                    android_ripple={androidRipple}
-                >
+                    android_ripple={androidRipple}>
                     <Text style={calText}>Clear</Text>
                 </Pressable>
             </View>
@@ -132,8 +127,7 @@ const RomanToNumber = () => {
                                     onPress={() => handleBtnPress(btn)}
                                     style={styles.calBtn}
                                     android_ripple={androidRipple}
-                                    key={i}
-                                >
+                                    key={i}>
                                     <Text
                                         style={
                                             btn.special
@@ -146,8 +140,7 @@ const RomanToNumber = () => {
                                                       },
                                                   ]
                                                 : calText
-                                        }
-                                    >
+                                        }>
                                         {btn.text}
                                     </Text>
                                 </Pressable>
@@ -161,16 +154,14 @@ const RomanToNumber = () => {
                                         { backgroundColor: colors.secondary },
                                     ]}
                                     android_ripple={androidRipple}
-                                    key={i}
-                                >
+                                    key={i}>
                                     <Text
                                         style={{
                                             fontSize: 24,
                                             fontWeight: "bold",
-                                            color: colors.text,
+                                            color: "white",
                                             textAlign: "center",
-                                        }}
-                                    >
+                                        }}>
                                         {btn.text}
                                     </Text>
                                 </Pressable>

@@ -42,8 +42,7 @@ const EquSolve = () => {
                         fontSize: 18,
                         color: colors.text,
                         marginHorizontal: 10,
-                    }}
-                >
+                    }}>
                     x +
                 </Text>
                 <CustomInput
@@ -57,8 +56,7 @@ const EquSolve = () => {
                         fontSize: 18,
                         color: colors.text,
                         marginHorizontal: 10,
-                    }}
-                >
+                    }}>
                     y +
                 </Text>
                 <CustomInput
@@ -80,8 +78,7 @@ const EquSolve = () => {
                         fontSize: 18,
                         color: colors.text,
                         marginHorizontal: 10,
-                    }}
-                >
+                    }}>
                     x +
                 </Text>
                 <CustomInput
@@ -95,8 +92,7 @@ const EquSolve = () => {
                         fontSize: 18,
                         color: colors.text,
                         marginHorizontal: 10,
-                    }}
-                >
+                    }}>
                     y +
                 </Text>
                 <CustomInput
@@ -121,8 +117,7 @@ const EquSolve = () => {
                         );
                     }}
                     buttonColor={colors.secondary}
-                    textColor={"white"}
-                >
+                    textColor={"white"}>
                     Calculate
                 </Button>
                 <Button
@@ -148,8 +143,7 @@ const EquSolve = () => {
                         });
                     }}
                     buttonColor={colors.secondary}
-                    textColor={"white"}
-                >
+                    textColor={"white"}>
                     Clear
                 </Button>
             </View>
