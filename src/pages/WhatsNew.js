@@ -17,25 +17,17 @@ const RenderItem = ({ item, colors }) => {
                 ]}>
                 {item.ver}
             </Text>
-            {(() => {
-                let comp = [];
-                for (let i = 0; i < item.changes.length; i++) {
-                    let txt = (
-                        <Text
-                            style={[
-                                styles.aboutText,
-                                { marginLeft: 15, color: colors.text },
-                            ]}
-                            key={i}>
-                            {"\u2022"}
-                            {"  "}
-                            {item.changes[i]}
-                        </Text>
-                    );
-                    comp.push(txt);
-                }
-                return comp;
-            })()}
+            {item.changes.map((change, index) => (
+                <Text
+                    key={index}
+                    style={[
+                        styles.aboutText,
+                        { marginLeft: 15, color: colors.text },
+                    ]}>
+                    {"\u2022  "}
+                    {change}
+                </Text>
+            ))}
         </>
     );
 };

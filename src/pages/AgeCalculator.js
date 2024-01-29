@@ -10,13 +10,17 @@ const AgeCalculator = () => {
         from: false,
         to: false,
     });
-    let [date, setDate] = useState({
+    const [date, setDate] = useState({
         from: undefined,
         to: undefined,
     });
     const [forCal, setForCal] = useState({
         from: undefined,
         to: undefined,
+    });
+    const [nextBirthday, setNextBirthday] = useState({
+        days: 0,
+        months: 0,
     });
     const [age, setAge] = useState({ days: 0, months: 0, years: 0 });
     const dateToStr = (day) => {
@@ -90,6 +94,35 @@ const AgeCalculator = () => {
             months = 0;
             days = 0;
         }
+
+        let now = new Date().getTime();
+        let bDay = new Date(
+            new Date().getFullYear(),
+            birthDate.getMonth(),
+            birthDate.getDate()
+        ).getTime();
+        if (now > bDay) {
+            bDay = new Date(
+                new Date().getFullYear() + 1,
+                birthDate.getMonth(),
+                birthDate.getDate()
+            ).getTime();
+        }
+        let left = bDay - now;
+        let second = 1000;
+        let minute = second * 60;
+        let hour = minute * 60;
+        let day = hour * 24;
+        let d = Math.floor(left / day);
+        let totalMonth = 0;
+        let leftDays = d;
+        for (let i = 0; i < 12; i++) {
+            let index = (new Date().getMonth() + i) % 12;
+            if (leftDays < monthDays[index]) break;
+            leftDays = leftDays - monthDays[index];
+            totalMonth++;
+        }
+        setNextBirthday({ months: totalMonth, days: leftDays });
         setAge({ days, months, years });
     };
     return (
@@ -97,7 +130,7 @@ const AgeCalculator = () => {
             <View style={styles.container}>
                 <View style={styles.dateRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>
-                        From
+                        Birth day
                     </Text>
                     <TouchableOpacity
                         onPress={() => {
@@ -186,16 +219,55 @@ const AgeCalculator = () => {
                         </Text>
                         <Text style={{ fontSize: 20, color: colors.text }}>
                             {"   "}
-                            Months
+                            Month{age.months > 1 ? "s" : ""}
                             {"      "}
                         </Text>
                         <Text style={{ fontSize: 40, color: colors.text }}>
                             {age.days}
                         </Text>
                         <Text style={{ fontSize: 20, color: colors.text }}>
-                            {"   "}Days
+                            {"   "}Day{age.days > 1 ? "s" : ""}
                         </Text>
                     </View>
+                </View>
+                {nextBirthday.months != 0 && nextBirthday.days != 0 && (
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            color: colors.text,
+                            textAlign: "center",
+                            marginTop: 40,
+                        }}>
+                        Next Birthday in
+                    </Text>
+                )}
+                <View
+                    style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 10,
+                    }}>
+                    {nextBirthday.months != 0 && (
+                        <>
+                            <Text
+                                style={{
+                                    fontSize: 40,
+                                    color: colors.secondary,
+                                }}>
+                                {nextBirthday.months}
+                            </Text>
+                            <Text style={{ fontSize: 20, color: colors.text }}>
+                                Month{nextBirthday.months > 1 ? "s" : ""}
+                            </Text>
+                        </>
+                    )}
+                    <Text style={{ fontSize: 40, color: colors.secondary }}>
+                        {nextBirthday.days}
+                    </Text>
+                    <Text style={{ fontSize: 20, color: colors.text }}>
+                        Day{nextBirthday.days > 1 ? "s" : ""}
+                    </Text>
                 </View>
             </View>
         </View>

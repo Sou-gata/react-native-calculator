@@ -6,7 +6,14 @@ import {
     calculusFormula,
 } from "../helpers/tables";
 
-const Fraction = ({ data, color, size }) => {
+export const Fraction = ({
+    data,
+    color,
+    size,
+    bullet = true,
+    textVisible = true,
+    style = {},
+}) => {
     const text = data.text;
     const numerator = data.numerator;
     const denominator = data.denominator;
@@ -19,19 +26,27 @@ const Fraction = ({ data, color, size }) => {
 
     return (
         <View
-            style={{
-                marginTop: 7,
-                flexDirection: "row",
-                alignItems: "center",
-            }}>
+            style={[
+                {
+                    flexDirection: "row",
+                    alignItems: "center",
+                },
+                style,
+            ]}>
+            <Text
+                style={{
+                    fontSize: size,
+                    color: textVisible ? color : "transparent",
+                }}>
+                {bullet ? "\u2022   " : ""}
+                {text}
+            </Text>
             <Text
                 style={{
                     fontSize: size,
                     color,
                 }}>
-                {"\u2022"}
-                {"   "}
-                {text} ={" "}
+                {` = `}
             </Text>
             {hasDenominator && (
                 <View

@@ -1668,3 +1668,10 @@ function removeSpace(str) {
     }
     return ans;
 }
+
+export function parseNumber(number, fixed = 4) {
+    let num = parseFloat(number);
+    if (isNaN(num)) return undefined;
+    let ans = num.toFixed(fixed);
+    return parseFloat(ans);
+}

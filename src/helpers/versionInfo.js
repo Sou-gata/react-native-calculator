@@ -1,5 +1,20 @@
 const info = [
     {
+        ver: "1.5.0",
+        changes: [
+            "bugs fix",
+            "new ui for second tab",
+            "categorized second tab",
+            "add shape calculator",
+            "add body calculator",
+            "add bmi calculator",
+        ],
+    },
+    {
+        ver: "1.4.2",
+        changes: ["bugs fix", "improved some functionality"],
+    },
+    {
         ver: "1.4.1",
         changes: [
             "bugs fix",

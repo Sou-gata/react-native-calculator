@@ -29,11 +29,12 @@ const CustomInput = ({
             style={{
                 textAlign: "center",
                 width: width || 150,
+                height: 40,
                 ...style,
             }}
             maxLength={maxLength}
             onEndEditing={onEndEditing || empty}
-            outlineStyle={{ borderWidth: 0.5 }}
+            outlineStyle={{ borderWidth: 0.5, borderRadius: 7 }}
             autoFocus={autoFocus}
         />
     );

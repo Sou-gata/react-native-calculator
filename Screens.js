@@ -27,12 +27,31 @@ import Volume from "./src/pages/Volume";
 import PowerConverter from "./src/pages/PowerConverter";
 import QuadraticEqu from "./src/pages/QuadraticEqu";
 import TimeCalculator from "./src/pages/TimeCalculator";
-import SurfaceAreaAndVolume from "./src/pages/SurfaceAreaAndVolume";
 import UsefulFormulas from "./src/pages/UsefulFormulas";
 import EMICalculator from "./src/pages/EMICalculator";
 import MatrixMultiply from "./src/pages/MatrixMultiply";
 import PostFix from "./src/pages/PostFix";
 import Average from "./src/pages/Average";
+import BMICalculator from "./src/pages/BMICalculator";
+import Shapes from "./src/pages/Shapes";
+import Triangle from "./src/pages/shapes/Triangle";
+import Square from "./src/pages/shapes/Square";
+import Rectangle from "./src/pages/shapes/Rectangle";
+import Trapezoid from "./src/pages/shapes/Trapezoid";
+import Rhombus from "./src/pages/shapes/Rhombus";
+import Pentagon from "./src/pages/shapes/Pentagon";
+import Hexagon from "./src/pages/shapes/Hexagon";
+import Circle from "./src/pages/shapes/Circle";
+import CircleArc from "./src/pages/shapes/CircleArc";
+import Ellipse from "./src/pages/shapes/Ellipse";
+import Bodies from "./src/pages/Bodies";
+import Cuboid from "./src/pages/bodies/Cuboid";
+import TriangularPrism from "./src/pages/bodies/TriangularPrism";
+import Pyramid from "./src/pages/bodies/Pyramid";
+import Cone from "./src/pages/bodies/Cone";
+import Cylinder from "./src/pages/bodies/Cylinder";
+import Sphere from "./src/pages/bodies/Sphere";
+import HemiSphere from "./src/pages/bodies/HemiSphere";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -61,7 +80,6 @@ const Screens = () => {
                 component={LCM}
                 options={{
                     ...options,
-                    headerShown: true,
                 }}
             />
             <Stack.Screen name="HCF" component={HCF} options={options} />
@@ -79,7 +97,7 @@ const Screens = () => {
             <Stack.Screen
                 name="Proportion"
                 component={Proportion}
-                options={{ ...options, title: "Proportion" }}
+                options={options}
             />
             <Stack.Screen name="Gst" component={Gst} options={options} />
             <Stack.Screen
@@ -211,14 +229,6 @@ const Screens = () => {
                 }}
             />
             <Stack.Screen
-                name="SurfaceAreaAndVolume"
-                component={SurfaceAreaAndVolume}
-                options={{
-                    ...options,
-                    title: "Surface Area & Volume",
-                }}
-            />
-            <Stack.Screen
                 name="UsefulFormula"
                 component={UsefulFormulas}
                 options={{
@@ -253,10 +263,82 @@ const Screens = () => {
             <Stack.Screen
                 name="Average"
                 component={Average}
+                options={options}
+            />
+            <Stack.Screen
+                name="BMICalculator"
+                component={BMICalculator}
                 options={{
                     ...options,
-                    title: "Average",
+                    title: "BMI Calculator",
                 }}
+            />
+            <Stack.Screen name="Shapes" component={Shapes} options={options} />
+            <Stack.Screen
+                name="Triangle"
+                component={Triangle}
+                options={options}
+            />
+            <Stack.Screen name="Square" component={Square} options={options} />
+            <Stack.Screen
+                name="Rectangle"
+                component={Rectangle}
+                options={options}
+            />
+            <Stack.Screen
+                name="Trapezoid"
+                component={Trapezoid}
+                options={options}
+            />
+            <Stack.Screen
+                name="Rhombus"
+                component={Rhombus}
+                options={options}
+            />
+            <Stack.Screen
+                name="Pentagon"
+                component={Pentagon}
+                options={options}
+            />
+            <Stack.Screen
+                name="Hexagon"
+                component={Hexagon}
+                options={options}
+            />
+            <Stack.Screen name="Circle" component={Circle} options={options} />
+            <Stack.Screen
+                name="Circle Arc"
+                component={CircleArc}
+                options={options}
+            />
+            <Stack.Screen
+                name="Ellipse"
+                component={Ellipse}
+                options={options}
+            />
+            <Stack.Screen name="Bodies" component={Bodies} options={options} />
+            <Stack.Screen name="Cuboid" component={Cuboid} options={options} />
+            <Stack.Screen
+                name="Triangular Prism"
+                component={TriangularPrism}
+                options={options}
+            />
+            <Stack.Screen
+                name="Pyramid"
+                component={Pyramid}
+                options={options}
+            />
+            <Stack.Screen name="Cone" component={Cone} options={options} />
+            <Stack.Screen
+                name="Cylinder"
+                component={Cylinder}
+                options={options}
+            />
+            <Stack.Screen name="Sphere" component={Sphere} options={options} />
+            <Stack.Screen
+                name="Hemisphere"
+                component={HemiSphere}
+                options={options}
             />
         </Stack.Navigator>
     );

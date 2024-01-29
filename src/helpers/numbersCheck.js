@@ -65,3 +65,17 @@ export function decCheck(number) {
     }
     return correct;
 }
+export function decIntCheck(number) {
+    let inputNumber = [];
+    inputNumber = number.toString().split("");
+    let correct = true;
+    for (let i = 0; i < inputNumber.length; i++) {
+        let a = inputNumber[i].charCodeAt(0);
+        if (a >= 48 && a <= 57) continue;
+        else {
+            correct = false;
+            break;
+        }
+    }
+    return correct;
+}
