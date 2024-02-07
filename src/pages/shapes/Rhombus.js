@@ -3,6 +3,7 @@ import { StyleSheet, View, ScrollView, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import { Fraction } from "../UsefulFormulas";
+import { parseNumber } from "../../helpers/functions";
 
 const Rhombus = (props) => {
     const { colors } = useTheme();
@@ -14,21 +15,14 @@ const Rhombus = (props) => {
         let a = parseFloat(input.A);
         let b = parseFloat(input.B);
         if (isNaN(a) || isNaN(b)) return;
-        a = isNaN(a) ? 0 : a;
-        b = isNaN(b) ? 0 : b;
-        a = a.toFixed(2);
-        b = b.toFixed(2);
-        a = parseFloat(a);
-        b = parseFloat(b);
+        a = parseNumber(a, 2);
+        b = parseNumber(b, 2);
         let area = (a * b) / 2;
-        area = area.toFixed(2);
-        area = parseFloat(area);
+        area = parseNumber(area, 2);
         let perimeter = 2 * Math.sqrt(a * a + b * b);
-        perimeter = perimeter.toFixed(2);
-        perimeter = parseFloat(perimeter);
+        perimeter = parseNumber(perimeter, 2);
         let side = perimeter / 4;
-        side = side.toFixed(2);
-        side = parseFloat(side);
+        side = parseNumber(side, 2);
         setInput((prev) => ({ ...prev, a, b }));
         setAns({ perimeter, area, side });
     };
@@ -271,39 +265,38 @@ const Rhombus = (props) => {
                                     {ans.perimeter}
                                 </Text>
                             </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "Perimeter",
-                                        denominator: "4",
-                                        text: "Side",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: ans.perimeter,
-                                        denominator: "4",
-                                        text: "Side",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: ans.side,
-                                        text: "Side",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                            </View>
+                            <Fraction
+                                data={{
+                                    numerator: "Perimeter",
+                                    denominator: "4",
+                                    text: "Side",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.perimeter,
+                                    denominator: "4",
+                                    text: "Side",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.side,
+                                    text: "Side",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
                         </>
                     )}
                 </>

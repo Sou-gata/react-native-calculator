@@ -91,9 +91,7 @@ const Square = (props) => {
             {ans.area !== 0 && (
                 <>
                     <View style={{ marginTop: 20, flexDirection: "row" }}>
-                        <Text style={styles.textStyle}>
-                            {"Area = Side × Side"}
-                        </Text>
+                        <Text style={styles.textStyle}>Area = Side × Side</Text>
                     </View>
                     <View style={styles.flexRow}>
                         <Text style={styles.transparentTextStyle}>Area</Text>
@@ -107,7 +105,7 @@ const Square = (props) => {
                     </View>
                     <View style={{ marginTop: 20, flexDirection: "row" }}>
                         <Text style={styles.textStyle}>
-                            {"Perimeter = 4 × Side"}
+                            Perimeter = 4 × Side
                         </Text>
                     </View>
                     <View style={styles.flexRow}>
@@ -128,7 +126,7 @@ const Square = (props) => {
                     </View>
                     <View style={{ marginTop: 20, flexDirection: "row" }}>
                         <Text style={styles.textStyle}>
-                            {"Diagonal = √2 × Side"}
+                            Diagonal = √2 × Side
                         </Text>
                     </View>
                     <View style={styles.flexRow}>

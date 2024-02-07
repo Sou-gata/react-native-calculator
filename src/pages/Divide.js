@@ -67,7 +67,7 @@ const Divide = () => {
                         mode="contained"
                         onPress={calculatePress}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>

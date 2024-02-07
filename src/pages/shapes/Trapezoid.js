@@ -177,53 +177,52 @@ const Trapezoid = (props) => {
                     </View>
                     {ans.area && (
                         <>
+                            <Fraction
+                                data={{
+                                    numerator: "( A + B ) × H",
+                                    denominator: "2",
+                                    text: "Area",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `( ${input.a} + ${input.b} ) × ${input.h}`,
+                                    denominator: "2",
+                                    text: "Area",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `${input.a + input.b} × ${
+                                        input.h
+                                    }`,
+                                    denominator: "2",
+                                    text: "Area",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `${ans.area}`,
+                                    text: "Area",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
                             <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "( A + B ) × H",
-                                        denominator: "2",
-                                        text: "Area",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `( ${input.a} + ${input.b} ) × ${input.h}`,
-                                        denominator: "2",
-                                        text: "Area",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `${input.a + input.b} × ${
-                                            input.h
-                                        }`,
-                                        denominator: "2",
-                                        text: "Area",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `${ans.area}`,
-                                        text: "Area",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                            </View>
-                            <View style={{ marginTop: 25, gap: 10 }}>
                                 <SFormula
                                     numerator={"(B - A)²"}
                                     h={"H²"}
@@ -235,7 +234,7 @@ const Trapezoid = (props) => {
                                     colors={colors}
                                 />
                                 <SFormula
-                                    numerator={`(${input.b - input.a})²`}
+                                    numerator={`${input.b - input.a}²`}
                                     h={input.h + "²"}
                                     colors={colors}
                                 />
@@ -291,50 +290,48 @@ const Trapezoid = (props) => {
                                     color={colors.text}
                                 />
                             </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "2S + A + B",
-                                        text: "Perimeter",
-                                    }}
-                                    // textVisible={false}
-                                    bullet={false}
-                                    size={18}
-                                    color={colors.text}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `2 × ${ans.s} + ${input.a} + ${input.b}`,
-                                        text: "Perimeter",
-                                    }}
-                                    textVisible={false}
-                                    bullet={false}
-                                    size={18}
-                                    color={colors.text}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `${2 * ans.s} + ${
-                                            input.a
-                                        } + ${input.b}`,
-                                        text: "Perimeter",
-                                    }}
-                                    textVisible={false}
-                                    bullet={false}
-                                    size={18}
-                                    color={colors.text}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `${ans.perimeter}`,
-                                        text: "Perimeter",
-                                    }}
-                                    textVisible={false}
-                                    bullet={false}
-                                    size={18}
-                                    color={colors.text}
-                                />
-                            </View>
+                            <Fraction
+                                data={{
+                                    numerator: "2S + A + B",
+                                    text: "Perimeter",
+                                }}
+                                bullet={false}
+                                size={18}
+                                color={colors.text}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `2 × ${ans.s} + ${input.a} + ${input.b}`,
+                                    text: "Perimeter",
+                                }}
+                                textVisible={false}
+                                bullet={false}
+                                size={18}
+                                color={colors.text}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `${2 * ans.s} + ${input.a} + ${
+                                        input.b
+                                    }`,
+                                    text: "Perimeter",
+                                }}
+                                textVisible={false}
+                                bullet={false}
+                                size={18}
+                                color={colors.text}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `${ans.perimeter}`,
+                                    text: "Perimeter",
+                                }}
+                                textVisible={false}
+                                bullet={false}
+                                size={18}
+                                color={colors.text}
+                            />
                         </>
                     )}
                 </>

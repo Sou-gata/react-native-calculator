@@ -63,114 +63,154 @@ const Rectangle = (props) => {
         flexRow: {
             flexDirection: "row",
         },
+        root: {
+            fontSize: 22,
+            marginTop: -5,
+            color: colors.text,
+        },
+        underRoot: {
+            fontSize: 18,
+            color: colors.text,
+            borderTopWidth: 1.5,
+            borderTopColor: colors.text,
+        },
     });
     return (
-        <ScrollView
-            style={styles.container}
-            showsVerticalScrollIndicator={false}>
-            <>
-                <Image source={shapeDetails.mainImage} style={styles.image} />
-                {shapeDetails.field.map((item, index) => (
-                    <View style={styles.inputContainer} key={index}>
-                        <Text style={styles.textStyle}>{item}</Text>
-                        <CustomInput
-                            placeholder={item}
-                            value={input[item]}
-                            onChangeText={(e) => {
-                                setInput((prev) => ({ ...prev, [item]: e }));
-                            }}
-                        />
+        <View style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <>
+                    <Image
+                        source={shapeDetails.mainImage}
+                        style={styles.image}
+                    />
+                    {shapeDetails.field.map((item, index) => (
+                        <View style={styles.inputContainer} key={index}>
+                            <Text style={styles.textStyle}>{item}</Text>
+                            <CustomInput
+                                placeholder={item}
+                                value={input[item]}
+                                onChangeText={(e) => {
+                                    setInput((prev) => ({
+                                        ...prev,
+                                        [item]: e,
+                                    }));
+                                }}
+                            />
+                        </View>
+                    ))}
+                    <View style={{ alignItems: "center" }}>
+                        <Button
+                            mode="contained"
+                            buttonColor={colors.secondary}
+                            textColor="#fff"
+                            style={{ marginTop: 15 }}
+                            onPress={() => calculate()}>
+                            Calculate
+                        </Button>
                     </View>
-                ))}
-                <View style={{ alignItems: "center" }}>
-                    <Button
-                        mode="contained"
-                        buttonColor={colors.secondary}
-                        textColor={"white"}
-                        style={{ marginTop: 15 }}
-                        onPress={() => calculate()}>
-                        Calculate
-                    </Button>
-                </View>
-                {ans.area != 0 && ans.perimeter != 0 && (
-                    <View style={{ marginTop: 25 }}>
-                        <Text style={styles.textStyle}>
-                            Area = Length × Breadth
-                        </Text>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Area
-                            </Text>
+                    {ans.area != 0 && ans.perimeter != 0 && (
+                        <View style={{ marginTop: 25 }}>
                             <Text style={styles.textStyle}>
-                                {` =  ${input.l} × ${input.b}`}
+                                Area = Length × Breadth
                             </Text>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Area
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {` =  ${input.l} × ${input.b}`}
+                                </Text>
+                            </View>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Area
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {" = " + ans.area}
+                                </Text>
+                            </View>
+                            <Text style={[styles.textStyle, { marginTop: 25 }]}>
+                                Perimeter = 2 × (Length + Breadth)
+                            </Text>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Perimeter
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {` = 2 × (${input.l} + ${input.b})`}
+                                </Text>
+                            </View>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Perimeter
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {` = 2 × ${input.l + input.b}`}
+                                </Text>
+                            </View>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Perimeter
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {" = " + ans.perimeter}
+                                </Text>
+                            </View>
+                            <View style={[styles.flexRow, { marginTop: 25 }]}>
+                                <Text style={styles.textStyle}>Diagonal</Text>
+                                <Text style={styles.textStyle}>{" = "}</Text>
+                                <Text style={styles.root}>√</Text>
+                                <Text style={styles.underRoot}>
+                                    Length² + Breadth²
+                                </Text>
+                            </View>
+                            <View style={[styles.flexRow, { marginTop: 5 }]}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Diagonal
+                                </Text>
+                                <Text style={styles.textStyle}>{" = "}</Text>
+                                <Text style={styles.root}>√</Text>
+
+                                <Text style={styles.underRoot}>
+                                    {`${input.l}² + ${input.b}²`}
+                                </Text>
+                            </View>
+                            <View style={[styles.flexRow, { marginTop: 5 }]}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Diagonal
+                                </Text>
+                                <Text style={styles.textStyle}>{" = "}</Text>
+                                <Text style={styles.root}>√</Text>
+
+                                <Text style={styles.underRoot}>
+                                    {`${input.l ** 2} + ${input.b ** 2}`}
+                                </Text>
+                            </View>
+                            <View style={[styles.flexRow, { marginTop: 5 }]}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Diagonal
+                                </Text>
+                                <Text style={styles.textStyle}>{" = "}</Text>
+                                <Text style={styles.root}>√</Text>
+                                <Text style={styles.underRoot}>
+                                    {` ${
+                                        input.l * input.l + input.b * input.b
+                                    }`}
+                                </Text>
+                            </View>
+                            <View style={styles.flexRow}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Diagonal
+                                </Text>
+                                <Text style={styles.textStyle}>
+                                    {" = " + ans.diagonal}
+                                </Text>
+                            </View>
                         </View>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Area
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {" = " + ans.area}
-                            </Text>
-                        </View>
-                        <Text style={[styles.textStyle, { marginTop: 25 }]}>
-                            Perimeter = 2 × (Length + Breadth)
-                        </Text>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Perimeter
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {` = 2 × (${input.l} + ${input.b})`}
-                            </Text>
-                        </View>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Perimeter
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {` = 2 × ${input.l + input.b}`}
-                            </Text>
-                        </View>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Perimeter
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {" = " + ans.perimeter}
-                            </Text>
-                        </View>
-                        <Text style={[styles.textStyle, { marginTop: 25 }]}>
-                            Diagonal = √(Length² + Breadth²)
-                        </Text>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Diagonal
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {` =  √(${input.l}² + ${input.b}²)`}
-                            </Text>
-                        </View>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Diagonal
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {` = √${input.l * input.l + input.b * input.b}`}
-                            </Text>
-                        </View>
-                        <View style={styles.flexRow}>
-                            <Text style={styles.transparentTextStyle}>
-                                Diagonal
-                            </Text>
-                            <Text style={styles.textStyle}>
-                                {" = " + ans.diagonal}
-                            </Text>
-                        </View>
-                    </View>
-                )}
-            </>
-        </ScrollView>
+                    )}
+                </>
+            </ScrollView>
+        </View>
     );
 };
 

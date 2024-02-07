@@ -52,6 +52,9 @@ import Cone from "./src/pages/bodies/Cone";
 import Cylinder from "./src/pages/bodies/Cylinder";
 import Sphere from "./src/pages/bodies/Sphere";
 import HemiSphere from "./src/pages/bodies/HemiSphere";
+import Interest from "./src/pages/Interest";
+import EquationWithThreeVeriables from "./src/pages/EquationWithThreeVeriables";
+import TimeDifference from "./src/pages/TimeDifference";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -338,6 +341,21 @@ const Screens = () => {
             <Stack.Screen
                 name="Hemisphere"
                 component={HemiSphere}
+                options={options}
+            />
+            <Stack.Screen
+                name="Interest"
+                component={Interest}
+                options={options}
+            />
+            <Stack.Screen
+                name="ThreeVeriablesEquation"
+                component={EquationWithThreeVeriables}
+                options={{ ...options, title: "Equation With Three Veriables" }}
+            />
+            <Stack.Screen
+                name="Time Difference"
+                component={TimeDifference}
                 options={options}
             />
         </Stack.Navigator>

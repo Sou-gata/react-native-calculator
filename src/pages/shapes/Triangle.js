@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Text, useTheme } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import { Fraction } from "../UsefulFormulas";
+import { parseNumber } from "../../helpers/functions";
 
 const Triangle = (props) => {
     const { colors } = useTheme();
@@ -33,24 +34,18 @@ const Triangle = (props) => {
         if (a + b > c && b + c > a && c + a > b) {
             setIsPossible(true);
             const s = (a + b + c) / 2;
-            let tempS = s.toFixed(2);
-            tempS = parseFloat(tempS);
+            tempS = parseNumber(s, 2);
             setInputs({ ...inputs, a, b, c });
             let area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-            area = area.toFixed(2);
-            area = parseFloat(area);
+            area = parseNumber(area, 2);
             let perimeter = a + b + c;
-            perimeter = perimeter.toFixed(2);
-            perimeter = parseFloat(perimeter);
+            perimeter = parseNumber(perimeter, 2);
             let heightA = (2 * area) / a;
-            heightA = heightA.toFixed(2);
-            heightA = parseFloat(heightA);
+            heightA = parseNumber(heightA, 2);
             let heightB = (2 * area) / b;
-            heightB = heightB.toFixed(2);
-            heightB = parseFloat(heightB);
+            heightB = parseNumber(heightB, 2);
             let heightC = (2 * area) / c;
-            heightC = heightC.toFixed(2);
-            heightC = parseFloat(heightC);
+            heightC = parseNumber(heightC, 2);
             setAns({
                 ...ans,
                 s: tempS,
@@ -155,7 +150,7 @@ const Triangle = (props) => {
                         </Text>
                     )}
                     {isPossible && ans.area && (
-                        <View style={{ marginTop: 15 }}>
+                        <>
                             <Fraction
                                 data={{
                                     numerator: "A + B + C",
@@ -165,6 +160,7 @@ const Triangle = (props) => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
+                                style={{ marginTop: 25 }}
                             />
                             <Fraction
                                 data={{
@@ -177,14 +173,30 @@ const Triangle = (props) => {
                                 bullet={false}
                                 textVisible={false}
                             />
-                            <View style={{ flexDirection: "row" }}>
-                                <Text style={styles.transparentTextStyle}>
-                                    S
-                                </Text>
-                                <Text style={styles.textStyle}>{` = `}</Text>
-                                <Text style={styles.textStyle}>{ans.s}</Text>
-                            </View>
-                        </View>
+                            <Fraction
+                                data={{
+                                    numerator: `${
+                                        inputs.a + inputs.b + inputs.c
+                                    }`,
+                                    denominator: "2",
+                                    text: "S",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.s,
+                                    text: "S",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                        </>
                     )}
                     {isPossible && ans.area && (
                         <>
@@ -196,8 +208,9 @@ const Triangle = (props) => {
                                     S (S - A) (S - B) (S - C)
                                 </Text>
                             </View>
+
                             <View
-                                style={{ marginTop: 15, flexDirection: "row" }}>
+                                style={{ marginTop: 10, flexDirection: "row" }}>
                                 <Text style={styles.transparentTextStyle}>
                                     Area{" "}
                                 </Text>
@@ -208,7 +221,34 @@ const Triangle = (props) => {
                                 </Text>
                             </View>
                             <View
-                                style={{ marginTop: 15, flexDirection: "row" }}>
+                                style={{ marginTop: 10, flexDirection: "row" }}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Area{" "}
+                                </Text>
+                                <Text style={styles.root}>= √</Text>
+                                <Text style={styles.lineWithRoot}>
+                                    {ans.s} × {ans.s - inputs.a} ×{" "}
+                                    {ans.s - inputs.b} × {ans.s - inputs.c}
+                                </Text>
+                            </View>
+                            <View
+                                style={{ marginTop: 10, flexDirection: "row" }}>
+                                <Text style={styles.transparentTextStyle}>
+                                    Area{" "}
+                                </Text>
+                                <Text style={styles.root}>= √</Text>
+                                <Text style={styles.lineWithRoot}>
+                                    {parseNumber(
+                                        ans.s *
+                                            (ans.s - inputs.a) *
+                                            (ans.s - inputs.b) *
+                                            (ans.s - inputs.c),
+                                        2
+                                    )}
+                                </Text>
+                            </View>
+                            <View
+                                style={{ marginTop: 10, flexDirection: "row" }}>
                                 <Text style={styles.transparentTextStyle}>
                                     Area{" "}
                                 </Text>
@@ -241,105 +281,135 @@ const Triangle = (props) => {
                                     </Text>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "2 × Area",
-                                        denominator: "A",
-                                        text: "Height A",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `2 × ${ans.area}`,
-                                        denominator: inputs.a,
-                                        text: "Height A",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: ans.heightA,
-                                        text: "Height A",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                            </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "2 × Area",
-                                        denominator: "B",
-                                        text: "Height B",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `2 × ${ans.area}`,
-                                        denominator: inputs.b,
-                                        text: "Height B",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: ans.heightB,
-                                        text: "Height B",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                            </View>
-                            <View style={{ marginTop: 25 }}>
-                                <Fraction
-                                    data={{
-                                        numerator: "2 × Area",
-                                        denominator: "C",
-                                        text: "Height C",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: `2 × ${ans.area}`,
-                                        denominator: inputs.c,
-                                        text: "Height C",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                                <Fraction
-                                    data={{
-                                        numerator: ans.heightC,
-                                        text: "Height C",
-                                    }}
-                                    size={18}
-                                    color={colors.text}
-                                    bullet={false}
-                                    textVisible={false}
-                                />
-                            </View>
+                            <Fraction
+                                data={{
+                                    numerator: "2 × Area",
+                                    denominator: "A",
+                                    text: "Height A",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `2 × ${ans.area}`,
+                                    denominator: inputs.a,
+                                    text: "Height A",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: 2 * ans.area,
+                                    denominator: inputs.a,
+                                    text: "Height A",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.heightA,
+                                    text: "Height A",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: "2 × Area",
+                                    denominator: "B",
+                                    text: "Height B",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `2 × ${ans.area}`,
+                                    denominator: inputs.b,
+                                    text: "Height B",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: 2 * ans.area,
+                                    denominator: inputs.b,
+                                    text: "Height B",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.heightB,
+                                    text: "Height B",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: "2 × Area",
+                                    denominator: "C",
+                                    text: "Height C",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                style={{ marginTop: 25 }}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: `2 × ${ans.area}`,
+                                    denominator: inputs.c,
+                                    text: "Height C",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: 2 * ans.area,
+                                    denominator: inputs.c,
+                                    text: "Height C",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
+                            <Fraction
+                                data={{
+                                    numerator: ans.heightC,
+                                    text: "Height C",
+                                }}
+                                size={18}
+                                color={colors.text}
+                                bullet={false}
+                                textVisible={false}
+                            />
                         </>
                     )}
                 </>

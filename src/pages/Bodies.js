@@ -15,8 +15,7 @@ const Bodies = ({ navigation }) => {
         shapeContainer: {
             flexDirection: "row",
             alignItems: "center",
-            marginBottom: 5,
-            paddingTop: 5,
+            paddingVertical: 5,
             paddingHorizontal: 10,
             borderRadius: 10,
             justifyContent: "flex-start",
@@ -44,21 +43,28 @@ const Bodies = ({ navigation }) => {
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {bodyList.map((shape, index) => (
-                    <Pressable
-                        android_ripple={{
-                            color: colors.secondary + "20",
-                            radius: 200,
-                        }}
-                        key={index}
-                        style={styles.shapeContainer}
-                        onPress={() =>
-                            navigation.navigate(shape.label, { shape })
-                        }>
-                        <View style={styles.iconBg}>
-                            <Image style={styles.icon} source={shape.icon} />
-                        </View>
-                        <Text style={styles.text}>{shape.label}</Text>
-                    </Pressable>
+                    <View
+                        style={{ overflow: "hidden", borderRadius: 7 }}
+                        key={index}>
+                        <Pressable
+                            android_ripple={{
+                                color: colors.secondary + "20",
+                                radius: 200,
+                            }}
+                            key={index}
+                            style={styles.shapeContainer}
+                            onPress={() =>
+                                navigation.navigate(shape.label, { shape })
+                            }>
+                            <View style={styles.iconBg}>
+                                <Image
+                                    style={styles.icon}
+                                    source={shape.icon}
+                                />
+                            </View>
+                            <Text style={styles.text}>{shape.label}</Text>
+                        </Pressable>
+                    </View>
                 ))}
             </ScrollView>
         </View>

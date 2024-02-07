@@ -1,5 +1,14 @@
 const info = [
     {
+        ver: "1.5.1",
+        changes: [
+            "bugs fix",
+            "add equation with three veriables",
+            "add interest calculator",
+            "add time difference calculator",
+        ],
+    },
+    {
         ver: "1.5.0",
         changes: [
             "bugs fix",

@@ -74,8 +74,8 @@ export default CustomInputFilds;
 
 const styles = StyleSheet.create({
     addInput: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         borderRadius: 7,
         alignItems: "center",
         justifyContent: "center",

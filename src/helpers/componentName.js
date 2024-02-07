@@ -112,6 +112,12 @@ export const secondTabComponents = {
             text: "Solve Equation",
             path: require("../../assets/icons/equ.png"),
         },
+        {
+            id: "3",
+            name: "ThreeVeriablesEquation",
+            text: "Three Variables Equation",
+            path: require("../../assets/icons/threeEqn.png"),
+        },
     ],
     Geometry: [
         {
@@ -137,8 +143,14 @@ export const secondTabComponents = {
         {
             id: "2",
             name: "TimeCalculator",
-            text: "Time Calculator",
+            text: "Time\nCalculator",
             path: require("../../assets/icons/watch.png"),
+        },
+        {
+            id: "3",
+            name: "Time Difference",
+            text: "Time Difference",
+            path: require("../../assets/icons/timeDiff.png"),
         },
     ],
     Finance: [
@@ -159,6 +171,12 @@ export const secondTabComponents = {
             name: "EMICalculator",
             text: "EMI Calculator",
             path: require("../../assets/icons/emi.png"),
+        },
+        {
+            id: "4",
+            name: "Interest",
+            text: "Interest",
+            path: require("../../assets/icons/interest.png"),
         },
     ],
     Others: [
