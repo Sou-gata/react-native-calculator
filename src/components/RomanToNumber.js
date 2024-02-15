@@ -40,59 +40,103 @@ const RomanToNumber = () => {
         setAns("");
     };
 
-    const displayContainer = [
-        styles.displayContainer,
-        { backgroundColor: colors.calBg, borderColor: colors.secondary },
-    ];
-    const calText = [styles.calText, { color: colors.text }];
+    const styles = StyleSheet.create({
+        displayContainer: {
+            height: 150,
+            alignItems: "center",
+            marginTop: 10,
+            borderTopWidth: 1,
+            borderBottomWidth: 1,
+            backgroundColor: colors.calBg,
+            borderColor: colors.secondary,
+        },
+        display: {
+            width: "75%",
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "row",
+        },
+        romanText: {
+            fontSize: 27,
+            color: colors.secondary,
+        },
+        bigRoman: {
+            fontSize: 27,
+            borderTopWidth: 2,
+            color: colors.secondary,
+            borderColor: colors.secondary,
+        },
+        ereseRow: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-around",
+        },
+        ereBtns: {
+            alignItems: "center",
+            justifyContent: "center",
+            height: hp("9.5%"),
+            width: wp("40%"),
+        },
+        calText: {
+            fontSize: 20,
+            textAlign: "center",
+            color: colors.text,
+        },
+        allBtns: {
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center",
+            paddingLeft: 20,
+            paddingRight: 20,
+            height: hp("75%") - 25,
+        },
+        calBtn: {
+            width: wp("17.5%"),
+            alignItems: "center",
+            height: hp("9.5%"),
+            justifyContent: "center",
+        },
+        romanCalText: {
+            borderTopWidth: 1,
+            fontSize: 20,
+            textAlign: "center",
+            borderColor: colors.secondary,
+            color: colors.secondary,
+        },
+        calEqual: {
+            width: hp("7.5%"),
+            height: hp("7.5%"),
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 55,
+            backgroundColor: colors.secondary,
+        },
+        calEqualText: {
+            fontSize: 24,
+            fontWeight: "bold",
+            color: "#fff",
+            textAlign: "center",
+        },
+    });
 
     return (
         <View>
-            <View style={displayContainer}>
+            <View style={styles.displayContainer}>
                 <View style={styles.display}>
                     <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-                        <Text
-                            style={[
-                                styles.romanText,
-                                { color: colors.secondary },
-                            ]}>
-                            {ans + ""}
-                        </Text>
-                        {(() => {
-                            let components = [];
-                            for (let i = 0; i < btn.length; i++) {
-                                let com;
-                                if (btn[i].special) {
-                                    com = (
-                                        <Text
-                                            key={i}
-                                            style={[
-                                                styles.bigRoman,
-                                                {
-                                                    color: colors.secondary,
-                                                    borderColor:
-                                                        colors.secondary,
-                                                },
-                                            ]}>
-                                            {btn[i].text}
-                                        </Text>
-                                    );
-                                } else {
-                                    com = (
-                                        <Text
-                                            key={i}
-                                            style={[
-                                                styles.romanText,
-                                                { color: colors.secondary },
-                                            ]}>
-                                            {btn[i].text}
-                                        </Text>
-                                    );
-                                }
-                                components.push(com);
-                            }
-                            return components;
-                        })()}
+                        <Text style={styles.romanText}>{ans + ""}</Text>
+                        {btn.map((text, i) => (
+                            <Text
+                                key={i}
+                                style={
+                                    text.special
+                                        ? styles.bigRoman
+                                        : styles.romanText
+                                }>
+                                {text.text}
+                            </Text>
+                        ))}
                     </View>
                 </View>
             </View>
@@ -103,7 +147,7 @@ const RomanToNumber = () => {
                         erase();
                     }}
                     android_ripple={androidRipple}>
-                    <Text style={calText}>⌫</Text>
+                    <Text style={styles.calText}>⌫</Text>
                 </Pressable>
                 <Pressable
                     style={styles.ereBtns}
@@ -112,133 +156,33 @@ const RomanToNumber = () => {
                         setAns("");
                     }}
                     android_ripple={androidRipple}>
-                    <Text style={calText}>Clear</Text>
+                    <Text style={styles.calText}>Clear</Text>
                 </Pressable>
             </View>
             <View style={[styles.allBtns, { height: "40%" }]}>
-                {(() => {
-                    let components = [];
-                    for (let i = 0; i < btns.length; i++) {
-                        let btn = btns[i];
-                        let com;
-                        if (btn.text != "=") {
-                            com = (
-                                <Pressable
-                                    onPress={() => handleBtnPress(btn)}
-                                    style={styles.calBtn}
-                                    android_ripple={androidRipple}
-                                    key={i}>
-                                    <Text
-                                        style={
-                                            btn.special
-                                                ? [
-                                                      styles.romanCalText,
-                                                      {
-                                                          borderColor:
-                                                              colors.secondary,
-                                                          color: colors.secondary,
-                                                      },
-                                                  ]
-                                                : calText
-                                        }>
-                                        {btn.text}
-                                    </Text>
-                                </Pressable>
-                            );
-                        } else {
-                            com = (
-                                <Pressable
-                                    onPress={() => handleBtnPress(btn)}
-                                    style={[
-                                        styles.calEqual,
-                                        { backgroundColor: colors.secondary },
-                                    ]}
-                                    android_ripple={androidRipple}
-                                    key={i}>
-                                    <Text
-                                        style={{
-                                            fontSize: 24,
-                                            fontWeight: "bold",
-                                            color: "white",
-                                            textAlign: "center",
-                                        }}>
-                                        {btn.text}
-                                    </Text>
-                                </Pressable>
-                            );
+                {btns.map((btn, i) => (
+                    <Pressable
+                        onPress={() => handleBtnPress(btn)}
+                        style={
+                            btn.text === "=" ? styles.calEqual : styles.calBtn
                         }
-                        components.push(com);
-                    }
-                    return components;
-                })()}
+                        android_ripple={androidRipple}
+                        key={i}>
+                        <Text
+                            style={
+                                btn.text == "="
+                                    ? styles.calEqualText
+                                    : btn.special
+                                      ? styles.romanCalText
+                                      : styles.calText
+                            }>
+                            {btn.text}
+                        </Text>
+                    </Pressable>
+                ))}
             </View>
         </View>
     );
 };
 
 export default RomanToNumber;
-
-const styles = StyleSheet.create({
-    displayContainer: {
-        height: 150,
-        alignItems: "center",
-        marginTop: 10,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-    },
-    display: {
-        width: "75%",
-        height: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "row",
-    },
-    romanText: {
-        fontSize: 27,
-    },
-    bigRoman: {
-        fontSize: 27,
-        borderTopWidth: 2,
-    },
-    ereseRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-    },
-    ereBtns: {
-        alignItems: "center",
-        justifyContent: "center",
-        height: hp("9.5%"),
-        width: wp("40%"),
-    },
-    calText: {
-        fontSize: 20,
-        textAlign: "center",
-    },
-    allBtns: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        paddingLeft: 20,
-        paddingRight: 20,
-        height: hp("75%") - 25,
-    },
-    calBtn: {
-        width: wp("17.5%"),
-        alignItems: "center",
-        height: hp("9.5%"),
-        justifyContent: "center",
-    },
-    romanCalText: {
-        borderTopWidth: 1,
-        fontSize: 20,
-        textAlign: "center",
-    },
-    calEqual: {
-        width: hp("7.5%"),
-        height: hp("7.5%"),
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 55,
-    },
-});

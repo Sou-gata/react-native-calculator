@@ -26,37 +26,82 @@ const TimeCalculator = () => {
         min: undefined,
         sec: undefined,
     });
+
+    const styles = StyleSheet.create({
+        container: {
+            justifyContent: "center",
+            alignContent: "center",
+            width: "100%",
+        },
+        flexRow: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        inputHeader: { fontSize: 18, color: colors.text },
+        timeHeadText: {
+            width: (wp("100%") - 10) / 4,
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        inputRow: {
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            marginTop: 10,
+        },
+        radioGroup: {
+            flexDirection: "row",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 5,
+        },
+        radioItem: {
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10,
+        },
+        radioText: {
+            fontSize: 20,
+            color: colors.text,
+        },
+        pressable: {
+            borderRadius: 50,
+            overflow: "hidden",
+        },
+        buttonContainer: {
+            alignItems: "center",
+            marginTop: 20,
+        },
+        textHighlight: {
+            fontSize: 35,
+            textAlign: "center",
+            color: colors.secondary,
+        },
+        ansText: {
+            fontSize: 18,
+            color: colors.text,
+        },
+    });
+
     return (
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
                 <View style={[styles.flexRow, { marginTop: 20 }]}>
                     <View style={styles.timeHeadText}>
-                        <Text style={{ fontSize: 18, color: colors.text }}>
-                            Days
-                        </Text>
+                        <Text style={styles.inputHeader}>Days</Text>
                     </View>
                     <View style={styles.timeHeadText}>
-                        <Text style={{ fontSize: 18, color: colors.text }}>
-                            Hours
-                        </Text>
+                        <Text style={styles.inputHeader}>Hours</Text>
                     </View>
                     <View style={styles.timeHeadText}>
-                        <Text style={{ fontSize: 18, color: colors.text }}>
-                            Minutes
-                        </Text>
+                        <Text style={styles.inputHeader}>Minutes</Text>
                     </View>
                     <View style={styles.timeHeadText}>
-                        <Text style={{ fontSize: 18, color: colors.text }}>
-                            Seconds
-                        </Text>
+                        <Text style={styles.inputHeader}>Seconds</Text>
                     </View>
                 </View>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-evenly",
-                        marginTop: 10,
-                    }}>
+                <View style={styles.inputRow}>
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d1")}
@@ -100,9 +145,7 @@ const TimeCalculator = () => {
                                 color={colors.secondary}
                                 onPress={() => setOperation(1)}
                             />
-                            <Text style={{ color: colors.text, fontSize: 20 }}>
-                                Add (+)
-                            </Text>
+                            <Text style={styles.radioText}>Add (+)</Text>
                         </Pressable>
                     </View>
                     <View style={styles.pressable}>
@@ -122,17 +165,11 @@ const TimeCalculator = () => {
                                 color={colors.secondary}
                                 onPress={() => setOperation(2)}
                             />
-                            <Text style={{ color: colors.text, fontSize: 20 }}>
-                                Subtract (-)
-                            </Text>
+                            <Text style={styles.radioText}>Subtract (-)</Text>
                         </Pressable>
                     </View>
                 </View>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        justifyContent: "space-evenly",
-                    }}>
+                <View style={styles.inputRow}>
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d2")}
@@ -166,91 +203,28 @@ const TimeCalculator = () => {
                             setAns(answer);
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>
                 {ans.day >= 0 && (
                     <View style={[styles.flexRow, { marginTop: 30 }]}>
                         {ans.day > 0 && (
-                            <Text
-                                style={[
-                                    styles.textHighlight,
-                                    { color: colors.secondary },
-                                ]}>
-                                {ans.day}
-                            </Text>
+                            <Text style={styles.textHighlight}>{ans.day}</Text>
                         )}
-                        {ans.day > 0 && (
-                            <Text
-                                style={[
-                                    styles.ansText,
-                                    { color: colors.text },
-                                ]}>
-                                {" "}
-                                D
-                            </Text>
-                        )}
+                        {ans.day > 0 && <Text style={styles.ansText}> D</Text>}
                         {ans.hou > 0 && (
-                            <Text
-                                style={[
-                                    styles.textHighlight,
-                                    { color: colors.secondary },
-                                ]}>
-                                {" "}
-                                {ans.hou}
-                            </Text>
+                            <Text style={styles.textHighlight}> {ans.hou}</Text>
                         )}
-                        {ans.hou > 0 && (
-                            <Text
-                                style={[
-                                    styles.ansText,
-                                    { color: colors.text },
-                                ]}>
-                                {" "}
-                                H
-                            </Text>
-                        )}
+                        {ans.hou > 0 && <Text style={styles.ansText}> H</Text>}
                         {ans.min > 0 && (
-                            <Text
-                                style={[
-                                    styles.textHighlight,
-                                    { color: colors.secondary },
-                                ]}>
-                                {" "}
-                                {ans.min}
-                            </Text>
+                            <Text style={styles.textHighlight}> {ans.min}</Text>
                         )}
-                        {ans.min > 0 && (
-                            <Text
-                                style={[
-                                    styles.ansText,
-                                    { color: colors.text },
-                                ]}>
-                                {" "}
-                                M
-                            </Text>
-                        )}
+                        {ans.min > 0 && <Text style={styles.ansText}> M</Text>}
                         {ans.sec > 0 && (
-                            <Text
-                                style={[
-                                    styles.textHighlight,
-                                    { color: colors.secondary },
-                                ]}>
-                                {" "}
-                                {ans.sec}
-                            </Text>
+                            <Text style={styles.textHighlight}> {ans.sec}</Text>
                         )}
-                        {ans.sec > 0 && (
-                            <Text
-                                style={[
-                                    styles.ansText,
-                                    { color: colors.text },
-                                ]}>
-                                {" "}
-                                S
-                            </Text>
-                        )}
+                        {ans.sec > 0 && <Text style={styles.ansText}> S</Text>}
                     </View>
                 )}
             </View>
@@ -259,48 +233,3 @@ const TimeCalculator = () => {
 };
 
 export default TimeCalculator;
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        alignContent: "center",
-        width: "100%",
-    },
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    timeHeadText: {
-        width: (wp("100%") - 10) / 4,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    radioGroup: {
-        flexDirection: "row",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 5,
-    },
-    radioItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        padding: 10,
-    },
-    pressable: {
-        borderRadius: 50,
-        overflow: "hidden",
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 20,
-    },
-    textHighlight: {
-        fontSize: 35,
-        textAlign: "center",
-    },
-    ansText: {
-        fontSize: 18,
-    },
-});

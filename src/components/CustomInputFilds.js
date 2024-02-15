@@ -4,7 +4,7 @@ import { useTheme, Text } from "react-native-paper";
 import Entypo from "react-native-vector-icons/Entypo";
 import CustomInput from "./CustomInput";
 
-const CustomInputFilds = ({ inputs, setInputs, maxInput }) => {
+const CustomInputFilds = ({ inputs, setInputs, maxInput, maxLength = 8 }) => {
     const { colors } = useTheme();
     return (
         <View style={styles.inputContainer}>
@@ -43,6 +43,7 @@ const CustomInputFilds = ({ inputs, setInputs, maxInput }) => {
                             newInputs[index].value = e;
                             setInputs(newInputs);
                         }}
+                        maxLength={maxLength}
                     />
                 </View>
             ))}

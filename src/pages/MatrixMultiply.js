@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
 import { matrixMultiply } from "../helpers/functions";
+import { decIntCheck } from "../helpers/numbersCheck";
 
 const MatrixMultiply = () => {
     const { colors } = useTheme();
@@ -23,7 +24,7 @@ const MatrixMultiply = () => {
     const [hide, setHide] = useState({ input: false, matrix: true });
     const change = (e, field) => {
         setInput((prev) => {
-            return { ...prev, [field]: e };
+            return { ...prev, [field]: decIntCheck(e) };
         });
     };
     const createMatrix = () => {

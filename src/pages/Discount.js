@@ -66,21 +66,18 @@ const Discount = () => {
                     />
                 </View>
             </View>
-            <View
-                style={
-                    opacity == 0
-                        ? { display: "none" }
-                        : { display: "flex", marginTop: 50 }
-                }>
-                <View style={styles.flexRow}>
-                    <Text style={textStyle}>The final price is </Text>
-                    <Text style={textHeighlight}>{ans.cost}</Text>
+            {Boolean(opacity) && (
+                <View style={{ display: "flex", marginTop: 50 }}>
+                    <View style={styles.flexRow}>
+                        <Text style={textStyle}>The final price is </Text>
+                        <Text style={textHeighlight}>{ans.cost}</Text>
+                    </View>
+                    <View style={styles.flexRow}>
+                        <Text style={textStyle}>You save </Text>
+                        <Text style={textHeighlight}>{ans.discount}</Text>
+                    </View>
                 </View>
-                <View style={styles.flexRow}>
-                    <Text style={textStyle}>You save </Text>
-                    <Text style={textHeighlight}>{ans.discount}</Text>
-                </View>
-            </View>
+            )}
         </View>
     );
 };

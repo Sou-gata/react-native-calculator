@@ -3,58 +3,7 @@ import {
     TransitionPresets,
 } from "@react-navigation/stack";
 import { useTheme } from "react-native-paper";
-import LCM from "./src/pages/LCM";
-import Home from "./Home";
-import HCF from "./src/pages/HCF";
-import Multiply from "./src/pages/Multiply";
-import Divide from "./src/pages/Divide";
-import About from "./src/pages/About";
-import Factors from "./src/pages/Factors";
-import Proportion from "./src/pages/Proportion";
-import Gst from "./src/pages/Gst";
-import LengthConverter from "./src/pages/LengthConverter";
-import NumberConverter from "./src/pages/NumberConverter";
-import RomanNumber from "./src/pages/RomanNumber";
-import Area from "./src/pages/Area";
-import WhatsNew from "./src/pages/WhatsNew";
-import PermutationCombination from "./src/pages/PermutationCombination";
-import WaightConverter from "./src/pages/WaightConverter";
-import Discount from "./src/pages/Discount";
-import AgeCalculator from "./src/pages/AgeCalculator";
-import EquSolve from "./src/pages/EquSolve";
-import TemperatureConverter from "./src/pages/TemperatureConverter";
-import Volume from "./src/pages/Volume";
-import PowerConverter from "./src/pages/PowerConverter";
-import QuadraticEqu from "./src/pages/QuadraticEqu";
-import TimeCalculator from "./src/pages/TimeCalculator";
-import UsefulFormulas from "./src/pages/UsefulFormulas";
-import EMICalculator from "./src/pages/EMICalculator";
-import MatrixMultiply from "./src/pages/MatrixMultiply";
-import PostFix from "./src/pages/PostFix";
-import Average from "./src/pages/Average";
-import BMICalculator from "./src/pages/BMICalculator";
-import Shapes from "./src/pages/Shapes";
-import Triangle from "./src/pages/shapes/Triangle";
-import Square from "./src/pages/shapes/Square";
-import Rectangle from "./src/pages/shapes/Rectangle";
-import Trapezoid from "./src/pages/shapes/Trapezoid";
-import Rhombus from "./src/pages/shapes/Rhombus";
-import Pentagon from "./src/pages/shapes/Pentagon";
-import Hexagon from "./src/pages/shapes/Hexagon";
-import Circle from "./src/pages/shapes/Circle";
-import CircleArc from "./src/pages/shapes/CircleArc";
-import Ellipse from "./src/pages/shapes/Ellipse";
-import Bodies from "./src/pages/Bodies";
-import Cuboid from "./src/pages/bodies/Cuboid";
-import TriangularPrism from "./src/pages/bodies/TriangularPrism";
-import Pyramid from "./src/pages/bodies/Pyramid";
-import Cone from "./src/pages/bodies/Cone";
-import Cylinder from "./src/pages/bodies/Cylinder";
-import Sphere from "./src/pages/bodies/Sphere";
-import HemiSphere from "./src/pages/bodies/HemiSphere";
-import Interest from "./src/pages/Interest";
-import EquationWithThreeVeriables from "./src/pages/EquationWithThreeVeriables";
-import TimeDifference from "./src/pages/TimeDifference";
+import Pages from "./src/helpers/PagesImport";
 
 const Screens = () => {
     const Stack = createStackNavigator();
@@ -64,7 +13,7 @@ const Screens = () => {
             backgroundColor: theme.colors.primary,
             height: 50,
         },
-        headerTintColor: "white",
+        headerTintColor: "#fff",
         animation: "timing",
         ...TransitionPresets.SlideFromRightIOS,
     };
@@ -72,40 +21,38 @@ const Screens = () => {
         <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
                 name="Home"
-                component={Home}
+                component={Pages.Home}
                 options={{
                     ...options,
                     headerShown: false,
                 }}
             />
-            <Stack.Screen
-                name="LCM"
-                component={LCM}
-                options={{
-                    ...options,
-                }}
-            />
-            <Stack.Screen name="HCF" component={HCF} options={options} />
+            <Stack.Screen name="LCM" component={Pages.LCM} options={options} />
+            <Stack.Screen name="HCF" component={Pages.HCF} options={options} />
             <Stack.Screen
                 name="Multiply"
-                component={Multiply}
+                component={Pages.Multiply}
                 options={options}
             />
-            <Stack.Screen name="Divide" component={Divide} options={options} />
+            <Stack.Screen
+                name="Divide"
+                component={Pages.Divide}
+                options={options}
+            />
             <Stack.Screen
                 name="Factors"
-                component={Factors}
+                component={Pages.Factors}
                 options={options}
             />
             <Stack.Screen
                 name="Proportion"
-                component={Proportion}
+                component={Pages.Proportion}
                 options={options}
             />
-            <Stack.Screen name="Gst" component={Gst} options={options} />
+            <Stack.Screen name="Gst" component={Pages.Gst} options={options} />
             <Stack.Screen
                 name="LengthConverter"
-                component={LengthConverter}
+                component={Pages.LengthConverter}
                 options={{
                     ...options,
                     title: "Length Converter",
@@ -113,7 +60,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="NumberConverter"
-                component={NumberConverter}
+                component={Pages.NumberConverter}
                 options={{
                     ...options,
                     title: "Number Converter",
@@ -121,7 +68,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="RomanNumber"
-                component={RomanNumber}
+                component={Pages.RomanNumber}
                 options={{
                     ...options,
                     title: "Roman Number",
@@ -129,7 +76,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="Area"
-                component={Area}
+                component={Pages.Area}
                 options={{
                     ...options,
                     title: "Area Converter",
@@ -137,7 +84,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="PermutationCombination"
-                component={PermutationCombination}
+                component={Pages.PermutationCombination}
                 options={{
                     ...options,
                     title: "Permutation Combination",
@@ -145,7 +92,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="About"
-                component={About}
+                component={Pages.About}
                 options={{
                     ...options,
                     headerShown: false,
@@ -153,7 +100,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="Discount"
-                component={Discount}
+                component={Pages.Discount}
                 options={{
                     ...options,
                     title: "Discount Calculator",
@@ -161,7 +108,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="AgeCalculator"
-                component={AgeCalculator}
+                component={Pages.AgeCalculator}
                 options={{
                     ...options,
                     title: "Age Calculator",
@@ -169,7 +116,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="SolveEqu"
-                component={EquSolve}
+                component={Pages.EquSolve}
                 options={{
                     ...options,
                     title: "Solve Equation",
@@ -177,7 +124,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="TemperatureConverter"
-                component={TemperatureConverter}
+                component={Pages.TemperatureConverter}
                 options={{
                     ...options,
                     title: "Temperature Converter",
@@ -185,7 +132,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="Volume"
-                component={Volume}
+                component={Pages.Volume}
                 options={{
                     ...options,
                     title: "Volume Converter",
@@ -193,7 +140,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="PowerConverter"
-                component={PowerConverter}
+                component={Pages.PowerConverter}
                 options={{
                     ...options,
                     title: "Power Converter",
@@ -201,7 +148,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="QuadraticEqu"
-                component={QuadraticEqu}
+                component={Pages.QuadraticEqu}
                 options={{
                     ...options,
                     title: "Quadratic Equation",
@@ -209,7 +156,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="TimeCalculator"
-                component={TimeCalculator}
+                component={Pages.TimeCalculator}
                 options={{
                     ...options,
                     title: "Time Calculator",
@@ -217,7 +164,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="WhatsNew"
-                component={WhatsNew}
+                component={Pages.WhatsNew}
                 options={{
                     ...options,
                     headerShown: false,
@@ -225,7 +172,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="MassConverter"
-                component={WaightConverter}
+                component={Pages.WaightConverter}
                 options={{
                     ...options,
                     title: "Mass Converter",
@@ -233,7 +180,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="UsefulFormula"
-                component={UsefulFormulas}
+                component={Pages.UsefulFormulas}
                 options={{
                     ...options,
                     title: "Useful Formulas",
@@ -241,7 +188,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="EMICalculator"
-                component={EMICalculator}
+                component={Pages.EMICalculator}
                 options={{
                     ...options,
                     title: "EMI Calculator",
@@ -249,7 +196,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="MatrixMultiplication"
-                component={MatrixMultiply}
+                component={Pages.MatrixMultiply}
                 options={{
                     ...options,
                     title: "Matrix Multiplication",
@@ -257,7 +204,7 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="Postfix"
-                component={PostFix}
+                component={Pages.PostFix}
                 options={{
                     ...options,
                     title: "Infix To Postfix",
@@ -265,97 +212,125 @@ const Screens = () => {
             />
             <Stack.Screen
                 name="Average"
-                component={Average}
+                component={Pages.Average}
                 options={options}
             />
             <Stack.Screen
                 name="BMICalculator"
-                component={BMICalculator}
+                component={Pages.BMICalculator}
                 options={{
                     ...options,
                     title: "BMI Calculator",
                 }}
             />
-            <Stack.Screen name="Shapes" component={Shapes} options={options} />
             <Stack.Screen
-                name="Triangle"
-                component={Triangle}
+                name="Shapes"
+                component={Pages.Shapes}
                 options={options}
             />
-            <Stack.Screen name="Square" component={Square} options={options} />
+            <Stack.Screen
+                name="Triangle"
+                component={Pages.Triangle}
+                options={options}
+            />
+            <Stack.Screen
+                name="Square"
+                component={Pages.Square}
+                options={options}
+            />
             <Stack.Screen
                 name="Rectangle"
-                component={Rectangle}
+                component={Pages.Rectangle}
                 options={options}
             />
             <Stack.Screen
                 name="Trapezoid"
-                component={Trapezoid}
+                component={Pages.Trapezoid}
                 options={options}
             />
             <Stack.Screen
                 name="Rhombus"
-                component={Rhombus}
+                component={Pages.Rhombus}
                 options={options}
             />
             <Stack.Screen
                 name="Pentagon"
-                component={Pentagon}
+                component={Pages.Pentagon}
                 options={options}
             />
             <Stack.Screen
                 name="Hexagon"
-                component={Hexagon}
+                component={Pages.Hexagon}
                 options={options}
             />
-            <Stack.Screen name="Circle" component={Circle} options={options} />
+            <Stack.Screen
+                name="Circle"
+                component={Pages.Circle}
+                options={options}
+            />
             <Stack.Screen
                 name="Circle Arc"
-                component={CircleArc}
+                component={Pages.CircleArc}
                 options={options}
             />
             <Stack.Screen
                 name="Ellipse"
-                component={Ellipse}
+                component={Pages.Ellipse}
                 options={options}
             />
-            <Stack.Screen name="Bodies" component={Bodies} options={options} />
-            <Stack.Screen name="Cuboid" component={Cuboid} options={options} />
+            <Stack.Screen
+                name="Bodies"
+                component={Pages.Bodies}
+                options={options}
+            />
+            <Stack.Screen
+                name="Cuboid"
+                component={Pages.Cuboid}
+                options={options}
+            />
             <Stack.Screen
                 name="Triangular Prism"
-                component={TriangularPrism}
+                component={Pages.TriangularPrism}
                 options={options}
             />
             <Stack.Screen
                 name="Pyramid"
-                component={Pyramid}
+                component={Pages.Pyramid}
+                options={Pages.options}
+            />
+            <Stack.Screen
+                name="Cone"
+                component={Pages.Cone}
                 options={options}
             />
-            <Stack.Screen name="Cone" component={Cone} options={options} />
             <Stack.Screen
                 name="Cylinder"
-                component={Cylinder}
+                component={Pages.Cylinder}
                 options={options}
             />
-            <Stack.Screen name="Sphere" component={Sphere} options={options} />
+            <Stack.Screen
+                name="Sphere"
+                component={Pages.Sphere}
+                options={options}
+            />
             <Stack.Screen
                 name="Hemisphere"
-                component={HemiSphere}
+                component={Pages.HemiSphere}
                 options={options}
             />
             <Stack.Screen
                 name="Interest"
-                component={Interest}
+                component={Pages.Interest}
                 options={options}
             />
             <Stack.Screen
                 name="ThreeVeriablesEquation"
-                component={EquationWithThreeVeriables}
+                component={Pages.EquationWithThreeVeriables}
                 options={{ ...options, title: "Equation With Three Veriables" }}
             />
             <Stack.Screen
                 name="Time Difference"
-                component={TimeDifference}
+                component={Pages.TimeDifference}
                 options={options}
             />
         </Stack.Navigator>

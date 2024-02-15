@@ -33,6 +33,37 @@ const Factors = () => {
         }
     };
 
+    const styles = StyleSheet.create({
+        container: {
+            marginTop: 29,
+            flexDirection: "column",
+            justifyContent: "center",
+            width: wp("100%"),
+            paddingHorizontal: 25,
+            alignItems: "center",
+        },
+        ansDiv: {
+            alignItems: "center",
+            paddingHorizontal: 20,
+        },
+        textStyleAns: {
+            fontSize: 35,
+            textAlign: "center",
+            color: colors.secondary,
+        },
+        textStyle: {
+            fontSize: 25,
+            textAlign: "center",
+            color: colors.text,
+        },
+        primeContainer: {
+            flexDirection: "row",
+            gap: 20,
+            alignItems: "center",
+            padding: 20,
+        },
+    });
+
     const onChangeText = (e) => {
         if (e != "") {
             let isCorrect = decIntCheck(e);
@@ -81,16 +112,10 @@ const Factors = () => {
                         styles.ansDiv,
                         { display: opacity ? "flex" : "none" },
                     ]}>
-                    <Text style={[styles.textStyle, { color: colors.text }]}>
+                    <Text style={[styles.textStyle, {}]}>
                         Factors of {ans.number} are :
                     </Text>
-                    <Text
-                        style={[
-                            styles.textStyleAns,
-                            { color: colors.secondary },
-                        ]}>
-                        {ans.str}
-                    </Text>
+                    <Text style={styles.textStyleAns}>{ans.str}</Text>
                 </View>
                 <View
                     style={{
@@ -98,28 +123,10 @@ const Factors = () => {
                         flexDirection: "row",
                         padding: 20,
                     }}>
-                    <Text style={[styles.textStyle, { color: colors.text }]}>
-                        {ans.number} ={" "}
+                    <Text style={styles.textStyle}>{ans.number} = </Text>
+                    <Text style={[styles.textStyle, { flexShrink: 1 }]}>
+                        {factor.join(" × ")}
                     </Text>
-                    {(() => {
-                        let com = "";
-                        for (let i = 0; i < factor.length; i++) {
-                            if (i < factor.length - 1) {
-                                com += factor[i] + " × ";
-                            } else {
-                                com += factor[i];
-                            }
-                        }
-                        return (
-                            <Text
-                                style={[
-                                    styles.textStyle,
-                                    { color: colors.text, flexShrink: 1 },
-                                ]}>
-                                {com}
-                            </Text>
-                        );
-                    })()}
                 </View>
                 <View style={{ display: opacity ? "flex" : "none" }}>
                     <View style={styles.primeContainer}>
@@ -162,32 +169,3 @@ const Factors = () => {
 };
 
 export default Factors;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        justifyContent: "center",
-        width: wp("100%"),
-        paddingHorizontal: 25,
-        alignItems: "center",
-    },
-    ansDiv: {
-        alignItems: "center",
-        paddingHorizontal: 20,
-    },
-    textStyleAns: {
-        fontSize: 35,
-        textAlign: "center",
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-    primeContainer: {
-        flexDirection: "row",
-        gap: 20,
-        alignItems: "center",
-        padding: 20,
-    },
-});

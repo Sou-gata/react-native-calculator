@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
     checkLcmHcfNumber,
     gcd,
-    inputToText,
     factorizeHcf,
     hasDecimalInArr,
     decimalHcf,
@@ -11,6 +10,7 @@ import {
 } from "../helpers/functions";
 import { useTheme, Button, Text, DataTable } from "react-native-paper";
 import CustomInputFilds from "../components/CustomInputFilds";
+import { Fraction } from "./UsefulFormulas";
 
 const HCF = () => {
     const { colors } = useTheme();
@@ -37,21 +37,10 @@ const HCF = () => {
         nuHcf: undefined,
     });
 
-    const arrayToString = (array) => {
-        let element = "";
-        for (let j = 0; j < array.length; j++) {
-            if (j < array.length - 1) {
-                element += array[j] + " × ";
-            } else {
-                element += array[j];
-            }
-        }
-        return element;
-    };
     const calculate = () => {
         let numbers = checkLcmHcfNumber(inputs);
         if (numbers) {
-            setInput(inputToText(inputs));
+            setInput(numbers.join(", "));
             if (!hasDecimalInArr(numbers)) {
                 let hcfAns = gcd(numbers);
                 setAns(hcfAns);
@@ -87,11 +76,50 @@ const HCF = () => {
             });
         }
     };
-    const textStyle = {
-        color: colors.text,
-        fontSize: 22,
-        marginTop: 20,
-    };
+
+    const styles = StyleSheet.create({
+        container: {
+            marginTop: 29,
+            width: wp("100%"),
+            paddingHorizontal: 25,
+        },
+        buttonContainer: {
+            alignItems: "center",
+            marginTop: 30,
+        },
+        textStyle: {
+            fontSize: 25,
+            textAlign: "center",
+            color: colors.text,
+        },
+        textStyleOrange: {
+            fontSize: 35,
+            textAlign: "center",
+            color: colors.secondary,
+        },
+        ansDiv: {
+            alignItems: "center",
+            padding: 20,
+        },
+        hrLine: {
+            height: 2,
+            marginVertical: 5,
+        },
+        hcfNumber: {
+            color: colors.text,
+            fontSize: 22,
+            fontFamily: "RobotoMono_400Regular",
+        },
+        factorLine: {
+            color: colors.text,
+            fontSize: 22,
+        },
+        ansLineContainer: {
+            flexDirection: "row",
+            paddingHorizontal: 20,
+        },
+    });
+
     return (
         <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
             <View style={styles.container}>
@@ -107,177 +135,91 @@ const HCF = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>
             </View>
-            <View
-                style={[
-                    styles.ansDiv,
-                    { display: opacity.two == 1 ? "flex" : "none" },
-                ]}>
-                <Text
-                    style={[
-                        styles.textStyleOrange,
-                        { color: colors.secondary },
-                    ]}>
-                    Can't calculate
-                </Text>
-            </View>
-            <View
-                style={[
-                    styles.ansDiv,
-                    { display: opacity.one ? "flex" : "none" },
-                ]}>
-                <Text style={[styles.textStyle, { color: colors.text }]}>
-                    HCF of {input} is
-                </Text>
-                <Text
-                    style={[
-                        styles.textStyleOrange,
-                        { color: colors.secondary },
-                    ]}>
-                    {ans}
-                </Text>
-            </View>
-            <ScrollView
-                style={{
-                    display: opacity.three == 1 ? "flex" : "none",
-                }}>
-                <View
-                    style={{
+            {opacity.two === 1 && (
+                <View style={styles.ansDiv}>
+                    <Text style={styles.textStyleOrange}>Can't calculate</Text>
+                </View>
+            )}
+            {Boolean(opacity.one) && (
+                <View style={styles.ansDiv}>
+                    <Text style={styles.textStyle}>HCF of {input} is</Text>
+                    <Text style={styles.textStyleOrange}>{ans}</Text>
+                </View>
+            )}
+            {Boolean(opacity.three) && (
+                <ScrollView
+                    contentContainerStyle={{
                         paddingHorizontal: 10,
                     }}>
                     <DataTable>
-                        {(() => {
-                            let com = [];
-                            for (let i = 0; i < details.numbers.length; i++) {
-                                const num = details.numbers[i];
-                                const fact = arrayToString(details.factors[i]);
-                                com.push(
-                                    <DataTable.Row
-                                        key={i}
-                                        style={{
-                                            borderBottomWidth: 0,
-                                            marginVertical: 2.5,
-                                        }}>
-                                        <View style={{ flexShrink: 1 }}>
-                                            <Text
-                                                style={{
-                                                    color: colors.text,
-                                                    fontSize: 22,
-                                                    fontFamily:
-                                                        "RobotoMono_400Regular",
-                                                }}>
-                                                {num} ={" "}
-                                            </Text>
-                                        </View>
-                                        <View
-                                            style={{
-                                                flexShrink: 1,
-                                            }}>
-                                            <Text
-                                                style={{
-                                                    color: colors.text,
-                                                    fontSize: 22,
-                                                }}>
-                                                {fact}
-                                            </Text>
-                                        </View>
-                                    </DataTable.Row>
-                                );
-                            }
-                            return com;
-                        })()}
-                    </DataTable>
-                    <View>
-                        {(() => {
-                            let com = "";
-                            for (let i = 0; i < details.hcf.length; i++) {
-                                if (i < details.hcf.length - 1) {
-                                    com += details.hcf[i] + " × ";
-                                } else {
-                                    com += details.hcf[i];
-                                }
-                            }
-                            return (
+                        {details.numbers.map((number, i) => (
+                            <DataTable.Row
+                                key={i}
+                                style={{
+                                    borderBottomWidth: 0,
+                                }}>
+                                <View style={{ flexShrink: 1 }}>
+                                    <Text style={styles.hcfNumber}>
+                                        {number} ={" "}
+                                    </Text>
+                                </View>
                                 <View
                                     style={{
-                                        flexDirection: "row",
-                                        paddingHorizontal: 20,
+                                        flexShrink: 1,
                                     }}>
-                                    <View>
-                                        <Text style={textStyle}>HCF = </Text>
-                                    </View>
-                                    <View style={{ flexShrink: 1 }}>
-                                        <Text style={textStyle}>{com}</Text>
-                                    </View>
+                                    <Text style={styles.factorLine}>
+                                        {details.factors[i].join(" × ")}
+                                    </Text>
                                 </View>
-                            );
-                        })()}
+                            </DataTable.Row>
+                        ))}
+                    </DataTable>
+                    <View>
+                        <View style={styles.ansLineContainer}>
+                            <View>
+                                <Text style={styles.textStyle}>HCF = </Text>
+                            </View>
+                            <View style={{ flexShrink: 1 }}>
+                                <Text style={styles.textStyle}>
+                                    {details.hcf.join(" × ")}
+                                </Text>
+                            </View>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
-            <View
-                style={{
-                    padding: 20,
-                    display: opacity.four === 0 ? "none" : "flex",
-                    alignItems: "center",
-                }}>
-                <View>
-                    <Text style={textStyle}>HCF of ({fraction.numinator})</Text>
-                    <View
-                        style={[
-                            styles.hrLine,
-                            { backgroundColor: colors.text },
-                        ]}
+                </ScrollView>
+            )}
+            {Boolean(opacity.four) && (
+                <View style={{ paddingHorizontal: 20 }}>
+                    <Fraction
+                        color={colors.text}
+                        size={22}
+                        bullet={false}
+                        data={{
+                            numerator: `HCF of (${fraction.numinator})`,
+                            denominator: fraction.denominator,
+                            text: "HCF",
+                        }}
                     />
-                    <Text style={textStyle}>{fraction.denominator}</Text>
-                </View>
-                <View style={{ marginTop: 20 }}>
-                    <Text style={textStyle}>{fraction.nuHcf}</Text>
-                    <View
-                        style={[
-                            styles.hrLine,
-                            { backgroundColor: colors.text },
-                        ]}
+                    <Fraction
+                        color={colors.text}
+                        size={22}
+                        bullet={false}
+                        textVisible={false}
+                        data={{
+                            numerator: fraction.nuHcf,
+                            denominator: fraction.denominator,
+                            text: "HCF",
+                        }}
                     />
-                    <Text style={textStyle}>{fraction.denominator}</Text>
                 </View>
-            </View>
+            )}
         </View>
     );
 };
 
 export default HCF;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        justifyContent: "center",
-        alignContent: "center",
-        width: wp("100%"),
-        paddingHorizontal: 25,
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 30,
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-    textStyleOrange: {
-        fontSize: 35,
-        textAlign: "center",
-    },
-    ansDiv: {
-        alignItems: "center",
-        padding: 20,
-    },
-    hrLine: {
-        height: 2,
-        marginVertical: 5,
-    },
-});

@@ -1,6 +1,5 @@
 import { View, Text, Image, Pressable, Linking } from "react-native";
 import { StyleSheet } from "react-native";
-import React from "react";
 import Appdata from "../../app.json";
 import { useTheme } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -54,14 +53,19 @@ const About = ({ navigation }) => {
                 <Text style={aboutAppName}>Key Features</Text>
                 <View style={{ marginTop: 20 }}>
                     <Text style={aboutText}>
-                        {"\u2022"} Multiply In details
-                    </Text>
-                    <Text style={aboutText}>{"\u2022"} Divide In details</Text>
-                    <Text style={aboutText}>
-                        {"\u2022"} Two degree equation solve
+                        {"\u2022"} Multiply & Divide In details
                     </Text>
                     <Text style={aboutText}>
-                        {"\u2022"} Two veriable equation solve
+                        {"\u2022"} LCM & HCF In details
+                    </Text>
+                    <Text style={aboutText}>
+                        {"\u2022"} Shapes & Bodies with formulas
+                    </Text>
+                    <Text style={aboutText}>
+                        {"\u2022"} Two & Three veriable equation solve
+                    </Text>
+                    <Text style={aboutText}>
+                        {"\u2022"} Some useful formulas
                     </Text>
                 </View>
             </View>

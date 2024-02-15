@@ -12,7 +12,38 @@ const NumberToRoman = () => {
     const [opacity, setOpacity] = useState(false);
     let intNum = parseInt(number);
     intNum = isNaN(intNum) ? "" : intNum + "";
-    const textStyle = [styles.textStyle, { color: colors.text }];
+
+    const styles = StyleSheet.create({
+        container: {
+            marginTop: 29,
+            alignItems: "center",
+            justifyContent: "center",
+        },
+        buttonContainer: {
+            alignItems: "center",
+            marginTop: 30,
+        },
+        flexRow: {
+            flexDirection: "row",
+            marginTop: 25,
+        },
+        textStyle: {
+            fontSize: 25,
+            textAlign: "center",
+            color: colors.text,
+        },
+        romanText: {
+            fontSize: 27,
+            color: colors.secondary,
+        },
+        bigRoman: {
+            fontSize: 27,
+            borderTopWidth: 2,
+            color: colors.secondary,
+            borderColor: colors.secondary,
+        },
+    });
+
     return (
         <View>
             <View style={styles.container}>
@@ -43,43 +74,26 @@ const NumberToRoman = () => {
                             }
                         }}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>
             </View>
             <View style={opacity ? styles.container : { display: "none" }}>
-                <Text style={textStyle}>{intNum}</Text>
-                <Text style={textStyle}> in roman is</Text>
+                <Text style={styles.textStyle}>{intNum}</Text>
+                <Text style={styles.textStyle}> in roman is</Text>
                 <View style={styles.flexRow}>
-                    {(() => {
-                        let components = [];
-                        for (let i = 0; i < ans.length; i++) {
-                            let com = (
-                                <Text
-                                    key={i}
-                                    style={
-                                        ans[i].special
-                                            ? [
-                                                  styles.bigRoman,
-                                                  {
-                                                      color: colors.secondary,
-                                                      borderColor:
-                                                          colors.secondary,
-                                                  },
-                                              ]
-                                            : [
-                                                  styles.romanText,
-                                                  { color: colors.secondary },
-                                              ]
-                                    }>
-                                    {ans[i].val}
-                                </Text>
-                            );
-                            components.push(com);
-                        }
-                        return components;
-                    })()}
+                    {ans.map((text, i) => (
+                        <Text
+                            key={i}
+                            style={
+                                text.special
+                                    ? styles.bigRoman
+                                    : styles.romanText
+                            }>
+                            {text.val}
+                        </Text>
+                    ))}
                 </View>
             </View>
         </View>
@@ -87,30 +101,3 @@ const NumberToRoman = () => {
 };
 
 export default NumberToRoman;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 30,
-    },
-    flexRow: {
-        flexDirection: "row",
-        marginTop: 25,
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-    romanText: {
-        fontSize: 27,
-    },
-    bigRoman: {
-        fontSize: 27,
-        borderTopWidth: 2,
-    },
-});

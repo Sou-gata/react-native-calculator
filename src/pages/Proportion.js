@@ -19,8 +19,6 @@ const Proportion = () => {
     });
     const [opacity, setOpacity] = useState({ full: 0, mix: 0 });
 
-    const textStyle = [styles.textStyle, { color: colors.text }];
-
     const calculate = () => {
         let opc = { full: 0, mix: 0 };
         setOpacity(opc);
@@ -53,6 +51,45 @@ const Proportion = () => {
         }
     };
 
+    const styles = StyleSheet.create({
+        container: {
+            marginTop: 29,
+            flexDirection: "column",
+            justifyContent: "center",
+            width: wp("100%"),
+            paddingHorizontal: 25,
+            alignItems: "center",
+        },
+        buttonContainer: {
+            alignItems: "center",
+            marginTop: 30,
+        },
+        ansDiv: {
+            alignItems: "center",
+            padding: 20,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+        },
+        textStyle: {
+            fontSize: 25,
+            textAlign: "center",
+            color: colors.text,
+        },
+        hrLine: {
+            height: 2,
+            marginVertical: 2,
+            marginTop: 7,
+            backgroundColor: colors.text,
+        },
+        mixContainer: {
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+        },
+    });
+
     return (
         <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
             <View style={styles.container}>
@@ -75,111 +112,49 @@ const Proportion = () => {
                         mode="contained"
                         onPress={calculate}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>
             </View>
             <View style={opacity.full ? styles.ansDiv : { display: "none" }}>
                 <View>
-                    <Text style={textStyle}>{ans.oriNu}</Text>
-                    <View
-                        style={[
-                            styles.hrLine,
-                            {
-                                backgroundColor: colors.text,
-                            },
-                        ]}></View>
-                    <Text style={textStyle}>{ans.oldDe}</Text>
+                    <Text style={styles.textStyle}>{ans.oriNu}</Text>
+                    <View style={styles.hrLine}></View>
+                    <Text style={styles.textStyle}>{ans.oldDe}</Text>
                 </View>
                 {ans.oldDe != ans.de && ans.oriNu != ans.nu && (
                     <>
-                        <Text style={textStyle}> = </Text>
+                        <Text style={styles.textStyle}> = </Text>
                         <View>
-                            <Text style={textStyle}>{ans.nu}</Text>
-                            <View
-                                style={[
-                                    styles.hrLine,
-                                    {
-                                        backgroundColor: colors.text,
-                                    },
-                                ]}
-                            />
-                            <Text style={textStyle}>{ans.de}</Text>
+                            <Text style={styles.textStyle}>{ans.nu}</Text>
+                            <View style={styles.hrLine} />
+                            <Text style={styles.textStyle}>{ans.de}</Text>
                         </View>
                     </>
                 )}
-                <Text
-                    style={
-                        opacity.mix === 0
-                            ? [{ display: "none" }, textStyle]
-                            : [{ display: "flex" }, textStyle]
-                    }>
-                    {" "}
-                    ={" "}
-                </Text>
-                <View
-                    style={
-                        opacity.mix == 0
-                            ? { display: "none" }
-                            : {
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  alignItems: "center",
-                              }
-                    }>
-                    <Text style={[textStyle, { marginRight: 5 }]}>
-                        {ans.mix}
-                    </Text>
-                    {ans.mixNu !== 0 && (
-                        <View>
-                            <Text style={textStyle}>{ans.mixNu}</Text>
-                            <View
-                                style={[
-                                    styles.hrLine,
-                                    {
-                                        backgroundColor: colors.text,
-                                    },
-                                ]}></View>
-                            <Text style={textStyle}>{ans.mixDe}</Text>
-                        </View>
-                    )}
-                </View>
+                {opacity.mix != 0 && (
+                    <View style={styles.mixContainer}>
+                        <Text style={[styles.textStyle, { marginRight: 5 }]}>
+                            {" = "}
+                            {ans.mix}
+                        </Text>
+                        {ans.mixNu != 0 && (
+                            <View>
+                                <Text style={styles.textStyle}>
+                                    {ans.mixNu}
+                                </Text>
+                                <View style={styles.hrLine} />
+                                <Text style={styles.textStyle}>
+                                    {ans.mixDe}
+                                </Text>
+                            </View>
+                        )}
+                    </View>
+                )}
             </View>
         </View>
     );
 };
 
 export default Proportion;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        justifyContent: "center",
-        width: wp("100%"),
-        paddingHorizontal: 25,
-        alignItems: "center",
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 30,
-    },
-    ansDiv: {
-        alignItems: "center",
-        padding: 20,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-    hrLine: {
-        height: 2,
-        marginVertical: 2,
-        marginTop: 7,
-    },
-});

@@ -77,10 +77,7 @@ const Divide = () => {
                 style={{ marginBottom: 20 }}>
                 <View style={styles.divideMath}>
                     <Text style={mathText}>{divideAns.numberB}</Text>
-                    <View
-                        style={
-                            vLine ? varticleLine : { display: "none" }
-                        }></View>
+                    {Boolean(vLine) && <View style={varticleLine} />}
                     <View>
                         <Text style={mathText}>{divideAns.numberA}</Text>
                         {(() => {
@@ -125,10 +122,7 @@ const Divide = () => {
                             }
                         })()}
                     </View>
-                    <View
-                        style={
-                            vLine ? varticleLine : { display: "none" }
-                        }></View>
+                    {Boolean(vLine) && <View style={varticleLine} />}
                     <Text style={mathText}>{divideAns.result}</Text>
                 </View>
             </ScrollView>

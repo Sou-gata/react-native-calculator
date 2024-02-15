@@ -117,7 +117,7 @@ const EquSolve = () => {
                         );
                     }}
                     buttonColor={colors.secondary}
-                    textColor={"white"}>
+                    textColor="#fff">
                     Calculate
                 </Button>
                 <Button
@@ -143,7 +143,7 @@ const EquSolve = () => {
                         });
                     }}
                     buttonColor={colors.secondary}
-                    textColor={"white"}>
+                    textColor="#fff">
                     Clear
                 </Button>
             </View>

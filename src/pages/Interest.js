@@ -27,6 +27,7 @@ const CompoundInterest = ({
                     flexDirection: "row",
                     alignItems: "center",
                     flexWrap: "wrap",
+                    marginTop: 5,
                 },
                 style,
             ]}>

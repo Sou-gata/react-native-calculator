@@ -172,6 +172,85 @@ const One = ({ navigation }) => {
     const [visible, setVisible] = useState(false);
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
+
+    const styles = StyleSheet.create({
+        main: {
+            flex: 1,
+        },
+        inputContainer: {
+            alignItems: "center",
+        },
+        calInput: {
+            height: (2 * (hp("25%") - 25)) / 3,
+            width: wp("100%"),
+            paddingVertical: 10,
+            paddingRight: 45,
+            paddingLeft: 25,
+            fontSize: 30,
+            textAlign: "center",
+            color: colors.text,
+            backgroundColor: colors.calBg,
+        },
+        calInputAns: {
+            height: (hp("25%") - 25) / 3,
+            width: wp("100%"),
+            padding: 10,
+            paddingRight: 20,
+            fontSize: 25,
+            textAlign: "center",
+            color: colors.calAns,
+            backgroundColor: colors.calBg,
+        },
+        allBtns: {
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center",
+            paddingLeft: 20,
+            paddingRight: 20,
+            height: hp("75%") - 25,
+            marginTop: hp("25%") - 25,
+            backgroundColor: colors.numPadBg,
+        },
+        calBtn: {
+            width: wp("17.5%"),
+            alignItems: "center",
+            height: hp("9.5%"),
+            justifyContent: "center",
+        },
+        calText: {
+            fontSize: 20,
+            textAlign: "center",
+            color: colors.text,
+        },
+        calTextOrange: {
+            fontSize: 22,
+            fontWeight: "600",
+            textAlign: "center",
+            color: colors.secondary,
+        },
+        calEqual: {
+            width: hp("7.5%"),
+            height: hp("7.5%"),
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 55,
+            backgroundColor: colors.secondary,
+        },
+        calEqualText: {
+            color: colors.backgroundColor,
+            fontSize: 22,
+        },
+        menu: {
+            position: "absolute",
+            top: 0,
+            left: 7,
+            zIndex: 999,
+            height: 45,
+            width: 45,
+            justifyContent: "center",
+        },
+    });
+
     return (
         <View
             style={{
@@ -217,35 +296,19 @@ const One = ({ navigation }) => {
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput
-                        style={[
-                            styles.calInput,
-                            {
-                                color: colors.text,
-                                backgroundColor: colors.calBg,
-                            },
-                        ]}
+                        style={styles.calInput}
                         value={text}
                         editable={false}
                         multiline={true}
                         numberOfLines={2}
                     />
                     <TextInput
-                        style={[
-                            styles.calInputAns,
-                            {
-                                color: colors.calAns,
-                                backgroundColor: colors.calBg,
-                            },
-                        ]}
+                        style={styles.calInputAns}
                         value={ans}
                         editable={false}
                     />
                 </View>
-                <View
-                    style={[
-                        styles.allBtns,
-                        { backgroundColor: colors.numPadBg },
-                    ]}>
+                <View style={styles.allBtns}>
                     {(() => {
                         let btns = [];
                         for (let i = 0; i < calBtns.length; i++) {
@@ -258,19 +321,8 @@ const One = ({ navigation }) => {
                                         onPress={() => calBtnPress(btn)}
                                         style={styles.calBtn}
                                         android_ripple={androidRipple}>
-                                        <View
-                                            style={[
-                                                styles.calEqual,
-                                                {
-                                                    backgroundColor:
-                                                        colors.secondary,
-                                                },
-                                            ]}>
-                                            <Text
-                                                style={{
-                                                    color: colors.backgroundColor,
-                                                    fontSize: 22,
-                                                }}>
+                                        <View style={styles.calEqual}>
+                                            <Text style={styles.calEqualText}>
                                                 {btn.text}
                                             </Text>
                                         </View>
@@ -286,11 +338,8 @@ const One = ({ navigation }) => {
                                         android_disableSound={true}>
                                         <Text
                                             style={[
-                                                styles.calText,
-                                                {
-                                                    color:
-                                                        colors.secondary + "80",
-                                                },
+                                                styles.calTextOrange,
+                                                { opacity: 0.5 },
                                             ]}>
                                             {mode}
                                         </Text>
@@ -307,18 +356,8 @@ const One = ({ navigation }) => {
                                         <Text
                                             style={
                                                 btn.primaryColor
-                                                    ? [
-                                                          styles.calTextOrange,
-                                                          {
-                                                              color: colors.secondary,
-                                                          },
-                                                      ]
-                                                    : [
-                                                          styles.calText,
-                                                          {
-                                                              color: colors.text,
-                                                          },
-                                                      ]
+                                                    ? styles.calTextOrange
+                                                    : styles.calText
                                             }>
                                             {btn.text}
                                         </Text>
@@ -334,71 +373,5 @@ const One = ({ navigation }) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-    },
-    inputContainer: {
-        alignItems: "center",
-    },
-    calInput: {
-        height: (2 * (hp("25%") - 25)) / 3,
-        width: wp("100%"),
-        paddingVertical: 10,
-        paddingRight: 45,
-        paddingLeft: 25,
-        fontSize: 30,
-        textAlign: "center",
-    },
-    calInputAns: {
-        height: (hp("25%") - 25) / 3,
-        width: wp("100%"),
-        padding: 10,
-        paddingRight: 20,
-        fontSize: 25,
-        textAlign: "center",
-    },
-    allBtns: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        paddingLeft: 20,
-        paddingRight: 20,
-        height: hp("75%") - 25,
-        marginTop: hp("25%") - 25,
-    },
-    calBtn: {
-        width: wp("17.5%"),
-        alignItems: "center",
-        height: hp("9.5%"),
-        justifyContent: "center",
-    },
-    calText: {
-        fontSize: 20,
-        textAlign: "center",
-    },
-    calTextOrange: {
-        fontSize: 22,
-        fontWeight: "600",
-        textAlign: "center",
-    },
-    calEqual: {
-        width: hp("7.5%"),
-        height: hp("7.5%"),
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 55,
-    },
-    menu: {
-        position: "absolute",
-        top: 0,
-        left: 7,
-        zIndex: 999,
-        height: 45,
-        width: 45,
-        justifyContent: "center",
-    },
-});
 
 export default One;

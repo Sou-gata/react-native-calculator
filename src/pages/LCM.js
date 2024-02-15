@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import {
     checkLcmHcfNumber,
     lcm,
-    inputToText,
     factorLcm,
     largeInArr,
     hasDecimalInArr,
@@ -55,7 +54,7 @@ const LCM = () => {
     const calculate = () => {
         let numbers = checkLcmHcfNumber(inputs);
         if (numbers) {
-            setInput(inputToText(inputs));
+            setInput(inputs.join(", "));
             if (!hasDecimalInArr(numbers)) {
                 let factorLCM = factorLcm(numbers);
                 let lcmAns = lcm(numbers);
@@ -88,6 +87,7 @@ const LCM = () => {
                         inputs={inputs}
                         setInputs={setInputs}
                         maxInput={12}
+                        maxLength={4}
                     />
                 </View>
 
@@ -96,7 +96,7 @@ const LCM = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor={"white"}>
+                        textColor="#fff">
                         Calculate
                     </Button>
                 </View>
@@ -179,30 +179,26 @@ const LCM = () => {
                             <Text style={textStyle}>LCM = </Text>
                         </View>
                         <View style={{ width: wp("100%") - 130 }}>
-                            {(() => {
-                                let element = "";
-                                for (
-                                    let i = 0;
-                                    i < details.factors.length;
-                                    i++
-                                ) {
-                                    let single = details.factors[i];
-                                    if (i < details.factors.length - 1) {
-                                        element += single + " × ";
-                                    } else {
-                                        element += single;
-                                    }
-                                }
-                                return (
-                                    <Text
-                                        style={[
-                                            textStyle,
-                                            { textAlign: "left" },
-                                        ]}>
-                                        {element}
-                                    </Text>
-                                );
-                            })()}
+                            <Text style={[textStyle, { textAlign: "left" }]}>
+                                {details.factors.join(" × ")}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={{ flexDirection: "row", marginTop: 5 }}>
+                        <View>
+                            <Text
+                                style={[
+                                    styles.textStyle,
+                                    { color: "transparent" },
+                                ]}>
+                                LCM
+                            </Text>
+                        </View>
+                        <View>
+                            <Text style={[textStyle, { textAlign: "left" }]}>
+                                {" = "}
+                                {ans}
+                            </Text>
                         </View>
                     </View>
                 </ScrollView>

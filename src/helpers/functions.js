@@ -152,40 +152,29 @@ export function factors(number) {
         }
     }
 
-    let str = "";
-    for (let i = 0; i < facts.length; i++) {
-        str += facts[i];
-        if (i < facts.length - 1) {
-            str += ", ";
-        }
-    }
+    let str = facts.join(", ");
     return { str, number: num };
 }
 
 export function checkLcmHcfNumber(inputs) {
     let numberSet = [];
-    let valid = true;
-    let hasZero = false;
-    if (inputs.length < 2) valid = false;
-    if (inputs[0].value == "" || inputs[1].value == "") valid = false;
+    if (inputs.length < 2) return false;
+    if (inputs[0].value == "" || inputs[1].value == "") return false;
     for (let i = 0; i < inputs.length; i++) {
         numberSet[i] = parseFloat(parseFloat(inputs[i].value).toFixed(4));
-        if (numberSet[i] == 0) hasZero = true;
+        if (numberSet[i] == 0) return false;
         if (isNaN(numberSet[i])) {
-            valid = false;
+            return false;
         }
     }
-    if (hasZero) return false;
-    if (valid) return numberSet;
-    else return valid;
+    return numberSet;
 }
 
 function maxDigitAfterPoint(numbersArr) {
     let numberSet = numbersArr;
     let maxDigit = 0;
     for (let i = 0; i < numberSet.length; i++) {
-        let temp = numberSet[i].toString();
-        temp = temp.split(".");
+        let temp = numberSet[i].toString().split(".");
         if (temp.length > 1) {
             let lengthAfter = temp[1].length;
             if (lengthAfter > maxDigit) maxDigit = lengthAfter;
@@ -197,7 +186,7 @@ function maxDigitAfterPoint(numbersArr) {
 export function hasDecimalInArr(arr) {
     let hasPoint = false;
     for (let i = 0; i < arr.length; i++) {
-        arr[i] = Math.abs(parseFloat(arr[i]));
+        arr[i] = Math.abs(arr[i]);
         if (arr[i] != Math.floor(arr[i])) {
             hasPoint = true;
         }
@@ -265,45 +254,14 @@ export function decimalHcf(numbersArr) {
     let hcf = gcd(newNumberSet);
     let nuHcf = hcf;
     hcf = hcf / Math.pow(10, maxDigit);
-    let numinator = "";
+    let numinator = newNumberSet.join(", ");
     let denominator = Math.pow(10, maxDigit);
-    for (let i = 0; i < newNumberSet.length; i++) {
-        if (i < newNumberSet.length - 1) {
-            numinator += newNumberSet[i] + ", ";
-        } else {
-            numinator += newNumberSet[i];
-        }
-    }
     return { hcf, numinator, denominator, nuHcf };
-}
-
-export function inputNumbers(str) {
-    let numberSet = str.trim();
-    numberSet = numberSet.split(" ");
-    let inputShow = "";
-    for (let i = 0; i < numberSet.length; i++) {
-        inputShow += numberSet[i];
-        if (i < numberSet.length - 1) {
-            inputShow += ", ";
-        }
-    }
-    return inputShow;
-}
-
-export function inputToText(inputs) {
-    let inputShow = "";
-    for (let i = 0; i < inputs.length; i++) {
-        inputShow += parseFloat(parseFloat(inputs[i].value).toFixed(4));
-        if (i < inputs.length - 1) {
-            inputShow += ", ";
-        }
-    }
-    return inputShow;
 }
 
 export function celToFar(num) {
     let f = 1.8 * parseFloat(num) + 32;
-    f = f.toFixed(3).toString();
+    f = f.toFixed(4);
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -311,7 +269,7 @@ export function celToFar(num) {
 
 export function celToKal(num) {
     let k = parseFloat(num) + 273.15;
-    k = k.toFixed(3).toString();
+    k = k.toFixed(4);
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -319,7 +277,7 @@ export function celToKal(num) {
 
 export function celToRan(num) {
     let r = parseFloat(num) * 1.8 + 491.67;
-    r = r.toFixed(3).toString();
+    r = r.toFixed(4);
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -327,7 +285,7 @@ export function celToRan(num) {
 
 export function farToCel(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
-    c = c.toFixed(3).toString();
+    c = c.toFixed(4);
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -335,7 +293,7 @@ export function farToCel(num) {
 
 export function farToRan(num) {
     let r = parseFloat(num) - 459.67;
-    r = r.toFixed(3).toString();
+    r = r.toFixed(4);
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -344,7 +302,7 @@ export function farToRan(num) {
 export function farToKal(num) {
     let c = ((parseFloat(num) - 32) / 9) * 5;
     let k = c + 273.15;
-    k = k.toFixed(3).toString();
+    k = k.toFixed(4);
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -353,7 +311,7 @@ export function farToKal(num) {
 export function ranToCel(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
-    c = c.toFixed(3).toString();
+    c = c.toFixed(4);
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -361,7 +319,7 @@ export function ranToCel(num) {
 
 export function ranToFar(num) {
     let f = parseFloat(num) + 459.67;
-    f = f.toFixed(3).toString();
+    f = f.toFixed(4);
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -371,7 +329,7 @@ export function ranToKal(num) {
     let f = parseFloat(num) + 459.67;
     let c = ((f - 32) / 9) * 5;
     let k = c + 273.15;
-    k = k.toFixed(3).toString();
+    k = k.toFixed(4);
     k = parseFloat(k);
     let ans = k;
     return ans;
@@ -379,7 +337,7 @@ export function ranToKal(num) {
 
 export function kalToCal(num) {
     let c = parseFloat(num) - 273.15;
-    c = c.toFixed(3).toString();
+    c = c.toFixed(4);
     c = parseFloat(c);
     let ans = c;
     return ans;
@@ -388,7 +346,7 @@ export function kalToCal(num) {
 export function kalToFar(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
-    f = f.toFixed(3).toString();
+    f = f.toFixed(4);
     f = parseFloat(f);
     let ans = f;
     return ans;
@@ -398,7 +356,7 @@ export function kalToRan(num) {
     let c = parseFloat(num) - 273.15;
     let f = 1.8 * c + 32;
     let r = f - 459.67;
-    r = r.toFixed(3).toString();
+    r = r.toFixed(4);
     r = parseFloat(r);
     let ans = r;
     return ans;
@@ -421,9 +379,7 @@ export function decimalToBinary(decimalNum) {
         binaryNum += degit;
         i = Math.floor(i / 2);
     }
-    binaryNum = binaryNum.split("");
-    binaryNum = binaryNum.reverse();
-    binaryNum = binaryNum.join("");
+    binaryNum = binaryNum.split("").reverse().join("");
     if (havePoint) {
         let decPoint = decimalNum - Math.floor(decimalNum);
         decPoint = parseFloat(decPoint.toFixed(5));
@@ -464,7 +420,7 @@ export function binaryToDecimal(binaryNum) {
     if (havePoint) {
         let pointBinary = binaryNum - Math.floor(binaryNum);
         let pointDec = 0;
-        pointBinary = pointBinary.toFixed(5);
+        pointBinary = pointBinary.toFixed(4);
         pointBinary = pointBinary.split("");
         pointBinary.splice(0, 2);
         for (let j = 0; j < 5; j++) {
@@ -1347,7 +1303,7 @@ export function factorizeHcf(arr) {
 
 export function factorLcm(numbersArr) {
     let numArr = [...numbersArr];
-    let min = smallInArr(numArr);
+    let max = largeInArr(numArr);
     let divisiors = [];
     let dividends = [];
     let i = 2;
@@ -1361,20 +1317,13 @@ export function factorLcm(numbersArr) {
                 if (numArr[j] % i == 0) {
                     numArr[j] /= i;
                 }
+                if (j == numArr.length - 1) {
+                    dividends.push([...numArr]);
+                }
             }
             divisiors.push(i);
         } else i++;
-        if (i > min) break;
-    }
-
-    numArr = [...numbersArr];
-    for (let i = 0; i < divisiors.length; i++) {
-        for (let j = 0; j < numArr.length; j++) {
-            if (numArr[j] % divisiors[i] == 0) {
-                numArr[j] /= divisiors[i];
-            }
-        }
-        dividends.push([...numArr]);
+        if (i >= max) break;
     }
     dividends.unshift(numbersArr);
     if (divisiors.length == 0) {
@@ -1391,6 +1340,7 @@ export function factorLcm(numbersArr) {
     }
     return { divisiors, dividends, factors };
 }
+
 function adjustSpacing(array) {
     let max = largeInArr(array);
     max = max.toString().length;
@@ -1405,145 +1355,15 @@ function adjustSpacing(array) {
     }
     return newArr;
 }
-function smallInArr(array) {
-    if (array.length == 0) return undefined;
-    let min = parseInt(array[0]);
-    for (let i = 0; i < array.length; i++) {
-        array[i] = parseInt(array[i]);
-        min = Math.min(min, array[i]);
-    }
-    return min;
-}
+
 export function largeInArr(array) {
-    if (array.length == 0) return undefined;
+    if (array.length == 0) return;
     let max = parseInt(array[0]);
     for (let i = 0; i < array.length; i++) {
         array[i] = parseInt(array[i]);
         max = Math.max(max, array[i]);
     }
     return max;
-}
-
-function checkTriangle(s1, s2, s3) {
-    if (s1 + s2 > s3 && s2 + s3 > s1 && s3 + s1 > s2) return true;
-    else return false;
-}
-
-function fixed(number) {
-    if (!isNaN(parseFloat(number))) {
-        let num = number.toFixed(4);
-        num = parseFloat(num);
-        let isGreater = false;
-        let decimalPart = number.toString().split(".");
-        if (decimalPart.length > 1) {
-            if (decimalPart[1] > 4) isGreater = true;
-        }
-        return { ans: num, isGreater };
-    } else return { ans: undefined, isGreater: false };
-}
-
-export function areaAndVolume(data) {
-    let area, volume, perimeter;
-    if (data.value === 1) {
-        let side = parseFloat(data.side);
-        if (!isNaN(side)) {
-            area = 6 * side * side;
-            volume = side * side * side;
-        }
-    } else if (data.value === 2) {
-        let l = parseFloat(data.length);
-        let b = parseFloat(data.breath);
-        let h = parseFloat(data.height);
-        if (!isNaN(l) && !isNaN(b) && !isNaN(h)) {
-            area = 2 * (l * b + b * h + h * l);
-            volume = l * b * h;
-        }
-    } else if (data.value === 3) {
-        let r = parseFloat(data.radious);
-        if (!isNaN(r)) {
-            area = 4 * Math.PI * r * r;
-            volume = (4 / 3) * Math.PI * r * r * r;
-        }
-    } else if (data.value === 4) {
-        let r = parseFloat(data.radious);
-        if (!isNaN(r)) {
-            if (data.isHollow) {
-                area = 2 * Math.PI * r * r;
-            } else {
-                area = 3 * Math.PI * r * r;
-            }
-            volume = (2 / 3) * Math.PI * r * r * r;
-        }
-    } else if (data.value === 5) {
-        let r = parseFloat(data.radious);
-        let h = parseFloat(data.height);
-        if (!isNaN(r) && !isNaN(h)) {
-            if (data.isHollow) {
-                area = 2 * Math.PI * r * h;
-            } else {
-                area = 2 * Math.PI * r * (h + r);
-            }
-            volume = Math.PI * r * r * h;
-        }
-    } else if (data.value === 6) {
-        let r = parseFloat(data.radious);
-        let h = parseFloat(data.height);
-        if (!isNaN(r) && !isNaN(h)) {
-            if (data.isHollow) {
-                area = Math.PI * r * Math.sqrt(h * h + r * r);
-            } else {
-                area = Math.PI * r * (r + Math.sqrt(h * h + r * r));
-            }
-            volume = (1 / 3) * Math.PI * r * r * h;
-        }
-    } else if (data.value === 7) {
-        let r = parseFloat(data.radious);
-        if (!isNaN(r)) {
-            area = Math.PI * r * r;
-            area = area;
-            perimeter = 2 * Math.PI * r;
-        }
-    } else if (data.value === 8) {
-        let side = parseFloat(data.side);
-        if (!isNaN(side)) {
-            area = side * side;
-            perimeter = 4 * side;
-        }
-    } else if (data.value === 9) {
-        let l = parseFloat(data.length);
-        let b = parseFloat(data.breath);
-        if (!isNaN(l) && !isNaN(b)) {
-            area = l * b;
-            perimeter = 2 * (l + b);
-        }
-    } else if (data.value === 10) {
-        let s1 = parseFloat(data.s1);
-        let s2 = parseFloat(data.s2);
-        let s3 = parseFloat(data.s3);
-        if (!isNaN(s1) && !isNaN(s2) && !isNaN(s3)) {
-            if (checkTriangle(s1, s2, s3)) {
-                let s = (s1 + s2 + s3) / 2;
-                let asq = s * (s - s1) * (s - s2) * (s - s3);
-                area = Math.sqrt(asq);
-                perimeter = s1 + s2 + s3;
-            }
-        }
-    } else if (data.value === 11) {
-        let minor = parseFloat(data.minor);
-        let major = parseFloat(data.major);
-        if (!isNaN(minor) && !isNaN(major)) {
-            area = Math.PI * major * minor;
-            perimeter =
-                2 * Math.PI * Math.sqrt((major * major + minor * minor) / 2);
-        }
-    }
-    if (area) area = fixed(area);
-    else area = { ans: undefined, isGreater: false };
-    if (volume) volume = fixed(volume);
-    else volume = { ans: undefined, isGreater: false };
-    if (perimeter) perimeter = fixed(perimeter);
-    else perimeter = { ans: undefined, isGreater: false };
-    return { area, volume, perimeter };
 }
 
 export function matrixMultiply(matrix, info) {
@@ -1659,6 +1479,7 @@ export function infixToPostfix(infix) {
         postfix: removeSpace(ans),
     };
 }
+
 function removeSpace(str) {
     let ans = "";
     for (let i = 0; i < str.length; i++) {
@@ -1671,7 +1492,7 @@ function removeSpace(str) {
 
 export function parseNumber(number, fixed = 4) {
     let num = parseFloat(number);
-    if (isNaN(num)) return undefined;
+    if (isNaN(num)) return;
     let ans = num.toFixed(fixed);
     return parseFloat(ans);
 }
