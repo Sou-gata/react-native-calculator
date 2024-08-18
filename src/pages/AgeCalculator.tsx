@@ -1,11 +1,13 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DatePicker from "react-native-date-picker";
 import Feather from "react-native-vector-icons/Feather";
+import { Context } from "../../Context";
 import { colorSchemeType } from "../../types";
 
 const AgeCalculator = () => {
+    const themeContext = useContext(Context);
     const { colors } = useTheme<colorSchemeType>();
     const [visible, setVisible] = useState({
         from: false,
@@ -43,6 +45,17 @@ const AgeCalculator = () => {
         let todayDate = dd + "/" + mm + "/" + yyyy;
         let dt = `${yyyy}-${mm}-${dd}`;
         return { today: todayDate, dt };
+    };
+    const strToDate = (str: string | undefined) => {
+        if (str == "" || !str) return new Date();
+        const strArr = str.split("/");
+        if (strArr.length != 3) return new Date();
+        const tempDate = new Date(
+            parseInt(strArr[2]),
+            parseInt(strArr[1]) - 1,
+            parseInt(strArr[0])
+        );
+        return tempDate;
     };
     useEffect(() => {
         let { today } = dateToStr(new Date());
@@ -164,12 +177,6 @@ const AgeCalculator = () => {
                             />
                         </View>
                     </TouchableOpacity>
-                    <DateTimePickerModal
-                        isVisible={visible.from}
-                        mode="date"
-                        onConfirm={confirmOne}
-                        onCancel={() => setVisible({ ...visible, from: false })}
-                    />
                 </View>
                 <View style={styles.dateRow}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>To</Text>
@@ -193,12 +200,6 @@ const AgeCalculator = () => {
                             />
                         </View>
                     </TouchableOpacity>
-                    <DateTimePickerModal
-                        isVisible={visible.to}
-                        mode="date"
-                        onConfirm={confirmTo}
-                        onCancel={() => setVisible({ ...visible, to: false })}
-                    />
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button
@@ -250,7 +251,7 @@ const AgeCalculator = () => {
                             textAlign: "center",
                             marginTop: 40,
                         }}>
-                        Next Birthday in
+                        From today next Birthday is in
                     </Text>
                 )}
                 <View
@@ -281,6 +282,30 @@ const AgeCalculator = () => {
                         Day{nextBirthday.days > 1 ? "s" : ""}
                     </Text>
                 </View>
+                <DatePicker
+                    modal
+                    open={visible.from}
+                    date={strToDate(date.from)}
+                    theme={themeContext?.theme == "light" ? "light" : "dark"}
+                    dividerColor="#555"
+                    onConfirm={confirmOne}
+                    mode="date"
+                    onCancel={() => {
+                        setVisible({ ...visible, from: false });
+                    }}
+                />
+                <DatePicker
+                    modal
+                    open={visible.to}
+                    date={strToDate(date.to)}
+                    theme={themeContext?.theme == "light" ? "light" : "dark"}
+                    dividerColor="#555"
+                    onConfirm={confirmTo}
+                    mode="date"
+                    onCancel={() => {
+                        setVisible({ ...visible, to: false });
+                    }}
+                />
             </View>
         </View>
     );

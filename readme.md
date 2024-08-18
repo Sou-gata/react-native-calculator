@@ -78,6 +78,6 @@ For support, email sougatatalukdar77@gmail.com.
 [![facebook](https://img.shields.io/badge/facebook-0165E1?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/sougata76)
 [![facebook](https://img.shields.io/badge/linkedin-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sougata76/)
 
-![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/sou-gata/react-native-calculator?logo=v.1.4.0)
+![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/sou-gata/react-native-calculator?logo=v.1.5.2)
 
 <!-- ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/badge/version-v1.3.1-blue) -->

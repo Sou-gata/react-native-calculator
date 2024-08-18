@@ -64,4 +64,4 @@ yarn-error.log
 
 # testing
 /coverage
-android/app/build.properties
+android/build.properties

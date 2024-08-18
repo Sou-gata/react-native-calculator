@@ -3,7 +3,13 @@ import { versionInfoType } from "../../types";
 const info: versionInfoType[] = [
     {
         ver: "1.5.2",
-        changes: ["bug fix", "reduced apk size", "language changes js to ts"],
+        changes: [
+            "bug fix",
+            "reduced apk size",
+            "language changes js to ts",
+            "depandencies update",
+            "new datepicker",
+        ],
     },
     {
         ver: "1.5.1",

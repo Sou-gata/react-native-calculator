@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MD3LightTheme, MD3DarkTheme, Provider } from "react-native-paper";
+import { MD3LightTheme, MD3DarkTheme, PaperProvider } from "react-native-paper";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Context } from "./Context";
@@ -49,10 +49,10 @@ const Main = () => {
     let theme = themeContext?.theme == "light" ? themeLight : themeDark;
     return (
         <NavigationContainer>
-            <Provider theme={theme}>
+            <PaperProvider theme={theme}>
                 <StatusBar backgroundColor={theme.colors.primary} />
                 <Screens />
-            </Provider>
+            </PaperProvider>
         </NavigationContainer>
     );
 };
