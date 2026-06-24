@@ -659,7 +659,7 @@ export function factors(number: number): { str: string; number: number } {
 }
 export function multiple(
     numberA: number,
-    numberB: number
+    numberB: number,
 ): {
     results: string[];
     ans: number;
@@ -714,7 +714,7 @@ export function multiple(
 }
 export function devide(
     numberA: number,
-    numberB: number
+    numberB: number,
 ): divideReturnType | false {
     let numbers: number[] = [];
     numbers[0] = numberA;
@@ -728,7 +728,7 @@ export function devide(
     let spacingInfo: number[][] = [];
     let a = numbers[0];
     let b = numbers[1];
-    if (b > a || isNaN(a) || isNaN(b)) {
+    if (b > a || isNaN(a) || isNaN(b) || b <= 0 || a <= 0) {
         return false;
     }
     let tempNumA = numbers[0].toString().split("");
@@ -843,7 +843,7 @@ export function permutationCombination(
     }: {
         order: number;
         repeat: number;
-    }
+    },
 ): {
     nuFormula: string;
     deFormula: string;
@@ -956,7 +956,7 @@ function calculateRoot(number: number): {
 function simplifyAns(
     fstPart: string,
     secPart: string,
-    deno: number
+    deno: number,
 ): {
     partOne: string;
     partTwo: string;
@@ -1025,7 +1025,7 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
                 let simplifiedAns = simplifyAns(
                     nuFstPart.toString(),
                     nuSecPart,
-                    2 * a
+                    2 * a,
                 );
                 let { partOne, partTwo, denominator } = simplifiedAns;
                 if (!hasImgRoot) {
@@ -1033,7 +1033,7 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
                         partOne = parseNumber(parseFloat(partOne)).toString();
                         partTwo = parseNumber(parseFloat(partTwo)).toString();
                         denominator = parseNumber(
-                            parseFloat(denominator)
+                            parseFloat(denominator),
                         ).toString();
                         if (parseFloat(denominator) == 1) {
                             if (parseFloat(partTwo) < 0) {
@@ -1079,12 +1079,12 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
                             rootOne = `(${partOne}${
                                 isNegative ? "-" : "+"
                             }${removeSigne(
-                                parseNumber(parseFloat(partTwo))
+                                parseNumber(parseFloat(partTwo)),
                             )}𝑖)/${denominator}`;
                             rootTwo = `(${partOne}${
                                 isNegative ? "+" : "-"
                             }${removeSigne(
-                                parseNumber(parseFloat(partTwo))
+                                parseNumber(parseFloat(partTwo)),
                             )}𝑖)/${denominator}`;
                         }
                     } else {
@@ -1143,7 +1143,7 @@ export function solveQuadraticEqu(a = 0, b = 0, c = 0) {
 export function solveQuadraticDec(
     a = 0,
     b = 0,
-    c = 0
+    c = 0,
 ): {
     rootOne: string;
     rootTwo: string;
@@ -1189,7 +1189,7 @@ export function equSolve(
     b2 = 0,
     c1 = 0,
     c2 = 0,
-    setFinalAns: React.Dispatch<React.SetStateAction<equnAnsType>>
+    setFinalAns: React.Dispatch<React.SetStateAction<equnAnsType>>,
 ) {
     let numeratorX = b1 * c2 - b2 * c1;
     let numeratorY = c1 * a2 - c2 * a1;
@@ -1204,7 +1204,7 @@ export function equSolve(
         newC1 = c1 / hcf,
         newC2 = c2 / hcf;
     if (newA1 / newA2 == newB1 / newB2 && newA1 / newA2 != newC1 / newC2) {
-        setFinalAns((prev) => {
+        setFinalAns(prev => {
             return { ...prev, noSolution: true };
         });
     } else if (
@@ -1212,7 +1212,7 @@ export function equSolve(
         newA1 / newA2 == newC1 / newC2 &&
         newB1 / newB2 == newC1 / newC2
     ) {
-        setFinalAns((prev) => {
+        setFinalAns(prev => {
             return { ...prev, manySolution: true };
         });
     } else {
@@ -1245,7 +1245,7 @@ export function equSolve(
                 x = 0;
                 y = 0;
             }
-            setFinalAns((prev) => {
+            setFinalAns(prev => {
                 return {
                     ...prev,
                     numeratorX,
@@ -1277,11 +1277,12 @@ export function bracManage(str: string): string {
     return newStr;
 }
 export function lastChar(str: string): string {
+    if (!str) return "";
     let last = str.charAt(str.length - 1);
     let type = "";
     for (let i = 0; i < calBtns.length; i++) {
         let btn = calBtns[i];
-        if (btn.text == last) {
+        if (btn.str === last || btn.text === last) {
             type = btn.type;
         }
     }
@@ -1328,7 +1329,7 @@ export function calculateTime(
         s1: string;
         s2: string;
     },
-    operation: number
+    operation: number,
 ) {
     let d1 = parseFloat(times.d1);
     let d2 = parseFloat(times.d2);
@@ -1391,7 +1392,7 @@ export function matrixMultiply(
         twoRow: string;
         oneCol: string;
         twoCol: string;
-    }
+    },
 ) {
     const { oneRow, oneCol, twoCol } = info;
     const { one, two } = matrix;
@@ -1405,7 +1406,7 @@ export function matrixMultiply(
             colNumbers.push(
                 isNaN(parseFloat(colElements[i]))
                     ? 0
-                    : parseFloat(colElements[i])
+                    : parseFloat(colElements[i]),
             );
         }
         matrixOne.push(colNumbers);
@@ -1418,7 +1419,7 @@ export function matrixMultiply(
             colNumbers.push(
                 isNaN(parseFloat(colElements[i]))
                     ? 0
-                    : parseFloat(colElements[i])
+                    : parseFloat(colElements[i]),
             );
         }
         matrixTwo.push(colNumbers);

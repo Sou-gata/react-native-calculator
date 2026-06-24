@@ -1,38 +1,105 @@
 import { StyleSheet, ScrollView, View } from "react-native";
-import { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { devide, wp } from "../helpers/functions";
-import { decCheck } from "../helpers/numbersCheck";
 import CustomInput from "../components/CustomInput";
 import { colorSchemeType, divideReturnType } from "../../types";
 
 const Divide = () => {
     const { colors } = useTheme<colorSchemeType>();
 
-    const mathText = [styles.mathText, { color: colors.text }];
-    const varticleLine = [
-        styles.varticleLine,
-        { backgroundColor: colors.text },
-    ];
-    const hrLine = [styles.hrLine, { backgroundColor: colors.text }];
+    const themeStyles = useMemo(
+        () => ({
+            mathText: [styles.mathText, { color: colors.text }],
+            varticleLine: [
+                styles.varticleLine,
+                { backgroundColor: colors.text },
+            ],
+            hrLine: [styles.hrLine, { backgroundColor: colors.text }],
+            errorText: [styles.errorText, { color: colors.error || "#ff3333" }],
+        }),
+        [colors]
+    );
 
     const [text, onChangeText] = useState({ a: "", b: "" });
-    const [vLine, setVline] = useState(0);
     const [divideAns, setDivideAns] = useState<divideReturnType>();
+    const [error, setError] = useState<{ hasError: boolean; message: string }>({
+        hasError: false,
+        message: "",
+    });
+
+    const handleTextChange = (key: "a" | "b", val: string) => {
+        onChangeText((prev) => ({ ...prev, [key]: val }));
+        if (divideAns) setDivideAns(undefined);
+        if (error.hasError) setError({ hasError: false, message: "" });
+    };
+
     const calculatePress = () => {
-        let numbers;
-        numbers = [parseInt(text.a), parseInt(text.b)];
-        let validateA = decCheck(numbers[0]);
-        let validateB = decCheck(numbers[1]);
-        if (validateA && validateB) {
-            if (parseFloat(text.a) > parseFloat(text.b)) {
-                onChangeText({ a: "", b: "" });
-                setVline(1);
-                const abc = devide(numbers[0], numbers[1]);
-                if (abc) setDivideAns(abc);
-            }
+        setError({ hasError: false, message: "" });
+
+        if (!text.a || !text.b) {
+            setError({ hasError: true, message: "Please fill in both fields" });
+            setDivideAns(undefined);
+            return;
+        }
+
+        const isPositiveIntA = /^\d+$/.test(text.a);
+        const isPositiveIntB = /^\d+$/.test(text.b);
+
+        if (!isPositiveIntA || !isPositiveIntB) {
+            setError({
+                hasError: true,
+                message: "Please enter positive integers only",
+            });
+            setDivideAns(undefined);
+            return;
+        }
+
+        const intA = parseInt(text.a, 10);
+        const intB = parseInt(text.b, 10);
+
+        if (intB === 0) {
+            setError({ hasError: true, message: "Cannot divide by zero" });
+            setDivideAns(undefined);
+            return;
+        }
+
+        if (intA <= 0 || intB <= 0) {
+            setError({
+                hasError: true,
+                message: "Please enter positive integers only",
+            });
+            setDivideAns(undefined);
+            return;
+        }
+
+        if (intB > intA) {
+            setError({
+                hasError: true,
+                message: "Dividend must be greater than or equal to divisor",
+            });
+            setDivideAns(undefined);
+            return;
+        }
+
+        const abc = devide(intA, intB);
+        if (abc) {
+            setDivideAns(abc);
+        } else {
+            setError({
+                hasError: true,
+                message: "Failed to calculate long division steps",
+            });
+            setDivideAns(undefined);
         }
     };
+
+    const handleReset = () => {
+        onChangeText({ a: "", b: "" });
+        setDivideAns(undefined);
+        setError({ hasError: false, message: "" });
+    };
+
     return (
         <View
             style={{
@@ -42,18 +109,14 @@ const Divide = () => {
             <View style={styles.container}>
                 <View style={styles.flexRow}>
                     <CustomInput
-                        onChangeText={(e) => {
-                            onChangeText({ ...text, a: e });
-                        }}
+                        onChangeText={(e) => handleTextChange("a", e)}
                         value={text.a}
                         placeholder="123456"
                         width={125}
                     />
-                    <Text style={mathText}>÷</Text>
+                    <Text style={themeStyles.mathText}>÷</Text>
                     <CustomInput
-                        onChangeText={(e) => {
-                            onChangeText({ ...text, b: e });
-                        }}
+                        onChangeText={(e) => handleTextChange("b", e)}
                         value={text.b}
                         placeholder="789"
                         width={125}
@@ -64,65 +127,72 @@ const Divide = () => {
                         mode="contained"
                         onPress={calculatePress}
                         buttonColor={colors.secondary}
-                        textColor="#fff">
+                        textColor="#fff"
+                        style={styles.button}>
                         Calculate
+                    </Button>
+                    <Button
+                        mode="outlined"
+                        onPress={handleReset}
+                        textColor={colors.secondary}
+                        style={[styles.button, { borderColor: colors.secondary }]}
+                        labelStyle={{ color: colors.secondary }}>
+                        Clear
                     </Button>
                 </View>
             </View>
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={{ marginBottom: 20 }}>
-                <View style={styles.divideMath}>
-                    <Text style={mathText}>{divideAns?.numberB}</Text>
-                    {Boolean(vLine) && <View style={varticleLine} />}
-                    <View>
-                        <Text style={mathText}>{divideAns?.numberA}</Text>
-                        {(() => {
-                            let element = [];
-                            if (divideAns?.numberA) {
-                                let tempString = "";
-                                let key = 0;
-                                for (
-                                    let i = 0;
-                                    i < divideAns.spacingInfo.length;
-                                    i++
-                                ) {
-                                    let a = divideAns.spacingInfo[i][0];
-                                    tempString = "";
-                                    for (let j = 0; j < a; j++) {
-                                        tempString += " ";
-                                    }
-                                    tempString += `${divideAns.multipleRuselts[i]}`;
-                                    key++;
-                                    element.push(
-                                        <View key={key}>
-                                            <Text style={mathText}>
-                                                {tempString}
-                                            </Text>
-                                            <View style={hrLine}></View>
-                                        </View>
-                                    );
-                                    tempString = "";
-                                    let b = divideAns.spacingInfo[i][1];
-                                    for (let j = 0; j < b; j++) {
-                                        tempString += " ";
-                                    }
-                                    tempString += `${divideAns.subResults[i]}`;
-                                    key++;
-                                    element.push(
-                                        <Text key={key} style={mathText}>
-                                            {tempString}
-                                        </Text>
-                                    );
-                                }
-                                return element;
-                            }
-                        })()}
-                    </View>
-                    {Boolean(vLine) && <View style={varticleLine} />}
-                    <Text style={mathText}>{divideAns?.result}</Text>
+
+            {error.hasError && (
+                <View style={styles.errorContainer}>
+                    <Text style={themeStyles.errorText}>{error.message}</Text>
                 </View>
-            </ScrollView>
+            )}
+
+            {divideAns && (
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    style={{ marginBottom: 20 }}>
+                    <View style={styles.divideMath}>
+                        <Text style={themeStyles.mathText}>
+                            {divideAns.numberB}
+                        </Text>
+                        <View style={themeStyles.varticleLine} />
+                        <View>
+                            <Text style={themeStyles.mathText}>
+                                {divideAns.numberA}
+                            </Text>
+                            {divideAns.spacingInfo.map((spacing, i) => {
+                                const a = spacing[0];
+                                const b = spacing[1];
+
+                                const multipleStr =
+                                    " ".repeat(a) +
+                                    divideAns.multipleRuselts[i];
+                                const subStr =
+                                    " ".repeat(b) + divideAns.subResults[i];
+
+                                return (
+                                    <React.Fragment key={i}>
+                                        <View>
+                                            <Text style={themeStyles.mathText}>
+                                                {multipleStr}
+                                            </Text>
+                                            <View style={themeStyles.hrLine} />
+                                        </View>
+                                        <Text style={themeStyles.mathText}>
+                                            {subStr}
+                                        </Text>
+                                    </React.Fragment>
+                                );
+                            })}
+                        </View>
+                        <View style={themeStyles.varticleLine} />
+                        <Text style={themeStyles.mathText}>
+                            {divideAns.result}
+                        </Text>
+                    </View>
+                </ScrollView>
+            )}
         </View>
     );
 };
@@ -148,8 +218,14 @@ const styles = StyleSheet.create({
         fontFamily: "RobotoMono_400Regular",
     },
     buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
         alignItems: "center",
         marginTop: 30,
+    },
+    button: {
+        marginHorizontal: 8,
+        minWidth: 120,
     },
     divideMath: {
         flexDirection: "row",
@@ -166,5 +242,15 @@ const styles = StyleSheet.create({
         height: 2,
         marginVertical: 2,
         marginTop: 7,
+    },
+    errorContainer: {
+        alignItems: "center",
+        marginTop: 20,
+        paddingHorizontal: 25,
+    },
+    errorText: {
+        fontSize: 16,
+        textAlign: "center",
+        fontFamily: "RobotoMono_400Regular",
     },
 });

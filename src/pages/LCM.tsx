@@ -169,7 +169,8 @@ const LCM = () => {
                         mode="contained"
                         onPress={() => calculate()}
                         buttonColor={colors.secondary}
-                        textColor="#fff">
+                        textColor="#fff"
+                    >
                         Calculate
                     </Button>
                 </View>
@@ -183,14 +184,16 @@ const LCM = () => {
                     <View
                         style={{
                             alignItems: "center",
-                        }}>
+                        }}
+                    >
                         <View>
                             {details.dividends.map((item, i) => (
                                 <View
                                     key={i}
                                     style={{
                                         flexDirection: "row",
-                                    }}>
+                                    }}
+                                >
                                     <Text style={styles.textStyleThree}>
                                         {i < details.dividends.length - 1
                                             ? details.divisiors[i]
@@ -201,7 +204,8 @@ const LCM = () => {
                                             i < details.dividends.length - 1
                                                 ? styles.textStyleTwo
                                                 : styles.textStyleThree
-                                        }>
+                                        }
+                                    >
                                         {item.toString()}
                                     </Text>
                                 </View>
@@ -223,8 +227,9 @@ const LCM = () => {
                             <Text
                                 style={[
                                     styles.textStyle,
-                                    { color: "transparent" },
-                                ]}>
+                                    { color: "#00000000" },
+                                ]}
+                            >
                                 LCM
                             </Text>
                         </View>

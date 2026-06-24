@@ -2,6 +2,16 @@ import { versionInfoType } from "../../types";
 
 const info: versionInfoType[] = [
     {
+        ver: "1.6.0",
+        changes: [
+            "add search in tab 2",
+            "add history of calculations",
+            "edit from center in numeric input",
+            "update depandencies",
+            "bugs fix",
+        ],
+    },
+    {
         ver: "1.5.2",
         changes: [
             "bug fix",
