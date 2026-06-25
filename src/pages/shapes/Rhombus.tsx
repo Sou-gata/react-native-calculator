@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -33,62 +33,21 @@ const Rhombus = () => {
         setInput((prev) => ({ ...prev, a, b }));
         setAns({ perimeter, area, side });
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 170,
-            height: 220,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            color: colors.text,
-            fontSize: 18,
-            marginVertical: 10,
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        flexRow: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[170px] h-[220px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {shapeDetails.field.map((item, index) => (
                             <View key={index}>
                                 <Text
-                                    style={[
-                                        styles.textStyle,
-                                        {
-                                            textAlign: "center",
-                                            color: colors.secondary,
-                                        },
-                                    ]}>
+                                    className="text-[18px] text-center"
+                                    style={{ color: colors.secondary }}>
                                     {item}
                                 </Text>
                                 <CustomInput
@@ -104,12 +63,12 @@ const Rhombus = () => {
                             </View>
                         ))}
                     </View>
-                    <View style={{ alignItems: "center", marginBottom: 25 }}>
+                    <View className="items-center mb-[25px]">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -158,103 +117,103 @@ const Rhombus = () => {
                                 color={colors.text}
                                 textVisible={false}
                             />
-                            <View style={[styles.flexRow, { marginTop: 25 }]}>
-                                <Text style={styles.textStyle}>Perimeter</Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>2 ×</Text>
+                            <View className="flex-row items-center mt-[25px]">
+                                <Text className="text-[18px]" style={{ color: colors.text }}>Perimeter</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>2 ×</Text>
                                 <Text
+                                    className="text-[25px]"
                                     style={{
                                         color: colors.text,
-                                        fontSize: 25,
                                     }}>
                                     {" √"}
                                 </Text>
                                 <View
+                                    className="border-t-[1.5px]"
                                     style={{
-                                        borderTopWidth: 1.5,
                                         borderTopColor: colors.text,
                                     }}>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         A² + B²
                                     </Text>
                                 </View>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 10 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center mt-[10px]">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>2 ×</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>2 ×</Text>
                                 <Text
+                                    className="text-[25px]"
                                     style={{
                                         color: colors.text,
-                                        fontSize: 25,
                                     }}>
                                     {" √"}
                                 </Text>
                                 <View
+                                    className="border-t-[1.5px]"
                                     style={{
-                                        borderTopWidth: 1.5,
                                         borderTopColor: colors.text,
                                     }}>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {input.a}² + {input.b}²
                                     </Text>
                                 </View>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 10 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center mt-[10px]">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>2 ×</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>2 ×</Text>
                                 <Text
+                                    className="text-[25px]"
                                     style={{
                                         color: colors.text,
-                                        fontSize: 25,
                                     }}>
                                     {" √"}
                                 </Text>
                                 <View
+                                    className="border-t-[1.5px]"
                                     style={{
-                                        borderTopWidth: 1.5,
                                         borderTopColor: colors.text,
                                     }}>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {input.a ** 2} + {input.b ** 2}
                                     </Text>
                                 </View>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 10 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center mt-[10px]">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>2 ×</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>2 ×</Text>
                                 <Text
+                                    className="text-[25px]"
                                     style={{
                                         color: colors.text,
-                                        fontSize: 25,
                                     }}>
                                     {" √"}
                                 </Text>
                                 <View
+                                    className="border-t-[1.5px]"
                                     style={{
-                                        borderTopWidth: 1.5,
                                         borderTopColor: colors.text,
                                     }}>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {input.a ** 2 + input.b ** 2}
                                     </Text>
                                 </View>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 10 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center mt-[10px]">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>2 ×</Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>2 ×</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {" " +
                                         parseFloat(
                                             Math.sqrt(
@@ -263,12 +222,12 @@ const Rhombus = () => {
                                         )}
                                 </Text>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 10 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center mt-[10px]">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {ans.perimeter}
                                 </Text>
                             </View>
@@ -281,7 +240,7 @@ const Rhombus = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{

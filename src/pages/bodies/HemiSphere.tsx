@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -41,72 +41,19 @@ const HemiSphere = () => {
         });
         setInput((prev) => ({ ...prev, r }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 250,
-            height: 150,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        inputHeader: {
-            fontSize: 18,
-            color: colors.secondary,
-            marginVertical: 5,
-            textAlign: "center",
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        parentContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        root: {
-            color: colors.text,
-            fontSize: 28,
-            marginTop: -8,
-        },
-        underRootText: {
-            color: colors.text,
-            fontSize: 18,
-            borderTopWidth: 1.5,
-            borderTopColor: colors.text,
-        },
-        flexRowCenter: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[250px] h-[150px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {field.map((item, index) => (
                             <View key={index}>
-                                <Text style={styles.inputHeader}>{item}</Text>
+                                <Text className="text-[18px] text-center my-[5px]" style={{ color: colors.secondary }}>{item}</Text>
                                 <CustomInput
                                     placeholder={item}
                                     value={input[item as keyof object]}
@@ -126,7 +73,7 @@ const HemiSphere = () => {
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             {" "}
                             Calculate
@@ -143,7 +90,7 @@ const HemiSphere = () => {
                                     numerator: "2 × π × R³",
                                     denominator: "3",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -202,7 +149,7 @@ const HemiSphere = () => {
                                     text: "SA",
                                     numerator: "3 × π × R²",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -242,7 +189,7 @@ const HemiSphere = () => {
                                     text: "LSA",
                                     numerator: "2 × π × R²",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -274,18 +221,16 @@ const HemiSphere = () => {
                                 }}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <Text
-                                    style={[
-                                        styles.root,
-                                        { color: colors.secondary },
-                                    ]}>
+                                    className="text-[28px] mt-[-8px]"
+                                    style={{ color: colors.secondary }}>
                                     Note :
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     SA = Surface Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     LSA = Lateral Surface Area
                                 </Text>
                             </View>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -42,62 +42,19 @@ const Cylinder = () => {
         });
         setInput((prev) => ({ ...prev, r, h }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 140,
-            height: 212,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        inputHeader: {
-            fontSize: 18,
-            color: colors.secondary,
-            marginVertical: 5,
-            textAlign: "center",
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        parentContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            alignItems: "center",
-        },
-
-        flexRowCenter: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[140px] h-[212px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {field.map((item, index) => (
                             <View key={index}>
-                                <Text style={styles.inputHeader}>{item}</Text>
+                                <Text className="text-[18px] text-center my-[5px]" style={{ color: colors.secondary }}>{item}</Text>
                                 <CustomInput
                                     placeholder={item}
                                     value={input[item as keyof object]}
@@ -117,7 +74,7 @@ const Cylinder = () => {
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -132,7 +89,7 @@ const Cylinder = () => {
                                     text: "Volume",
                                     numerator: "π × R² × H",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -179,7 +136,7 @@ const Cylinder = () => {
                                     text: "SA",
                                     numerator: "2 × π × R × (R + H)",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -221,7 +178,7 @@ const Cylinder = () => {
                                     text: "LSA",
                                     numerator: `2 × π × R × H`,
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -256,18 +213,16 @@ const Cylinder = () => {
                                 }}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <Text
-                                    style={{
-                                        color: colors.secondary,
-                                        fontSize: 24,
-                                    }}>
+                                    className="text-[24px]"
+                                    style={{ color: colors.secondary }}>
                                     Note :
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     SA = Surface Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     LSA = Lateral Surface Area
                                 </Text>
                             </View>

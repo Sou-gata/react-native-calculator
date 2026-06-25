@@ -3,7 +3,6 @@ import {
     View,
     ScrollView,
     Image,
-    StyleSheet,
     Pressable,
     Dimensions,
     TextInput as RNTextInput,
@@ -30,110 +29,6 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
         borderless: true,
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            backgroundColor: colors.backgroundColor,
-            flex: 1,
-        },
-        searchContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: colors.calBg,
-            marginHorizontal: 16,
-            marginTop: 16,
-            marginBottom: 8,
-            paddingHorizontal: 16,
-            borderRadius: 24,
-            borderWidth: 1,
-            borderColor: colors.divider || "rgba(0,0,0,0.05)",
-            height: 46,
-        },
-        searchIcon: {
-            marginRight: 8,
-        },
-        searchInput: {
-            flex: 1,
-            color: colors.text,
-            fontSize: 15,
-            paddingVertical: 0,
-        },
-        clearButton: {
-            padding: 4,
-        },
-        scrollContent: {
-            paddingBottom: 24,
-        },
-        sectionContainer: {
-            marginTop: 16,
-        },
-        headerContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            paddingHorizontal: 16,
-            marginBottom: 8,
-        },
-        headerAccent: {
-            width: 3,
-            height: 14,
-            backgroundColor: colors.secondary,
-            borderRadius: 1.5,
-            marginRight: 8,
-        },
-        heading: {
-            fontSize: 14,
-            color: colors.secondary,
-            textTransform: "uppercase",
-            fontWeight: "bold",
-            letterSpacing: 0.5,
-            opacity: 0.9,
-        },
-        gridContainer: {
-            flexDirection: "row",
-            flexWrap: "wrap",
-            paddingHorizontal: 8,
-        },
-        cardWrapper: {
-            width: (Dimensions.get("window").width - 16) * 0.25,
-            alignItems: "center",
-            justifyContent: "center",
-            marginVertical: 4,
-        },
-        cardBtn: {
-            width: "90%",
-            height: Dimensions.get("window").height * 0.14,
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 12,
-            padding: 4,
-        },
-        icons: {
-            marginBottom: 8,
-            width: 38,
-            height: 38,
-            tintColor: colors.secondary,
-        },
-        btnText: {
-            textAlign: "center",
-            color: colors.text,
-            fontSize: 11,
-            fontWeight: "500",
-            lineHeight: 14,
-        },
-        noResultsContainer: {
-            alignItems: "center",
-            justifyContent: "center",
-            paddingVertical: 60,
-            paddingHorizontal: 20,
-        },
-        noResultsText: {
-            fontSize: 15,
-            color: colors.text,
-            opacity: 0.6,
-            marginTop: 12,
-            textAlign: "center",
-        },
-    });
-
     // Filtering components based on the search query
     const filteredComponents = Object.keys(secondTabComponents).reduce(
         (acc, category) => {
@@ -154,19 +49,29 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
     const hasResults = Object.keys(filteredComponents).length > 0;
 
     return (
-        <View style={styles.container}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
             {/* Search Bar */}
-            <View style={styles.searchContainer}>
+            <View
+                className="flex-row items-center mx-4 mt-4 mb-2 px-4 rounded-[24px] border h-[46px]"
+                style={{
+                    backgroundColor: colors.backgroundColor,
+                    borderColor: colors.divider || "rgba(0,0,0,0.05)",
+                }}
+            >
                 <Ionicons
                     name="search"
                     size={18}
                     color={colors.secondary}
-                    style={styles.searchIcon}
+                    className="mr-2"
                 />
                 <RNTextInput
-                    style={styles.searchInput}
+                    className="flex-1 text-[15px] py-0"
+                    style={{ color: colors.text }}
                     placeholder="Search tools..."
-                    placeholderTextColor={colors.text + "50"}
+                    placeholderTextColor={colors.secondary + "50"}
                     value={searchQuery}
                     onChangeText={setSearchQuery}
                     autoCorrect={false}
@@ -174,7 +79,7 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                 {searchQuery.length > 0 && (
                     <Pressable
                         onPress={() => setSearchQuery("")}
-                        style={styles.clearButton}
+                        className="p-1"
                     >
                         <Ionicons
                             name="close-circle"
@@ -187,7 +92,7 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
 
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.scrollContent}
+                contentContainerClassName="pb-6"
             >
                 {hasResults ? (
                     Object.keys(filteredComponents).map(
@@ -195,12 +100,20 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                             const components = filteredComponents[category];
 
                             return (
-                                <View key={index} style={styles.sectionContainer}>
-                                    <View style={styles.headerContainer}>
-                                        <View style={styles.headerAccent} />
-                                        <Text style={styles.heading}>{category}</Text>
+                                <View key={index} className="mt-4">
+                                    <View className="flex-row items-center px-4 mb-2">
+                                        <View
+                                            className="w-[3px] h-3.5 rounded-[1.5px] mr-2"
+                                            style={{ backgroundColor: colors.secondary }}
+                                        />
+                                        <Text
+                                            className="text-[14px] uppercase font-bold tracking-[0.5px] opacity-90"
+                                            style={{ color: colors.secondary }}
+                                        >
+                                            {category}
+                                        </Text>
                                     </View>
-                                    <View style={styles.gridContainer}>
+                                    <View className="flex-row flex-wrap px-2">
                                         {components.map(
                                             (
                                                 comp: componentNameType,
@@ -208,10 +121,16 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                                             ) => (
                                                 <View
                                                     key={index + key + comp.id}
-                                                    style={styles.cardWrapper}
+                                                    className="items-center justify-center my-1"
+                                                    style={{
+                                                        width: (Dimensions.get("window").width - 16) * 0.25,
+                                                    }}
                                                 >
                                                     <Pressable
-                                                        style={styles.cardBtn}
+                                                        className="w-[90%] items-center justify-center rounded-xl p-1"
+                                                        style={{
+                                                            height: Dimensions.get("window").height * 0.14,
+                                                        }}
                                                         android_ripple={androidRipple}
                                                         onPress={() => {
                                                             navigation.navigate(
@@ -220,12 +139,14 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                                                         }}
                                                     >
                                                         <Image
-                                                            style={styles.icons}
+                                                            className="mb-2 w-[38px] h-[38px]"
+                                                            style={{ tintColor: colors.secondary }}
                                                             source={comp.path}
                                                         />
                                                         <Text
                                                             numberOfLines={2}
-                                                            style={styles.btnText}
+                                                            className="text-center text-[11px] font-medium leading-3.5"
+                                                            style={{ color: colors.text }}
                                                         >
                                                             {comp.text}
                                                         </Text>
@@ -239,14 +160,17 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                         }
                     )
                 ) : (
-                    <View style={styles.noResultsContainer}>
+                    <View className="items-center justify-center py-[60px] px-5">
                         <Ionicons
                             name="search-outline"
                             size={44}
                             color={colors.secondary}
                             style={{ opacity: 0.5 }}
                         />
-                        <Text style={styles.noResultsText}>
+                        <Text
+                            className="text-[15px] opacity-60 mt-3 text-center"
+                            style={{ color: colors.text }}
+                        >
                             No tools found matching "{searchQuery}"
                         </Text>
                     </View>

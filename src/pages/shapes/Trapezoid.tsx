@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -10,70 +10,56 @@ const SFormula = ({ numerator, h }: { numerator: string; h: string }) => {
     const { colors } = useTheme<colorSchemeType>();
     return (
         <View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={{ color: colors.text, fontSize: 18 }}>S</Text>
-                <Text style={{ color: colors.text, fontSize: 18 }}>
+            <View className="flex-row items-center">
+                <Text className="text-[18px]" style={{ color: colors.text }}>S</Text>
+                <Text className="text-[18px]" style={{ color: colors.text }}>
                     {" = "}
                 </Text>
                 <View
-                    style={{
-                        height: 55,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: 25,
-                    }}>
+                    className="h-[55px] items-center justify-center w-[25px]">
                     <Image
                         source={require("../../../assets/shapes/root.png")}
+                        className="h-[115px] w-[50px] -mt-[10px]"
                         style={{
-                            height: 115,
-                            width: 50,
                             tintColor: colors.text,
                             transform: [{ scale: 0.35 }],
-                            marginTop: -10,
                         }}
                     />
                 </View>
 
                 <View
+                    className="-ml-[3px] flex-row items-center border-t-[1.5px]"
                     style={{
                         borderTopColor: colors.text,
-                        borderTopWidth: 1.5,
-                        marginLeft: -3,
-                        flexDirection: "row",
-                        alignItems: "center",
                     }}>
                     <View>
                         <Text
+                            className="text-[18px] border-b pb-[3px]"
                             style={{
                                 color: colors.text,
-                                fontSize: 18,
                                 borderBottomColor: colors.text,
-                                borderBottomWidth: 1,
-                                paddingBottom: 3,
                             }}>
                             {numerator}
                         </Text>
                         <Text
+                            className="text-[18px] text-center"
                             style={{
                                 color: colors.text,
-                                fontSize: 18,
-                                textAlign: "center",
                             }}>
                             4
                         </Text>
                     </View>
                     <Text
+                        className="text-[18px] mx-[5px]"
                         style={{
                             color: colors.text,
-                            fontSize: 18,
-                            marginHorizontal: 5,
                         }}>
                         +
                     </Text>
                     <Text
+                        className="text-[18px]"
                         style={{
                             color: colors.text,
-                            fontSize: 18,
                         }}>
                         {h}
                     </Text>
@@ -113,49 +99,21 @@ const Trapezoid = () => {
         const perimeter = parseFloat((2 * s + a + b).toFixed(2));
         setAns({ area, perimeter, s });
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 260,
-            height: 200,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            color: colors.secondary,
-            fontSize: 18,
-            marginVertical: 10,
-            width: 100,
-            textAlign: "center",
-        },
-        inputField: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-        },
-        flexRow: {
-            flexDirection: "row",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[260px] h-[200px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputField}>
-                        <Text style={styles.topText}>A</Text>
-                        <Text style={styles.topText}>B</Text>
-                        <Text style={styles.topText}>H</Text>
+                    <View className="flex-row justify-center items-center gap-[10px]">
+                        <Text className="text-[18px] my-[10px] w-[100px] text-center" style={{ color: colors.secondary }}>A</Text>
+                        <Text className="text-[18px] my-[10px] w-[100px] text-center" style={{ color: colors.secondary }}>B</Text>
+                        <Text className="text-[18px] my-[10px] w-[100px] text-center" style={{ color: colors.secondary }}>H</Text>
                     </View>
-                    <View style={styles.inputField}>
+                    <View className="flex-row justify-center items-center gap-[10px]">
                         {shapeDetails.field.map((item, index) => {
                             return (
                                 <CustomInput
@@ -173,12 +131,12 @@ const Trapezoid = () => {
                             );
                         })}
                     </View>
-                    <View style={{ alignItems: "center" }}>
+                    <View className="items-center">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -194,7 +152,7 @@ const Trapezoid = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -230,7 +188,7 @@ const Trapezoid = () => {
                                 bullet={false}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <SFormula numerator={"(B - A)²"} h="H²" />
                                 <SFormula
                                     numerator={`(${input.b} - ${input.a})²`}
@@ -244,34 +202,29 @@ const Trapezoid = () => {
                                     numerator={`${(input.b - input.a) ** 2}`}
                                     h={(input.h ** 2).toString()}
                                 />
-                                <View style={styles.flexRow}>
+                                <View className="flex-row">
                                     <Text
-                                        style={{
-                                            color: "transparent",
-                                            fontSize: 18,
-                                        }}>
+                                        className="text-[18px] text-transparent">
                                         S
                                     </Text>
                                     <Text
+                                        className="text-[18px]"
                                         style={{
                                             color: colors.text,
-                                            fontSize: 18,
                                         }}>
                                         {" = "}
                                     </Text>
                                     <Text
+                                        className="text-[25px] -mt-[5px]"
                                         style={{
                                             color: colors.text,
-                                            fontSize: 25,
-                                            marginTop: -5,
                                         }}>
                                         √
                                     </Text>
                                     <Text
+                                        className="text-[18px] border-t-[1.5px]"
                                         style={{
                                             color: colors.text,
-                                            fontSize: 18,
-                                            borderTopWidth: 1.5,
                                             borderTopColor: colors.text,
                                         }}>
                                         {parseFloat(
@@ -299,7 +252,7 @@ const Trapezoid = () => {
                                 bullet={false}
                                 size={18}
                                 color={colors.text}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -342,5 +295,3 @@ const Trapezoid = () => {
 };
 
 export default Trapezoid;
-
-const styles = StyleSheet.create({});

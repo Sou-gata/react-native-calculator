@@ -1,10 +1,15 @@
-import { View, Pressable, Animated, StyleSheet } from "react-native";
+import { View, Pressable, Animated } from "react-native";
 import { useRef, useContext } from "react";
+import { cssInterop } from "nativewind";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Context } from "../../Context";
 import { useTheme } from "react-native-paper";
 import { colorSchemeType } from "../../types";
+
+cssInterop(Animated.View, {
+    className: "style",
+});
 
 const ThemeSwitch = () => {
     const { colors } = useTheme<colorSchemeType>();
@@ -51,15 +56,7 @@ const ThemeSwitch = () => {
         outputRange: ["0deg", "360deg"],
     });
     return (
-        <View
-            style={{
-                position: "absolute",
-                zIndex: 99,
-                right: 16,
-                top: 10,
-                width: 24,
-                height: 24,
-            }}>
+        <View className="absolute z-[99] right-4 top-2.5 w-6 h-6">
             <Pressable
                 onPress={() => {
                     if (state?.theme === "dark") lightIn();
@@ -69,16 +66,14 @@ const ThemeSwitch = () => {
                     );
                 }}>
                 <Animated.View
-                    style={[
-                        styles.iconContainer,
-                        {
-                            opacity: animOne,
-                            transform: [
-                                { scale: animOne },
-                                { rotate: rotateOne },
-                            ],
-                        },
-                    ]}>
+                    className="absolute top-0 left-0"
+                    style={{
+                        opacity: animOne,
+                        transform: [
+                            { scale: animOne },
+                            { rotate: rotateOne },
+                        ],
+                    }}>
                     <MaterialIcons
                         name="brightness-7"
                         size={24}
@@ -86,28 +81,19 @@ const ThemeSwitch = () => {
                     />
                 </Animated.View>
                 <Animated.View
-                    style={[
-                        styles.iconContainer,
-                        {
-                            opacity: animTwo,
-                            transform: [
-                                { scale: animTwo },
-                                { rotate: rotateTwo },
-                            ],
-                        },
-                    ]}>
+                    className="absolute top-0 left-0"
+                    style={{
+                        opacity: animTwo,
+                        transform: [
+                            { scale: animTwo },
+                            { rotate: rotateTwo },
+                        ],
+                    }}>
                     <Ionicons name="moon" size={24} color={colors.secondary} />
                 </Animated.View>
             </Pressable>
         </View>
     );
 };
-const styles = StyleSheet.create({
-    iconContainer: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-    },
-});
 
 export default ThemeSwitch;

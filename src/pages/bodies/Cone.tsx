@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import CustomInput from "../../components/CustomInput";
@@ -47,72 +47,19 @@ const Cone = () => {
         });
         setInput((prev) => ({ ...prev, r, h }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 220,
-            height: 200,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        inputHeader: {
-            fontSize: 18,
-            color: colors.secondary,
-            marginVertical: 5,
-            textAlign: "center",
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        parentContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        root: {
-            color: colors.text,
-            fontSize: 28,
-            marginTop: -8,
-        },
-        underRootText: {
-            color: colors.text,
-            fontSize: 18,
-            borderTopWidth: 1.5,
-            borderTopColor: colors.text,
-        },
-        flexRowCenter: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[220px] h-[200px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {field.map((item, index) => (
                             <View key={index}>
-                                <Text style={styles.inputHeader}>{item}</Text>
+                                <Text className="text-[18px] text-center my-[5px]" style={{ color: colors.secondary }}>{item}</Text>
                                 <CustomInput
                                     placeholder={item}
                                     value={input[item as keyof object]}
@@ -132,7 +79,7 @@ const Cone = () => {
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -148,7 +95,7 @@ const Cone = () => {
                                     numerator: "π × R² × H",
                                     denominator: "3",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -199,54 +146,54 @@ const Cone = () => {
                                 }}
                                 textVisible={false}
                             />
-                            <View style={styles.parentContainer}>
-                                <Text style={styles.textStyle}>L = </Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRootText}>
+                            <View className="mt-[25px] flex-row items-center">
+                                <Text className="text-[18px]" style={{ color: colors.text }}>L = </Text>
+                                <Text className="text-[28px] mt-[-8px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     R² + H²
                                 </Text>
                             </View>
-                            <View style={styles.flexRowCenter}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center">
+                                <Text className="text-[18px] text-transparent">
                                     L
                                 </Text>
-                                <Text style={styles.textStyle}> = </Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRootText}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                <Text className="text-[28px] mt-[-8px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {input.r}² + {input.h}²
                                 </Text>
                             </View>
-                            <View style={styles.flexRowCenter}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center">
+                                <Text className="text-[18px] text-transparent">
                                     L
                                 </Text>
-                                <Text style={styles.textStyle}> = </Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRootText}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                <Text className="text-[28px] mt-[-8px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {parseNumber(input.r ** 2, 2)}
                                     {" + "}
                                     {parseNumber(input.h ** 2, 2)}
                                 </Text>
                             </View>
-                            <View style={styles.flexRowCenter}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center">
+                                <Text className="text-[18px] text-transparent">
                                     L
                                 </Text>
-                                <Text style={styles.textStyle}> = </Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRootText}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                <Text className="text-[28px] mt-[-8px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {parseNumber(
                                         input.r ** 2 + input.h ** 2,
                                         2
                                     )}
                                 </Text>
                             </View>
-                            <View style={styles.flexRowCenter}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row items-center">
+                                <Text className="text-[18px] text-transparent">
                                     L
                                 </Text>
-                                <Text style={styles.textStyle}> = </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {ans.slantHeight}
                                 </Text>
                             </View>
@@ -258,7 +205,7 @@ const Cone = () => {
                                     text: "SA",
                                     numerator: "π × R × (R + L)",
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -300,7 +247,7 @@ const Cone = () => {
                                     text: "LSA",
                                     numerator: `π × R × L`,
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 color={colors.text}
@@ -335,21 +282,19 @@ const Cone = () => {
                                 }}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <Text
-                                    style={[
-                                        styles.root,
-                                        { color: colors.secondary },
-                                    ]}>
+                                    className="text-[28px] mt-[-8px]"
+                                    style={{ color: colors.secondary }}>
                                     Note :
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     L = Slant Height
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     SA = Surface Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     LSA = Lateral Surface Area
                                 </Text>
                             </View>

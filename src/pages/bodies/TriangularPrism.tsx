@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -49,66 +49,19 @@ const TriangularPrism = () => {
             h: parseNumber(h, 2),
         }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 225,
-            height: 172,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        inputHeader: {
-            fontSize: 18,
-            color: colors.secondary,
-            marginVertical: 5,
-            textAlign: "center",
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        sa: {
-            flexDirection: "row",
-            marginTop: 25,
-            alignItems: "center",
-        },
-        sas: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        rootText: {
-            color: colors.text,
-            fontSize: 27,
-            marginTop: -7,
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[225px] h-[172px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {field.map((item, index) => (
                             <View key={index}>
-                                <Text style={styles.inputHeader}>{item}</Text>
+                                <Text className="text-[18px] text-center my-[5px]" style={{ color: colors.secondary }}>{item}</Text>
                                 <CustomInput
                                     placeholder={item}
                                     value={input[item as keyof object]}
@@ -128,7 +81,7 @@ const TriangularPrism = () => {
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor={"white"}
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -144,7 +97,7 @@ const TriangularPrism = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -195,7 +148,7 @@ const TriangularPrism = () => {
                                 bullet={false}
                                 textVisible={false}
                             />
-                            <View style={styles.sa}>
+                            <View className="flex-row mt-[25px] items-center">
                                 <Fraction
                                     data={{
                                         numerator: "√3 × S²",
@@ -207,14 +160,12 @@ const TriangularPrism = () => {
                                     bullet={false}
                                 />
                                 <Text
-                                    style={[
-                                        styles.textStyle,
-                                        { marginTop: 9 },
-                                    ]}>
+                                    className="text-[18px] mt-[9px]"
+                                    style={{ color: colors.text }}>
                                     {" + 3 × S × H"}
                                 </Text>
                             </View>
-                            <View style={styles.sas}>
+                            <View className="flex-row items-center">
                                 <Fraction
                                     data={{
                                         numerator: `√3 × ${input.s}²`,
@@ -227,14 +178,12 @@ const TriangularPrism = () => {
                                     textVisible={false}
                                 />
                                 <Text
-                                    style={[
-                                        styles.textStyle,
-                                        { marginTop: 9 },
-                                    ]}>
+                                    className="text-[18px] mt-[9px]"
+                                    style={{ color: colors.text }}>
                                     {" + "}3 × {input.s} × {input.h}
                                 </Text>
                             </View>
-                            <View style={styles.sas}>
+                            <View className="flex-row items-center">
                                 <Fraction
                                     data={{
                                         numerator: `√3 × ${parseNumber(
@@ -250,15 +199,13 @@ const TriangularPrism = () => {
                                     textVisible={false}
                                 />
                                 <Text
-                                    style={[
-                                        styles.textStyle,
-                                        { marginTop: 9 },
-                                    ]}>
+                                    className="text-[18px] mt-[9px]"
+                                    style={{ color: colors.text }}>
                                     {" + "}
                                     {parseNumber(3 * input.s * input.h, 2)}
                                 </Text>
                             </View>
-                            <View style={styles.sas}>
+                            <View className="flex-row items-center">
                                 <Fraction
                                     data={{
                                         numerator: `${parseNumber(
@@ -274,10 +221,8 @@ const TriangularPrism = () => {
                                     textVisible={false}
                                 />
                                 <Text
-                                    style={[
-                                        styles.textStyle,
-                                        { marginTop: 9 },
-                                    ]}>
+                                    className="text-[18px] mt-[9px]"
+                                    style={{ color: colors.text }}>
                                     {" + "}
                                     {parseNumber(3 * input.s * input.h, 2)}
                                 </Text>
@@ -316,7 +261,7 @@ const TriangularPrism = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -338,18 +283,16 @@ const TriangularPrism = () => {
                                 bullet={false}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <Text
-                                    style={[
-                                        styles.rootText,
-                                        { color: colors.secondary },
-                                    ]}>
+                                    className="text-[27px] mt-[-7px]"
+                                    style={{ color: colors.secondary }}>
                                     Note :
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     SA = Surface Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     LSA = Lateral Surface Area
                                 </Text>
                             </View>

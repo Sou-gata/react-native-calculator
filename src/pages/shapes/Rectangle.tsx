@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import { RouteProp, useRoute } from "@react-navigation/native";
@@ -37,59 +37,18 @@ const Rectangle = () => {
             });
         } else return;
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 230,
-            height: 150,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        flexRow: {
-            flexDirection: "row",
-        },
-        root: {
-            fontSize: 22,
-            marginTop: -5,
-            color: colors.text,
-        },
-        underRoot: {
-            fontSize: 18,
-            color: colors.text,
-            borderTopWidth: 1.5,
-            borderTopColor: colors.text,
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[230px] h-[150px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
                     {shapeDetails.field.map((item, index) => (
-                        <View style={styles.inputContainer} key={index}>
-                            <Text style={styles.textStyle}>{item}</Text>
+                        <View className="flex-row justify-center items-center gap-[10px] mt-[25px]" key={index}>
+                            <Text className="text-[18px]" style={{ color: colors.text }}>{item}</Text>
                             <CustomInput
                                 placeholder={item}
                                 value={input[item as keyof object]}
@@ -102,111 +61,111 @@ const Rectangle = () => {
                             />
                         </View>
                     ))}
-                    <View style={{ alignItems: "center" }}>
+                    <View className="items-center">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
                     </View>
                     {ans.area != 0 && ans.perimeter != 0 && (
-                        <View style={{ marginTop: 25 }}>
-                            <Text style={styles.textStyle}>
+                        <View className="mt-[25px]">
+                            <Text className="text-[18px]" style={{ color: colors.text }}>
                                 Area = Length × Breadth
                             </Text>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {` =  ${input.l} × ${input.b}`}
                                 </Text>
                             </View>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {" = " + ans.area}
                                 </Text>
                             </View>
-                            <Text style={[styles.textStyle, { marginTop: 25 }]}>
+                            <Text className="text-[18px] mt-[25px]" style={{ color: colors.text }}>
                                 Perimeter = 2 × (Length + Breadth)
                             </Text>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {` = 2 × (${input.l} + ${input.b})`}
                                 </Text>
                             </View>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {` = 2 × ${input.l + input.b}`}
                                 </Text>
                             </View>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Perimeter
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {" = " + ans.perimeter}
                                 </Text>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 25 }]}>
-                                <Text style={styles.textStyle}>Diagonal</Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRoot}>
+                            <View className="flex-row mt-[25px]">
+                                <Text className="text-[18px]" style={{ color: colors.text }}>Diagonal</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[22px] -mt-[5px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     Length² + Breadth²
                                 </Text>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 5 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row mt-[5px]">
+                                <Text className="text-[18px] text-transparent">
                                     Diagonal
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.root}>√</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[22px] -mt-[5px]" style={{ color: colors.text }}>√</Text>
 
-                                <Text style={styles.underRoot}>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {`${input.l}² + ${input.b}²`}
                                 </Text>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 5 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row mt-[5px]">
+                                <Text className="text-[18px] text-transparent">
                                     Diagonal
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.root}>√</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[22px] -mt-[5px]" style={{ color: colors.text }}>√</Text>
 
-                                <Text style={styles.underRoot}>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {`${input.l ** 2} + ${input.b ** 2}`}
                                 </Text>
                             </View>
-                            <View style={[styles.flexRow, { marginTop: 5 }]}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row mt-[5px]">
+                                <Text className="text-[18px] text-transparent">
                                     Diagonal
                                 </Text>
-                                <Text style={styles.textStyle}>{" = "}</Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.underRoot}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{" = "}</Text>
+                                <Text className="text-[22px] -mt-[5px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                     {` ${
                                         input.l * input.l + input.b * input.b
                                     }`}
                                 </Text>
                             </View>
-                            <View style={styles.flexRow}>
-                                <Text style={styles.transparentTextStyle}>
+                            <View className="flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Diagonal
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     {" = " + ans.diagonal}
                                 </Text>
                             </View>

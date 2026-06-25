@@ -313,156 +313,6 @@ const One = ({ navigation }) => {
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
 
-    const styles = StyleSheet.create({
-        main: {
-            flex: 1,
-        },
-        inputContainer: {
-            alignItems: "center",
-        },
-        calInput: {
-            height: (2 * (hp("25%") - 25)) / 3,
-            width: wp("100%"),
-            paddingVertical: 10,
-            paddingRight: 45,
-            paddingLeft: 25,
-            fontSize: 30,
-            textAlign: "center",
-            color: colors.text,
-            backgroundColor: colors.calBg,
-        },
-        calInputAns: {
-            height: (hp("25%") - 25) / 3,
-            width: wp("100%"),
-            padding: 10,
-            paddingRight: 20,
-            fontSize: 25,
-            textAlign: "center",
-            color: colors.calAns,
-            backgroundColor: colors.calBg,
-        },
-        allBtns: {
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "center",
-            paddingLeft: 20,
-            paddingRight: 20,
-            height: hp("75%") - 25,
-            marginTop: 0,
-            backgroundColor: colors.numPadBg,
-        },
-        calBtn: {
-            width: wp("17.5%"),
-            alignItems: "center",
-            height: hp("9.5%"),
-            justifyContent: "center",
-        },
-        calText: {
-            fontSize: 20,
-            textAlign: "center",
-            color: colors.text,
-        },
-        calTextOrange: {
-            fontSize: 22,
-            fontWeight: "600",
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        calEqual: {
-            width: hp("7.5%"),
-            height: hp("7.5%"),
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 55,
-            backgroundColor: colors.secondary,
-        },
-        calEqualText: {
-            color: colors.backgroundColor,
-            fontSize: 22,
-        },
-        menu: {
-            position: "absolute",
-            top: 0,
-            left: 7,
-            zIndex: 999,
-            height: 45,
-            width: 45,
-            justifyContent: "center",
-        },
-        historyButton: {
-            position: "absolute",
-            zIndex: 99,
-            right: 52,
-            top: 10,
-            width: 24,
-            height: 24,
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        historyContainer: {
-            padding: 20,
-            height: hp("75%") - 25,
-            marginTop: 0,
-            backgroundColor: colors.numPadBg,
-        },
-        historyHeader: {
-            fontSize: 18,
-            fontWeight: "bold",
-            color: colors.secondary,
-            marginBottom: 10,
-        },
-        emptyHistory: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        emptyHistoryText: {
-            color: colors.text + "80",
-            fontSize: 16,
-        },
-        historyItem: {
-            borderBottomWidth: StyleSheet.hairlineWidth,
-            borderBottomColor: colors.text + "20",
-            paddingVertical: 12,
-        },
-        historyEquationPress: {
-            alignSelf: "flex-start",
-            paddingVertical: 2,
-        },
-        historyEquationText: {
-            fontSize: 16,
-            color: colors.text,
-            textAlign: "left",
-        },
-        historyResultPress: {
-            alignSelf: "flex-end",
-            paddingVertical: 2,
-        },
-        historyResultText: {
-            fontSize: 18,
-            fontWeight: "600",
-            color: colors.secondary,
-            textAlign: "right",
-        },
-        historyFooter: {
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginTop: 10,
-            gap: 10,
-        },
-        historyFooterBtn: {
-            flex: 1,
-            height: 44,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 8,
-        },
-        historyFooterBtnText: {
-            fontSize: 16,
-            fontWeight: "600",
-        },
-    });
-
     return (
         <View
             style={{
@@ -470,9 +320,9 @@ const One = ({ navigation }) => {
                 flex: 1,
             }}
         >
-            <View style={styles.main}>
+            <View className="flex-1">
                 <ThemeSwitch colors={colors} />
-                <View style={styles.historyButton}>
+                <View className="absolute z-[99] right-[52px] top-2.5 w-6 h-6 justify-center items-center">
                     <Pressable onPress={() => setShowHistory(!showHistory)}>
                         <MaterialIcons
                             name="history"
@@ -481,7 +331,7 @@ const One = ({ navigation }) => {
                         />
                     </Pressable>
                 </View>
-                <View style={styles.menu}>
+                <View className="absolute top-0 left-[7px] z-[999] h-[45px] w-[45px] justify-center">
                     <Menu
                         visible={visible}
                         onDismiss={closeMenu}
@@ -518,10 +368,16 @@ const One = ({ navigation }) => {
                         />
                     </Menu>
                 </View>
-                <View style={styles.inputContainer}>
+                <View className="items-center">
                     <TextInput
                         ref={inputRef}
-                        style={styles.calInput}
+                        className="py-2.5 pr-[45px] pl-[25px] text-3xl text-center"
+                        style={{
+                            height: (2 * (hp("32%") - 25)) / 3,
+                            width: wp("100%"),
+                            color: colors.text,
+                            backgroundColor: colors.calBg,
+                        }}
                         value={text}
                         editable={true}
                         showSoftInputOnFocus={false}
@@ -533,56 +389,78 @@ const One = ({ navigation }) => {
                         }
                     />
                     <TextInput
-                        style={styles.calInputAns}
+                        className="p-2.5 pr-5 text-2xl text-center"
+                        style={{
+                            height: (hp("32%") - 25) / 3,
+                            width: wp("100%"),
+                            color: colors.calAns,
+                            backgroundColor: colors.calBg,
+                        }}
                         value={ans}
                         editable={false}
                     />
                 </View>
                 {showHistory ? (
-                    <View style={styles.historyContainer}>
-                        <Text style={styles.historyHeader}>
+                    <View
+                        className="p-5 mt-0"
+                        style={{
+                            height: hp("68%") - 25,
+                            backgroundColor: colors.numPadBg,
+                        }}
+                    >
+                        <Text
+                            className="text-lg font-bold mb-2.5"
+                            style={{ color: colors.secondary }}
+                        >
                             Calculation History
                         </Text>
                         {history.length === 0 ? (
-                            <View style={styles.emptyHistory}>
-                                <Text style={styles.emptyHistoryText}>
+                            <View className="flex-1 justify-center items-center">
+                                <Text
+                                    className="text-base"
+                                    style={{ color: colors.text + "80" }}
+                                >
                                     No history yet
                                 </Text>
                             </View>
                         ) : (
                             <ScrollView
-                                style={{ flex: 1 }}
+                                className="flex-1"
                                 showsVerticalScrollIndicator={false}
                             >
                                 {history.map((item, index) => (
                                     <View
                                         key={index}
-                                        style={styles.historyItem}
+                                        className="border-b py-3"
+                                        style={{
+                                            borderBottomColor: colors.text + "20",
+                                            borderBottomWidth: StyleSheet.hairlineWidth,
+                                        }}
                                     >
                                         <Pressable
-                                            style={styles.historyEquationPress}
+                                            className="self-start py-0.5"
                                             onPress={() => {
                                                 insertText(item.equation);
                                                 setShowHistory(false);
                                             }}
                                         >
                                             <Text
-                                                style={
-                                                    styles.historyEquationText
-                                                }
+                                                className="text-base text-left"
+                                                style={{ color: colors.text }}
                                             >
                                                 {item.equation}
                                             </Text>
                                         </Pressable>
                                         <Pressable
-                                            style={styles.historyResultPress}
+                                            className="self-end py-0.5"
                                             onPress={() => {
                                                 insertText(item.result);
                                                 setShowHistory(false);
                                             }}
                                         >
                                             <Text
-                                                style={styles.historyResultText}
+                                                className="text-lg font-semibold text-right"
+                                                style={{ color: colors.secondary }}
                                             >
                                                 = {item.result}
                                             </Text>
@@ -591,41 +469,32 @@ const One = ({ navigation }) => {
                                 ))}
                             </ScrollView>
                         )}
-                        <View style={styles.historyFooter}>
+                        <View className="flex-row justify-between mt-2.5 gap-2.5">
                             <Pressable
-                                style={[
-                                    styles.historyFooterBtn,
-                                    {
-                                        backgroundColor:
-                                            colors.secondary + "20",
-                                    },
-                                ]}
+                                className="flex-1 h-11 justify-center items-center rounded-lg"
+                                style={{
+                                    backgroundColor: colors.secondary + "20",
+                                }}
                                 onPress={() => {
                                     setHistory([]);
                                     saveHistory([]);
                                 }}
                             >
                                 <Text
-                                    style={[
-                                        styles.historyFooterBtnText,
-                                        { color: colors.secondary },
-                                    ]}
+                                    className="text-base font-semibold"
+                                    style={{ color: colors.secondary }}
                                 >
                                     Clear
                                 </Text>
                             </Pressable>
                             <Pressable
-                                style={[
-                                    styles.historyFooterBtn,
-                                    { backgroundColor: colors.secondary },
-                                ]}
+                                className="flex-1 h-11 justify-center items-center rounded-lg"
+                                style={{ backgroundColor: colors.secondary }}
                                 onPress={() => setShowHistory(false)}
                             >
                                 <Text
-                                    style={[
-                                        styles.historyFooterBtnText,
-                                        { color: colors.backgroundColor },
-                                    ]}
+                                    className="text-base font-semibold"
+                                    style={{ color: colors.backgroundColor }}
                                 >
                                     Keyboard
                                 </Text>
@@ -633,7 +502,13 @@ const One = ({ navigation }) => {
                         </View>
                     </View>
                 ) : (
-                    <View style={styles.allBtns}>
+                    <View
+                        className="flex-row flex-wrap items-center px-5 mt-0"
+                        style={{
+                            height: hp("68%") - 25,
+                            backgroundColor: colors.numPadBg,
+                        }}
+                    >
                         {(() => {
                             let btns = [];
                             for (let i = 0; i < calBtns.length; i++) {
@@ -644,12 +519,24 @@ const One = ({ navigation }) => {
                                         <Pressable
                                             key={i}
                                             onPress={() => calBtnPress(btn)}
-                                            style={styles.calBtn}
+                                            className="items-center justify-center"
+                                            style={{
+                                                width: wp("17.5%"),
+                                                height: hp("8.2%"),
+                                            }}
                                             android_ripple={androidRipple}
                                         >
-                                            <View style={styles.calEqual}>
+                                            <View
+                                                className="justify-center items-center rounded-[55px]"
+                                                style={{
+                                                    width: hp("6.5%"),
+                                                    height: hp("6.5%"),
+                                                    backgroundColor: colors.secondary,
+                                                }}
+                                            >
                                                 <Text
-                                                    style={styles.calEqualText}
+                                                    className="text-[22px]"
+                                                    style={{ color: colors.backgroundColor }}
                                                 >
                                                     {btn.text}
                                                 </Text>
@@ -661,15 +548,17 @@ const One = ({ navigation }) => {
                                         <Pressable
                                             key={i}
                                             onPress={() => changeMode()}
-                                            style={styles.calBtn}
+                                            className="items-center justify-center"
+                                            style={{
+                                                width: wp("17.5%"),
+                                                height: hp("8.2%"),
+                                            }}
                                             android_ripple={androidRipple}
                                             android_disableSound={true}
                                         >
                                             <Text
-                                                style={[
-                                                    styles.calTextOrange,
-                                                    { opacity: 0.5 },
-                                                ]}
+                                                className="text-[22px] font-semibold text-center opacity-50"
+                                                style={{ color: colors.secondary }}
                                             >
                                                 {mode}
                                             </Text>
@@ -680,16 +569,25 @@ const One = ({ navigation }) => {
                                         <Pressable
                                             key={i}
                                             onPress={() => calBtnPress(btn)}
-                                            style={styles.calBtn}
+                                            className="items-center justify-center"
+                                            style={{
+                                                width: wp("17.5%"),
+                                                height: hp("8.2%"),
+                                            }}
                                             android_ripple={androidRipple}
                                             android_disableSound={true}
                                         >
                                             <Text
-                                                style={
+                                                className={
                                                     btn.primaryColor
-                                                        ? styles.calTextOrange
-                                                        : styles.calText
+                                                        ? "text-[22px] font-semibold text-center"
+                                                        : "text-[20px] text-center"
                                                 }
+                                                style={{
+                                                    color: btn.primaryColor
+                                                        ? colors.secondary
+                                                        : colors.text,
+                                                }}
                                             >
                                                 {btn.text}
                                             </Text>

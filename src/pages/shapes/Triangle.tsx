@@ -1,4 +1,4 @@
-import { View, ScrollView, Image, StyleSheet } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import { useState } from "react";
 import { Button, Text, useTheme } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
@@ -62,68 +62,17 @@ const Triangle = () => {
             setIsPossible(false);
         }
     };
-
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 200,
-            height: 200,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            color: colors.text,
-            fontSize: 18,
-            marginVertical: 10,
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        secondaryText: {
-            fontSize: 18,
-            color: colors.secondary,
-        },
-        lineWithRoot: {
-            color: colors.text,
-            fontSize: 18,
-            borderTopWidth: 1,
-            borderColor: colors.text,
-        },
-        root: {
-            color: colors.text,
-            fontSize: 20,
-            lineHeight: 25,
-        },
-        notPossible: {
-            color: colors.text,
-            fontSize: 18,
-            marginTop: 15,
-            textAlign: "center",
-        },
-        flexRow: {
-            flexDirection: "row",
-        },
-    });
-
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={require("../../../assets/shapes/triangle_main.png")}
-                        style={styles.image}
+                        className="w-[200px] h-[200px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <Text style={styles.topText}>Sides</Text>
-                    <View style={{ flexDirection: "row", gap: 10 }}>
+                    <Text className="text-[18px] my-[10px]" style={{ color: colors.text }}>Sides</Text>
+                    <View className="flex-row gap-[10px]">
                         {shapeDetails.field.map((field, index) => (
                             <CustomInput
                                 key={index}
@@ -136,18 +85,18 @@ const Triangle = () => {
                             />
                         ))}
                     </View>
-                    <View style={{ alignItems: "center" }}>
+                    <View className="items-center">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor={"white"}
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
                     </View>
                     {!isPossible && (
-                        <Text style={styles.notPossible}>
+                        <Text className="text-[18px] mt-[15px] text-center" style={{ color: colors.text }}>
                             Triangle is not possible
                         </Text>
                     )}
@@ -162,7 +111,7 @@ const Triangle = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -203,43 +152,43 @@ const Triangle = () => {
                     {isPossible && ans?.area && (
                         <>
                             <View
-                                style={{ marginTop: 25, flexDirection: "row" }}>
-                                <Text style={styles.textStyle}>Area = </Text>
-                                <Text style={styles.root}>√</Text>
-                                <Text style={styles.lineWithRoot}>
+                                className="mt-[25px] flex-row">
+                                <Text className="text-[18px]" style={{ color: colors.text }}>Area = </Text>
+                                <Text className="text-[20px] leading-[25px]" style={{ color: colors.text }}>√</Text>
+                                <Text className="text-[18px] border-t" style={{ color: colors.text, borderColor: colors.text }}>
                                     S (S - A) (S - B) (S - C)
                                 </Text>
                             </View>
 
                             <View
-                                style={{ marginTop: 10, flexDirection: "row" }}>
-                                <Text style={styles.transparentTextStyle}>
+                                className="mt-[10px] flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area{" "}
                                 </Text>
-                                <Text style={styles.root}>= √</Text>
-                                <Text style={styles.lineWithRoot}>
+                                <Text className="text-[20px] leading-[25px]" style={{ color: colors.text }}>= √</Text>
+                                <Text className="text-[18px] border-t" style={{ color: colors.text, borderColor: colors.text }}>
                                     {ans.s} ({ans.s} - {inputs.a}) ({ans.s} -{" "}
                                     {inputs.b}) ({ans.s} - {inputs.c})
                                 </Text>
                             </View>
                             <View
-                                style={{ marginTop: 10, flexDirection: "row" }}>
-                                <Text style={styles.transparentTextStyle}>
+                                className="mt-[10px] flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area{" "}
                                 </Text>
-                                <Text style={styles.root}>= √</Text>
-                                <Text style={styles.lineWithRoot}>
+                                <Text className="text-[20px] leading-[25px]" style={{ color: colors.text }}>= √</Text>
+                                <Text className="text-[18px] border-t" style={{ color: colors.text, borderColor: colors.text }}>
                                     {ans.s} × {ans.s - inputs.a} ×{" "}
                                     {ans.s - inputs.b} × {ans.s - inputs.c}
                                 </Text>
                             </View>
                             <View
-                                style={{ marginTop: 10, flexDirection: "row" }}>
-                                <Text style={styles.transparentTextStyle}>
+                                className="mt-[10px] flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area{" "}
                                 </Text>
-                                <Text style={styles.root}>= √</Text>
-                                <Text style={styles.lineWithRoot}>
+                                <Text className="text-[20px] leading-[25px]" style={{ color: colors.text }}>= √</Text>
+                                <Text className="text-[18px] border-t" style={{ color: colors.text, borderColor: colors.text }}>
                                     {parseNumber(
                                         ans.s *
                                             (ans.s - inputs.a) *
@@ -250,35 +199,35 @@ const Triangle = () => {
                                 </Text>
                             </View>
                             <View
-                                style={{ marginTop: 10, flexDirection: "row" }}>
-                                <Text style={styles.transparentTextStyle}>
+                                className="mt-[10px] flex-row">
+                                <Text className="text-[18px] text-transparent">
                                     Area{" "}
                                 </Text>
-                                <Text style={styles.textStyle}>{` = `}</Text>
-                                <Text style={styles.textStyle}>{ans.area}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{` = `}</Text>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>{ans.area}</Text>
                             </View>
 
-                            <View style={{ marginTop: 15 }}>
-                                <Text style={styles.textStyle}>
+                            <View className="mt-[15px]">
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     Perimeter = A + B + C
                                 </Text>
-                                <View style={styles.flexRow}>
-                                    <Text style={styles.transparentTextStyle}>
+                                <View className="flex-row">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {" "}
                                         = {inputs.a} + {inputs.b} + {inputs.c}
                                     </Text>
                                 </View>
-                                <View style={styles.flexRow}>
-                                    <Text style={styles.transparentTextStyle}>
+                                <View className="flex-row">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {" = "}
                                     </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         {ans.perimeter}
                                     </Text>
                                 </View>
@@ -292,7 +241,7 @@ const Triangle = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -335,7 +284,7 @@ const Triangle = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -378,7 +327,7 @@ const Triangle = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{

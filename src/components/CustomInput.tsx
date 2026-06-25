@@ -1,6 +1,11 @@
 import React from "react";
-import { TextInput, useTheme } from "react-native-paper";
+import { cssInterop } from "nativewind";
+import { TextInput as PaperTextInput, useTheme } from "react-native-paper";
 import { CustomInputType, colorSchemeType } from "../../types";
+
+cssInterop(PaperTextInput, {
+    className: "style",
+});
 
 const CustomInput = ({
     value,
@@ -16,7 +21,7 @@ const CustomInput = ({
     const { colors } = useTheme<colorSchemeType>();
     const empty = () => {};
     return (
-        <TextInput
+        <PaperTextInput
             mode="outlined"
             onChangeText={onChangeText}
             value={value}
@@ -27,11 +32,10 @@ const CustomInput = ({
             selectionColor={colors.secondary}
             activeOutlineColor={colors.secondary}
             textColor={colors.text}
+            className="text-center h-10"
             style={[
                 {
-                    textAlign: "center",
                     width: width || 150,
-                    height: 40,
                     backgroundColor: colors.backgroundColor,
                 },
                 style,

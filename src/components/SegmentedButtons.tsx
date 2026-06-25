@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { useTheme, Text } from "react-native-paper";
 import { colorSchemeType } from "../../types";
 
@@ -17,110 +17,37 @@ const SegmentedButtons = ({
     const { colors } = useTheme<colorSchemeType>();
     const setValue = onChange;
     return (
-        <View style={[styles.flexRow]}>
+        <View className="flex-row">
             {data.map((item, i) => {
-                if (i == 0) {
-                    return (
-                        <Pressable
-                            key={i}
-                            onPress={() => setValue(item.value)}
-                            style={[
-                                styles.sagment,
-                                styles.one,
-                                { borderColor: colors.secondary },
-                                item.value == value
-                                    ? {
-                                          backgroundColor:
-                                              colors.secondary + "80",
-                                      }
-                                    : {},
-                            ]}>
-                            <Text
-                                style={{
-                                    textAlign: "center",
-                                    color: colors.text,
-                                }}>
-                                {item.label}
-                            </Text>
-                        </Pressable>
-                    );
-                } else if (i == data.length - 1) {
-                    return (
-                        <Pressable
-                            key={i}
-                            onPress={() => setValue(item.value)}
-                            style={[
-                                styles.sagment,
-                                styles.last,
-                                { borderColor: colors.secondary },
-                                item.value == value
-                                    ? {
-                                          backgroundColor:
-                                              colors.secondary + "80",
-                                      }
-                                    : {},
-                            ]}>
-                            <Text
-                                style={{
-                                    textAlign: "center",
-                                    color: colors.text,
-                                }}>
-                                {item.label}
-                            </Text>
-                        </Pressable>
-                    );
-                } else {
-                    return (
-                        <Pressable
-                            key={i}
-                            onPress={() => setValue(item.value)}
-                            style={[
-                                styles.sagment,
-                                { borderColor: colors.secondary },
-                                item.value == value
-                                    ? {
-                                          backgroundColor:
-                                              colors.secondary + "80",
-                                      }
-                                    : {},
-                            ]}>
-                            <Text
-                                style={[
-                                    {
-                                        textAlign: "center",
-                                        color: colors.text,
-                                    },
-                                ]}>
-                                {item.label}
-                            </Text>
-                        </Pressable>
-                    );
+                const isSelected = item.value === value;
+                const dynamicStyles = {
+                    borderColor: colors.secondary,
+                    backgroundColor: isSelected ? colors.secondary + "80" : undefined,
+                };
+                let btnClass = "border-l border-t border-b p-[5px] w-[50px]";
+                if (i === 0) {
+                    btnClass += " rounded-l-[20px]";
+                } else if (i === data.length - 1) {
+                    btnClass += " border-r rounded-r-[20px]";
                 }
+                return (
+                    <Pressable
+                        key={i}
+                        onPress={() => setValue(item.value)}
+                        className={btnClass}
+                        style={dynamicStyles}
+                    >
+                        <Text
+                            className="text-center"
+                            style={{ color: colors.text }}
+                        >
+                            {item.label}
+                        </Text>
+                    </Pressable>
+                );
             })}
         </View>
     );
 };
 
 export default SegmentedButtons;
-
-const styles = StyleSheet.create({
-    flexRow: {
-        flexDirection: "row",
-    },
-    sagment: {
-        borderLeftWidth: 1,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        padding: 5,
-        width: 50,
-    },
-    one: {
-        borderBottomStartRadius: 20,
-        borderTopStartRadius: 20,
-    },
-    last: {
-        borderRightWidth: 1,
-        borderBottomEndRadius: 20,
-        borderTopEndRadius: 20,
-    },
-});

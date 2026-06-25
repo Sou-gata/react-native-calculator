@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -21,10 +21,9 @@ const SA = ({
     }, [data]);
     return (
         <View
+            className="flex-wrap mt-[5px]"
             style={{
                 flexDirection: rapped ? "column" : "row",
-                flexWrap: "wrap",
-                marginTop: 5,
                 ...style,
             }}
             onLayout={(e) => {
@@ -34,7 +33,7 @@ const SA = ({
                     setRapped(false);
                 }
             }}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View className="flex-row items-center">
                 <Text
                     style={{
                         color: textVisible ? color : "transparent",
@@ -66,11 +65,10 @@ const SA = ({
                     }}
                 />
                 <View
+                    className="flex-row items-center"
                     style={{
                         borderTopWidth: 1.5,
                         borderColor: color,
-                        flexDirection: "row",
-                        alignItems: "center",
                     }}>
                     <View>
                         <Text
@@ -102,11 +100,7 @@ const SA = ({
                     )}
                 </View>
             </View>
-            <View
-                style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                }}>
+            <View className="flex-row items-center">
                 <Text style={{ color, fontSize: size }}> + </Text>
                 <Text style={{ color, fontSize: size }}>
                     {data.thirdBeforeRoot}
@@ -126,11 +120,10 @@ const SA = ({
                     }}
                 />
                 <View
+                    className="flex-row items-center"
                     style={{
                         borderTopWidth: 1.5,
                         borderColor: color,
-                        flexDirection: "row",
-                        alignItems: "center",
                     }}>
                     <View>
                         <Text
@@ -215,86 +208,20 @@ const Pyramid = () => {
             h: parseNumber(h, 2),
         }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 200,
-            height: 200,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        inputHeader: {
-            fontSize: 18,
-            color: colors.secondary,
-            marginVertical: 5,
-            textAlign: "center",
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        sa: {
-            flexDirection: "row",
-            marginTop: 25,
-            alignItems: "center",
-        },
-        sas: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        rootText: {
-            color: colors.text,
-            fontSize: 27,
-            marginTop: -7,
-        },
-        openBtn: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-        },
-        menuHandle: {
-            borderWidth: 1,
-            width: 150,
-            borderRadius: 7,
-            paddingRight: 10,
-            overflow: "hidden",
-            borderColor: colors.secondary,
-        },
-        selected: {
-            fontSize: 12,
-            color: colors.text,
-            padding: 10,
-            textAlign: "center",
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[200px] h-[200px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
                         {field.map((item, index) => {
                             return (
                                 <View key={index}>
-                                    <Text style={styles.inputHeader}>
+                                    <Text className="text-[18px] text-center my-[5px]" style={{ color: colors.secondary }}>
                                         {item}
                                     </Text>
                                     <CustomInput
@@ -317,7 +244,7 @@ const Pyramid = () => {
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -333,7 +260,7 @@ const Pyramid = () => {
                                 color={colors.text}
                                 bullet={false}
                                 size={18}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -585,7 +512,7 @@ const Pyramid = () => {
                                     text: "LSA",
                                     numerator: `SA - A × B`,
                                 }}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 size={18}
@@ -619,18 +546,16 @@ const Pyramid = () => {
                                 }}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
+                            <View className="mt-[25px]">
                                 <Text
-                                    style={[
-                                        styles.rootText,
-                                        { color: colors.secondary },
-                                    ]}>
+                                    className="text-[27px] mt-[-7px]"
+                                    style={{ color: colors.secondary }}>
                                     Note :
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     SA = Surface Area
                                 </Text>
-                                <Text style={styles.textStyle}>
+                                <Text className="text-[18px]" style={{ color: colors.text }}>
                                     LSA = Lateral Surface Area
                                 </Text>
                             </View>

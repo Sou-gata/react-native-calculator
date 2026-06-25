@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -27,39 +27,11 @@ const Hexagon = () => {
         setAns({ area, perimeter });
         setInput((prev) => ({ ...prev, s: parseNumber(s, 2) }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 230,
-            height: 200,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-        },
-        transparentTextStyle: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-    });
     return (
-        <View style={styles.container}>
-            <Image source={shapeDetails.mainImage} style={styles.image} />
-            <View style={styles.inputContainer}>
-                <Text style={styles.textStyle}>Side</Text>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
+            <Image source={shapeDetails.mainImage} className="w-[230px] h-[200px] self-center" style={{ tintColor: colors.text }} />
+            <View className="mt-[25px] flex-row justify-center items-center gap-[10px]">
+                <Text className="text-[18px]" style={{ color: colors.text }}>Side</Text>
                 <CustomInput
                     placeholder="Side"
                     width={100}
@@ -69,12 +41,12 @@ const Hexagon = () => {
                     }}
                 />
             </View>
-            <View style={{ alignItems: "center", marginBottom: 25 }}>
+            <View className="items-center mb-[25px]">
                 <Button
                     mode="contained"
                     buttonColor={colors.secondary}
                     textColor={"white"}
-                    style={{ marginTop: 15 }}
+                    className="mt-[15px]"
                     onPress={() => calculate()}>
                     Calculate
                 </Button>
@@ -132,7 +104,7 @@ const Hexagon = () => {
                         color={colors.text}
                         textVisible={false}
                     />
-                    <View style={{ marginTop: 25 }}>
+                    <View className="mt-[25px]">
                         <Fraction
                             data={{
                                 numerator: "6 × S",

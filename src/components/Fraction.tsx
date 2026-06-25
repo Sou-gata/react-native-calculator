@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { fractionPropsType } from "../../types";
+import { cssInterop } from "nativewind";
 
 export const Fraction = ({
     data,
@@ -21,74 +22,54 @@ export const Fraction = ({
         hasDenominator = true;
     }
 
-    const styles = StyleSheet.create({
-        container: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        numerator: {
-            borderBottomWidth: 1,
-            paddingBottom: 4,
-            paddingHorizontal: 4,
-        },
-        denominator: {
-            borderTopWidth: 1,
-            paddingTop: 2,
-            paddingHorizontal: 4,
-            fontSize: size,
-            color,
-            borderColor: color,
-        },
-        bullet: {
-            fontSize: size,
-            color: textVisible ? color : "transparent",
-        },
-        equal: { fontSize: size, color },
-        denominatorContainer: {
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        smallNu: { fontSize: size, color, paddingBottom: 2 },
-        largeNu: {
-            borderBottomWidth: 1,
-            paddingBottom: 4,
-            paddingHorizontal: 4,
-            fontSize: size,
-            color,
-            borderColor: color,
-        },
-        smallDeno: { fontSize: size, color },
-        denominatorText: { fontSize: size, color },
-    });
-
     return (
-        <View style={[styles.container, style]}>
-            <Text style={styles.bullet}>
+        <View className="flex-row items-center" style={style}>
+            <Text
+                style={{
+                    fontSize: size,
+                    color: textVisible ? color : "transparent",
+                }}
+            >
                 {bullet ? "\u2022   " : ""}
                 {text}
             </Text>
-            <Text style={styles.equal}>{` = `}</Text>
+            <Text style={{ fontSize: size, color }}>{` = `}</Text>
             {hasDenominator && (
-                <View style={styles.denominatorContainer}>
+                <View className="justify-center items-center">
                     <Text
-                        style={isDenoLarger ? styles.smallNu : styles.largeNu}>
+                        className={isDenoLarger ? "" : "border-b pb-1 px-1"}
+                        style={{
+                            fontSize: size,
+                            color,
+                            borderColor: color,
+                            paddingBottom: isDenoLarger ? 2 : undefined,
+                        }}
+                    >
                         {numerator}
                     </Text>
                     <Text
-                        style={
-                            isDenoLarger ? styles.denominator : styles.smallDeno
-                        }>
+                        className={isDenoLarger ? "border-t pt-0.5 px-1" : ""}
+                        style={{
+                            fontSize: size,
+                            color,
+                            borderColor: color,
+                        }}
+                    >
                         {denominator}
                     </Text>
                 </View>
             )}
             {!denominator && (
-                <View style={styles.denominatorContainer}>
-                    <Text style={styles.denominatorText}>{numerator}</Text>
+                <View className="justify-center items-center">
+                    <Text style={{ fontSize: size, color }}>{numerator}</Text>
                 </View>
             )}
         </View>
     );
 };
+
+cssInterop(Fraction, {
+    className: "style",
+});
 
 export default Fraction;

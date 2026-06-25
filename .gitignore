@@ -80,3 +80,4 @@ yarn-error.log
 # Editors
 .vscode/
 .yarn/
+/build_output.txt

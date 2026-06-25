@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -35,49 +35,17 @@ const Circle = () => {
         setInput((prev) => ({ ...prev, r: parseNumber(r) }));
         setIsVisible(true);
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 180,
-            height: 180,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            color: colors.text,
-            fontSize: 18,
-            marginVertical: 10,
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        inputContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-        },
-        btnContainer: {
-            alignItems: "center",
-            marginBottom: 25,
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[180px] h-[180px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.textStyle}>Radious</Text>
+                    <View className="mt-[25px] flex-row justify-center items-center gap-[10px]">
+                        <Text className="text-[18px]" style={{ color: colors.text }}>Radious</Text>
                         <CustomInput
                             placeholder="R"
                             width={100}
@@ -87,12 +55,12 @@ const Circle = () => {
                             }}
                         />
                     </View>
-                    <View style={styles.btnContainer}>
+                    <View className="items-center mb-[25px]">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -145,7 +113,7 @@ const Circle = () => {
                                 bullet={false}
                                 color={colors.text}
                                 size={18}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -177,7 +145,7 @@ const Circle = () => {
                                 bullet={false}
                                 color={colors.text}
                                 size={18}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -208,3 +176,4 @@ const Circle = () => {
 };
 
 export default Circle;
+

@@ -19,3 +19,17 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+subprojects {
+    if (project.name == "react-native-reanimated" || project.name == "react-native-worklets") {
+        plugins.withId("com.android.library") {
+            android {
+                externalNativeBuild {
+                    cmake {
+                        buildStagingDirectory = file("E:/temp_cxx/${project.name}")
+                    }
+                }
+            }
+        }
+    }
+}

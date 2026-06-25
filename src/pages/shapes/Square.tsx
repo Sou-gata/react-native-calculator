@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, Image } from "react-native";
 import { useState } from "react";
 import { Text, useTheme, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
@@ -33,44 +33,11 @@ const Square = () => {
             });
         } else return;
     };
-
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 200,
-            height: 220,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        inputContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-            marginTop: 25,
-        },
-        transparentTextStyle: {
-            fontSize: 20,
-            color: "transparent",
-        },
-        textStyle: {
-            fontSize: 20,
-            color: colors.text,
-        },
-        flexRow: {
-            flexDirection: "row",
-        },
-    });
-
     return (
-        <View style={styles.container}>
-            <Image source={shapeDetails.mainImage} style={styles.image} />
-            <View style={styles.inputContainer}>
-                <Text style={styles.textStyle}>Side</Text>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
+            <Image source={shapeDetails.mainImage} className="w-[200px] h-[220px] self-center" style={{ tintColor: colors.text }} />
+            <View className="flex-row justify-center items-center gap-[10px] mt-[25px]">
+                <Text className="text-[20px]" style={{ color: colors.text }}>Side</Text>
                 <CustomInput
                     placeholder="Side"
                     value={input.Side}
@@ -79,70 +46,70 @@ const Square = () => {
                     }}
                 />
             </View>
-            <View style={{ alignItems: "center" }}>
+            <View className="items-center">
                 <Button
                     mode="contained"
                     buttonColor={colors.secondary}
                     textColor="#fff"
-                    style={{ marginTop: 15 }}
+                    className="mt-[15px]"
                     onPress={() => calculate()}>
                     Calculate
                 </Button>
             </View>
             {ans.area !== 0 && (
                 <>
-                    <View style={{ marginTop: 20, flexDirection: "row" }}>
-                        <Text style={styles.textStyle}>Area = Side × Side</Text>
+                    <View className="mt-[20px] flex-row">
+                        <Text className="text-[20px]" style={{ color: colors.text }}>Area = Side × Side</Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>Area</Text>
-                        <Text style={styles.textStyle}>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">Area</Text>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             {` = ${input.side} × ${input.side}`}
                         </Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>Area</Text>
-                        <Text style={styles.textStyle}>{` = ${ans.area}`}</Text>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">Area</Text>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>{` = ${ans.area}`}</Text>
                     </View>
-                    <View style={{ marginTop: 20, flexDirection: "row" }}>
-                        <Text style={styles.textStyle}>
+                    <View className="mt-[20px] flex-row">
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             Perimeter = 4 × Side
                         </Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">
                             Perimeter
                         </Text>
-                        <Text style={styles.textStyle}>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             {` = 4 × ${input.side}`}
                         </Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">
                             Perimeter
                         </Text>
-                        <Text style={styles.textStyle}>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             {` = ${ans.perimeter}`}
                         </Text>
                     </View>
-                    <View style={{ marginTop: 20, flexDirection: "row" }}>
-                        <Text style={styles.textStyle}>
+                    <View className="mt-[20px] flex-row">
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             Diagonal = √2 × Side
                         </Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">
                             Perimeter
                         </Text>
-                        <Text style={styles.textStyle}>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             {` = ${Math.sqrt(2).toFixed(2)} × ${input.side}`}
                         </Text>
                     </View>
-                    <View style={styles.flexRow}>
-                        <Text style={styles.transparentTextStyle}>
+                    <View className="flex-row">
+                        <Text className="text-[20px] text-transparent">
                             Perimeter
                         </Text>
-                        <Text style={styles.textStyle}>
+                        <Text className="text-[20px]" style={{ color: colors.text }}>
                             {` = ${ans.diagonal}`}
                         </Text>
                     </View>

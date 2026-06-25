@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { parseNumber } from "../../helpers/functions";
@@ -35,59 +35,22 @@ const CircleArc = () => {
             a: parseNumber(a, 2),
         }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 180,
-            height: 182,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            color: colors.text,
-            fontSize: 18,
-            marginVertical: 10,
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        inputContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-        },
-        btnContainer: {
-            alignItems: "center",
-            marginBottom: 25,
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[180px] h-[182px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="mt-[25px] flex-row justify-center items-center gap-[10px]">
                         {shapeDetails?.field.map(
                             (item: string, index: number) => (
                                 <View key={index}>
                                     <Text
-                                        style={[
-                                            styles.textStyle,
-                                            {
-                                                textAlign: "center",
-                                                color: colors.secondary,
-                                            },
-                                        ]}>
+                                        className="text-[18px] text-center"
+                                        style={{ color: colors.secondary }}>
                                         {item === "R"
                                             ? "Radius"
                                             : item === "A"
@@ -110,12 +73,12 @@ const CircleArc = () => {
                             )
                         )}
                     </View>
-                    <View style={styles.btnContainer}>
+                    <View className="items-center mb-[25px]">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -190,7 +153,7 @@ const CircleArc = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{

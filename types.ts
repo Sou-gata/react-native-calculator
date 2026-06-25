@@ -89,6 +89,7 @@ export type fractionPropsType = {
     bullet?: boolean;
     textVisible?: boolean;
     style?: StyleProp<ViewStyle>;
+    className?: string;
 };
 export type divideReturnType = {
     numberA: number;

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, View } from "react-native";
 import React from "react";
 import { useTheme, Text } from "react-native-paper";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -13,12 +13,12 @@ const CustomInputFilds = ({
 }: inputFildsProps) => {
     const { colors } = useTheme<colorSchemeType>();
     return (
-        <View style={styles.inputContainer}>
+        <View className="flex-row gap-2.5 justify-center items-center flex-wrap">
             {inputs.map((input, index) => (
-                <View key={index} style={{ position: "relative" }}>
+                <View key={index} className="relative">
                     {index > 1 && (
                         <Pressable
-                            style={styles.cross}
+                            className="p-[5px] justify-center items-center absolute top-[-14px] right-[-14px] z-[2]"
                             onPress={() => {
                                 const newInputs = [...inputs].filter(
                                     (inp) => inp.id != input.id
@@ -26,9 +26,9 @@ const CustomInputFilds = ({
                                 setInputs(newInputs);
                             }}>
                             <View
+                                className="rounded-[20px]"
                                 style={{
                                     backgroundColor: colors.secondary,
-                                    borderRadius: 20,
                                 }}>
                                 <Entypo
                                     name="cross"
@@ -55,10 +55,8 @@ const CustomInputFilds = ({
             {inputs.length < maxInput &&
                 inputs[inputs.length - 1].value !== "" && (
                     <Pressable
-                        style={[
-                            { backgroundColor: colors.secondary },
-                            styles.addInput,
-                        ]}
+                        className="w-10 h-10 rounded-[7px] items-center justify-center"
+                        style={{ backgroundColor: colors.secondary }}
                         onPress={() => {
                             const newInputs = [...inputs];
                             if (inputs.length < 12) {
@@ -69,7 +67,7 @@ const CustomInputFilds = ({
                                 setInputs(newInputs);
                             }
                         }}>
-                        <Text style={{ fontSize: 20, color: "white" }}>+</Text>
+                        <Text className="text-[20px] text-white">+</Text>
                     </Pressable>
                 )}
         </View>
@@ -77,30 +75,3 @@ const CustomInputFilds = ({
 };
 
 export default CustomInputFilds;
-
-const styles = StyleSheet.create({
-    addInput: {
-        width: 40,
-        height: 40,
-        borderRadius: 7,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    inputContainer: {
-        flexDirection: "row",
-        gap: 10,
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-    },
-    cross: {
-        padding: 5,
-        justifyContent: "center",
-        alignItems: "center",
-        position: "absolute",
-        top: -14,
-        right: -14,
-        fontSize: 18,
-        zIndex: 2,
-    },
-});

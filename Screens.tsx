@@ -1,5 +1,6 @@
 import {
     createStackNavigator,
+    StackNavigationOptions,
     TransitionPresets,
 } from "@react-navigation/stack";
 import { useTheme } from "react-native-paper";
@@ -11,13 +12,12 @@ const Screens = () => {
     const {
         colors: { primary },
     } = useTheme<colorSchemeType>();
-    const options = {
+    const options: StackNavigationOptions = {
         headerStyle: {
             backgroundColor: primary,
             height: 50,
         },
         headerTintColor: "#fff",
-        animation: "timing",
         ...TransitionPresets.SlideFromRightIOS,
     };
     return (

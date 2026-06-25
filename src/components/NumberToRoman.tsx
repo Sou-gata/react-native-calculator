@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { useState } from "react";
 import { numaricToRoman } from "../helpers/functions";
 import { useTheme, Button } from "react-native-paper";
@@ -14,47 +14,16 @@ const NumberToRoman = () => {
     let num = parseInt(number);
     let intNum = isNaN(num) ? "" : num + "";
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            alignItems: "center",
-            justifyContent: "center",
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        flexRow: {
-            flexDirection: "row",
-            marginTop: 25,
-        },
-        textStyle: {
-            fontSize: 25,
-            textAlign: "center",
-            color: colors.text,
-        },
-        romanText: {
-            fontSize: 27,
-            color: colors.secondary,
-        },
-        bigRoman: {
-            fontSize: 27,
-            borderTopWidth: 2,
-            color: colors.secondary,
-            borderColor: colors.secondary,
-        },
-    });
-
     return (
         <View>
-            <View style={styles.container}>
+            <View className="mt-[29px] items-center justify-center">
                 <CustomInput
                     placeholder="123"
                     onChangeText={onChangeText}
                     value={text}
                     maxLength={7}
                 />
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={() => {
@@ -80,18 +49,29 @@ const NumberToRoman = () => {
                     </Button>
                 </View>
             </View>
-            <View style={opacity ? styles.container : { display: "none" }}>
-                <Text style={styles.textStyle}>{intNum}</Text>
-                <Text style={styles.textStyle}> in roman is</Text>
-                <View style={styles.flexRow}>
+            <View className={opacity ? "mt-[29px] items-center justify-center" : "hidden"}>
+                <Text
+                    className="text-[25px] text-center"
+                    style={{ color: colors.text }}
+                >
+                    {intNum}
+                </Text>
+                <Text
+                    className="text-[25px] text-center"
+                    style={{ color: colors.text }}
+                >
+                    {" "}in roman is
+                </Text>
+                <View className="flex-row mt-[25px]">
                     {ans.map((text, i) => (
                         <Text
                             key={i}
-                            style={
-                                text.special
-                                    ? styles.bigRoman
-                                    : styles.romanText
-                            }>
+                            className={text.special ? "text-[27px] border-t-2" : "text-[27px]"}
+                            style={{
+                                color: colors.secondary,
+                                borderColor: text.special ? colors.secondary : undefined,
+                            }}
+                        >
                             {text.val}
                         </Text>
                     ))}

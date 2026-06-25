@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../../components/CustomInput";
 import Fraction from "../../components/Fraction";
@@ -38,89 +38,19 @@ const Ellipse = () => {
             b: parseFloat(b.toFixed(2)),
         }));
     };
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        image: {
-            width: 250,
-            height: 165,
-            alignSelf: "center",
-            tintColor: colors.text,
-        },
-        topText: {
-            fontSize: 18,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        textStyle: {
-            fontSize: 18,
-            color: colors.text,
-        },
-        transparentText: {
-            fontSize: 18,
-            color: "transparent",
-        },
-        inputContainer: {
-            marginTop: 25,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-        },
-        btnContainer: {
-            alignItems: "center",
-            marginBottom: 25,
-        },
-        flexRow: {
-            flexDirection: "row",
-        },
-        flexCenter: {
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-        },
-        flexRowCenter: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        rootoverStyle: {
-            height: 45,
-            width: 16,
-            tintColor: colors.text,
-            marginTop: -10,
-            marginLeft: 2,
-        },
-        numeratorStyle: {
-            fontSize: 18,
-            color: colors.text,
-            textAlign: "center",
-            borderTopColor: colors.text,
-            borderTopWidth: 1.5,
-            paddingVertical: 2,
-        },
-        denominatorStyle: {
-            fontSize: 18,
-            color: colors.text,
-            textAlign: "center",
-            borderTopColor: colors.text,
-            borderTopWidth: 1.5,
-        },
-    });
     return (
-        <View style={styles.container}>
+        <View className="flex-1 p-[20px]" style={{ backgroundColor: colors.backgroundColor }}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
                         source={shapeDetails.mainImage}
-                        style={styles.image}
+                        className="w-[250px] h-[165px] self-center"
+                        style={{ tintColor: colors.text }}
                     />
-                    <View style={styles.inputContainer}>
+                    <View className="mt-[25px] flex-row justify-center items-center gap-[10px]">
                         {shapeDetails.field.map((item, index) => (
                             <View key={index}>
-                                <Text style={styles.topText}>{item}</Text>
+                                <Text className="text-[18px] text-center" style={{ color: colors.secondary }}>{item}</Text>
                                 <CustomInput
                                     placeholder={item}
                                     value={input[item as keyof object]}
@@ -136,12 +66,12 @@ const Ellipse = () => {
                             </View>
                         ))}
                     </View>
-                    <View style={styles.btnContainer}>
+                    <View className="items-center mb-[25px]">
                         <Button
                             mode="contained"
                             buttonColor={colors.secondary}
                             textColor="#fff"
-                            style={{ marginTop: 15 }}
+                            className="mt-[15px]"
                             onPress={() => calculate()}>
                             Calculate
                         </Button>
@@ -156,7 +86,7 @@ const Ellipse = () => {
                                 size={18}
                                 color={colors.text}
                                 bullet={false}
-                                style={{ marginTop: 25 }}
+                                className="mt-[25px]"
                             />
                             <Fraction
                                 data={{
@@ -178,74 +108,77 @@ const Ellipse = () => {
                                 bullet={false}
                                 textVisible={false}
                             />
-                            <View style={{ marginTop: 25 }}>
-                                <View style={styles.flexRowCenter}>
-                                    <Text style={styles.textStyle}>
+                            <View className="mt-[25px]">
+                                <View className="flex-row items-center">
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}> = </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         2 × π ×{" "}
                                     </Text>
-                                    <View style={styles.flexCenter}>
+                                    <View className="justify-center items-center flex-row">
                                         <Image
                                             source={require("../../../assets/shapes/root.png")}
-                                            style={styles.rootoverStyle}
+                                            className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
+                                            style={{ tintColor: colors.text }}
                                         />
                                         <View>
-                                            <Text style={styles.numeratorStyle}>
+                                            <Text className="text-[18px] text-center border-t-[1.5px] py-[2px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 (A² + B²)
                                             </Text>
                                             <Text
-                                                style={styles.denominatorStyle}>
+                                                className="text-[18px] text-center border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 2
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 10 }}>
-                                <View style={styles.flexRowCenter}>
-                                    <Text style={styles.transparentText}>
+                            <View className="mt-[10px]">
+                                <View className="flex-row items-center">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}> = </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         2 × π ×{" "}
                                     </Text>
-                                    <View style={styles.flexCenter}>
+                                    <View className="justify-center items-center flex-row">
                                         <Image
                                             source={require("../../../assets/shapes/root.png")}
-                                            style={styles.rootoverStyle}
+                                            className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
+                                            style={{ tintColor: colors.text }}
                                         />
                                         <View>
-                                            <Text style={styles.numeratorStyle}>
+                                            <Text className="text-[18px] text-center border-t-[1.5px] py-[2px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 ({input.a}² + {input.b}²)
                                             </Text>
                                             <Text
-                                                style={styles.denominatorStyle}>
+                                                className="text-[18px] text-center border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 2
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 10 }}>
-                                <View style={styles.flexRowCenter}>
-                                    <Text style={styles.transparentText}>
+                            <View className="mt-[10px]">
+                                <View className="flex-row items-center">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}> = </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         2 × π ×{" "}
                                     </Text>
-                                    <View style={styles.flexCenter}>
+                                    <View className="justify-center items-center flex-row">
                                         <Image
                                             source={require("../../../assets/shapes/root.png")}
-                                            style={styles.rootoverStyle}
+                                            className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
+                                            style={{ tintColor: colors.text }}
                                         />
                                         <View>
-                                            <Text style={styles.numeratorStyle}>
+                                            <Text className="text-[18px] text-center border-t-[1.5px] py-[2px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 (
                                                 {parseFloat(
                                                     (input.a ** 2).toFixed(2)
@@ -257,29 +190,30 @@ const Ellipse = () => {
                                                 )
                                             </Text>
                                             <Text
-                                                style={styles.denominatorStyle}>
+                                                className="text-[18px] text-center border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 2
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 10 }}>
-                                <View style={styles.flexRowCenter}>
-                                    <Text style={styles.transparentText}>
+                            <View className="mt-[10px]">
+                                <View className="flex-row items-center">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}> = </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         2 × π ×{" "}
                                     </Text>
-                                    <View style={styles.flexCenter}>
+                                    <View className="justify-center items-center flex-row">
                                         <Image
                                             source={require("../../../assets/shapes/root.png")}
-                                            style={styles.rootoverStyle}
+                                            className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
+                                            style={{ tintColor: colors.text }}
                                         />
                                         <View>
-                                            <Text style={styles.numeratorStyle}>
+                                            <Text className="text-[18px] text-center border-t-[1.5px] py-[2px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 {parseFloat(
                                                     (
                                                         input.a ** 2 +
@@ -288,38 +222,33 @@ const Ellipse = () => {
                                                 )}
                                             </Text>
                                             <Text
-                                                style={styles.denominatorStyle}>
+                                                className="text-[18px] text-center border-t-[1.5px]" style={{ color: colors.text, borderTopColor: colors.text }}>
                                                 2
                                             </Text>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ marginTop: 10 }}>
-                                <View style={styles.flexRowCenter}>
-                                    <Text style={styles.transparentText}>
+                            <View className="mt-[10px]">
+                                <View className="flex-row items-center">
+                                    <Text className="text-[18px] text-transparent">
                                         Perimeter
                                     </Text>
-                                    <Text style={styles.textStyle}> = </Text>
-                                    <Text style={styles.textStyle}>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}> = </Text>
+                                    <Text className="text-[18px]" style={{ color: colors.text }}>
                                         2 × π ×{" "}
                                     </Text>
                                     <Text
-                                        style={[
-                                            styles.textStyle,
-                                            { fontSize: 25, marginTop: -10 },
-                                        ]}>
+                                        className="text-[25px] -mt-[10px]" style={{ color: colors.text }}>
                                         √
                                     </Text>
                                     <View>
                                         <Text
-                                            style={[
-                                                styles.textStyle,
-                                                {
-                                                    borderTopWidth: 1.5,
-                                                    borderTopColor: colors.text,
-                                                },
-                                            ]}>
+                                            className="text-[18px] border-t-[1.5px]"
+                                            style={{
+                                                color: colors.text,
+                                                borderTopColor: colors.text,
+                                            }}>
                                             {parseFloat(
                                                 (
                                                     (input.a ** 2 +
