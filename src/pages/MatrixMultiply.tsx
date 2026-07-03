@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -133,7 +133,7 @@ const MatrixMultiply = () => {
                             />
                         </View>
                     </View>
-                    <View style={styles.buttonContainer}>
+                    <View className="flex-row items-center justify-evenly mt-[30px]">
                         <Button
                             mode="contained"
                             onPress={createMatrix}
@@ -259,7 +259,7 @@ const MatrixMultiply = () => {
                             })()}
                         </View>
                     </View>
-                    <View style={styles.buttonContainer}>
+                    <View className="flex-row items-center justify-evenly mt-[30px]">
                         <Button
                             mode="contained"
                             onPress={calculate}
@@ -352,14 +352,4 @@ const MatrixBorder = ({ colors }: { colors: colorsType }) => {
         </View>
     );
 };
-
 export default MatrixMultiply;
-
-const styles = StyleSheet.create({
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 30,
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-    },
-});

@@ -2,9 +2,11 @@ import { calBtnsType } from "../../types";
 
 const btns: calBtnsType[] = [
     {
-        str: "",
-        type: "unknown",
-        text: "deg",
+        str: "!",
+        type: "num",
+        text: "!",
+        evalLen: 1,
+        textLen: 1,
     },
     {
         str: "sin(",

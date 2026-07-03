@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
 import { useState } from "react";
 import { useTheme, Text, Button, RadioButton } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -29,32 +29,48 @@ const PermutationCombination = () => {
     const setRepeat = (val: number) =>
         setOperation({ ...operation, repeat: val });
 
-    const textStyle = [styles.textStyle, { color: colors.text }];
-
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={{ marginTop: 10 }}>
-                <View style={styles.flexRow}>
-                    <Text style={[...textStyle, { marginRight: 20 }]}>n =</Text>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="mt-2.5">
+                <View className="flex-row items-center justify-center w-full mb-[15px]">
+                    <Text
+                        className="text-[25px] text-center mr-5"
+                        style={{ color: colors.text }}
+                    >
+                        n =
+                    </Text>
                     <CustomInput
                         placeholder="n"
                         onChangeText={(e) => changeValues(e, "n")}
                         value={inputs.n}
                     />
                 </View>
-                <View style={styles.flexRow}>
-                    <Text style={[...textStyle, { marginRight: 20 }]}>r =</Text>
+                <View className="flex-row items-center justify-center w-full mb-[15px]">
+                    <Text
+                        className="text-[25px] text-center mr-5"
+                        style={{ color: colors.text }}
+                    >
+                        r =
+                    </Text>
                     <CustomInput
                         placeholder="r"
                         onChangeText={(e) => changeValues(e, "r")}
                         value={inputs.r}
                     />
                 </View>
-                <View style={{ alignItems: "center" }}>
-                    <Text style={textStyle}>Does the order matter?</Text>
-                    <View style={styles.radioGroup}>
+                <View className="items-center">
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        Does the order matter?
+                    </Text>
+                    <View className="flex-row w-full items-center justify-center">
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center"
                             onPress={() => setOrder(1)}>
                             <RadioButton
                                 value="1"
@@ -72,7 +88,7 @@ const PermutationCombination = () => {
                             </Text>
                         </Pressable>
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center"
                             onPress={() => setOrder(2)}>
                             <RadioButton
                                 value="2"
@@ -91,11 +107,16 @@ const PermutationCombination = () => {
                         </Pressable>
                     </View>
                 </View>
-                <View style={{ alignItems: "center" }}>
-                    <Text style={textStyle}>Can the items repeat?</Text>
-                    <View style={styles.radioGroup}>
+                <View className="items-center">
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        Can the items repeat?
+                    </Text>
+                    <View className="flex-row w-full items-center justify-center">
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center"
                             onPress={() => setRepeat(1)}>
                             <RadioButton
                                 value="1"
@@ -113,7 +134,7 @@ const PermutationCombination = () => {
                             </Text>
                         </Pressable>
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center"
                             onPress={() => setRepeat(2)}>
                             <RadioButton
                                 value="2"
@@ -132,7 +153,7 @@ const PermutationCombination = () => {
                         </Pressable>
                     </View>
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-5">
                     <Button
                         mode="contained"
                         onPress={() => {
@@ -155,44 +176,85 @@ const PermutationCombination = () => {
             </View>
             {ans.ans && (
                 <View>
-                    <View style={styles.pcAnsRow}>
-                        <Text style={textStyle}>Formula = </Text>
-                        <View>
-                            <Text style={textStyle}>{ans.nuFormula}</Text>
-                            {ans.deFormula && (
-                                <View
-                                    style={[
-                                        styles.hr,
-                                        { backgroundColor: colors.text },
-                                    ]}></View>
-                            )}
-                            {ans.deFormula && (
-                                <Text style={textStyle}>{ans.deFormula}</Text>
-                            )}
-                        </View>
-                    </View>
-                    <View style={styles.pcAnsRow}>
-                        <Text style={[...textStyle, { opacity: 0 }]}>
+                    <View className="flex-row justify-center items-center mt-[15px]">
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             Formula ={" "}
                         </Text>
-                        <Text style={textStyle}> = </Text>
                         <View>
-                            <Text style={textStyle}>{ans.valueNu}</Text>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                {ans.nuFormula}
+                            </Text>
                             {ans.deFormula && (
                                 <View
-                                    style={[
-                                        styles.hr,
-                                        { backgroundColor: colors.text },
-                                    ]}></View>
+                                    className="h-[2px] mt-[5px]"
+                                    style={{ backgroundColor: colors.text }}
+                                />
                             )}
                             {ans.deFormula && (
-                                <Text style={textStyle}>{ans.valueDe}</Text>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
+                                    {ans.deFormula}
+                                </Text>
                             )}
                         </View>
                     </View>
-                    <View style={[styles.pcAnsRow, { marginTop: 25 }]}>
-                        <Text style={textStyle}>Answer = </Text>
-                        <Text style={textStyle}>{ans.ans}</Text>
+                    <View className="flex-row justify-center items-center mt-[15px]">
+                        <Text
+                            className="text-[25px] text-center opacity-0"
+                            style={{ color: colors.text }}
+                        >
+                            Formula ={" "}
+                        </Text>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
+                            {" "}={" "}
+                        </Text>
+                        <View>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                {ans.valueNu}
+                            </Text>
+                            {ans.deFormula && (
+                                <View
+                                    className="h-[2px] mt-[5px]"
+                                    style={{ backgroundColor: colors.text }}
+                                />
+                            )}
+                            {ans.deFormula && (
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
+                                    {ans.valueDe}
+                                </Text>
+                            )}
+                        </View>
+                    </View>
+                    <View className="flex-row justify-center items-center mt-[25px]">
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
+                            Answer ={" "}
+                        </Text>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
+                            {ans.ans}
+                        </Text>
                     </View>
                 </View>
             )}
@@ -201,41 +263,3 @@ const PermutationCombination = () => {
 };
 
 export default PermutationCombination;
-
-const styles = StyleSheet.create({
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        marginBottom: 15,
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-    radioGroup: {
-        flexDirection: "row",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    radioItem: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 20,
-    },
-    pcAnsRow: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 15,
-    },
-    hr: {
-        height: 2,
-        marginTop: 5,
-    },
-});

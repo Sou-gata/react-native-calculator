@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
     checkLcmHcfNumber,
@@ -86,77 +86,16 @@ const LCM = () => {
         generateGap(details.divisiors);
     }, [details]);
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            flexDirection: "column",
-            justifyContent: "center",
-            width: wp("100%"),
-            paddingHorizontal: 25,
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        textStyle: { fontSize: 25, textAlign: "center", color: colors.text },
-        ansTextStyle: { fontSize: 25, textAlign: "left", color: colors.text },
-        textStyleOrange: {
-            fontSize: 35,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        ansDiv: {
-            alignItems: "center",
-            padding: 20,
-            display: opacity.one ? "flex" : "none",
-        },
-        textStyleTwo: {
-            fontSize: 25,
-            padding: 5,
-            borderLeftWidth: 2,
-            borderBottomWidth: 2,
-            borderBottomLeftRadius: 5,
-            fontFamily: "RobotoMono_400Regular",
-            color: colors.text,
-            borderColor: colors.text,
-        },
-        textStyleThree: {
-            fontSize: 25,
-            padding: 5,
-            fontFamily: "RobotoMono_400Regular",
-            color: colors.text,
-        },
-        hrLine: {
-            height: 2,
-            marginVertical: 5,
-            backgroundColor: colors.text,
-        },
-        viewTwo: {
-            paddingHorizontal: 20,
-            alignItems: "center",
-            display: opacity.two ? "flex" : "none",
-            flex: 1,
-        },
-        viewThree: {
-            alignItems: "center",
-            padding: 20,
-            display: opacity.three ? "flex" : "none",
-        },
-        viewFour: {
-            padding: 25,
-            display: opacity.four ? "flex" : "none",
-        },
-        error: {
-            fontSize: 35,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-    });
-
     return (
-        <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
-            <View style={styles.container}>
-                <View style={{ alignItems: "center" }}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="flex-col justify-center px-[25px] mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
+                <View className="items-center">
                     <CustomInputFilds
                         inputs={inputs}
                         setInputs={setInputs}
@@ -164,7 +103,7 @@ const LCM = () => {
                         maxLength={4}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={() => calculate()}
@@ -175,36 +114,53 @@ const LCM = () => {
                     </Button>
                 </View>
             </View>
-            <View style={styles.ansDiv}>
-                <Text style={styles.textStyle}>LCM of {input} is</Text>
-                <Text style={styles.textStyleOrange}>{ans}</Text>
+            <View
+                className="items-center p-5"
+                style={{ display: opacity.one ? "flex" : "none" }}
+            >
+                <Text
+                    className="text-[25px] text-center"
+                    style={{ color: colors.text }}
+                >
+                    LCM of {input} is
+                </Text>
+                <Text
+                    className="text-[35px] text-center"
+                    style={{ color: colors.secondary }}
+                >
+                    {ans}
+                </Text>
             </View>
-            <View style={styles.viewTwo}>
+            <View
+                className="px-5 items-center flex-1"
+                style={{ display: opacity.two ? "flex" : "none" }}
+            >
                 <ScrollView>
-                    <View
-                        style={{
-                            alignItems: "center",
-                        }}
-                    >
+                    <View className="items-center">
                         <View>
                             {details.dividends.map((item, i) => (
                                 <View
                                     key={i}
-                                    style={{
-                                        flexDirection: "row",
-                                    }}
+                                    className="flex-row"
                                 >
-                                    <Text style={styles.textStyleThree}>
+                                    <Text
+                                        className="text-[25px] p-[5px] font-[RobotoMono_400Regular]"
+                                        style={{ color: colors.text }}
+                                    >
                                         {i < details.dividends.length - 1
                                             ? details.divisiors[i]
                                             : gap}
                                     </Text>
                                     <Text
-                                        style={
+                                        className={
                                             i < details.dividends.length - 1
-                                                ? styles.textStyleTwo
-                                                : styles.textStyleThree
+                                                ? "text-[25px] p-[5px] border-l-2 border-b-2 rounded-bl-[5px] font-[RobotoMono_400Regular]"
+                                                : "text-[25px] p-[5px] font-[RobotoMono_400Regular]"
                                         }
+                                        style={{
+                                            color: colors.text,
+                                            borderColor: colors.text,
+                                        }}
                                     >
                                         {item.toString()}
                                     </Text>
@@ -212,49 +168,93 @@ const LCM = () => {
                             ))}
                         </View>
                     </View>
-                    <View style={{ flexDirection: "row", marginTop: 20 }}>
+                    <View className="flex-row mt-5">
                         <View>
-                            <Text style={styles.textStyle}>LCM = </Text>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                LCM ={" "}
+                            </Text>
                         </View>
                         <View style={{ width: wp("100%") - 130 }}>
-                            <Text style={styles.ansTextStyle}>
+                            <Text
+                                className="text-[25px] text-left"
+                                style={{ color: colors.text }}
+                            >
                                 {details.factors.join(" × ")}
                             </Text>
                         </View>
                     </View>
-                    <View style={{ flexDirection: "row", marginTop: 5 }}>
+                    <View className="flex-row mt-[5px]">
                         <View>
                             <Text
-                                style={[
-                                    styles.textStyle,
-                                    { color: "#00000000" },
-                                ]}
+                                className="text-[25px] text-center"
+                                style={{ color: "#00000000" }}
                             >
                                 LCM
                             </Text>
                         </View>
                         <View>
-                            <Text style={styles.textStyle}>{` = ${ans}`}</Text>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >{` = ${ans}`}</Text>
                         </View>
                     </View>
                 </ScrollView>
             </View>
-            <View style={styles.viewThree}>
+            <View
+                className="items-center p-5"
+                style={{ display: opacity.three ? "flex" : "none" }}
+            >
                 <View>
-                    <Text style={styles.textStyle}>
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
                         HCF of ({decimal.numinator})
                     </Text>
-                    <View style={styles.hrLine} />
-                    <Text style={styles.textStyle}>{decimal.denominator}</Text>
+                    <View
+                        className="h-[2px] my-[5px]"
+                        style={{ backgroundColor: colors.text }}
+                    />
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {decimal.denominator}
+                    </Text>
                 </View>
-                <View style={{ marginTop: 20 }}>
-                    <Text style={styles.textStyle}>{decimal.nuLcm}</Text>
-                    <View style={styles.hrLine} />
-                    <Text style={styles.textStyle}>{decimal.denominator}</Text>
+                <View className="mt-5">
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {decimal.nuLcm}
+                    </Text>
+                    <View
+                        className="h-[2px] my-[5px]"
+                        style={{ backgroundColor: colors.text }}
+                    />
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {decimal.denominator}
+                    </Text>
                 </View>
             </View>
-            <View style={styles.viewFour}>
-                <Text style={styles.error}>Can't calculate</Text>
+            <View
+                className="p-[25px]"
+                style={{ display: opacity.four ? "flex" : "none" }}
+            >
+                <Text
+                    className="text-[35px] text-center"
+                    style={{ color: colors.secondary }}
+                >
+                    Can't calculate
+                </Text>
             </View>
         </View>
     );

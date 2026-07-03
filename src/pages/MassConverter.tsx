@@ -1,8 +1,7 @@
-import { StyleSheet, ScrollView, View } from "react-native";
+import { ScrollView, View, TextInput, Pressable } from "react-native";
 import { useState } from "react";
 import { useTheme, Text } from "react-native-paper";
-import CustomInput from "../components/CustomInput";
-import { parseNumber } from "../helpers/functions";
+import { parseNumber, addOpacity } from "../helpers/functions";
 import { colorSchemeType } from "../../types";
 
 const MassConverter = () => {
@@ -11,14 +10,15 @@ const MassConverter = () => {
     const [gm, setGm] = useState<string>("");
     const [lb, setLb] = useState<string>("");
     const [ounce, setOunce] = useState<string>("");
+    const [activeKey, setActiveKey] = useState<string>("kg");
 
     const onChangeKg = (e: string) => {
         setKg(e);
-        if (e != "") {
+        if (e !== "") {
             setGm(parseNumber(parseFloat(e) * 1000).toString());
             setLb(parseNumber(parseFloat(e) * 2.20462).toString());
             setOunce(parseNumber(parseFloat(e) * 35.274).toString());
-        } else if (e == "") {
+        } else if (e === "") {
             setGm("");
             setLb("");
             setOunce("");
@@ -26,11 +26,11 @@ const MassConverter = () => {
     };
     const onChangeGm = (e: string) => {
         setGm(e);
-        if (e != "") {
+        if (e !== "") {
             setKg(parseNumber(parseFloat(e) * 0.001).toString());
             setLb(parseNumber(parseFloat(e) / 453.6).toString());
             setOunce(parseNumber(parseFloat(e) * 0.035274).toString());
-        } else if (e == "") {
+        } else if (e === "") {
             setKg("");
             setLb("");
             setOunce("");
@@ -38,11 +38,11 @@ const MassConverter = () => {
     };
     const onChangeLb = (e: string) => {
         setLb(e);
-        if (e != "") {
+        if (e !== "") {
             setKg(parseNumber(parseFloat(e) / 2.20462).toString());
             setGm(parseNumber((parseFloat(e) * 1000) / 2.20462).toString());
             setOunce(parseNumber(parseFloat(e) * 16).toString());
-        } else if (e == "") {
+        } else if (e === "") {
             setKg("");
             setGm("");
             setOunce("");
@@ -50,58 +50,80 @@ const MassConverter = () => {
     };
     const onChangeOz = (e: string) => {
         setOunce(e);
-        if (e != "") {
+        if (e !== "") {
             setKg(parseNumber(parseFloat(e) / 35.274).toString());
             setGm(parseNumber((parseFloat(e) * 1000) / 35.274).toString());
             setLb(parseNumber(parseFloat(e) / 16).toString());
-        } else if (e == "") {
+        } else if (e === "") {
             setKg("");
             setGm("");
-            setLb("");
+            setOunce("");
         }
     };
 
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles.container}>
-                    <View style={styles.convertorIndicator}>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Killogram
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Gram
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Pound
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Ounce
-                        </Text>
-                    </View>
-                    <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
-                        <CustomInput
-                            value={kg.toString()}
-                            placeholder="kg"
-                            onChangeText={(e) => onChangeKg(e)}
-                        />
-                        <CustomInput
-                            value={gm.toString()}
-                            placeholder="g"
-                            onChangeText={(e) => onChangeGm(e)}
-                        />
-                        <CustomInput
-                            value={lb.toString()}
-                            placeholder="lb"
-                            onChangeText={(e) => onChangeLb(e)}
-                        />
-                        <CustomInput
-                            value={ounce.toString()}
-                            placeholder="oz"
-                            onChangeText={(e) => onChangeOz(e)}
-                        />
-                    </View>
+        <View className="flex-1" style={{ backgroundColor: colors.backgroundColor }}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 pt-6" keyboardShouldPersistTaps="handled">
+                <View className="flex-col pb-6">
+                    {[
+                        { key: "kg", label: "Kilogram", sub: "kg", val: kg, ph: "Kilogram", change: onChangeKg },
+                        { key: "gm", label: "Gram", sub: "g", val: gm, ph: "Gram", change: onChangeGm },
+                        { key: "lb", label: "Pound", sub: "lb", val: lb, ph: "Pound", change: onChangeLb },
+                        { key: "ounce", label: "Ounce", sub: "oz", val: ounce, ph: "Ounce", change: onChangeOz },
+                    ].map((item, idx) => {
+                        const isActive = activeKey === item.key;
+                        return (
+                            <Pressable
+                                key={idx}
+                                onPress={() => setActiveKey(item.key)}
+                                className="flex-row items-center justify-between p-3.5 mb-3 rounded-2xl border"
+                                style={{
+                                    backgroundColor: isActive ? addOpacity(colors.secondary, "08") : colors.elevation.level2,
+                                    borderColor: isActive ? colors.secondary : addOpacity(colors.divider, "20"),
+                                    borderWidth: isActive ? 1.5 : 1,
+                                }}
+                            >
+                                <View className="pr-2 justify-center">
+                                    <Text
+                                        className="text-[16px] font-semibold"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.label}
+                                    </Text>
+                                    <Text
+                                        className="text-[12px] opacity-60 mt-0.5"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.sub}
+                                    </Text>
+                                </View>
+                                <View className="flex-1 justify-center">
+                                    {isActive ? (
+                                        <TextInput
+                                            className="text-right text-[18px] font-bold p-0 py-1 flex-1"
+                                            style={{ color: colors.text }}
+                                            value={item.val.toString()}
+                                            onChangeText={item.change}
+                                            placeholder={item.ph}
+                                            placeholderTextColor={colors.paceHolder}
+                                            keyboardType="decimal-pad"
+                                            autoFocus={true}
+                                            selectTextOnFocus={true}
+                                        />
+                                    ) : (
+                                        <Text
+                                            className="text-right text-[18px] font-semibold py-1 flex-1"
+                                            style={{ color: item.val ? colors.text : colors.paceHolder }}
+                                            numberOfLines={1}
+                                            ellipsizeMode="tail"
+                                        >
+                                            {item.val.toString() || item.ph}
+                                        </Text>
+                                    )}
+                                </View>
+                            </Pressable>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </View>
@@ -109,18 +131,3 @@ const MassConverter = () => {
 };
 
 export default MassConverter;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "row",
-        height: 300,
-    },
-    convertorIndicator: {
-        justifyContent: "space-around",
-        height: "100%",
-        alignItems: "flex-end",
-    },
-});

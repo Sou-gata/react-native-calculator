@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Text } from "react-native-paper";
 import { factors, factorize, wp } from "../helpers/functions";
@@ -37,37 +37,6 @@ const Factors = () => {
         }
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            flexDirection: "column",
-            justifyContent: "center",
-            width: wp("100%"),
-            paddingHorizontal: 25,
-            alignItems: "center",
-        },
-        ansDiv: {
-            alignItems: "center",
-            paddingHorizontal: 20,
-        },
-        textStyleAns: {
-            fontSize: 35,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        textStyle: {
-            fontSize: 25,
-            textAlign: "center",
-            color: colors.text,
-        },
-        primeContainer: {
-            flexDirection: "row",
-            gap: 20,
-            alignItems: "center",
-            padding: 20,
-        },
-    });
-
     const onChangeText = (e: string) => {
         if (e != "") {
             let isCorrect = decIntCheck(parseInt(e));
@@ -98,8 +67,14 @@ const Factors = () => {
     };
 
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={styles.container}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="flex-col justify-center px-[25px] items-center mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
                 <CustomInput
                     onChangeText={onChangeText}
                     value={text}
@@ -110,30 +85,44 @@ const Factors = () => {
             </View>
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={{ marginVertical: 20 }}>
+                className="my-5"
+            >
                 <View
-                    style={[
-                        styles.ansDiv,
-                        { display: opacity ? "flex" : "none" },
-                    ]}>
-                    <Text style={[styles.textStyle, {}]}>
+                    className="items-center px-5"
+                    style={{ display: opacity ? "flex" : "none" }}
+                >
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
                         Factors of {ans?.number} are :
                     </Text>
-                    <Text style={styles.textStyleAns}>{ans?.str}</Text>
+                    <Text
+                        className="text-[35px] text-center"
+                        style={{ color: colors.secondary }}
+                    >
+                        {ans?.str}
+                    </Text>
                 </View>
                 <View
-                    style={{
-                        display: opacity ? "flex" : "none",
-                        flexDirection: "row",
-                        padding: 20,
-                    }}>
-                    <Text style={styles.textStyle}>{ans?.number} = </Text>
-                    <Text style={[styles.textStyle, { flexShrink: 1 }]}>
+                    className="flex-row p-5"
+                    style={{ display: opacity ? "flex" : "none" }}
+                >
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {ans?.number} ={" "}
+                    </Text>
+                    <Text
+                        className="text-[25px] text-center flex-shrink"
+                        style={{ color: colors.text }}
+                    >
                         {factor.join(" × ")}
                     </Text>
                 </View>
                 <View style={{ display: opacity ? "flex" : "none" }}>
-                    <View style={styles.primeContainer}>
+                    <View className="flex-row gap-5 items-center p-5">
                         {prime.prime ? (
                             <MaterialIcons
                                 name="check-circle"
@@ -148,22 +137,18 @@ const Factors = () => {
                             />
                         )}
                         <Text
-                            style={{
-                                color: colors.text,
-                                fontSize: 25,
-                                textAlign: "center",
-                            }}>
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             {prime.prime
                                 ? "Prime number"
                                 : "Not a prime number"}
                         </Text>
                     </View>
                     <Text
-                        style={{
-                            color: colors.text,
-                            fontSize: 25,
-                            marginLeft: 20,
-                        }}>
+                        className="text-[25px] ml-5"
+                        style={{ color: colors.text }}
+                    >
                         Next Prime : {prime.nextPrime}
                     </Text>
                 </View>

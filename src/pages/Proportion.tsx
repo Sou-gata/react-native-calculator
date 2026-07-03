@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -63,54 +63,22 @@ const Proportion = () => {
         }
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            flexDirection: "column",
-            justifyContent: "center",
-            width: wp("100%"),
-            paddingHorizontal: 25,
-            alignItems: "center",
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        ansDiv: {
-            padding: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-        },
-        textStyle: {
-            fontSize: 25,
-            textAlign: "center",
-            color: colors.text,
-        },
-        hrLine: {
-            height: 2,
-            marginVertical: 2,
-            marginTop: 7,
-            backgroundColor: colors.text,
-        },
-        mixContainer: {
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-        },
-    });
-
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={styles.container}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="flex-col justify-center px-[25px] items-center mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
                 <CustomInput
                     onChangeText={onChangeTextNu}
                     value={textNu}
                     placeholder="Numerator"
                     width={150}
                 />
-                <View style={{ marginTop: 10 }}>
+                <View className="mt-2.5">
                     <CustomInput
                         onChangeText={onChangeTextDe}
                         value={textDe}
@@ -118,7 +86,7 @@ const Proportion = () => {
                         width={150}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={calculate}
@@ -128,35 +96,80 @@ const Proportion = () => {
                     </Button>
                 </View>
             </View>
-            <View style={opacity.full ? styles.ansDiv : { display: "none" }}>
+            <View
+                className={opacity.full ? "p-5 flex-row items-center justify-center w-full" : "hidden"}
+            >
                 <View>
-                    <Text style={styles.textStyle}>{ans.oriNu}</Text>
-                    <View style={styles.hrLine}></View>
-                    <Text style={styles.textStyle}>{ans.oldDe}</Text>
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {ans.oriNu}
+                    </Text>
+                    <View
+                        className="h-[2px] my-[2px] mt-[7px]"
+                        style={{ backgroundColor: colors.text }}
+                    />
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        {ans.oldDe}
+                    </Text>
                 </View>
                 {ans.oldDe != ans.de && ans.oriNu != ans.nu && (
                     <>
-                        <Text style={styles.textStyle}> = </Text>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
+                            {" "}={" "}
+                        </Text>
                         <View>
-                            <Text style={styles.textStyle}>{ans.nu}</Text>
-                            <View style={styles.hrLine} />
-                            <Text style={styles.textStyle}>{ans.de}</Text>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                {ans.nu}
+                            </Text>
+                            <View
+                                className="h-[2px] my-[2px] mt-[7px]"
+                                style={{ backgroundColor: colors.text }}
+                            />
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                {ans.de}
+                            </Text>
                         </View>
                     </>
                 )}
                 {opacity.mix != 0 && (
-                    <View style={styles.mixContainer}>
-                        <Text style={[styles.textStyle, { marginRight: 5 }]}>
+                    <View className="flex-row items-center">
+                        <Text
+                            className="text-[25px] text-center mr-[5px]"
+                            style={{ color: colors.text }}
+                        >
                             {" = "}
                             {ans?.mix}
                         </Text>
                         {ans.mixNu != 0 && (
                             <View>
-                                <Text style={styles.textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     {ans.mixNu}
                                 </Text>
-                                <View style={styles.hrLine} />
-                                <Text style={styles.textStyle}>
+                                <View
+                                    className="h-[2px] my-[2px] mt-[7px]"
+                                    style={{ backgroundColor: colors.text }}
+                                />
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     {ans.mixDe}
                                 </Text>
                             </View>

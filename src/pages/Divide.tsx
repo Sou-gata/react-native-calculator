@@ -1,5 +1,5 @@
-import { StyleSheet, ScrollView, View } from "react-native";
-import React, { useState, useMemo } from "react";
+import { ScrollView, View } from "react-native";
+import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { devide, wp } from "../helpers/functions";
 import CustomInput from "../components/CustomInput";
@@ -7,19 +7,6 @@ import { colorSchemeType, divideReturnType } from "../../types";
 
 const Divide = () => {
     const { colors } = useTheme<colorSchemeType>();
-
-    const themeStyles = useMemo(
-        () => ({
-            mathText: [styles.mathText, { color: colors.text }],
-            varticleLine: [
-                styles.varticleLine,
-                { backgroundColor: colors.text },
-            ],
-            hrLine: [styles.hrLine, { backgroundColor: colors.text }],
-            errorText: [styles.errorText, { color: colors.error || "#ff3333" }],
-        }),
-        [colors]
-    );
 
     const [text, onChangeText] = useState({ a: "", b: "" });
     const [divideAns, setDivideAns] = useState<divideReturnType>();
@@ -102,19 +89,29 @@ const Divide = () => {
 
     return (
         <View
-            style={{
-                backgroundColor: colors.backgroundColor,
-                flex: 1,
-            }}>
-            <View style={styles.container}>
-                <View style={styles.flexRow}>
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="flex-col justify-center px-[25px] mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
+                <View
+                    className="flex-row items-center justify-around"
+                    style={{ width: wp("100%") - 50 }}
+                >
                     <CustomInput
                         onChangeText={(e) => handleTextChange("a", e)}
                         value={text.a}
                         placeholder="123456"
                         width={125}
                     />
-                    <Text style={themeStyles.mathText}>÷</Text>
+                    <Text
+                        className="text-[25px] font-[RobotoMono_400Regular]"
+                        style={{ color: colors.text }}
+                    >
+                        ÷
+                    </Text>
                     <CustomInput
                         onChangeText={(e) => handleTextChange("b", e)}
                         value={text.b}
@@ -122,43 +119,61 @@ const Divide = () => {
                         width={125}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="flex-row justify-center items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={calculatePress}
                         buttonColor={colors.secondary}
                         textColor="#fff"
-                        style={styles.button}>
+                        className="mx-2 min-w-[120px]"
+                    >
                         Calculate
                     </Button>
                     <Button
                         mode="outlined"
                         onPress={handleReset}
                         textColor={colors.secondary}
-                        style={[styles.button, { borderColor: colors.secondary }]}
-                        labelStyle={{ color: colors.secondary }}>
+                        className="mx-2 min-w-[120px]"
+                        style={{ borderColor: colors.secondary }}
+                        labelStyle={{ color: colors.secondary }}
+                    >
                         Clear
                     </Button>
                 </View>
             </View>
 
             {error.hasError && (
-                <View style={styles.errorContainer}>
-                    <Text style={themeStyles.errorText}>{error.message}</Text>
+                <View className="items-center mt-5 px-[25px]">
+                    <Text
+                        className="text-[16px] text-center font-[RobotoMono_400Regular]"
+                        style={{ color: colors.error || "#ff3333" }}
+                    >
+                        {error.message}
+                    </Text>
                 </View>
             )}
 
             {divideAns && (
                 <ScrollView
                     showsVerticalScrollIndicator={false}
-                    style={{ marginBottom: 20 }}>
-                    <View style={styles.divideMath}>
-                        <Text style={themeStyles.mathText}>
+                    className="mb-5"
+                >
+                    <View className="flex-row justify-center mt-[35px]">
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
                             {divideAns.numberB}
                         </Text>
-                        <View style={themeStyles.varticleLine} />
+                        <View
+                            className="w-[2px] h-[30px] mx-1"
+                            style={{ backgroundColor: colors.text }}
+                        />
                         <View>
-                            <Text style={themeStyles.mathText}>
+                            <Text
+                                className="text-[25px] font-[RobotoMono_400Regular]"
+                                style={{ color: colors.text }}
+                            >
                                 {divideAns.numberA}
                             </Text>
                             {divideAns.spacingInfo.map((spacing, i) => {
@@ -174,20 +189,35 @@ const Divide = () => {
                                 return (
                                     <React.Fragment key={i}>
                                         <View>
-                                            <Text style={themeStyles.mathText}>
+                                            <Text
+                                                className="text-[25px] font-[RobotoMono_400Regular]"
+                                                style={{ color: colors.text }}
+                                            >
                                                 {multipleStr}
                                             </Text>
-                                            <View style={themeStyles.hrLine} />
+                                            <View
+                                                className="h-[2px] my-[2px] mt-[7px]"
+                                                style={{ backgroundColor: colors.text }}
+                                            />
                                         </View>
-                                        <Text style={themeStyles.mathText}>
+                                        <Text
+                                            className="text-[25px] font-[RobotoMono_400Regular]"
+                                            style={{ color: colors.text }}
+                                        >
                                             {subStr}
                                         </Text>
                                     </React.Fragment>
                                 );
                             })}
                         </View>
-                        <View style={themeStyles.varticleLine} />
-                        <Text style={themeStyles.mathText}>
+                        <View
+                            className="w-[2px] h-[30px] mx-1"
+                            style={{ backgroundColor: colors.text }}
+                        />
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
                             {divideAns.result}
                         </Text>
                     </View>
@@ -198,59 +228,3 @@ const Divide = () => {
 };
 
 export default Divide;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        flexDirection: "column",
-        justifyContent: "center",
-        width: wp("100%"),
-        paddingHorizontal: 25,
-    },
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-around",
-        width: wp("100%") - 50,
-    },
-    mathText: {
-        fontSize: 25,
-        fontFamily: "RobotoMono_400Regular",
-    },
-    buttonContainer: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 30,
-    },
-    button: {
-        marginHorizontal: 8,
-        minWidth: 120,
-    },
-    divideMath: {
-        flexDirection: "row",
-        justifyContent: "center",
-        marginTop: 35,
-        fontFamily: "RobotoMono_400Regular",
-    },
-    varticleLine: {
-        width: 2,
-        height: 30,
-        marginHorizontal: 4,
-    },
-    hrLine: {
-        height: 2,
-        marginVertical: 2,
-        marginTop: 7,
-    },
-    errorContainer: {
-        alignItems: "center",
-        marginTop: 20,
-        paddingHorizontal: 25,
-    },
-    errorText: {
-        fontSize: 16,
-        textAlign: "center",
-        fontFamily: "RobotoMono_400Regular",
-    },
-});

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { Text, View, Pressable } from "react-native";
 import { Button, useTheme } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
 import { colorSchemeType } from "../../types";
@@ -134,71 +134,25 @@ const TimeDifference = () => {
         });
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-            padding: 20,
-        },
-        headingText: {
-            fontSize: 16,
-            color: colors.text,
-        },
-        headingTextTwo: {
-            fontSize: 16,
-            color: colors.divider,
-        },
-        row: {
-            flexDirection: "row",
-            justifyContent: "center",
-            gap: 20,
-            marginVertical: 10,
-        },
-        center: {
-            alignItems: "center",
-        },
-        formatToggle: {
-            width: 80,
-            height: 40,
-            borderColor: colors.secondary,
-            borderWidth: 1,
-            borderRadius: 5,
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        errorMsg: {
-            fontSize: 25,
-            color: colors.text,
-            textAlign: "center",
-            marginTop: 30,
-        },
-        ansText: {
-            fontSize: 25,
-            color: colors.text,
-            marginTop: 5,
-            textAlign: "center",
-        },
-        ansContainer: {
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 10,
-            justifyContent: "center",
-        },
-        ansNumber: {
-            fontSize: 50,
-            color: colors.secondary,
-        },
-    });
     return (
-        <View style={styles.container}>
-            <Text style={styles.headingText}>Start Time</Text>
-            <View style={styles.row}>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Hours</Text>
+        <View
+            className="flex-1 p-5"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <Text
+                className="text-[16px]"
+                style={{ color: colors.text }}
+            >
+                Start Time
+            </Text>
+            <View className="flex-row justify-center gap-5 my-2.5">
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Hours
+                    </Text>
                     <CustomInput
                         width={80}
                         placeholder="Hr"
@@ -207,8 +161,13 @@ const TimeDifference = () => {
                         onChangeText={(e) => onChangeText(e, "startHr")}
                     />
                 </View>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Minutes</Text>
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Minutes
+                    </Text>
                     <CustomInput
                         width={80}
                         placeholder="Min"
@@ -217,11 +176,18 @@ const TimeDifference = () => {
                         onChangeText={(e) => onChangeText(e, "startMin")}
                     />
                 </View>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Format</Text>
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Format
+                    </Text>
                     <Pressable
                         onPress={() => changeMeridian("start")}
-                        style={styles.formatToggle}>
+                        className="w-[80px] h-[40px] border rounded-[5px] justify-center items-center"
+                        style={{ borderColor: colors.secondary }}
+                    >
                         <Text
                             style={{
                                 color: colors.secondary,
@@ -232,12 +198,20 @@ const TimeDifference = () => {
                     </Pressable>
                 </View>
             </View>
-            <Text style={[styles.headingText, { marginTop: 20 }]}>
+            <Text
+                className="text-[16px] mt-5"
+                style={{ color: colors.text }}
+            >
                 End Time
             </Text>
-            <View style={styles.row}>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Hours</Text>
+            <View className="flex-row justify-center gap-5 my-2.5">
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Hours
+                    </Text>
                     <CustomInput
                         width={80}
                         placeholder="Hr"
@@ -246,8 +220,13 @@ const TimeDifference = () => {
                         onChangeText={(e) => onChangeText(e, "endHr")}
                     />
                 </View>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Minutes</Text>
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Minutes
+                    </Text>
                     <CustomInput
                         width={80}
                         placeholder="Min"
@@ -256,11 +235,18 @@ const TimeDifference = () => {
                         onChangeText={(e) => onChangeText(e, "endMin")}
                     />
                 </View>
-                <View style={styles.center}>
-                    <Text style={styles.headingTextTwo}>Format</Text>
+                <View className="items-center">
+                    <Text
+                        className="text-[16px]"
+                        style={{ color: colors.divider }}
+                    >
+                        Format
+                    </Text>
                     <Pressable
                         onPress={() => changeMeridian("end")}
-                        style={styles.formatToggle}>
+                        className="w-[80px] h-[40px] border rounded-[5px] justify-center items-center"
+                        style={{ borderColor: colors.secondary }}
+                    >
                         <Text
                             style={{
                                 color: colors.secondary,
@@ -271,7 +257,7 @@ const TimeDifference = () => {
                     </Pressable>
                 </View>
             </View>
-            <View style={styles.buttonContainer}>
+            <View className="items-center mt-[30px]">
                 <Button
                     mode="contained"
                     onPress={calculate}
@@ -282,37 +268,63 @@ const TimeDifference = () => {
             </View>
             {error.hasError && (
                 <View>
-                    <Text style={styles.errorMsg}>{error.message}</Text>
+                    <Text
+                        className="text-[25px] text-center mt-[30px]"
+                        style={{ color: colors.text }}
+                    >
+                        {error.message}
+                    </Text>
                 </View>
             )}
             {answer.visible && !error.hasError && (
-                <View style={{ marginTop: 30 }}>
-                    <Text style={styles.ansText}>
+                <View className="mt-[30px]">
+                    <Text
+                        className="text-[25px] mt-[5px] text-center"
+                        style={{ color: colors.text }}
+                    >
                         Start {"  "}
                         {answer.startHr} : {answer.startMin}
                         {"  "}
                         {answer.start !== "24H" ? answer.start : ""}
                     </Text>
-                    <Text style={styles.ansText}>
+                    <Text
+                        className="text-[25px] mt-[5px] text-center"
+                        style={{ color: colors.text }}
+                    >
                         End {"    "}
                         {answer.endHr} : {answer.endMin}
                         {"  "}
                         {answer.end !== "24H" ? answer.end : ""}
                     </Text>
                     <Text
-                        style={[
-                            styles.ansText,
-                            { marginTop: 30, textAlign: "center" },
-                        ]}>
+                        className="text-[25px] mt-[30px] text-center"
+                        style={{ color: colors.text }}
+                    >
                         Difference
                     </Text>
-                    <View style={styles.ansContainer}>
-                        <Text style={styles.ansNumber}>{answer.hr}</Text>
-                        <Text style={styles.ansText}>
+                    <View className="flex-row items-center gap-2.5 justify-center">
+                        <Text
+                            className="text-[50px]"
+                            style={{ color: colors.secondary }}
+                        >
+                            {answer.hr}
+                        </Text>
+                        <Text
+                            className="text-[25px] mt-[5px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             {answer.hr != 1 ? "Hrs" : "Hr"}
                         </Text>
-                        <Text style={styles.ansNumber}>{answer.min}</Text>
-                        <Text style={styles.ansText}>
+                        <Text
+                            className="text-[50px]"
+                            style={{ color: colors.secondary }}
+                        >
+                            {answer.min}
+                        </Text>
+                        <Text
+                            className="text-[25px] mt-[5px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             {answer.min != 1 ? "Mins" : "Min"}
                         </Text>
                     </View>

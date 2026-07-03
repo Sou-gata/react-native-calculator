@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import { useTheme, Button, Text } from "react-native-paper";
@@ -29,11 +29,12 @@ const EquSolve = () => {
     const changeValues = (e: string, place: string) =>
         setVal({ ...val, [place]: e });
 
-    const textStyle = [styles.textStyle, { color: colors.text }];
-
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={styles.flexRow}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="flex-row items-center justify-center w-full mt-[15px]">
                 <CustomInput
                     placeholder="a1"
                     onChangeText={(e) => changeValues(e, "a1")}
@@ -41,10 +42,10 @@ const EquSolve = () => {
                     width={60}
                 />
                 <Text
+                    className="mx-[10px]"
                     style={{
                         fontSize: 18,
                         color: colors.text,
-                        marginHorizontal: 10,
                     }}>
                     x +
                 </Text>
@@ -55,10 +56,10 @@ const EquSolve = () => {
                     width={60}
                 />
                 <Text
+                    className="mx-[10px]"
                     style={{
                         fontSize: 18,
                         color: colors.text,
-                        marginHorizontal: 10,
                     }}>
                     y +
                 </Text>
@@ -69,7 +70,7 @@ const EquSolve = () => {
                     width={60}
                 />
             </View>
-            <View style={styles.flexRow}>
+            <View className="flex-row items-center justify-center w-full mt-[15px]">
                 <CustomInput
                     placeholder="a2"
                     onChangeText={(e) => changeValues(e, "a2")}
@@ -77,10 +78,10 @@ const EquSolve = () => {
                     width={60}
                 />
                 <Text
+                    className="mx-[10px]"
                     style={{
                         fontSize: 18,
                         color: colors.text,
-                        marginHorizontal: 10,
                     }}>
                     x +
                 </Text>
@@ -91,10 +92,10 @@ const EquSolve = () => {
                     width={60}
                 />
                 <Text
+                    className="mx-[10px]"
                     style={{
                         fontSize: 18,
                         color: colors.text,
-                        marginHorizontal: 10,
                     }}>
                     y +
                 </Text>
@@ -105,7 +106,7 @@ const EquSolve = () => {
                     width={60}
                 />
             </View>
-            <View style={styles.buttonContainer}>
+            <View className="flex-row justify-evenly items-center mt-[30px]">
                 <Button
                     mode="contained"
                     onPress={() => {
@@ -153,35 +154,57 @@ const EquSolve = () => {
             </View>
             <View style={{ marginTop: 30 }}>
                 {finalAns.noSolution && (
-                    <Text style={textStyle}>No Solution</Text>
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        No Solution
+                    </Text>
                 )}
                 {finalAns.manySolution && (
-                    <Text style={textStyle}>Many Solution</Text>
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        Many Solution
+                    </Text>
                 )}
                 {finalAns.normalSolution && (
                     <>
-                        <View style={styles.flexRow2}>
+                        <View className="flex-row items-center justify-center w-full">
                             {(finalAns.numeratorX ||
                                 finalAns.numeratorX == 0) && (
-                                <Text style={textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     x = {finalAns.numeratorX}
                                 </Text>
                             )}
                             {Boolean(finalAns.denominatorX) && (
-                                <Text style={textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     /{finalAns.denominatorX}
                                 </Text>
                             )}
                         </View>
-                        <View style={styles.flexRow2}>
+                        <View className="flex-row items-center justify-center w-full">
                             {(finalAns.numeratorY ||
                                 finalAns.numeratorY == 0) && (
-                                <Text style={textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     y = {finalAns.numeratorY}
                                 </Text>
                             )}
                             {Boolean(finalAns.denominatorY) && (
-                                <Text style={textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     /{finalAns.denominatorY}
                                 </Text>
                             )}
@@ -189,14 +212,23 @@ const EquSolve = () => {
                         {(finalAns.x || finalAns.x == 0) && (
                             <View>
                                 <Text
-                                    style={[
-                                        ...textStyle,
-                                        { marginVertical: 20 },
-                                    ]}>
+                                    className="text-[25px] text-center my-5"
+                                    style={{ color: colors.text }}
+                                >
                                     Or
                                 </Text>
-                                <Text style={textStyle}>x = {finalAns.x}</Text>
-                                <Text style={textStyle}>y = {finalAns.y}</Text>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
+                                    x = {finalAns.x}
+                                </Text>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
+                                    y = {finalAns.y}
+                                </Text>
                             </View>
                         )}
                     </>
@@ -207,29 +239,3 @@ const EquSolve = () => {
 };
 
 export default EquSolve;
-
-const styles = StyleSheet.create({
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        marginTop: 15,
-    },
-    flexRow2: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-    },
-    buttonContainer: {
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        marginTop: 30,
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-});

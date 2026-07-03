@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import React, { useState } from "react";
 import { useTheme, Button, Text } from "react-native-paper";
 import { multiple, wp } from "../helpers/functions";
@@ -28,45 +28,19 @@ const Multiply = () => {
         }
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            flexDirection: "column",
-            justifyContent: "center",
-            width: wp("100%"),
-            paddingHorizontal: 25,
-        },
-        flexRow: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-            width: wp("100%") - 50,
-        },
-        mathText: {
-            fontSize: 25,
-            fontFamily: "RobotoMono_400Regular",
-            color: colors.text,
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        hrLine: {
-            height: 2,
-            marginVertical: 2,
-            marginTop: 7,
-            backgroundColor: colors.text,
-        },
-    });
-
     return (
         <View
-            style={{
-                backgroundColor: colors.backgroundColor,
-                flex: 1,
-            }}>
-            <View style={styles.container}>
-                <View style={styles.flexRow}>
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="flex-col justify-center px-[25px] mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
+                <View
+                    className="flex-row items-center justify-around"
+                    style={{ width: wp("100%") - 50 }}
+                >
                     <CustomInput
                         onChangeText={(e) => {
                             onChangeText({ ...text, a: e });
@@ -75,7 +49,10 @@ const Multiply = () => {
                         placeholder="123"
                         width={125}
                     />
-                    <Text style={[styles.mathText, { color: colors.text }]}>
+                    <Text
+                        className="text-[25px] font-[RobotoMono_400Regular]"
+                        style={{ color: colors.text }}
+                    >
                         ×
                     </Text>
                     <CustomInput
@@ -87,7 +64,7 @@ const Multiply = () => {
                         width={125}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={calculatePress}
@@ -99,24 +76,38 @@ const Multiply = () => {
             </View>
             <ScrollView
                 showsVerticalScrollIndicator={false}
-                style={{ marginBottom: 20 }}
+                className="mb-5"
                 contentContainerStyle={
                     opacity ? { alignItems: "center" } : { display: "none" }
                 }>
-                <View style={{ padding: 20 }}>
-                    <View style={{ alignItems: "flex-end" }}>
-                        <Text style={styles.mathText}>{ans?.numberA}</Text>
+                <View className="p-5">
+                    <View className="items-end">
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
+                            {ans?.numberA}
+                        </Text>
+                    </View>
+                    <View className="flex-row justify-between">
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
+                            x
+                        </Text>
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
+                            {ans?.numberB}
+                        </Text>
                     </View>
                     <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                        }}>
-                        <Text style={styles.mathText}>x</Text>
-                        <Text style={styles.mathText}>{ans?.numberB}</Text>
-                    </View>
-                    <View style={styles.hrLine} />
-                    <View style={{ alignItems: "flex-end" }}>
+                        className="h-[2px] my-[2px] mt-[7px]"
+                        style={{ backgroundColor: colors.text }}
+                    />
+                    <View className="items-end">
                         {ans?.results?.map((item, i) => {
                             let space = "";
                             for (
@@ -127,16 +118,28 @@ const Multiply = () => {
                                 space += " ";
                             }
                             return (
-                                <Text key={i} style={styles.mathText}>
+                                <Text
+                                    key={i}
+                                    className="text-[25px] font-[RobotoMono_400Regular]"
+                                    style={{ color: colors.text }}
+                                >
                                     {space}
                                     {item}
                                 </Text>
                             );
                         })}
                     </View>
-                    <View style={styles.hrLine} />
-                    <View style={{ alignItems: "flex-end" }}>
-                        <Text style={styles.mathText}>{ans?.ans}</Text>
+                    <View
+                        className="h-[2px] my-[2px] mt-[7px]"
+                        style={{ backgroundColor: colors.text }}
+                    />
+                    <View className="items-end">
+                        <Text
+                            className="text-[25px] font-[RobotoMono_400Regular]"
+                            style={{ color: colors.text }}
+                        >
+                            {ans?.ans}
+                        </Text>
                     </View>
                 </View>
             </ScrollView>

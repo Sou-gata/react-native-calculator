@@ -1,9 +1,9 @@
 import { MD3Theme } from "react-native-paper";
 import { MD3Colors } from "react-native-paper/lib/typescript/types";
 import {
-    NativeSyntheticEvent,
+    DimensionValue,
     StyleProp,
-    TextInputEndEditingEventData,
+    TextInputEndEditingEvent,
     TextStyle,
     ViewStyle,
 } from "react-native";
@@ -45,11 +45,11 @@ export type CustomInputType = {
     value: string;
     onChangeText: (e: string) => void;
     placeholder?: string;
-    width?: number;
+    width?: DimensionValue;
     keyboardType?: "decimal-pad" | "default";
     maxLength?: number;
     onEndEditing?: (
-        e: NativeSyntheticEvent<TextInputEndEditingEventData>
+        e: TextInputEndEditingEvent
     ) => void;
     style?: StyleProp<TextStyle>;
     autoFocus?: boolean;

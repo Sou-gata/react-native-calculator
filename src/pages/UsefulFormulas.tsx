@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useTheme, Text } from "react-native-paper";
 import {
     algebricFormula,
@@ -28,67 +28,44 @@ const Calculus = ({
     }
 
     return (
-        <View
-            style={{
-                marginTop: 7,
-                flexDirection: "row",
-                alignItems: "center",
-            }}>
+        <View className="mt-[7px] flex-row items-center">
             <Text style={{ fontSize: size, color }}>
                 {"\u2022"}
                 {"   "}
             </Text>
             <View>
-                <Text style={{ fontSize: size, color, textAlign: "center" }}>
+                <Text
+                    className="text-center"
+                    style={{ fontSize: size, color }}
+                >
                     d
                 </Text>
                 <Text
-                    style={[
-                        styles.denominator,
-                        { fontSize: size, color, borderColor: color },
-                    ]}>
+                    className="border-t pt-[2px] px-[4px]"
+                    style={{ fontSize: size, color, borderColor: color }}
+                >
                     dx
                 </Text>
             </View>
             <Text style={{ fontSize: size, color }}> {text} = </Text>
             {hasDenominator && (
-                <View
-                    style={{ justifyContent: "center", alignItems: "center" }}>
+                <View className="justify-center items-center">
                     <Text
-                        style={
-                            isDenoLarger
-                                ? { fontSize: size, color, paddingBottom: 2 }
-                                : [
-                                      styles.numerator,
-                                      {
-                                          fontSize: size,
-                                          color,
-                                          borderColor: color,
-                                      },
-                                  ]
-                        }>
+                        className={isDenoLarger ? "pb-[2px]" : "border-b pb-[4px] px-[4px]"}
+                        style={{ fontSize: size, color, borderColor: color }}
+                    >
                         {numerator}
                     </Text>
                     <Text
-                        style={
-                            isDenoLarger
-                                ? [
-                                      styles.denominator,
-                                      {
-                                          fontSize: size,
-                                          color,
-                                          borderColor: color,
-                                      },
-                                  ]
-                                : { fontSize: size, color }
-                        }>
+                        className={isDenoLarger ? "border-t pt-[2px] px-[4px]" : ""}
+                        style={{ fontSize: size, color, borderColor: color }}
+                    >
                         {denominator}
                     </Text>
                 </View>
             )}
             {!denominator && (
-                <View
-                    style={{ justifyContent: "center", alignItems: "center" }}>
+                <View className="justify-center items-center">
                     <Text style={{ fontSize: size, color }}>{numerator}</Text>
                 </View>
             )}
@@ -99,26 +76,25 @@ const Calculus = ({
 const UsefulFormulas = () => {
     const { colors } = useTheme<colorSchemeType>();
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={{ padding: 20 }}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="p-5">
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View>
                         <Text
-                            style={{
-                                fontSize: 28,
-                                color: colors.secondary,
-                                marginTop: 5,
-                            }}>
+                            className="text-[28px] mt-[5px]"
+                            style={{ color: colors.secondary }}
+                        >
                             Algebra :-
                         </Text>
                         {algebricFormula.map((formula, i) => (
                             <Text
                                 key={i}
-                                style={{
-                                    fontSize: 18,
-                                    color: colors.text,
-                                    marginTop: 7,
-                                }}>
+                                className="text-[18px] mt-[7px]"
+                                style={{ color: colors.text }}
+                            >
                                 {"\u2022"}
                                 {"  "} {formula}
                             </Text>
@@ -127,11 +103,9 @@ const UsefulFormulas = () => {
 
                     <View>
                         <Text
-                            style={{
-                                fontSize: 28,
-                                color: colors.secondary,
-                                marginTop: 10,
-                            }}>
+                            className="text-[28px] mt-[10px]"
+                            style={{ color: colors.secondary }}
+                        >
                             Trigonometry :-
                         </Text>
                         {trigonometricFormula.map((formula, i) => (
@@ -146,11 +120,9 @@ const UsefulFormulas = () => {
 
                     <View>
                         <Text
-                            style={{
-                                fontSize: 28,
-                                color: colors.secondary,
-                                marginTop: 10,
-                            }}>
+                            className="text-[28px] mt-[10px]"
+                            style={{ color: colors.secondary }}
+                        >
                             Calculus :-
                         </Text>
                         {calculusFormula.map((formula, i) => (
@@ -169,16 +141,3 @@ const UsefulFormulas = () => {
 };
 
 export default UsefulFormulas;
-
-const styles = StyleSheet.create({
-    numerator: {
-        borderBottomWidth: 1,
-        paddingBottom: 4,
-        paddingHorizontal: 4,
-    },
-    denominator: {
-        borderTopWidth: 1,
-        paddingTop: 2,
-        paddingHorizontal: 4,
-    },
-});

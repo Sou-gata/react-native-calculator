@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -30,25 +30,35 @@ const QuadraticEqu = () => {
         }
     };
 
-    const textStyle = [styles.textStyle, { color: colors.text }];
-
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={[styles.flexRow, { marginTop: 20 }]}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="flex-row items-center justify-center w-full mt-5">
                 <CustomInput
                     onChangeText={(e) => changeValues(e, "a")}
                     value={veriable.a}
                     placeholder="a"
                     width={60}
                 />
-                <View style={styles.supContainer}>
-                    <Text style={[styles.sup1st, { color: colors.text }]}>
+                <View className="flex-row items-start mx-[10px]">
+                    <Text
+                        className="text-[20px] leading-[30px]"
+                        style={{ color: colors.text }}
+                    >
                         X
                     </Text>
-                    <Text style={[styles.supPow, { color: colors.text }]}>
+                    <Text
+                        className="text-[12px] leading-[18px]"
+                        style={{ color: colors.text }}
+                    >
                         2
                     </Text>
-                    <Text style={[styles.sup1st, { color: colors.text }]}>
+                    <Text
+                        className="text-[20px] leading-[30px]"
+                        style={{ color: colors.text }}
+                    >
                         {" "}
                         +
                     </Text>
@@ -60,10 +70,9 @@ const QuadraticEqu = () => {
                     width={60}
                 />
                 <Text
-                    style={[
-                        styles.sup1st,
-                        { marginHorizontal: 10, color: colors.text },
-                    ]}>
+                    className="text-[20px] leading-[30px] mx-[10px]"
+                    style={{ color: colors.text }}
+                >
                     X +
                 </Text>
                 <CustomInput
@@ -73,7 +82,7 @@ const QuadraticEqu = () => {
                     width={60}
                 />
             </View>
-            <View style={styles.buttonContainer}>
+            <View className="flex-row justify-evenly items-center mt-[30px]">
                 <Button
                     mode="contained"
                     onPress={getAns}
@@ -101,14 +110,25 @@ const QuadraticEqu = () => {
                     Clear
                 </Button>
             </View>
-            <View style={{ marginTop: 35 }}>
+            <View className="mt-[35px]">
                 {(ans.inFraction.rootOne || ans.inFraction.rootOne == "0") && (
                     <View>
-                        <Text style={textStyle}>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             X = {ans.inFraction.rootOne}
                         </Text>
-                        <Text style={textStyle}>and</Text>
-                        <Text style={textStyle}>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
+                            and
+                        </Text>
+                        <Text
+                            className="text-[25px] text-center"
+                            style={{ color: colors.text }}
+                        >
                             X = {ans.inFraction.rootTwo}
                         </Text>
                     </View>
@@ -118,14 +138,27 @@ const QuadraticEqu = () => {
                     ans.inDecimal.rootTwo != ans.inFraction.rootTwo && (
                         <View>
                             <Text
-                                style={[...textStyle, { marginVertical: 20 }]}>
+                                className="text-[25px] text-center my-5"
+                                style={{ color: colors.text }}
+                            >
                                 Or
                             </Text>
-                            <Text style={textStyle}>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
                                 X = {ans.inDecimal.rootOne}
                             </Text>
-                            <Text style={textStyle}>and</Text>
-                            <Text style={textStyle}>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
+                                and
+                            </Text>
+                            <Text
+                                className="text-[25px] text-center"
+                                style={{ color: colors.text }}
+                            >
                                 X = {ans.inDecimal.rootTwo}
                             </Text>
                         </View>
@@ -136,35 +169,3 @@ const QuadraticEqu = () => {
 };
 
 export default QuadraticEqu;
-
-const styles = StyleSheet.create({
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-    },
-    supContainer: {
-        flexDirection: "row",
-        alignItems: "flex-start",
-        marginHorizontal: 10,
-    },
-    sup1st: {
-        fontSize: 20,
-        lineHeight: 30,
-    },
-    supPow: {
-        fontSize: 12,
-        lineHeight: 18,
-    },
-    buttonContainer: {
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        marginTop: 30,
-    },
-    textStyle: {
-        fontSize: 25,
-        textAlign: "center",
-    },
-});

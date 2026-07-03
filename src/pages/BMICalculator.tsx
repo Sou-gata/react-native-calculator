@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dimensions, Pressable, StyleSheet, View } from "react-native";
+import { Dimensions, Pressable, View } from "react-native";
 import { useTheme, Text, Button } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
 import { colorSchemeType } from "../../types";
@@ -60,11 +60,11 @@ const BMICalculator = () => {
     };
     return (
         <View
+            className="flex-1"
             style={{
-                flex: 1,
                 backgroundColor: colors.backgroundColor,
             }}>
-            <View style={styles.rowContainer}>
+            <View className="flex-row items-center gap-[15px] p-2.5">
                 <View style={{ width }}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>
                         Height:
@@ -89,7 +89,7 @@ const BMICalculator = () => {
                     }}
                 />
             </View>
-            <View style={styles.rowContainer}>
+            <View className="flex-row items-center gap-[15px] p-2.5">
                 <View style={{ width }}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>
                         Weight:
@@ -114,7 +114,7 @@ const BMICalculator = () => {
                     }}
                 />
             </View>
-            <View style={styles.rowContainer}>
+            <View className="flex-row items-center gap-[15px] p-2.5">
                 <View style={{ width }}>
                     <Text style={{ color: colors.text, fontSize: 20 }}>
                         Unit:
@@ -158,7 +158,7 @@ const BMICalculator = () => {
                 </Button>
             </View>
             {result.bmi && (
-                <View style={styles.ansContainer}>
+                <View className="px-2.5 py-[25px] flex-row gap-[15px]">
                     <View style={{ alignItems: "flex-end" }}>
                         <Text style={{ color: colors.text, fontSize: 22 }}>
                             BMI :
@@ -215,18 +215,3 @@ const BMICalculator = () => {
 };
 
 export default BMICalculator;
-
-const styles = StyleSheet.create({
-    rowContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 15,
-        padding: 10,
-    },
-    ansContainer: {
-        paddingHorizontal: 10,
-        paddingVertical: 25,
-        flexDirection: "row",
-        gap: 15,
-    },
-});

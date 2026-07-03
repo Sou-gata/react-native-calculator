@@ -1,4 +1,4 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import { useTheme, Text, Button } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
@@ -151,9 +151,12 @@ const AgeCalculator = () => {
         setAge({ days, months, years });
     };
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <View style={styles.container}>
-                <View style={styles.dateRow}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="my-2.5 p-[30px]">
+                <View className="flex flex-row justify-between mb-5">
                     <Text style={{ color: colors.text, fontSize: 20 }}>
                         Birth day
                     </Text>
@@ -161,7 +164,7 @@ const AgeCalculator = () => {
                         onPress={() => {
                             setVisible({ ...visible, from: true });
                         }}>
-                        <View style={styles.flexRow}>
+                        <View className="flex-row items-center">
                             <Text
                                 style={{
                                     color: colors.secondary,
@@ -178,13 +181,13 @@ const AgeCalculator = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.dateRow}>
+                <View className="flex flex-row justify-between mb-5">
                     <Text style={{ color: colors.text, fontSize: 20 }}>To</Text>
                     <TouchableOpacity
                         onPress={() => {
                             setVisible({ ...visible, to: true });
                         }}>
-                        <View style={styles.flexRow}>
+                        <View className="flex-row items-center">
                             <Text
                                 style={{
                                     color: colors.secondary,
@@ -201,7 +204,7 @@ const AgeCalculator = () => {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={calculateAge}
@@ -312,24 +315,3 @@ const AgeCalculator = () => {
 };
 
 export default AgeCalculator;
-
-const styles = StyleSheet.create({
-    container: {
-        marginVertical: 10,
-        padding: 30,
-    },
-    flexRow: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    dateRow: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 20,
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 30,
-    },
-});

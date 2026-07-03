@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React, { useState } from "react";
 import {
     checkLcmHcfNumber,
@@ -86,52 +86,15 @@ const HCF = () => {
         }
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 29,
-            width: wp("100%"),
-            paddingHorizontal: 25,
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 30,
-        },
-        textStyle: {
-            fontSize: 25,
-            textAlign: "center",
-            color: colors.text,
-        },
-        textStyleOrange: {
-            fontSize: 35,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        ansDiv: {
-            alignItems: "center",
-            padding: 20,
-        },
-        hrLine: {
-            height: 2,
-            marginVertical: 5,
-        },
-        hcfNumber: {
-            color: colors.text,
-            fontSize: 22,
-            fontFamily: "RobotoMono_400Regular",
-        },
-        factorLine: {
-            color: colors.text,
-            fontSize: 22,
-        },
-        ansLineContainer: {
-            flexDirection: "row",
-            paddingHorizontal: 20,
-        },
-    });
-
     return (
-        <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
-            <View style={styles.container}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View
+                className="px-[25px] mt-[29px]"
+                style={{ width: wp("100%") }}
+            >
                 <View style={{ alignItems: "center" }}>
                     <CustomInputFilds
                         inputs={inputs}
@@ -139,7 +102,7 @@ const HCF = () => {
                         maxInput={12}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[30px]">
                     <Button
                         mode="contained"
                         onPress={() => calculate()}
@@ -150,14 +113,29 @@ const HCF = () => {
                 </View>
             </View>
             {opacity.two === 1 && (
-                <View style={styles.ansDiv}>
-                    <Text style={styles.textStyleOrange}>Can't calculate</Text>
+                <View className="items-center p-5">
+                    <Text
+                        className="text-[35px] text-center"
+                        style={{ color: colors.secondary }}
+                    >
+                        Can't calculate
+                    </Text>
                 </View>
             )}
             {Boolean(opacity.one) && (
-                <View style={styles.ansDiv}>
-                    <Text style={styles.textStyle}>HCF of {input} is</Text>
-                    <Text style={styles.textStyleOrange}>{ans}</Text>
+                <View className="items-center p-5">
+                    <Text
+                        className="text-[25px] text-center"
+                        style={{ color: colors.text }}
+                    >
+                        HCF of {input} is
+                    </Text>
+                    <Text
+                        className="text-[35px] text-center"
+                        style={{ color: colors.secondary }}
+                    >
+                        {ans}
+                    </Text>
                 </View>
             )}
             {Boolean(opacity.three) && (
@@ -173,7 +151,10 @@ const HCF = () => {
                                     borderBottomWidth: 0,
                                 }}>
                                 <View style={{ flexShrink: 1 }}>
-                                    <Text style={styles.hcfNumber}>
+                                    <Text
+                                        className="text-[22px] font-[RobotoMono_400Regular]"
+                                        style={{ color: colors.text }}
+                                    >
                                         {number} ={" "}
                                     </Text>
                                 </View>
@@ -181,7 +162,10 @@ const HCF = () => {
                                     style={{
                                         flexShrink: 1,
                                     }}>
-                                    <Text style={styles.factorLine}>
+                                    <Text
+                                        className="text-[22px]"
+                                        style={{ color: colors.text }}
+                                    >
                                         {details.factors[i].join(" × ")}
                                     </Text>
                                 </View>
@@ -189,12 +173,20 @@ const HCF = () => {
                         ))}
                     </DataTable>
                     <View>
-                        <View style={styles.ansLineContainer}>
+                        <View className="flex-row px-5">
                             <View>
-                                <Text style={styles.textStyle}>HCF = </Text>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
+                                    HCF ={" "}
+                                </Text>
                             </View>
                             <View style={{ flexShrink: 1 }}>
-                                <Text style={styles.textStyle}>
+                                <Text
+                                    className="text-[25px] text-center"
+                                    style={{ color: colors.text }}
+                                >
                                     {details.hcf.join(" × ")}
                                 </Text>
                             </View>

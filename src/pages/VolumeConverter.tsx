@@ -1,8 +1,7 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { ScrollView, View, TextInput, Pressable } from "react-native";
 import { useState } from "react";
 import { useTheme, Text } from "react-native-paper";
-import CustomInput from "../components/CustomInput";
-import { parseNumber } from "../helpers/functions";
+import { parseNumber, addOpacity } from "../helpers/functions";
 import { colorSchemeType } from "../../types";
 
 const Volume = () => {
@@ -16,6 +15,7 @@ const Volume = () => {
         gln: "",
         qnt: "",
     });
+    const [activeKey, setActiveKey] = useState<string>("lit");
 
     const setEmpty = () => {
         setText({
@@ -52,7 +52,7 @@ const Volume = () => {
 
     const onChangeCm = (e: string) => {
         setText({ ...text, cm: e });
-        if (e != "") {
+        if (e !== "") {
             const cm = parseFloat(e);
             const m = fixed(cm * 0.000001);
             const inc = fixed(cm * 0.0610237);
@@ -65,7 +65,7 @@ const Volume = () => {
     };
     const onChangeM = (e: string) => {
         setText({ ...text, m: e });
-        if (e != "") {
+        if (e !== "") {
             const m = parseFloat(e);
             const cm = fixed(m * 1000000);
             const inc = fixed(m * 61023.7);
@@ -78,7 +78,7 @@ const Volume = () => {
     };
     const onChangeInch = (e: string) => {
         setText({ ...text, inc: e });
-        if (e != "") {
+        if (e !== "") {
             const inc = parseFloat(e);
             const cm = fixed(inc * 16.3871);
             const m = fixed(inc * 0.000016387);
@@ -91,7 +91,7 @@ const Volume = () => {
     };
     const onChangeFoot = (e: string) => {
         setText({ ...text, foot: e });
-        if (e != "") {
+        if (e !== "") {
             const foot = parseFloat(e);
             const cm = fixed(foot * 28316.8);
             const m = fixed(foot * 0.0283168);
@@ -104,7 +104,7 @@ const Volume = () => {
     };
     const onChangeLit = (e: string) => {
         setText({ ...text, lit: e });
-        if (e != "") {
+        if (e !== "") {
             const lit = parseFloat(e);
             const cm = fixed(lit * 1000);
             const m = fixed(lit * 0.001);
@@ -117,7 +117,7 @@ const Volume = () => {
     };
     const onChangeGln = (e: string) => {
         setText({ ...text, gln: e });
-        if (e != "") {
+        if (e !== "") {
             const gln = parseFloat(e);
             const cm = fixed(gln * 4546.09);
             const m = fixed(gln * 0.00454609);
@@ -130,7 +130,7 @@ const Volume = () => {
     };
     const onChangeQnt = (e: string) => {
         setText({ ...text, qnt: e });
-        if (e != "") {
+        if (e !== "") {
             const qnt = parseFloat(e);
             const cm = fixed(qnt * 1136.52);
             const m = fixed(qnt * 0.00113652);
@@ -141,71 +141,73 @@ const Volume = () => {
             setAns(cm, m, inc, foot, lit, gln, e);
         } else setEmpty();
     };
+
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <ScrollView>
-                <View style={styles.container}>
-                    <View style={styles.convertorIndicator}>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            cm³
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            m³
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            inch³
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            feet³
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Liter
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Imp Gallon
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Imp Quant
-                        </Text>
-                    </View>
-                    <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
-                        <CustomInput
-                            onChangeText={onChangeCm}
-                            value={text.cm}
-                            placeholder="Centimeter³"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeM}
-                            value={text.m}
-                            placeholder="Meter³"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeInch}
-                            value={text.inc}
-                            placeholder="Inch³"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeFoot}
-                            value={text.foot}
-                            placeholder="Foot³"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeLit}
-                            value={text.lit}
-                            placeholder="Liter"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeGln}
-                            value={text.gln}
-                            placeholder="Imperial Gallon"
-                        />
-                        <CustomInput
-                            onChangeText={onChangeQnt}
-                            value={text.qnt}
-                            placeholder="Imperial Quant"
-                        />
-                    </View>
+        <View className="flex-1" style={{ backgroundColor: colors.backgroundColor }}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 pt-6" keyboardShouldPersistTaps="handled">
+                <View className="flex-col pb-6">
+                    {[
+                        { key: "cm", label: "Cubic Centimeter", sub: "cm³", val: text.cm, ph: "Cubic Centimeter", change: onChangeCm },
+                        { key: "m", label: "Cubic Meter", sub: "m³", val: text.m, ph: "Cubic Meter", change: onChangeM },
+                        { key: "inc", label: "Cubic Inch", sub: "in³", val: text.inc, ph: "Cubic Inch", change: onChangeInch },
+                        { key: "foot", label: "Cubic Foot", sub: "ft³", val: text.foot, ph: "Cubic Foot", change: onChangeFoot },
+                        { key: "lit", label: "Liter", sub: "L", val: text.lit, ph: "Liter", change: onChangeLit },
+                        { key: "gln", label: "Imperial Gallon", sub: "gal", val: text.gln, ph: "Imperial Gallon", change: onChangeGln },
+                        { key: "qnt", label: "Imperial Quart", sub: "qt", val: text.qnt, ph: "Imperial Quart", change: onChangeQnt },
+                    ].map((item, idx) => {
+                        const isActive = activeKey === item.key;
+                        return (
+                            <Pressable
+                                key={idx}
+                                onPress={() => setActiveKey(item.key)}
+                                className="flex-row items-center justify-between p-3.5 mb-3 rounded-2xl border"
+                                style={{
+                                    backgroundColor: isActive ? addOpacity(colors.secondary, "08") : colors.elevation.level2,
+                                    borderColor: isActive ? colors.secondary : addOpacity(colors.divider, "20"),
+                                    borderWidth: isActive ? 1.5 : 1,
+                                }}
+                            >
+                                <View className="pr-2 justify-center">
+                                    <Text
+                                        className="text-[16px] font-semibold"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.label}
+                                    </Text>
+                                    <Text
+                                        className="text-[12px] opacity-60 mt-0.5"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.sub}
+                                    </Text>
+                                </View>
+                                <View className="flex-1 justify-center">
+                                    {isActive ? (
+                                        <TextInput
+                                            className="text-right text-[18px] font-bold p-0 py-1 flex-1"
+                                            style={{ color: colors.text }}
+                                            value={item.val}
+                                            onChangeText={item.change}
+                                            placeholder={item.ph}
+                                            placeholderTextColor={colors.paceHolder}
+                                            keyboardType="decimal-pad"
+                                            autoFocus={true}
+                                            selectTextOnFocus={true}
+                                        />
+                                    ) : (
+                                        <Text
+                                            className="text-right text-[18px] font-semibold py-1 flex-1"
+                                            style={{ color: item.val ? colors.text : colors.paceHolder }}
+                                            numberOfLines={1}
+                                            ellipsizeMode="tail"
+                                        >
+                                            {item.val || item.ph}
+                                        </Text>
+                                    )}
+                                </View>
+                            </Pressable>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </View>
@@ -213,18 +215,3 @@ const Volume = () => {
 };
 
 export default Volume;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 20,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "row",
-        height: 480,
-    },
-    convertorIndicator: {
-        justifyContent: "space-around",
-        height: "100%",
-        alignItems: "flex-end",
-    },
-});

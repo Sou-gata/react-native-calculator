@@ -1,8 +1,7 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { ScrollView, View, TextInput, Pressable } from "react-native";
 import { useState } from "react";
 import { useTheme, Text } from "react-native-paper";
-import CustomInput from "../components/CustomInput";
-import { parseNumber } from "../helpers/functions";
+import { parseNumber, addOpacity } from "../helpers/functions";
 import { colorSchemeType } from "../../types";
 
 const Area = () => {
@@ -16,6 +15,7 @@ const Area = () => {
         acre: "",
         mile: "",
     });
+    const [activeKey, setActiveKey] = useState<string>("cm");
 
     const setValues = (
         cm: string,
@@ -42,7 +42,7 @@ const Area = () => {
 
     const onChangeCm = (e: string) => {
         setText({ ...text, cm: e });
-        if (e != "") {
+        if (e !== "") {
             const cm = parseFloat(e);
             if (isNaN(cm)) return;
             const m = parseNumber(cm * 0.0001) + "";
@@ -56,7 +56,7 @@ const Area = () => {
     };
     const onChangeM = (e: string) => {
         setText({ ...text, m: e });
-        if (e != "") {
+        if (e !== "") {
             const m = parseFloat(e);
             const cm = parseNumber(m * 10000) + "";
             const inc = parseNumber(m * 1550) + "";
@@ -69,7 +69,7 @@ const Area = () => {
     };
     const onChangeInch = (e: string) => {
         setText({ ...text, inc: e });
-        if (e != "") {
+        if (e !== "") {
             const inc = parseFloat(e);
             const cm = parseNumber(inc * 6.4516) + "";
             const m = parseNumber(inc * 0.00064516) + "";
@@ -82,7 +82,7 @@ const Area = () => {
     };
     const onChangeFoot = (e: string) => {
         setText({ ...text, foot: e });
-        if (e != "") {
+        if (e !== "") {
             const foot = parseFloat(e);
             const cm = parseNumber(foot * 929.03) + "";
             const m = parseNumber(foot * 0.092903) + "";
@@ -95,7 +95,7 @@ const Area = () => {
     };
     const onChangeYard = (e: string) => {
         setText({ ...text, yard: e });
-        if (e != "") {
+        if (e !== "") {
             const yard = parseFloat(e);
             const cm = parseNumber(yard * 8361.27) + "";
             const m = parseNumber(yard * 0.836127) + "";
@@ -108,7 +108,7 @@ const Area = () => {
     };
     const onChangeAcre = (e: string) => {
         setText({ ...text, acre: e });
-        if (e != "") {
+        if (e !== "") {
             const acre = parseFloat(e);
             const cm = parseNumber(acre * 40470000) + "";
             const m = parseNumber(acre * 4046.86) + "";
@@ -121,7 +121,7 @@ const Area = () => {
     };
     const onChangeMile = (e: string) => {
         setText({ ...text, mile: e });
-        if (e != "") {
+        if (e !== "") {
             const mile = parseFloat(e);
             const cm = parseNumber(mile * 25900000000) + "";
             const m = parseNumber(mile * 2590000) + "";
@@ -132,78 +132,73 @@ const Area = () => {
             setValues(cm, m, inc, foot, yard, acre, e);
         } else setEmpty();
     };
+
     return (
-        <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
-            <ScrollView>
-                <View style={styles.container}>
-                    <View style={styles.convertorIndicator}>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            cm²
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            m²
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            inch²
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            foot²
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            yard²
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            Acre
-                        </Text>
-                        <Text style={{ color: colors.text, fontSize: 20 }}>
-                            mile²
-                        </Text>
-                    </View>
-                    <View
-                        style={[styles.convertorIndicator, { marginLeft: 30 }]}>
-                        <CustomInput
-                            onChangeText={onChangeCm}
-                            value={text.cm}
-                            placeholder="Centimeter²"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeM}
-                            value={text.m}
-                            placeholder="Meter²"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeInch}
-                            value={text.inc}
-                            placeholder="Inch²"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeFoot}
-                            value={text.foot}
-                            placeholder="Foot²"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeYard}
-                            value={text.yard}
-                            placeholder="Yard²"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeAcre}
-                            value={text.acre}
-                            placeholder="Acre"
-                            width={180}
-                        />
-                        <CustomInput
-                            onChangeText={onChangeMile}
-                            value={text.mile}
-                            placeholder="Mile²"
-                            width={180}
-                        />
-                    </View>
+        <View className="flex-1" style={{ backgroundColor: colors.backgroundColor }}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="p-4 pt-6" keyboardShouldPersistTaps="handled">
+                <View className="flex-col pb-6">
+                    {[
+                        { key: "cm", label: "Centimeter²", sub: "cm²", val: text.cm, change: onChangeCm, ph: "Centimeter²" },
+                        { key: "m", label: "Meter²", sub: "m²", val: text.m, change: onChangeM, ph: "Meter²" },
+                        { key: "inc", label: "Inch²", sub: "in²", val: text.inc, change: onChangeInch, ph: "Inch²" },
+                        { key: "foot", label: "Foot²", sub: "ft²", val: text.foot, change: onChangeFoot, ph: "Foot²" },
+                        { key: "yard", label: "Yard²", sub: "yd²", val: text.yard, change: onChangeYard, ph: "Yard²" },
+                        { key: "acre", label: "Acre", sub: "ac", val: text.acre, change: onChangeAcre, ph: "Acre" },
+                        { key: "mile", label: "Mile²", sub: "mi²", val: text.mile, change: onChangeMile, ph: "Mile²" },
+                    ].map((item, idx) => {
+                        const isActive = activeKey === item.key;
+                        return (
+                            <Pressable
+                                key={idx}
+                                onPress={() => setActiveKey(item.key)}
+                                className="flex-row items-center justify-between p-3.5 mb-3 rounded-2xl border"
+                                style={{
+                                    backgroundColor: isActive ? addOpacity(colors.secondary, "08") : colors.elevation.level2,
+                                    borderColor: isActive ? colors.secondary : addOpacity(colors.divider, "20"),
+                                    borderWidth: isActive ? 1.5 : 1,
+                                }}
+                            >
+                                <View className="pr-2 justify-center">
+                                    <Text
+                                        className="text-[16px] font-semibold"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.label}
+                                    </Text>
+                                    <Text
+                                        className="text-[12px] opacity-60 mt-0.5"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.sub}
+                                    </Text>
+                                </View>
+                                <View className="flex-1 justify-center">
+                                    {isActive ? (
+                                        <TextInput
+                                            className="text-right text-[18px] font-bold p-0 py-1 flex-1"
+                                            style={{ color: colors.text }}
+                                            value={item.val}
+                                            onChangeText={item.change}
+                                            placeholder={item.ph}
+                                            placeholderTextColor={colors.paceHolder}
+                                            keyboardType="decimal-pad"
+                                            autoFocus={true}
+                                            selectTextOnFocus={true}
+                                        />
+                                    ) : (
+                                        <Text
+                                            className="text-right text-[18px] font-semibold py-1 flex-1"
+                                            style={{ color: item.val ? colors.text : colors.paceHolder }}
+                                            numberOfLines={1}
+                                            ellipsizeMode="tail"
+                                        >
+                                            {item.val || item.ph}
+                                        </Text>
+                                    )}
+                                </View>
+                            </Pressable>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </View>
@@ -211,18 +206,3 @@ const Area = () => {
 };
 
 export default Area;
-
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 29,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "row",
-        height: 450,
-    },
-    convertorIndicator: {
-        justifyContent: "space-around",
-        height: "100%",
-        alignItems: "flex-end",
-    },
-});

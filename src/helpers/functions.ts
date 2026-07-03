@@ -319,7 +319,6 @@ export function decimalToBinary(decimalNum: number): number {
     }
 }
 export function pointRemove(val: string): string {
-    let ans: string;
     let number = val.split("");
     let lastDig = number[number.length - 1];
     if (lastDig == ".") {
@@ -1520,3 +1519,15 @@ export function infixToPostfix(infix: string) {
         postfix: removeSpace(ans),
     };
 }
+
+export function addOpacity(color: string, opacity: string): string {
+    if (color && color.startsWith("#")) {
+        if (color.length === 9) {
+            return color.slice(0, 7) + opacity;
+        }
+        if (color.length === 5) {
+            return color.slice(0, 4) + opacity;
+        }
+    }
+    return color + opacity;
+};

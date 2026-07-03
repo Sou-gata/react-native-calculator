@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ScrollView, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useTheme, Text } from "react-native-paper";

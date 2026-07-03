@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { useState } from "react";
 import { useTheme, Text, DataTable, Button } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -18,56 +18,12 @@ const PostFix = () => {
         setData(ans);
     };
 
-    const styles = StyleSheet.create({
-        container: { flex: 1, backgroundColor: colors.backgroundColor },
-        input: {
-            alignItems: "center",
-            marginVertical: 20,
-        },
-        colOne: {
-            flex: 0,
-            width: "15%",
-        },
-        colTwo: {
-            flex: 0,
-            width: "30%",
-        },
-        colThree: {
-            flex: 0,
-            width: "55%",
-        },
-        ansContainer: {
-            flexDirection: "row",
-            justifyContent: "center",
-            height: 50,
-        },
-        ansKeyText: {
-            fontSize: 20,
-            color: colors.divider,
-        },
-        ansValueText: {
-            fontSize: 20,
-            color: colors.text,
-        },
-        tableHeader: {
-            backgroundColor: colors.secondary + "e0",
-        },
-        headerText: {
-            fontWeight: "bold",
-            fontSize: 17,
-            color: "#fff",
-        },
-        tableRow: {
-            borderBlockColor: colors.secondary,
-        },
-        tableData: {
-            color: colors.text,
-        },
-    });
-
     return (
-        <View style={styles.container}>
-            <View style={styles.input}>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="items-center my-5">
                 <CustomInput
                     width={200}
                     keyboardType="default"
@@ -80,37 +36,54 @@ const PostFix = () => {
                     onPress={() => calculate()}
                     buttonColor={colors.secondary}
                     textColor="white"
-                    style={{ marginTop: 15 }}>
+                    className="mt-[15px]"
+                >
                     Calculate
                 </Button>
             </View>
 
             {data.data.length > 0 && (
                 <>
-                    <View style={styles.ansContainer}>
-                        <View style={{ alignItems: "flex-end" }}>
-                            <Text style={styles.ansKeyText}>Infix: </Text>
-                            <Text style={styles.ansKeyText}>Postfix: </Text>
+                    <View className="flex-row justify-center h-[50px]">
+                        <View className="items-end">
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.divider }}
+                            >
+                                Infix:{" "}
+                            </Text>
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.divider }}
+                            >
+                                Postfix:{" "}
+                            </Text>
                         </View>
                         <View>
-                            <Text style={styles.ansValueText}>
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.text }}
+                            >
                                 {data.infix}
                             </Text>
-                            <Text style={styles.ansValueText}>
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.text }}
+                            >
                                 {data.postfix}
                             </Text>
                         </View>
                     </View>
-                    <DataTable style={{ marginTop: 20 }}>
-                        <DataTable.Header style={styles.tableHeader}>
-                            <DataTable.Title style={styles.colOne}>
-                                <Text style={styles.headerText}>Infix</Text>
+                    <DataTable className="mt-5">
+                        <DataTable.Header style={{ backgroundColor: colors.secondary + "e0" }}>
+                            <DataTable.Title className="flex-0 w-[15%]">
+                                <Text className="font-bold text-[17px] text-white">Infix</Text>
                             </DataTable.Title>
-                            <DataTable.Title style={styles.colTwo}>
-                                <Text style={styles.headerText}>Stack</Text>
+                            <DataTable.Title className="flex-0 w-[30%]">
+                                <Text className="font-bold text-[17px] text-white">Stack</Text>
                             </DataTable.Title>
-                            <DataTable.Title style={styles.colThree}>
-                                <Text style={styles.headerText}>Postfix</Text>
+                            <DataTable.Title className="flex-0 w-[55%]">
+                                <Text className="font-bold text-[17px] text-white">Postfix</Text>
                             </DataTable.Title>
                         </DataTable.Header>
                     </DataTable>
@@ -123,22 +96,25 @@ const PostFix = () => {
                                     return (
                                         <DataTable.Row
                                             key={i}
-                                            style={styles.tableRow}>
+                                            style={{ borderBlockColor: colors.secondary }}>
                                             <DataTable.Cell
-                                                style={styles.colOne}>
-                                                <Text style={styles.tableData}>
+                                                className="flex-0 w-[15%]"
+                                            >
+                                                <Text style={{ color: colors.text }}>
                                                     {row[0]}
                                                 </Text>
                                             </DataTable.Cell>
                                             <DataTable.Cell
-                                                style={styles.colTwo}>
-                                                <Text style={styles.tableData}>
+                                                className="flex-0 w-[30%]"
+                                            >
+                                                <Text style={{ color: colors.text }}>
                                                     {row[1]}
                                                 </Text>
                                             </DataTable.Cell>
                                             <DataTable.Cell
-                                                style={styles.colThree}>
-                                                <Text style={styles.tableData}>
+                                                className="flex-0 w-[55%]"
+                                            >
+                                                <Text style={{ color: colors.text }}>
                                                     {row[2]}
                                                 </Text>
                                             </DataTable.Cell>
@@ -146,7 +122,7 @@ const PostFix = () => {
                                     );
                                 })}
                             </DataTable>
-                            <View style={{ height: 20 }} />
+                            <View className="h-5" />
                         </>
                     </ScrollView>
                 </>

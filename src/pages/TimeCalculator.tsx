@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { useState } from "react";
 import { useTheme, Button, Text, RadioButton } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
@@ -33,81 +33,59 @@ const TimeCalculator = () => {
         sec: undefined,
     });
 
-    const styles = StyleSheet.create({
-        container: {
-            justifyContent: "center",
-            alignContent: "center",
-            width: "100%",
-        },
-        flexRow: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-        },
-        inputHeader: { fontSize: 18, color: colors.text },
-        timeHeadText: {
-            width: (wp("100%") - 10) / 4,
-            alignItems: "center",
-            justifyContent: "center",
-        },
-        inputRow: {
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            marginTop: 10,
-        },
-        radioGroup: {
-            flexDirection: "row",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 5,
-        },
-        radioItem: {
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 10,
-        },
-        radioText: {
-            fontSize: 20,
-            color: colors.text,
-        },
-        pressable: {
-            borderRadius: 50,
-            overflow: "hidden",
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginTop: 20,
-        },
-        textHighlight: {
-            fontSize: 35,
-            textAlign: "center",
-            color: colors.secondary,
-        },
-        ansText: {
-            fontSize: 18,
-            color: colors.text,
-        },
-    });
-
     return (
-        <View style={{ backgroundColor: colors.backgroundColor, flex: 1 }}>
-            <View style={styles.container}>
-                <View style={[styles.flexRow, { marginTop: 20 }]}>
-                    <View style={styles.timeHeadText}>
-                        <Text style={styles.inputHeader}>Days</Text>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            <View className="justify-center content-center w-full">
+                <View className="flex-row items-center justify-center mt-5">
+                    <View
+                        className="items-center justify-center"
+                        style={{ width: (wp("100%") - 10) / 4 }}
+                    >
+                        <Text
+                            className="text-[18px]"
+                            style={{ color: colors.text }}
+                        >
+                            Days
+                        </Text>
                     </View>
-                    <View style={styles.timeHeadText}>
-                        <Text style={styles.inputHeader}>Hours</Text>
+                    <View
+                        className="items-center justify-center"
+                        style={{ width: (wp("100%") - 10) / 4 }}
+                    >
+                        <Text
+                            className="text-[18px]"
+                            style={{ color: colors.text }}
+                        >
+                            Hours
+                        </Text>
                     </View>
-                    <View style={styles.timeHeadText}>
-                        <Text style={styles.inputHeader}>Minutes</Text>
+                    <View
+                        className="items-center justify-center"
+                        style={{ width: (wp("100%") - 10) / 4 }}
+                    >
+                        <Text
+                            className="text-[18px]"
+                            style={{ color: colors.text }}
+                        >
+                            Minutes
+                        </Text>
                     </View>
-                    <View style={styles.timeHeadText}>
-                        <Text style={styles.inputHeader}>Seconds</Text>
+                    <View
+                        className="items-center justify-center"
+                        style={{ width: (wp("100%") - 10) / 4 }}
+                    >
+                        <Text
+                            className="text-[18px]"
+                            style={{ color: colors.text }}
+                        >
+                            Seconds
+                        </Text>
                     </View>
                 </View>
-                <View style={styles.inputRow}>
+                <View className="flex-row justify-evenly mt-[10px]">
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d1")}
@@ -133,10 +111,10 @@ const TimeCalculator = () => {
                         width={65}
                     />
                 </View>
-                <View style={styles.radioGroup}>
-                    <View style={styles.pressable}>
+                <View className="flex-row w-full items-center justify-center mt-[5px]">
+                    <View className="rounded-full overflow-hidden">
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center p-[10px]"
                             onPress={() => setOperation(1)}
                             android_ripple={{
                                 color: colors.secondary + "80",
@@ -151,12 +129,17 @@ const TimeCalculator = () => {
                                 color={colors.secondary}
                                 onPress={() => setOperation(1)}
                             />
-                            <Text style={styles.radioText}>Add (+)</Text>
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.text }}
+                            >
+                                Add (+)
+                            </Text>
                         </Pressable>
                     </View>
-                    <View style={styles.pressable}>
+                    <View className="rounded-full overflow-hidden">
                         <Pressable
-                            style={styles.radioItem}
+                            className="flex-row items-center p-[10px]"
                             onPress={() => setOperation(2)}
                             android_ripple={{
                                 color: colors.secondary + "80",
@@ -171,11 +154,16 @@ const TimeCalculator = () => {
                                 color={colors.secondary}
                                 onPress={() => setOperation(2)}
                             />
-                            <Text style={styles.radioText}>Subtract (-)</Text>
+                            <Text
+                                className="text-[20px]"
+                                style={{ color: colors.text }}
+                            >
+                                Subtract (-)
+                            </Text>
                         </Pressable>
                     </View>
                 </View>
-                <View style={styles.inputRow}>
+                <View className="flex-row justify-evenly mt-[10px]">
                     <CustomInput
                         placeholder="day"
                         onChangeText={(e) => changeValues(e, "d2")}
@@ -201,7 +189,7 @@ const TimeCalculator = () => {
                         width={65}
                     />
                 </View>
-                <View style={styles.buttonContainer}>
+                <View className="items-center mt-[20px]">
                     <Button
                         mode="contained"
                         onPress={() => {
@@ -214,30 +202,70 @@ const TimeCalculator = () => {
                     </Button>
                 </View>
                 {ans.day && ans.day >= 0 && (
-                    <View style={[styles.flexRow, { marginTop: 30 }]}>
+                    <View className="flex-row items-center justify-center mt-[30px]">
                         {ans.day && ans.day > 0 && (
-                            <Text style={styles.textHighlight}>{ans.day}</Text>
+                            <Text
+                                className="text-[35px] text-center"
+                                style={{ color: colors.secondary }}
+                            >
+                                {ans.day}
+                            </Text>
                         )}
                         {ans.day && ans.day > 0 && (
-                            <Text style={styles.ansText}> D</Text>
+                            <Text
+                                className="text-[18px]"
+                                style={{ color: colors.text }}
+                            >
+                                {" "}D
+                            </Text>
                         )}
                         {ans.hou && ans.hou > 0 && (
-                            <Text style={styles.textHighlight}> {ans.hou}</Text>
+                            <Text
+                                className="text-[35px] text-center"
+                                style={{ color: colors.secondary }}
+                            >
+                                {" "}{ans.hou}
+                            </Text>
                         )}
                         {ans.hou && ans.hou > 0 && (
-                            <Text style={styles.ansText}> H</Text>
+                            <Text
+                                className="text-[18px]"
+                                style={{ color: colors.text }}
+                            >
+                                {" "}H
+                            </Text>
                         )}
                         {ans.min && ans.min > 0 && (
-                            <Text style={styles.textHighlight}> {ans.min}</Text>
+                            <Text
+                                className="text-[35px] text-center"
+                                style={{ color: colors.secondary }}
+                            >
+                                {" "}{ans.min}
+                            </Text>
                         )}
                         {ans.min && ans.min > 0 && (
-                            <Text style={styles.ansText}> M</Text>
+                            <Text
+                                className="text-[18px]"
+                                style={{ color: colors.text }}
+                            >
+                                {" "}M
+                            </Text>
                         )}
                         {ans.sec && ans.sec > 0 && (
-                            <Text style={styles.textHighlight}> {ans.sec}</Text>
+                            <Text
+                                className="text-[35px] text-center"
+                                style={{ color: colors.secondary }}
+                            >
+                                {" "}{ans.sec}
+                            </Text>
                         )}
                         {ans.sec && ans.sec > 0 && (
-                            <Text style={styles.ansText}> S</Text>
+                            <Text
+                                className="text-[18px]"
+                                style={{ color: colors.text }}
+                            >
+                                {" "}S
+                            </Text>
                         )}
                     </View>
                 )}

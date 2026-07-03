@@ -1,5 +1,5 @@
 import { View, Pressable, Animated } from "react-native";
-import { useRef, useContext } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { cssInterop } from "nativewind";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -21,46 +21,45 @@ const ThemeSwitch = () => {
         new Animated.Value(state?.theme === "dark" ? 1 : 0)
     ).current;
 
-    const lightIn = () => {
-        Animated.timing(animOne, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-        Animated.timing(animTwo, {
-            toValue: 0,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-    };
+    useEffect(() => {
+        if (state?.theme === "dark") {
+            Animated.timing(animOne, {
+                toValue: 0,
+                duration: 500,
+                useNativeDriver: true,
+            }).start();
+            Animated.timing(animTwo, {
+                toValue: 1,
+                duration: 500,
+                useNativeDriver: true,
+            }).start();
+        } else {
+            Animated.timing(animOne, {
+                toValue: 1,
+                duration: 500,
+                useNativeDriver: true,
+            }).start();
+            Animated.timing(animTwo, {
+                toValue: 0,
+                duration: 500,
+                useNativeDriver: true,
+            }).start();
+        }
+    }, [state?.theme, animOne, animTwo]);
+
     const rotateOne = animOne.interpolate({
         inputRange: [0, 1],
         outputRange: ["0deg", "360deg"],
     });
-
-    const darkIn = () => {
-        Animated.timing(animOne, {
-            toValue: 0,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-        Animated.timing(animTwo, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: true,
-        }).start();
-    };
 
     const rotateTwo = animTwo.interpolate({
         inputRange: [0, 1],
         outputRange: ["0deg", "360deg"],
     });
     return (
-        <View className="absolute z-[99] right-4 top-2.5 w-6 h-6">
+        <View className="absolute z-[99] right-4 top-2.5 w-7 h-6">
             <Pressable
                 onPress={() => {
-                    if (state?.theme === "dark") lightIn();
-                    else darkIn();
                     state?.updateTheme(
                         state.theme === "light" ? "dark" : "light"
                     );

@@ -1,3 +1,4 @@
+import React from "react";
 import {
     View,
     Text,
@@ -5,13 +6,15 @@ import {
     Pressable,
     Linking,
     ScrollView,
-    StyleSheet,
+    Platform,
 } from "react-native";
 import versionInfo from "../helpers/versionInfo";
 import { useTheme } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { colorSchemeType } from "../../types";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { addOpacity } from "../helpers/functions";
 
 const icon = require("../../assets/icon.png");
 
@@ -20,311 +23,340 @@ const About = ({
 }: {
     navigation: StackNavigationProp<any, any>;
 }) => {
-    const { colors } = useTheme<colorSchemeType>();
+    const { colors, dark } = useTheme<colorSchemeType>();
+    const insets = useSafeAreaInsets();
     const appVersion = versionInfo[0]?.ver || "1.5.2";
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.backgroundColor,
-        },
-        header: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingHorizontal: 20,
-            paddingTop: 20,
-            paddingBottom: 10,
-        },
-        headerTitle: {
-            fontSize: 22,
-            fontFamily: "Flamante",
-            color: colors.secondary,
-            fontWeight: "bold",
-        },
-        crossButton: {
-            width: 40,
-            height: 40,
-            borderRadius: 20,
-            backgroundColor: colors.calBg,
-            alignItems: "center",
-            justifyContent: "center",
-            borderWidth: 1,
-            borderColor: colors.divider || "rgba(0,0,0,0.05)",
-        },
-        scrollContent: {
-            paddingHorizontal: 20,
-            paddingBottom: 40,
-            paddingTop: 10,
-        },
-        heroSection: {
-            alignItems: "center",
-            marginBottom: 20,
-        },
-        aboutIcon: {
-            width: 110,
-            height: 110,
-            borderRadius: 28,
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.15,
-            shadowRadius: 8,
-            elevation: 4,
-        },
-        appName: {
-            fontSize: 32,
-            fontFamily: "Flamante",
-            color: colors.secondary,
-            fontWeight: "800",
-            marginTop: 5,
-        },
-        versionContainer: {
-            backgroundColor: colors.calBg,
-            paddingHorizontal: 12,
-            paddingVertical: 4,
-            borderRadius: 20,
-            marginTop: 8,
-            borderWidth: 1,
-            borderColor: colors.divider || "rgba(0,0,0,0.05)",
-        },
-        versionText: {
-            fontSize: 14,
-            color: colors.text,
-            fontWeight: "600",
-            opacity: 0.8,
-        },
-        authorText: {
-            fontSize: 15,
-            color: colors.text,
-            marginTop: 10,
-            opacity: 0.6,
-        },
-        authorName: {
-            fontFamily: "Flamante",
-            color: colors.secondary,
-            fontWeight: "bold",
-        },
-        card: {
-            backgroundColor: colors.calBg,
-            borderRadius: 20,
-            padding: 20,
-            marginBottom: 20,
-            borderWidth: 1,
-            borderColor: colors.divider || "rgba(0,0,0,0.05)",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.05,
-            shadowRadius: 6,
-            elevation: 1,
-        },
-        descriptionText: {
-            fontSize: 15,
-            lineHeight: 22,
-            color: colors.text,
-            textAlign: "center",
-            opacity: 0.85,
-        },
-        sectionTitle: {
-            fontSize: 18,
-            fontFamily: "Flamante",
-            color: colors.secondary,
-            fontWeight: "bold",
-            marginBottom: 15,
-        },
-        featureItem: {
-            flexDirection: "row",
-            alignItems: "center",
-            paddingVertical: 10,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.divider || "rgba(0,0,0,0.05)",
-        },
-        lastFeatureItem: {
-            flexDirection: "row",
-            alignItems: "center",
-            paddingVertical: 10,
-        },
-        featureIconContainer: {
-            width: 36,
-            height: 36,
-            borderRadius: 18,
-            backgroundColor: colors.backgroundColor,
-            alignItems: "center",
-            justifyContent: "center",
-            marginRight: 12,
-        },
-        featureText: {
-            fontSize: 15,
-            color: colors.text,
-            flex: 1,
-            fontWeight: "500",
-        },
-        githubButton: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: colors.secondary,
-            borderRadius: 16,
-            paddingVertical: 15,
-            marginBottom: 20,
-            shadowColor: colors.secondary,
-            shadowOffset: { width: 0, height: 3 },
-            shadowOpacity: 0.2,
-            shadowRadius: 6,
-            elevation: 3,
-        },
-        githubButtonText: {
-            color: colors.backgroundColor,
-            fontSize: 16,
-            fontWeight: "bold",
-            marginLeft: 10,
-        },
-        socialRow: {
-            flexDirection: "row",
-            justifyContent: "space-around",
-            alignItems: "center",
-            marginTop: 5,
-        },
-        socialButton: {
-            width: 50,
-            height: 50,
-            borderRadius: 25,
-            backgroundColor: colors.backgroundColor,
-            alignItems: "center",
-            justifyContent: "center",
-            borderWidth: 1,
-            borderColor: colors.divider || "rgba(0,0,0,0.05)",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.05,
-            shadowRadius: 3,
-            elevation: 1,
-        },
-    });
+    // Clean, high-contrast card colors
+    const cardBg = dark ? "#2c3134" : "#ffffff";
+    const cardBorder = dark ? addOpacity(colors.divider, "10") : addOpacity(colors.divider, "08");
 
     const keyFeatures = [
         {
             id: 1,
-            text: "Multiply & Divide with detail views",
-            icon: "calculator",
+            title: "Advanced Math details",
+            desc: "Multiply & Divide with comprehensive step-by-step detail views.",
+            icon: "calculator-sharp",
         },
-        { id: 2, text: "LCM & HCF step-by-step breakdown", icon: "analytics" },
+        { 
+            id: 2, 
+            title: "LCM & HCF breakdown", 
+            desc: "Understand factor calculations with exact visual steps.",
+            icon: "analytics-sharp" 
+        },
         {
             id: 3,
-            text: "Geometric Shapes & Bodies with formulas",
-            icon: "cube",
+            title: "Geometry Formulas",
+            desc: "Explore 2D Shapes & 3D Bodies with equations and volume solving.",
+            icon: "cube-sharp",
         },
         {
             id: 4,
-            text: "Two & Three variable equation solver",
-            icon: "git-compare",
+            title: "Equation Solver",
+            desc: "Solve linear equations with up to two and three variables.",
+            icon: "git-compare-sharp",
         },
-        { id: 5, text: "Useful reference formulas list", icon: "book" },
+        { 
+            id: 5, 
+            title: "Formula Quick-Ref", 
+            desc: "Fast reference list for calculus, algebra, and common math formulas.",
+            icon: "book-sharp" 
+        },
     ];
 
+    const shadowStyle = Platform.select({
+        ios: {
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: dark ? 0.25 : 0.05,
+            shadowRadius: 10,
+        },
+        android: {
+            elevation: 2,
+        },
+    });
+
+    const logoOuterRing = {
+        backgroundColor: addOpacity(colors.primary, "08"),
+        borderColor: addOpacity(colors.primary, "25"),
+        borderStyle: "dashed" as const,
+        borderWidth: 2,
+    };
+
     return (
-        <View style={styles.container}>
-            {/* Top Navigation Bar */}
-            <View style={styles.header}>
-                <Text style={styles.headerTitle}></Text>
+        <View
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+        >
+            {/* Top Header */}
+            <View
+                className="flex-row items-center justify-between pb-2 px-6 border-b"
+                style={{
+                    paddingTop: Math.max(insets.top, 8),
+                    borderBottomColor: addOpacity(colors.divider, "10"),
+                }}
+            >
+                <View className="flex-row items-center">
+                    <Ionicons
+                        name="information-circle"
+                        size={24}
+                        color={colors.primary}
+                        className="mr-2"
+                    />
+                    <Text
+                        className="text-xl font-bold tracking-tight"
+                        style={{ color: colors.text }}
+                    >
+                        About App
+                    </Text>
+                </View>
                 <Pressable
-                    style={styles.crossButton}
+                    className="w-10 h-10 rounded-full items-center justify-center"
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: cardBg,
+                            borderWidth: 1,
+                            borderColor: cardBorder,
+                            opacity: pressed ? 0.7 : 1,
+                        },
+                    ]}
                     onPress={() => {
                         navigation.navigate("Home");
                     }}
                 >
-                    <Ionicons name="close" size={22} color={colors.secondary} />
+                    <Ionicons name="close" size={22} color={colors.text} />
                 </Pressable>
             </View>
 
             <ScrollView
-                contentContainerStyle={styles.scrollContent}
+                contentContainerStyle={{
+                    paddingHorizontal: 20,
+                    paddingBottom: 20,
+                    paddingTop: 16,
+                }}
                 showsVerticalScrollIndicator={false}
             >
-                {/* Hero Header Section */}
-                <View style={styles.heroSection}>
-                    <Image style={styles.aboutIcon} source={icon} />
-                    <Text style={styles.appName}>Calculator</Text>
-                    <View style={styles.versionContainer}>
-                        <Text style={styles.versionText}>v{appVersion}</Text>
+                {/* Logo & Headline Card */}
+                <View 
+                    className="items-center rounded-[24px] p-6 mb-3 border"
+                    style={[
+                        {
+                            backgroundColor: cardBg,
+                            borderColor: cardBorder,
+                        },
+                        shadowStyle
+                    ]}
+                >
+                    {/* Pulsing Dash Ring for Icon */}
+                    <View 
+                        className="w-28 h-28 rounded-full items-center justify-center mb-4"
+                        style={logoOuterRing}
+                    >
+                        <Image
+                            className="w-[86px] h-[86px] rounded-[22px]"
+                            source={icon}
+                        />
                     </View>
-                    <Text style={styles.authorText}>
-                        by{" "}
-                        <Text style={styles.authorName}>Sougata Talukdar</Text>
+                    
+                    <Text
+                        className="text-3xl font-extrabold tracking-tight"
+                        style={{ fontFamily: "Flamante", color: colors.secondary }}
+                    >
+                        Calculator
+                    </Text>
+                    
+                    <View
+                        className="px-3 py-1 rounded-full mt-2 border"
+                        style={{
+                            backgroundColor: addOpacity(colors.secondary, "10"),
+                            borderColor: addOpacity(colors.secondary, "20"),
+                        }}
+                    >
+                        <Text
+                            className="text-xs font-bold tracking-wide"
+                            style={{ color: colors.secondary }}
+                        >
+                            VERSION {appVersion}
+                        </Text>
+                    </View>
+                    
+                    <Text
+                        className="text-[14px] mt-4 opacity-70 text-center leading-5"
+                        style={{ color: colors.text }}
+                    >
+                        An elegant, multipurpose utility designed for fast daily conversions, equation solving, and interactive step-by-step arithmetic.
                     </Text>
                 </View>
 
-                {/* About Project Description */}
-                <View style={styles.card}>
-                    <Text style={styles.descriptionText}>
-                        This is an open source project, built using React
-                        Native. You are free to use it however you like. If you
-                        like my work, please give a star to this project on
-                        GitHub. If you find any bugs or have improvement ideas,
-                        let me know!
-                    </Text>
+                {/* About Developer Section */}
+                <View
+                    className="flex-row items-center rounded-[20px] p-4 mb-3 border"
+                    style={[
+                        {
+                            backgroundColor: cardBg,
+                            borderColor: cardBorder,
+                        },
+                        shadowStyle
+                    ]}
+                >
+                    <View 
+                        className="w-11 h-11 rounded-full items-center justify-center mr-3"
+                        style={{ backgroundColor: addOpacity(colors.secondary, "10") }}
+                    >
+                        <Ionicons name="code-slash" size={20} color={colors.secondary} />
+                    </View>
+                    <View className="flex-1">
+                        <Text className="text-xs opacity-50 uppercase tracking-wider font-semibold" style={{ color: colors.text }}>
+                            Developer
+                        </Text>
+                        <Text
+                            className="text-base font-bold"
+                            style={{ fontFamily: "Flamante", color: colors.text }}
+                        >
+                            Sougata Talukdar
+                        </Text>
+                    </View>
                 </View>
 
-                {/* Key Features Card */}
-                <View style={styles.card}>
-                    <Text style={styles.sectionTitle}>Key Features</Text>
+                {/* Project Open-Source Info */}
+                <View
+                    className="rounded-[20px] p-5 mb-3 border"
+                    style={[
+                        {
+                            backgroundColor: cardBg,
+                            borderColor: cardBorder,
+                        },
+                        shadowStyle
+                    ]}
+                >
+                    <View className="flex-row items-center mb-3">
+                        <Ionicons name="logo-github" size={20} color={colors.text} className="mr-2" />
+                        <Text className="text-base font-bold" style={{ color: colors.text }}>
+                            Open Source Project
+                        </Text>
+                    </View>
+                    <Text
+                        className="text-sm leading-6 opacity-80"
+                        style={{ color: colors.text }}
+                    >
+                        This project is open source and built with React Native. You are free to modify or contribute! If you like this work, please consider giving a star to the repository.
+                    </Text>
+                    
+                    <Pressable
+                        className="flex-row items-center justify-center rounded-2xl py-3 mt-4 border border-gray-500"
+                        style={({ pressed }) => [
+                            {
+                                backgroundColor: colors.secondary,
+                                borderColor: colors.secondary,
+                                opacity: pressed ? 0.9 : 1,
+                            },
+                        ]}
+                        onPress={() =>
+                            Linking.openURL(
+                                "https://github.com/Sou-gata/react-native-calculator",
+                            )
+                        }
+                    >
+                        <Ionicons
+                            name="star"
+                            size={18}
+                            color="#fff"
+                        />
+                        <Text
+                            className="text-sm font-bold ml-2"
+                            style={{color:colors.text}}
+                        >
+                            Star on GitHub
+                        </Text>
+                    </Pressable>
+                </View>
+
+                {/* Key Features Accordion/Card */}
+                <View
+                    className="rounded-[24px] p-5 mb-3 border"
+                    style={[
+                        {
+                            backgroundColor: cardBg,
+                            borderColor: cardBorder,
+                        },
+                        shadowStyle
+                    ]}
+                >
+                    <Text
+                        className="text-lg font-bold mb-4"
+                        style={{ fontFamily: "Flamante", color: colors.secondary }}
+                    >
+                        Key Capabilities
+                    </Text>
                     {keyFeatures.map((item, index) => {
                         const isLast = index === keyFeatures.length - 1;
                         return (
                             <View
                                 key={item.id}
-                                style={
-                                    isLast
-                                        ? styles.lastFeatureItem
-                                        : styles.featureItem
-                                }
+                                className={`flex-row items-start py-3.5 ${
+                                    isLast ? "" : "border-b"
+                                }`}
+                                style={{
+                                    borderBottomColor: addOpacity(colors.divider, "08"),
+                                }}
                             >
-                                <View style={styles.featureIconContainer}>
+                                <View
+                                    className="w-10 h-10 rounded-full items-center justify-center mr-3 mt-0.5"
+                                    style={{ backgroundColor: addOpacity(colors.primary, "08") }}
+                                >
                                     <Ionicons
                                         name={item.icon}
-                                        size={20}
+                                        size={18}
                                         color={colors.secondary}
                                     />
                                 </View>
-                                <Text style={styles.featureText}>
-                                    {item.text}
-                                </Text>
+                                <View className="flex-1">
+                                    <Text
+                                        className="text-[15px] font-bold"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.title}
+                                    </Text>
+                                    <Text
+                                        className="text-xs opacity-60 mt-1 leading-4"
+                                        style={{ color: colors.text }}
+                                    >
+                                        {item.desc}
+                                    </Text>
+                                </View>
                             </View>
                         );
                     })}
                 </View>
 
-                {/* GitHub Action Button */}
-                <Pressable
-                    style={styles.githubButton}
-                    onPress={() =>
-                        Linking.openURL(
-                            "https://github.com/Sou-gata/react-native-calculator",
-                        )
-                    }
+                {/* Contact Developer Card */}
+                <View
+                    className="rounded-[24px] p-5 mb-6 border"
+                    style={[
+                        {
+                            backgroundColor: cardBg,
+                            borderColor: cardBorder,
+                        },
+                        shadowStyle
+                    ]}
                 >
-                    <Ionicons
-                        name="logo-github"
-                        size={22}
-                        color={colors.backgroundColor}
-                    />
-                    <Text style={styles.githubButtonText}>
-                        Source Code on GitHub
-                    </Text>
-                </Pressable>
-
-                {/* Contact Card */}
-                <View style={styles.card}>
                     <Text
-                        style={[
-                            styles.sectionTitle,
-                            { textAlign: "center", marginBottom: 20 },
-                        ]}
+                        className="text-base font-bold text-center mb-4"
+                        style={{ color: colors.text }}
                     >
-                        Contact Developer
+                        Connect with Developer
                     </Text>
-                    <View style={styles.socialRow}>
+                    <View className="flex-row justify-around items-center">
                         <Pressable
-                            style={styles.socialButton}
+                            className="w-12 h-12 rounded-full items-center justify-center"
+                            style={({ pressed }) => [
+                                {
+                                    backgroundColor: dark ? "#1877f215" : "#1877f208",
+                                    borderWidth: 1,
+                                    borderColor: addOpacity("#1877f2", "20"),
+                                    opacity: pressed ? 0.75 : 1,
+                                },
+                            ]}
                             onPress={() =>
                                 Linking.openURL(
                                     "https://www.facebook.com/sougata76/",
@@ -333,12 +365,20 @@ const About = ({
                         >
                             <Ionicons
                                 name="logo-facebook"
-                                size={24}
-                                color={colors.secondary}
+                                size={22}
+                                color="#1877f2"
                             />
                         </Pressable>
                         <Pressable
-                            style={styles.socialButton}
+                            className="w-12 h-12 rounded-full items-center justify-center"
+                            style={({ pressed }) => [
+                                {
+                                    backgroundColor: dark ? "#e1306c15" : "#e1306c08",
+                                    borderWidth: 1,
+                                    borderColor: addOpacity("#e1306c", "20"),
+                                    opacity: pressed ? 0.75 : 1,
+                                },
+                            ]}
                             onPress={() =>
                                 Linking.openURL(
                                     "https://www.instagram.com/sougata_76/",
@@ -347,12 +387,20 @@ const About = ({
                         >
                             <Ionicons
                                 name="logo-instagram"
-                                size={24}
-                                color={colors.secondary}
+                                size={22}
+                                color="#e1306c"
                             />
                         </Pressable>
                         <Pressable
-                            style={styles.socialButton}
+                            className="w-12 h-12 rounded-full items-center justify-center"
+                            style={({ pressed }) => [
+                                {
+                                    backgroundColor: dark ? "#0077b515" : "#0077b508",
+                                    borderWidth: 1,
+                                    borderColor: addOpacity("#0077b5", "20"),
+                                    opacity: pressed ? 0.75 : 1,
+                                },
+                            ]}
                             onPress={() =>
                                 Linking.openURL(
                                     "https://www.linkedin.com/in/sougata76/",
@@ -361,8 +409,8 @@ const About = ({
                         >
                             <Ionicons
                                 name="logo-linkedin"
-                                size={24}
-                                color={colors.secondary}
+                                size={22}
+                                color="#0077b5"
                             />
                         </Pressable>
                     </View>

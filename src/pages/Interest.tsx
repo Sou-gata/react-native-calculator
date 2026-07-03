@@ -2,16 +2,14 @@ import {
     Image,
     Pressable,
     ScrollView,
-    StyleSheet,
     Text,
     View,
 } from "react-native";
 import { useState } from "react";
-import { Button, Menu, useTheme } from "react-native-paper";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import { Button, useTheme } from "react-native-paper";
 import CustomInput from "../components/CustomInput";
 import Fraction from "../components/Fraction";
-import { parseNumber } from "../helpers/functions";
+import { parseNumber, addOpacity } from "../helpers/functions";
 import { colorSchemeType, compoundInterestDataType } from "../../types";
 
 const CompoundInterest = ({
@@ -136,17 +134,12 @@ const CompoundInterest = ({
 const Interest = () => {
     const { colors } = useTheme<colorSchemeType>();
 
-    const androidRipple = {
-        color: colors.secondary + "80",
-        radius: 150,
-        borderless: false,
-    };
-    const [visible, setVisible] = useState({ 1: false, 2: false });
     const options = [
         { label: "Simple Interest", value: "SI" },
         { label: "Compound Interest", value: "CI" },
     ];
     const [selected, setSelected] = useState(options[0]);
+
     const types = [
         { label: "Annually", n: 1 },
         { label: "Half Yearly", n: 2 },
@@ -156,9 +149,7 @@ const Interest = () => {
         { label: "Daily", n: 365 },
     ];
     const [compounded, setCompounded] = useState(types[0]);
-    const openMenu = (menu: string) => {
-        setVisible((prev) => ({ ...prev, [menu]: true }));
-    };
+
     const [input, setInput] = useState({
         P: "",
         R: "",
@@ -167,12 +158,12 @@ const Interest = () => {
         r: 0,
         t: 0,
     });
+    
     const [ans, setAns] = useState<{
         si?: number;
         ci?: number;
         n?: number;
     }>();
-    const closeMenu = () => setVisible({ 1: false, 2: false });
 
     const Calculate = () => {
         if (input.P === "" || input.R === "" || input.T === "") return;
@@ -207,398 +198,431 @@ const Interest = () => {
         setInput((prev) => ({ ...prev, p, r, t }));
     };
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            padding: 20,
-            backgroundColor: colors.backgroundColor,
-        },
-        menuHandle: {
-            borderWidth: 1,
-            width: 180,
-            borderRadius: 7,
-            paddingRight: 10,
-            overflow: "hidden",
-            borderColor: colors.secondary,
-        },
-        openBtn: {
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-        },
-        flexRow: {
-            flexDirection: "row",
-            alignItems: "center",
-        },
-        selectedText: {
-            fontSize: 16,
-            color: colors.text,
-            padding: 10,
-            textAlign: "center",
-        },
-        inputContainer: {
-            marginTop: 15,
-            paddingVertical: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 20,
-        },
-        buttonContainer: {
-            alignItems: "center",
-            marginVertical: 25,
-        },
-    });
-
     return (
-        <View style={styles.container}>
-            <View style={styles.flexRow}>
-                <Text style={{ color: colors.text, fontSize: 18 }}>
-                    Interest type{"  "}:{"  "}
-                </Text>
-                <Menu
-                    visible={visible[1]}
-                    onDismiss={() => closeMenu()}
-                    anchor={
+        <ScrollView
+            className="flex-1"
+            style={{ backgroundColor: colors.backgroundColor }}
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={{ padding: 20 }}
+        >
+            {/* Interest Type Selector Toggle */}
+            <View
+                className="flex-row rounded-2xl p-1 mb-6 border"
+                style={{
+                    backgroundColor: colors.elevation.level2,
+                    borderColor: addOpacity(colors.divider, "10"),
+                }}
+            >
+                {options.map((opt) => {
+                    const isSelected = selected.value === opt.value;
+                    return (
                         <Pressable
-                            style={styles.menuHandle}
-                            onPress={() => openMenu("1")}
-                            android_ripple={androidRipple}>
-                            <View style={styles.openBtn}>
-                                <Text style={styles.selectedText}>
-                                    {selected.label}
-                                </Text>
-                                <AntDesign
-                                    name="caretdown"
-                                    size={14}
-                                    color={colors.secondary + "f0"}
-                                />
-                            </View>
-                        </Pressable>
-                    }>
-                    {options.map((item, index) => (
-                        <Menu.Item
-                            key={index}
+                            key={opt.value}
                             onPress={() => {
-                                setSelected(item);
-                                closeMenu();
+                                setSelected(opt);
+                                setAns(undefined); // Reset results on toggle
                             }}
-                            title={item.label}
-                            titleStyle={{ color: colors.text }}
-                        />
-                    ))}
-                </Menu>
-            </View>
-            <View style={styles.inputContainer}>
-                <View style={{ justifyContent: "space-between", height: 150 }}>
-                    <Text style={{ color: colors.text, fontSize: 18 }}>
-                        Principal
-                    </Text>
-                    <Text style={{ color: colors.text, fontSize: 18 }}>
-                        Rate %
-                    </Text>
-                    <Text style={{ color: colors.text, fontSize: 18 }}>
-                        Time (Years)
-                    </Text>
-                </View>
-                <View style={{ justifyContent: "space-between", height: 170 }}>
-                    <CustomInput
-                        placeholder="Principal"
-                        value={input.P}
-                        onChangeText={(e) => {
-                            setInput((prev) => {
-                                return { ...prev, P: e };
-                            });
-                        }}
-                        maxLength={8}
-                    />
-                    <CustomInput
-                        placeholder="Rate %"
-                        value={input.R}
-                        onChangeText={(e) => {
-                            setInput((prev) => {
-                                return { ...prev, R: e };
-                            });
-                        }}
-                        maxLength={5}
-                    />
-                    <CustomInput
-                        placeholder="Time"
-                        value={input.T}
-                        onChangeText={(e) => {
-                            setInput((prev) => {
-                                return { ...prev, T: e };
-                            });
-                        }}
-                        maxLength={5}
-                    />
-                </View>
-            </View>
-            {selected.value === "CI" && (
-                <View style={[styles.flexRow, { marginTop: 15 }]}>
-                    <Text style={{ color: colors.text, fontSize: 18 }}>
-                        Compounded{"   "}
-                    </Text>
-                    <Menu
-                        visible={visible[2]}
-                        onDismiss={closeMenu}
-                        anchor={
-                            <Pressable
-                                style={styles.menuHandle}
-                                onPress={() => openMenu("2")}
-                                android_ripple={androidRipple}>
-                                <View style={styles.openBtn}>
-                                    <Text style={styles.selectedText}>
-                                        {compounded.label}
-                                    </Text>
-                                    <AntDesign
-                                        name="caretdown"
-                                        size={14}
-                                        color={colors.secondary + "f0"}
-                                    />
-                                </View>
-                            </Pressable>
-                        }>
-                        {types.map((item, index) => (
-                            <Menu.Item
-                                key={item.label}
-                                onPress={() => {
-                                    setCompounded(item);
-                                    closeMenu();
+                            className="flex-1 py-3 rounded-xl items-center justify-center"
+                            style={{
+                                backgroundColor: isSelected ? colors.secondary : "transparent",
+                            }}
+                        >
+                            <Text
+                                className="text-[13px] font-bold"
+                                style={{
+                                    color: isSelected ? "#ffffff" : addOpacity(colors.text, "70"),
                                 }}
-                                title={item.label}
-                                titleStyle={{ color: colors.text }}
-                            />
-                        ))}
-                    </Menu>
+                            >
+                                {opt.label}
+                            </Text>
+                        </Pressable>
+                    );
+                })}
+            </View>
+
+            {selected.value === "CI" && (
+                <View className="mb-6">
+                    <Text
+                        className="text-[13px] font-bold mb-3 tracking-[0.5px]"
+                        style={{ color: addOpacity(colors.text, "70") }}
+                    >
+                        COMPOUNDING FREQUENCY
+                    </Text>
+                    <View className="flex-row flex-wrap justify-between gap-y-2.5">
+                        {types.map((t) => {
+                            const isSelected = compounded.label === t.label;
+                            return (
+                                <Pressable
+                                    key={t.label}
+                                    onPress={() => {
+                                        setCompounded(t);
+                                        setAns(undefined); // Reset results on change
+                                    }}
+                                    className="py-2.5 rounded-2xl items-center justify-center border"
+                                    style={{
+                                        width: "31%",
+                                        backgroundColor: isSelected ? colors.secondary : colors.elevation.level2,
+                                        borderColor: isSelected ? colors.secondary : addOpacity(colors.divider, "10"),
+                                    }}
+                                >
+                                    <Text
+                                        className="text-[11.5px] font-bold text-center"
+                                        style={{
+                                            color: isSelected ? "#ffffff" : colors.text,
+                                        }}
+                                        numberOfLines={1}
+                                        adjustsFontSizeToFit
+                                    >
+                                        {t.label}
+                                    </Text>
+                                </Pressable>
+                            );
+                        })}
+                    </View>
                 </View>
             )}
-            <View style={styles.buttonContainer}>
-                <Button
-                    mode="contained"
-                    onPress={Calculate}
-                    buttonColor={colors.secondary}
-                    textColor="#fff">
-                    Calculate
-                </Button>
+
+            {/* Inputs Card */}
+            <View
+                className="p-5 rounded-3xl border mb-6"
+                style={{
+                    backgroundColor: colors.elevation.level2,
+                    borderColor: addOpacity(colors.divider, "10"),
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.05,
+                    shadowRadius: 8,
+                    elevation: 2,
+                }}
+            >
+                <View className="mb-4 w-full">
+                    <Text
+                        className="text-[13px] font-bold mb-2.5 tracking-[0.5px]"
+                        style={{ color: addOpacity(colors.text, "70") }}
+                    >
+                        PRINCIPAL AMOUNT (₹)
+                    </Text>
+                    <CustomInput
+                        placeholder="0.00"
+                        value={input.P}
+                        width="100%"
+                        onChangeText={(e) => setInput((prev) => ({ ...prev, P: e }))}
+                        maxLength={8}
+                    />
+                </View>
+
+                <View className="mb-4 w-full">
+                    <Text
+                        className="text-[13px] font-bold mb-2.5 tracking-[0.5px]"
+                        style={{ color: addOpacity(colors.text, "70") }}
+                    >
+                        INTEREST RATE (% P.A.)
+                    </Text>
+                    <CustomInput
+                        placeholder="0.0"
+                        value={input.R}
+                        width="100%"
+                        onChangeText={(e) => setInput((prev) => ({ ...prev, R: e }))}
+                        maxLength={5}
+                    />
+                </View>
+
+                <View className="w-full">
+                    <Text
+                        className="text-[13px] font-bold mb-2.5 tracking-[0.5px]"
+                        style={{ color: addOpacity(colors.text, "70") }}
+                    >
+                        TIME PERIOD (YEARS)
+                    </Text>
+                    <CustomInput
+                        placeholder="0"
+                        value={input.T}
+                        width="100%"
+                        onChangeText={(e) => setInput((prev) => ({ ...prev, T: e }))}
+                        maxLength={5}
+                    />
+                </View>
+
+                <View className="items-center mt-6 w-full">
+                    <Button
+                        mode="contained"
+                        onPress={Calculate}
+                        buttonColor={colors.secondary}
+                        textColor="white"
+                        className="w-full h-11 justify-center rounded-2xl"
+                        labelStyle={{ fontSize: 15, fontWeight: "bold" }}
+                    >
+                        Calculate Interest
+                    </Button>
+                </View>
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                {selected.value === "SI" && ans?.si && (
-                    <>
-                        <Fraction
-                            color={colors.text}
-                            size={16}
-                            bullet={false}
-                            data={{
-                                text: "SI",
-                                numerator: "P × R × T",
-                                denominator: "100",
-                            }}
-                        />
-                        <Fraction
-                            color={colors.text}
-                            size={16}
-                            bullet={false}
-                            data={{
-                                text: "SI",
-                                numerator: `${input.p} × ${input.r} × ${input.t}`,
-                                denominator: "100",
-                            }}
-                            textVisible={false}
-                        />
-                        <Fraction
-                            color={colors.text}
-                            size={16}
-                            bullet={false}
-                            data={{
-                                text: "SI",
-                                numerator: `${input.p * input.r * input.t}`,
-                                denominator: "100",
-                            }}
-                            textVisible={false}
-                        />
-                        <Fraction
-                            color={colors.text}
-                            size={16}
-                            bullet={false}
-                            data={{
-                                text: "SI",
-                                numerator: ans.si ? ans.si : "0",
-                            }}
-                            textVisible={false}
-                        />
-                    </>
-                )}
-                {selected.value === "CI" && ans?.ci && (
-                    <>
-                        <Fraction
-                            color={colors.text}
-                            size={18}
-                            bullet={false}
-                            data={{
-                                text: "N",
-                                numerator: ans.n || 0,
-                            }}
-                            style={{ marginVertical: 20 }}
-                        />
-                        <CompoundInterest
-                            size={18}
-                            color={colors.text}
-                            textVisible={true}
-                            data={{
-                                text: "A",
-                                firstPart: "P",
-                                secondPart: {
-                                    firstPart: "1",
-                                    numerator: "R",
-                                    denominator: ans.n == 1 ? "100" : "100 × N",
-                                },
-                                power: ans.n == 1 ? "T" : `N × T`,
-                                prinsipal: "P",
-                            }}
-                        />
-                        <CompoundInterest
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            data={{
-                                text: "A",
-                                firstPart: input.p.toString(),
-                                secondPart: {
-                                    firstPart: "1",
-                                    numerator: input.r.toString(),
-                                    denominator:
-                                        ans.n == 1 ? "" : `100 × ${ans.n}`,
-                                },
-                                power:
-                                    ans.n == 1 ? "T" : `${ans.n} × ${input.t}`,
-                                prinsipal: input.p.toString(),
-                            }}
-                        />
-                        <CompoundInterest
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            data={{
-                                text: "A",
-                                firstPart: input.p.toString(),
-                                secondPart: {
-                                    firstPart: "1",
-                                    numerator: input.r.toString(),
-                                    denominator:
-                                        ans.n == 1
-                                            ? ""
-                                            : parseNumber(
-                                                  100 * (ans?.n || 0)
-                                              ).toString(),
-                                },
-                                power: parseNumber(
-                                    (ans?.n || 0) * input.t,
-                                    2
-                                ).toString(),
-                                prinsipal: input.p.toString(),
-                            }}
-                        />
-                        <CompoundInterest
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            data={{
-                                text: "A",
-                                firstPart: input.p.toString(),
-                                secondPart: {
-                                    firstPart: "1",
-                                    numerator: parseNumber(
-                                        input.r / (100 * (ans.n || 0))
-                                    ).toString(),
-                                },
-                                power: parseNumber(
-                                    (ans.n || 0) * input.t,
-                                    2
-                                ).toString(),
-                                prinsipal: input.p.toString(),
-                            }}
-                        />
-                        <CompoundInterest
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            data={{
-                                text: "A",
-                                firstPart: input.p.toString(),
-                                secondPart: {
-                                    firstPart: parseNumber(
-                                        1 + input.r / (100 * (ans.n || 0))
-                                    ).toString(),
-                                },
-                                power: parseNumber(
-                                    (ans.n || 0) * input.t,
-                                    2
-                                ).toString(),
-                                prinsipal: input.p.toString(),
-                            }}
-                        />
-                        <Fraction
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            bullet={false}
-                            data={{
-                                text: "A",
-                                numerator:
-                                    `${input.p} × ` +
-                                    parseNumber(
-                                        Math.pow(
-                                            1 + input.r / (100 * (ans.n || 0)),
-                                            (ans.n || 0) * input.t
-                                        )
-                                    ),
-                            }}
-                        />
-                        <Fraction
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            bullet={false}
-                            data={{
-                                text: "A",
-                                numerator: ans.ci,
-                            }}
-                        />
-                        <Fraction
-                            size={18}
-                            color={colors.text}
-                            // textVisible={false}
-                            bullet={false}
-                            data={{
-                                text: "CI",
-                                numerator: `A - P`,
-                            }}
-                            style={{ marginTop: 20 }}
-                        />
-                        <Fraction
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            bullet={false}
-                            data={{
-                                text: "CI",
-                                numerator: `${ans.ci} - ${input.p}`,
-                            }}
-                        />
-                        <Fraction
-                            size={18}
-                            color={colors.text}
-                            textVisible={false}
-                            bullet={false}
-                            data={{
-                                text: "CI",
-                                numerator: parseNumber(ans.ci - input.p),
-                            }}
-                        />
-                    </>
-                )}
-            </ScrollView>
-        </View>
+
+            {/* Results & Math Notebook Card */}
+            {ans && (
+                <View
+                    className="p-6 rounded-3xl border mb-6"
+                    style={{
+                        backgroundColor: colors.elevation.level2,
+                        borderColor: addOpacity(colors.divider, "10"),
+                        shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 2 },
+                        shadowOpacity: 0.05,
+                        shadowRadius: 8,
+                        elevation: 2,
+                    }}
+                >
+                    {/* Summary Header */}
+                    <View className="items-center mb-6">
+                        <Text
+                            className="text-center text-[12px] font-bold tracking-[0.8px] mb-2"
+                            style={{ color: addOpacity(colors.text, "60") }}
+                        >
+                            {selected.value === "SI" ? "TOTAL INTEREST EARNED" : "TOTAL COMPOUND INTEREST"}
+                        </Text>
+                        <Text
+                            className="text-center text-[36px] font-extrabold"
+                            style={{ color: colors.secondary }}
+                        >
+                            ₹ {selected.value === "SI" ? ans.si : parseNumber((ans.ci || 0) - input.p)}
+                        </Text>
+                        <Text
+                            className="text-center text-[13px] font-semibold mt-2.5"
+                            style={{ color: addOpacity(colors.text, "60") }}
+                        >
+                            Maturity Amount: ₹ {selected.value === "SI" ? parseNumber(input.p + (ans.si || 0)) : ans.ci}
+                        </Text>
+                    </View>
+
+                    <View
+                        className="h-[1px] w-full mb-5"
+                        style={{ backgroundColor: addOpacity(colors.divider, "10") }}
+                    />
+
+                    {/* Step-by-Step Breakdown */}
+                    <Text
+                        className="text-[13px] font-bold mb-4 tracking-[0.5px]"
+                        style={{ color: addOpacity(colors.text, "70") }}
+                    >
+                        STEP-BY-STEP SOLUTION
+                    </Text>
+
+                    <View className="gap-y-4">
+                        {selected.value === "SI" && ans.si && (
+                            <>
+                                <Fraction
+                                    color={colors.text}
+                                    size={15}
+                                    bullet={false}
+                                    data={{
+                                        text: "Simple Interest (SI)",
+                                        numerator: "P × R × T",
+                                        denominator: "100",
+                                    }}
+                                />
+                                <Fraction
+                                    color={colors.text}
+                                    size={15}
+                                    bullet={false}
+                                    data={{
+                                        text: "SI",
+                                        numerator: `${input.p} × ${input.r} × ${input.t}`,
+                                        denominator: "100",
+                                    }}
+                                    textVisible={false}
+                                />
+                                <Fraction
+                                    color={colors.text}
+                                    size={15}
+                                    bullet={false}
+                                    data={{
+                                        text: "SI",
+                                        numerator: `${input.p * input.r * input.t}`,
+                                        denominator: "100",
+                                    }}
+                                    textVisible={false}
+                                />
+                                <Fraction
+                                    color={colors.text}
+                                    size={15}
+                                    bullet={false}
+                                    data={{
+                                        text: "SI",
+                                        numerator: ans.si ? ans.si : "0",
+                                    }}
+                                    textVisible={false}
+                                />
+                            </>
+                        )}
+                        {selected.value === "CI" && ans.ci && (
+                            <>
+                                <Fraction
+                                    color={colors.text}
+                                    size={15}
+                                    bullet={false}
+                                    data={{
+                                        text: "N (Compounding Intervals)",
+                                        numerator: ans.n || 0,
+                                    }}
+                                />
+                                <CompoundInterest
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={true}
+                                    data={{
+                                        text: "Maturity Amount (A)",
+                                        firstPart: "P",
+                                        secondPart: {
+                                            firstPart: "1",
+                                            numerator: "R",
+                                            denominator: ans.n == 1 ? "100" : "100 × N",
+                                        },
+                                        power: ans.n == 1 ? "T" : `N × T`,
+                                        prinsipal: "P",
+                                    }}
+                                />
+                                <CompoundInterest
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    data={{
+                                        text: "A",
+                                        firstPart: input.p.toString(),
+                                        secondPart: {
+                                            firstPart: "1",
+                                            numerator: input.r.toString(),
+                                            denominator:
+                                                ans.n == 1 ? "" : `100 × ${ans.n}`,
+                                        },
+                                        power:
+                                            ans.n == 1 ? "T" : `${ans.n} × ${input.t}`,
+                                        prinsipal: input.p.toString(),
+                                    }}
+                                />
+                                <CompoundInterest
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    data={{
+                                        text: "A",
+                                        firstPart: input.p.toString(),
+                                        secondPart: {
+                                            firstPart: "1",
+                                            numerator: input.r.toString(),
+                                            denominator:
+                                                ans.n == 1
+                                                    ? ""
+                                                    : parseNumber(
+                                                          100 * (ans?.n || 0)
+                                                      ).toString(),
+                                        },
+                                        power: parseNumber(
+                                            (ans?.n || 0) * input.t,
+                                            2
+                                        ).toString(),
+                                        prinsipal: input.p.toString(),
+                                    }}
+                                />
+                                <CompoundInterest
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    data={{
+                                        text: "A",
+                                        firstPart: input.p.toString(),
+                                        secondPart: {
+                                            firstPart: "1",
+                                            numerator: parseNumber(
+                                                input.r / (100 * (ans.n || 0))
+                                            ).toString(),
+                                        },
+                                        power: parseNumber(
+                                            (ans.n || 0) * input.t,
+                                            2
+                                        ).toString(),
+                                        prinsipal: input.p.toString(),
+                                    }}
+                                />
+                                <CompoundInterest
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    data={{
+                                        text: "A",
+                                        firstPart: input.p.toString(),
+                                        secondPart: {
+                                            firstPart: parseNumber(
+                                                1 + input.r / (100 * (ans.n || 0))
+                                            ).toString(),
+                                        },
+                                        power: parseNumber(
+                                            (ans.n || 0) * input.t,
+                                            2
+                                        ).toString(),
+                                        prinsipal: input.p.toString(),
+                                    }}
+                                />
+                                <Fraction
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    bullet={false}
+                                    data={{
+                                        text: "A",
+                                        numerator:
+                                            `${input.p} × ` +
+                                            parseNumber(
+                                                Math.pow(
+                                                    1 + input.r / (100 * (ans.n || 0)),
+                                                    (ans.n || 0) * input.t
+                                                )
+                                            ),
+                                    }}
+                                />
+                                <Fraction
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    bullet={false}
+                                    data={{
+                                        text: "A",
+                                        numerator: ans.ci,
+                                    }}
+                                />
+                                <Fraction
+                                    size={15}
+                                    color={colors.text}
+                                    bullet={false}
+                                    data={{
+                                        text: "Compound Interest (CI)",
+                                        numerator: `A - P`,
+                                    }}
+                                />
+                                <Fraction
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    bullet={false}
+                                    data={{
+                                        text: "CI",
+                                        numerator: `${ans.ci} - ${input.p}`,
+                                    }}
+                                />
+                                <Fraction
+                                    size={15}
+                                    color={colors.text}
+                                    textVisible={false}
+                                    bullet={false}
+                                    data={{
+                                        text: "CI",
+                                        numerator: parseNumber(ans.ci - input.p),
+                                    }}
+                                />
+                            </>
+                        )}
+                    </View>
+                </View>
+            )}
+        </ScrollView>
     );
 };
 
