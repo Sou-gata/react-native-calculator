@@ -18,7 +18,7 @@ const SFormula = ({ numerator, h }: { numerator: string; h: string }) => {
                 <View
                     className="h-[55px] items-center justify-center w-[25px]">
                     <Image
-                        source={require("../../../assets/shapes/root.png")}
+                        source={require("../../../../assets/shapes/root.png")}
                         className="h-[115px] w-[50px] -mt-[10px]"
                         style={{
                             tintColor: colors.text,

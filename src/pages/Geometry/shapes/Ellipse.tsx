@@ -119,7 +119,7 @@ const Ellipse = () => {
                                     </Text>
                                     <View className="justify-center items-center flex-row">
                                         <Image
-                                            source={require("../../../assets/shapes/root.png")}
+                                            source={require("../../../../assets/shapes/root.png")}
                                             className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
                                             style={{ tintColor: colors.text }}
                                         />
@@ -146,7 +146,7 @@ const Ellipse = () => {
                                     </Text>
                                     <View className="justify-center items-center flex-row">
                                         <Image
-                                            source={require("../../../assets/shapes/root.png")}
+                                            source={require("../../../../assets/shapes/root.png")}
                                             className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
                                             style={{ tintColor: colors.text }}
                                         />
@@ -173,7 +173,7 @@ const Ellipse = () => {
                                     </Text>
                                     <View className="justify-center items-center flex-row">
                                         <Image
-                                            source={require("../../../assets/shapes/root.png")}
+                                            source={require("../../../../assets/shapes/root.png")}
                                             className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
                                             style={{ tintColor: colors.text }}
                                         />
@@ -208,7 +208,7 @@ const Ellipse = () => {
                                     </Text>
                                     <View className="justify-center items-center flex-row">
                                         <Image
-                                            source={require("../../../assets/shapes/root.png")}
+                                            source={require("../../../../assets/shapes/root.png")}
                                             className="h-[45px] w-[16px] -mt-[10px] ml-[2px]"
                                             style={{ tintColor: colors.text }}
                                         />

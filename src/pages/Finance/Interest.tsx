@@ -47,7 +47,7 @@ const CompoundInterest = ({
             <Text style={{ fontSize: size, color }}>{data.firstPart} × </Text>
             {Boolean(data.secondPart?.denominator) && (
                 <Image
-                    source={require("../../assets/open.png")}
+                    source={require("../../../assets/open.png")}
                     style={{
                         height: 50,
                         width: 9,
@@ -99,7 +99,7 @@ const CompoundInterest = ({
             {Boolean(data.secondPart?.denominator) &&
                 Boolean(data.secondPart?.numerator) && (
                     <Image
-                        source={require("../../assets/close.png")}
+                        source={require("../../../assets/close.png")}
                         style={{
                             height: 50,
                             width: 9,

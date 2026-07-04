@@ -52,7 +52,7 @@ const SA = ({
                     {" × "}
                 </Text>
                 <Image
-                    source={require("../../../assets/shapes/root.png")}
+                    source={require("../../../../assets/shapes/root.png")}
                     style={{
                         tintColor: color,
                         height: data.secondInsideRoot.denominator
@@ -107,7 +107,7 @@ const SA = ({
                     {" × "}
                 </Text>
                 <Image
-                    source={require("../../../assets/shapes/root.png")}
+                    source={require("../../../../assets/shapes/root.png")}
                     style={{
                         tintColor: color,
                         height: data.thirdInsideRoot.denominator

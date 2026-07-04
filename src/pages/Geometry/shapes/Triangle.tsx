@@ -67,7 +67,7 @@ const Triangle = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <>
                     <Image
-                        source={require("../../../assets/shapes/triangle_main.png")}
+                        source={require("../../../../assets/shapes/triangle_main.png")}
                         className="w-[200px] h-[200px] self-center"
                         style={{ tintColor: colors.text }}
                     />

@@ -16,7 +16,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { addOpacity } from "../../helpers/functions";
 
-const icon = require("../../assets/icon.png");
+const icon = require("../../../assets/icon.png");
 
 const About = ({
     navigation,
