@@ -100,6 +100,12 @@ export const secondTabComponents: secondTabComponentsType = {
             text: "Permutation Combination",
             path: require("../../assets/icons/permutation.png"),
         },
+        {
+            id: "9",
+            name: "StatisticalAnalyzer",
+            text: "Statistical Analyzer",
+            path: require("../../assets/icons/formula.png"),
+        },
     ],
     Algebra: [
         {
@@ -119,6 +125,24 @@ export const secondTabComponents: secondTabComponentsType = {
             name: "ThreeVeriablesEquation",
             text: "Three Variables Equation",
             path: require("../../assets/icons/threeEqn.png"),
+        },
+        {
+            id: "4",
+            name: "VectorCalculator",
+            text: "Vector Calculator",
+            path: require("../../assets/icons/navigation.png"),
+        },
+        {
+            id: "5",
+            name: "MatrixOperations",
+            text: "Matrix Operations",
+            path: require("../../assets/icons/matrix.png"),
+        },
+        {
+            id: "6",
+            name: "FunctionPlotter",
+            text: "Function Plotter",
+            path: require("../../assets/icons/formula.png"),
         },
     ],
     Geometry: [
@@ -205,6 +229,12 @@ export const secondTabComponents: secondTabComponentsType = {
             name: "UsefulFormula",
             text: "Useful Formulas",
             path: require("../../assets/icons/formula.png"),
+        },
+        {
+            id: "5",
+            name: "CalculationHistory",
+            text: "Calculation History",
+            path: require("../../assets/icons/timeDiff.png"),
         },
     ],
 };

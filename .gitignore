@@ -81,3 +81,6 @@ yarn-error.log
 .vscode/
 .yarn/
 /build_output.txt
+
+# Suggestions / Brainstorms
+/FEATURE_IDEAS.md

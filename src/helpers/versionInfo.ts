@@ -2,6 +2,19 @@ import { versionInfoType } from "../../types";
 
 const info: versionInfoType[] = [
     {
+        ver: "1.7.0",
+        changes: [
+            "Added Vector Calculator (2D & 3D coordinate space calculations)",
+            "Added Matrix Operations Toolkit (Determinant, Inverse, Adjoint, Transpose)",
+            "Added Statistical Analyzer (Mean, Median, Mode, Variance, Standard Deviation)",
+            "Added Interactive 2D Function Plotter with coefficient morph controls",
+            "Added Favorites / Quick Access section for pinning tools to tab top",
+            "Added advanced Calculation History Log persisting the last 15 outputs",
+            "Center-aligned linear and quadratic layout operators",
+            "Fixed misaligned combining unicode characters in mobile fonts",
+        ],
+    },
+    {
         ver: "1.6.0",
         changes: [
             "Added search functionality in Category tab",

@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     divideReturnType,
     equnAnsType,
@@ -1289,30 +1290,22 @@ export function lastChar(str: string): string {
 }
 
 function simplifyTime(d = 0, h = 0, m = 0, s = 0) {
-    let day = d;
-    let hou = h;
-    let min = m;
     let sec = s;
-    let reCalculateTime = parseInt((sec / 60).toString());
-    for (let i = 1; i <= reCalculateTime; i++) {
-        if (sec >= 60) {
-            min += 1;
-            sec -= 60;
-        }
+    let min = m;
+    let hou = h;
+    let day = d;
+
+    if (sec >= 60) {
+        min += Math.floor(sec / 60);
+        sec = sec % 60;
     }
-    reCalculateTime = parseInt((min / 60).toString());
-    for (let i = 1; i <= reCalculateTime; i++) {
-        if (min >= 60) {
-            hou += 1;
-            min -= 60;
-        }
+    if (min >= 60) {
+        hou += Math.floor(min / 60);
+        min = min % 60;
     }
-    reCalculateTime = parseInt((hou / 24).toString());
-    for (let i = 1; i <= reCalculateTime; i++) {
-        if (hou >= 24) {
-            day += 1;
-            hou -= 24;
-        }
+    if (hou >= 24) {
+        day += Math.floor(hou / 24);
+        hou = hou % 24;
     }
     return { day, hou, min, sec };
 }
@@ -1330,57 +1323,39 @@ export function calculateTime(
     },
     operation: number,
 ) {
-    let d1 = parseFloat(times.d1);
-    let d2 = parseFloat(times.d2);
-    let h1 = parseFloat(times.h1);
-    let h2 = parseFloat(times.h2);
-    let m1 = parseFloat(times.m1);
-    let m2 = parseFloat(times.m2);
-    let s1 = parseFloat(times.s1);
-    let s2 = parseFloat(times.s2);
-    if (isNaN(d1)) d1 = 0;
-    if (isNaN(d2)) d2 = 0;
-    if (isNaN(h1)) h1 = 0;
-    if (isNaN(h2)) h2 = 0;
-    if (isNaN(m1)) m1 = 0;
-    if (isNaN(m2)) m2 = 0;
-    if (isNaN(s1)) s1 = 0;
-    if (isNaN(s2)) s2 = 0;
-    if (operation == 1) {
+    let d1 = parseFloat(times.d1) || 0;
+    let d2 = parseFloat(times.d2) || 0;
+    let h1 = parseFloat(times.h1) || 0;
+    let h2 = parseFloat(times.h2) || 0;
+    let m1 = parseFloat(times.m1) || 0;
+    let m2 = parseFloat(times.m2) || 0;
+    let s1 = parseFloat(times.s1) || 0;
+    let s2 = parseFloat(times.s2) || 0;
+
+    if (operation === 1) {
         let day = d1 + d2;
         let hou = h1 + h2;
         let min = m1 + m2;
         let sec = s1 + s2;
         let ans = simplifyTime(day, hou, min, sec);
-        return { day: ans.day, hou: ans.hou, min: ans.min, sec: ans.sec };
-    } else if (operation == 2) {
-        let timeOne = simplifyTime(d1, h1, m1, s1);
-        let timeTwo = simplifyTime(d2, h2, m2, s2);
-        while (
-            timeOne.hou < timeTwo.hou ||
-            timeOne.min < timeTwo.min ||
-            timeOne.sec < timeTwo.sec
-        ) {
-            if (timeOne.hou < timeTwo.hou) {
-                timeOne.day -= 1;
-                timeOne.hou += 24;
-            }
-            if (timeOne.min < timeTwo.min) {
-                timeOne.hou -= 1;
-                timeOne.min += 60;
-            }
-            if (timeOne.sec < timeTwo.sec) {
-                timeOne.min -= 1;
-                timeOne.sec += 60;
-            }
-        }
-        let day = timeOne.day - timeTwo.day;
-        let hou = timeOne.hou - timeTwo.hou;
-        let min = timeOne.min - timeTwo.min;
-        let sec = timeOne.sec - timeTwo.sec;
-        return { day, hou, min, sec };
+        return { day: ans.day, hou: ans.hou, min: ans.min, sec: ans.sec, isNegative: false };
+    } else if (operation === 2) {
+        let totalSec1 = d1 * 86400 + h1 * 3600 + m1 * 60 + s1;
+        let totalSec2 = d2 * 86400 + h2 * 3600 + m2 * 60 + s2;
+        let diffSec = totalSec1 - totalSec2;
+        let isNegative = diffSec < 0;
+        let absSec = Math.abs(diffSec);
+
+        let day = Math.floor(absSec / 86400);
+        let rem = absSec % 86400;
+        let hou = Math.floor(rem / 3600);
+        rem = rem % 3600;
+        let min = Math.floor(rem / 60);
+        let sec = parseFloat((rem % 60).toFixed(6));
+
+        return { day, hou, min, sec, isNegative };
     } else {
-        return { day: 0, hou: 0, min: 0, sec: 0 };
+        return { day: 0, hou: 0, min: 0, sec: 0, isNegative: false };
     }
 }
 
@@ -1530,4 +1505,33 @@ export function addOpacity(color: string, opacity: string): string {
         }
     }
     return color + opacity;
+}
+
+export type HistoryItem = {
+    id: string;
+    toolName: string;
+    detail: string;
+    result: string;
+    timestamp: number;
+};
+
+export const addHistoryLog = async (toolName: string, detail: string, result: string) => {
+    try {
+        const historyData = await AsyncStorage.getItem("advanced_calc_history");
+        let history: HistoryItem[] = historyData ? JSON.parse(historyData) : [];
+        const newItem: HistoryItem = {
+            id: Date.now().toString(),
+            toolName,
+            detail,
+            result,
+            timestamp: Date.now(),
+        };
+        history.unshift(newItem);
+        if (history.length > 15) {
+            history = history.slice(0, 15);
+        }
+        await AsyncStorage.setItem("advanced_calc_history", JSON.stringify(history));
+    } catch (e) {
+        console.error("Failed to save history", e);
+    }
 };

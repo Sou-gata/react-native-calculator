@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     ScrollView,
@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { useTheme, Text } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useIsFocused } from "@react-navigation/native";
 
 import { secondTabComponents } from "../../helpers/componentName";
 import {
@@ -40,10 +42,44 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
         };
     });
 
-    React.useEffect(() => {
+    const [favorites, setFavorites] = useState<string[]>([]);
+    const isFocused = useIsFocused();
+
+    const loadFavorites = async () => {
+        try {
+            const stored = await AsyncStorage.getItem("favorite_tools");
+            if (stored) {
+                setFavorites(JSON.parse(stored));
+            }
+        } catch (e) {
+            console.error("Failed to load favorites", e);
+        }
+    };
+
+    useEffect(() => {
+        if (isFocused) {
+            loadFavorites();
+        }
+    }, [isFocused]);
+
+    const toggleFavorite = async (compName: string) => {
+        try {
+            let updated = [...favorites];
+            if (updated.includes(compName)) {
+                updated = updated.filter((name) => name !== compName);
+            } else {
+                updated.push(compName);
+            }
+            setFavorites(updated);
+            await AsyncStorage.setItem("favorite_tools", JSON.stringify(updated));
+        } catch (e) {
+            console.error("Failed to save favorite toggle", e);
+        }
+    };
+
+    useEffect(() => {
         translateX.value = 0;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [translateX]);
 
     const handleCategoryPress = (catId: string, index: number) => {
         if (catId === activeCategory) return;
@@ -107,6 +143,16 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
         {} as Record<string, componentNameType[]>
     );
 
+    const favoriteComps: componentNameType[] = [];
+    Object.values(secondTabComponents).forEach((comps) => {
+        comps.forEach((comp) => {
+            if (favorites.includes(comp.name)) {
+                if (!favoriteComps.some((c) => c.name === comp.name)) {
+                    favoriteComps.push(comp);
+                }
+            }
+        });
+    });
     const hasResults = Object.keys(filteredComponents).length > 0;
 
     return (
@@ -144,7 +190,7 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                     onFocus={() => setIsSearchFocused(true)}
                     onBlur={() => setIsSearchFocused(false)}
                 />
-                {searchQuery.length > 0 && (
+                {searchQuery.length > 0 ? (
                     <Pressable
                         onPress={() => setSearchQuery("")}
                         className="p-1"
@@ -153,6 +199,17 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                             name="close-circle"
                             size={18}
                             color={colors.text + "80"}
+                        />
+                    </Pressable>
+                ) : (
+                    <Pressable
+                        onPress={() => navigation.navigate("CalculationHistory")}
+                        className="p-1"
+                    >
+                        <Ionicons
+                            name="time-outline"
+                            size={20}
+                            color={colors.secondary}
                         />
                     </Pressable>
                 )}
@@ -203,6 +260,72 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                     style={animatedStyle}
                     className="flex-1"
                 >
+                    {favoriteComps.length > 0 && searchQuery === "" && activeCategory === "All" && (
+                        <View className="mt-4 mb-2">
+                            <View className="flex-row items-center px-4 mb-3">
+                                <View
+                                    className="w-7 h-7 rounded-lg items-center justify-center mr-2.5"
+                                    style={{ backgroundColor: addOpacity(colors.secondary, "10") }}
+                                >
+                                    <Ionicons name="star" size={15} color="#FFD700" />
+                                </View>
+                                <Text className="text-[14px] font-bold tracking-[0.3px]" style={{ color: colors.text }}>
+                                    Quick Access
+                                </Text>
+                            </View>
+                            <ScrollView
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                contentContainerClassName="px-4 py-1"
+                            >
+                                {favoriteComps.map((comp) => (
+                                    <Pressable
+                                        key={comp.name}
+                                        className="items-center justify-center rounded-2xl p-2 border mr-3 relative"
+                                        style={{
+                                            width: 95,
+                                            height: 100,
+                                            backgroundColor: colors.elevation.level2,
+                                            borderColor: addOpacity(colors.divider, "20"),
+                                            shadowColor: "#000",
+                                            shadowOffset: { width: 0, height: 1 },
+                                            shadowOpacity: 0.05,
+                                            shadowRadius: 2,
+                                            elevation: 2,
+                                        }}
+                                        onPress={() => navigation.navigate(comp.name)}
+                                    >
+                                        <Pressable
+                                            onPress={() => toggleFavorite(comp.name)}
+                                            className="absolute top-1.5 right-1.5 p-1 z-10"
+                                        >
+                                            <Ionicons name="star" size={14} color="#FFD700" />
+                                        </Pressable>
+                                        <View
+                                            className="w-12 h-12 rounded-full items-center justify-center mb-1"
+                                            style={{
+                                                backgroundColor: addOpacity(colors.secondary, "15"),
+                                            }}
+                                        >
+                                            <Image
+                                                className="w-5 h-5"
+                                                style={{ tintColor: colors.secondary }}
+                                                source={comp.path}
+                                            />
+                                        </View>
+                                        <Text
+                                            className="text-center text-[9.5px] font-bold leading-3 px-0.5"
+                                            numberOfLines={1}
+                                            style={{ color: colors.text }}
+                                        >
+                                            {comp.text}
+                                        </Text>
+                                    </Pressable>
+                                ))}
+                            </ScrollView>
+                        </View>
+                    )}
+
                     {hasResults ? (
                     Object.keys(filteredComponents).map(
                         (category: string) => {
@@ -260,7 +383,7 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                                                         }}
                                                     >
                                                         <Pressable
-                                                            className="w-full items-center justify-center rounded-2xl p-2 border"
+                                                            className="w-full items-center justify-center rounded-2xl p-2 border relative"
                                                             style={{
                                                                 height: 110,
                                                                 backgroundColor: colors.elevation.level2,
@@ -278,6 +401,20 @@ const Two = ({ navigation }: { navigation: StackNavigationProp<any, any> }) => {
                                                                 );
                                                             }}
                                                         >
+                                                            <Pressable
+                                                                onPress={(e) => {
+                                                                    e.stopPropagation();
+                                                                    toggleFavorite(comp.name);
+                                                                }}
+                                                                className="absolute top-2 right-2 p-1 z-10"
+                                                            >
+                                                                <Ionicons
+                                                                    name={favorites.includes(comp.name) ? "star" : "star-outline"}
+                                                                    size={15}
+                                                                    color={favorites.includes(comp.name) ? "#FFD700" : addOpacity(colors.text, "30")}
+                                                                />
+                                                            </Pressable>
+
                                                             {/* Soft icon background bubble */}
                                                             <View
                                                                 className="w-14 h-14 rounded-full items-center justify-center mb-2"

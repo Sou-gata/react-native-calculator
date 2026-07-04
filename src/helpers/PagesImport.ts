@@ -1,55 +1,60 @@
 import Home from "../../Home";
-import TemperatureConverter from "../pages/TemperatureConverter";
-import NumberConverter from "../pages/NumberConverter";
-import MassConverter from "../pages/MassConverter";
-import LengthConverter from "../pages/LengthConverter";
-import AreaConverter from "../pages/AreaConverter";
-import VolumeConverter from "../pages/VolumeConverter";
-import PowerConverter from "../pages/PowerConverter";
-import RomanNumber from "../pages/RomanNumber";
-import LCM from "../pages/LCM";
-import HCF from "../pages/HCF";
-import Factors from "../pages/Factors";
-import Proportion from "../pages/Proportion";
-import Multiply from "../pages/Multiply";
-import Divide from "../pages/Divide";
-import Average from "../pages/Average";
-import PermutationCombination from "../pages/PermutationCombination";
-import QuadraticEqu from "../pages/QuadraticEqu";
-import EquSolve from "../pages/EquSolve";
-import EquationWithThreeVeriables from "../pages/EquationWithThreeVeriables";
-import Shapes from "../pages/Shapes";
-import Circle from "../pages/shapes/Circle";
-import CircleArc from "../pages/shapes/CircleArc";
-import Ellipse from "../pages/shapes/Ellipse";
-import Hexagon from "../pages/shapes/Hexagon";
-import Pentagon from "../pages/shapes/Pentagon";
-import Triangle from "../pages/shapes/Triangle";
-import Rectangle from "../pages/shapes/Rectangle";
-import Trapezoid from "../pages/shapes/Trapezoid";
-import Rhombus from "../pages/shapes/Rhombus";
-import Square from "../pages/shapes/Square";
-import About from "../pages/About";
-import WhatsNew from "../pages/WhatsNew";
-import Bodies from "../pages/Bodies";
-import Cone from "../pages/bodies/Cone";
-import Cuboid from "../pages/bodies/Cuboid";
-import Cylinder from "../pages/bodies/Cylinder";
-import HemiSphere from "../pages/bodies/HemiSphere";
-import Pyramid from "../pages/bodies/Pyramid";
-import Sphere from "../pages/bodies/Sphere";
-import TriangularPrism from "../pages/bodies/TriangularPrism";
-import Gst from "../pages/Gst";
-import Discount from "../pages/Discount";
-import AgeCalculator from "../pages/AgeCalculator";
-import TimeCalculator from "../pages/TimeCalculator";
-import UsefulFormulas from "../pages/UsefulFormulas";
-import EMICalculator from "../pages/EMICalculator";
-import MatrixMultiply from "../pages/MatrixMultiply";
-import PostFix from "../pages/PostFix";
-import BMICalculator from "../pages/BMICalculator";
-import Interest from "../pages/Interest";
-import TimeDifference from "../pages/TimeDifference";
+import TemperatureConverter from "../pages/Converters/TemperatureConverter";
+import NumberConverter from "../pages/Converters/NumberConverter";
+import MassConverter from "../pages/Converters/MassConverter";
+import LengthConverter from "../pages/Converters/LengthConverter";
+import AreaConverter from "../pages/Converters/AreaConverter";
+import VolumeConverter from "../pages/Converters/VolumeConverter";
+import PowerConverter from "../pages/Converters/PowerConverter";
+import RomanNumber from "../pages/Converters/RomanNumber";
+import LCM from "../pages/Arithmetic/LCM";
+import HCF from "../pages/Arithmetic/HCF";
+import Factors from "../pages/Arithmetic/Factors";
+import Proportion from "../pages/Arithmetic/Proportion";
+import Multiply from "../pages/Arithmetic/Multiply";
+import Divide from "../pages/Arithmetic/Divide";
+import Average from "../pages/Arithmetic/Average";
+import PermutationCombination from "../pages/Arithmetic/PermutationCombination";
+import QuadraticEqu from "../pages/Algebra/QuadraticEqu";
+import EquSolve from "../pages/Algebra/EquSolve";
+import EquationWithThreeVeriables from "../pages/Algebra/EquationWithThreeVeriables";
+import Shapes from "../pages/Geometry/Shapes";
+import Circle from "../pages/Geometry/shapes/Circle";
+import CircleArc from "../pages/Geometry/shapes/CircleArc";
+import Ellipse from "../pages/Geometry/shapes/Ellipse";
+import Hexagon from "../pages/Geometry/shapes/Hexagon";
+import Pentagon from "../pages/Geometry/shapes/Pentagon";
+import Triangle from "../pages/Geometry/shapes/Triangle";
+import Rectangle from "../pages/Geometry/shapes/Rectangle";
+import Trapezoid from "../pages/Geometry/shapes/Trapezoid";
+import Rhombus from "../pages/Geometry/shapes/Rhombus";
+import Square from "../pages/Geometry/shapes/Square";
+import About from "../pages/Others/About";
+import WhatsNew from "../pages/Others/WhatsNew";
+import Bodies from "../pages/Geometry/Bodies";
+import Cone from "../pages/Geometry/bodies/Cone";
+import Cuboid from "../pages/Geometry/bodies/Cuboid";
+import Cylinder from "../pages/Geometry/bodies/Cylinder";
+import HemiSphere from "../pages/Geometry/bodies/HemiSphere";
+import Pyramid from "../pages/Geometry/bodies/Pyramid";
+import Sphere from "../pages/Geometry/bodies/Sphere";
+import TriangularPrism from "../pages/Geometry/bodies/TriangularPrism";
+import Gst from "../pages/Finance/Gst";
+import Discount from "../pages/Finance/Discount";
+import AgeCalculator from "../pages/Time/AgeCalculator";
+import TimeCalculator from "../pages/Time/TimeCalculator";
+import UsefulFormulas from "../pages/Others/UsefulFormulas";
+import EMICalculator from "../pages/Finance/EMICalculator";
+import MatrixMultiply from "../pages/Others/MatrixMultiply";
+import PostFix from "../pages/Others/PostFix";
+import BMICalculator from "../pages/Others/BMICalculator";
+import Interest from "../pages/Finance/Interest";
+import TimeDifference from "../pages/Time/TimeDifference";
+import VectorCalculator from "../pages/Algebra/VectorCalculator";
+import MatrixOperations from "../pages/Algebra/MatrixOperations";
+import StatisticalAnalyzer from "../pages/Arithmetic/StatisticalAnalyzer";
+import FunctionPlotter from "../pages/Algebra/FunctionPlotter";
+import CalculationHistory from "../pages/Others/CalculationHistory";
 
 export default {
     Home,
@@ -104,4 +109,9 @@ export default {
     BMICalculator,
     Interest,
     TimeDifference,
+    VectorCalculator,
+    MatrixOperations,
+    StatisticalAnalyzer,
+    FunctionPlotter,
+    CalculationHistory,
 };

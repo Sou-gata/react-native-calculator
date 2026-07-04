@@ -336,6 +336,46 @@ const Screens = () => {
                 component={Pages.TimeDifference}
                 options={options}
             />
+            <Stack.Screen
+                name="VectorCalculator"
+                component={Pages.VectorCalculator}
+                options={{
+                    ...options,
+                    title: "Vector Calculator",
+                }}
+            />
+            <Stack.Screen
+                name="MatrixOperations"
+                component={Pages.MatrixOperations}
+                options={{
+                    ...options,
+                    title: "Matrix Operations",
+                }}
+            />
+            <Stack.Screen
+                name="StatisticalAnalyzer"
+                component={Pages.StatisticalAnalyzer}
+                options={{
+                    ...options,
+                    title: "Statistical Analyzer",
+                }}
+            />
+            <Stack.Screen
+                name="FunctionPlotter"
+                component={Pages.FunctionPlotter}
+                options={{
+                    ...options,
+                    title: "Function Plotter",
+                }}
+            />
+            <Stack.Screen
+                name="CalculationHistory"
+                component={Pages.CalculationHistory}
+                options={{
+                    ...options,
+                    title: "Calculation History",
+                }}
+            />
         </Stack.Navigator>
     );
 };

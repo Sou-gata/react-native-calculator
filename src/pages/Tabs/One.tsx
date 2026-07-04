@@ -239,7 +239,6 @@ const One = ({ navigation }: OneProps) => {
         if (text !== "" && text !== "Math Error") {
             try {
                 const evalStr = textToEvalStr(text);
-                // eslint-disable-next-line no-eval
                 const tempAns = eval(bracManage(evalStr));
                 if ((tempAns || tempAns === 0) && isFinite(tempAns)) {
                     const fixed = parseFloat(tempAns.toFixed(8)) + "";
@@ -383,7 +382,6 @@ const One = ({ navigation }: OneProps) => {
             if (text.length !== 0) {
                 try {
                     const evalStr = textToEvalStr(text);
-                    // eslint-disable-next-line no-eval
                     const tempAns = eval(bracManage(evalStr));
 
                     if ((tempAns || tempAns === 0) && isFinite(tempAns)) {
